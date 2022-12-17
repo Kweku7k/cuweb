@@ -5,6 +5,24 @@ app=Flask(__name__)
 def home():
     return render_template('index.html')
 
+@app.route('/online')
+def online():
+    return render_template('online.html')
+
+@app.route('/post')
+def post():
+    return render_template('post.html')
+
+@app.route('/posts')
+def posts():
+    return render_template('posts.html')
+
+@app.route('/students')
+def students():
+    return render_template('students.html')
+
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
     app.run(port=5000,debug=True)
+
+
