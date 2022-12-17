@@ -714,7 +714,12 @@ section {
   color: #fff;
   text-decoration: none;
 }
-
+.img-caro {
+  width: 100vw;
+}
+.carousel-item {
+  overflow: hidden;
+}
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
