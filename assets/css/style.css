@@ -488,6 +488,13 @@ h6 {
   margin-top: 100px;
 }
 
+.icon-boxes {
+  margin-top: 100px;
+}
+#hero .icon-boxes {
+  margin-top: 100px;
+}
+
 #hero .icon-box {
   padding: 50px 30px;
   position: relative;
@@ -499,13 +506,35 @@ h6 {
   z-index: 1;
 }
 
+.postsContainer .icon-box {
+  padding: 50px 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(18, 66, 101, 0.08);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+  margin-bottom: 10px;
+}
+
 #hero .icon-box .title {
   font-weight: 700;
   margin-bottom: 15px;
   font-size: 18px;
 }
 
+.postsContainer .icon-box .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
 #hero .icon-box .title a {
+  color: #ca181e;
+  transition: 0.3s;
+}
+.postsContainer .icon-box .title a {
   color: #ca181e;
   transition: 0.3s;
 }
@@ -516,7 +545,23 @@ h6 {
   margin-bottom: 0;
 }
 
+.postsContainer .icon-box .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+
 #hero .icon-box .icon {
+  margin-bottom: 20px;
+  padding-top: 10px;
+  display: inline-block;
+  transition: all 0.3s ease-in-out;
+  font-size: 36px;
+  line-height: 1;
+  color: #ca181e;
+}
+
+.postsContainer .icon-box .icon {
   margin-bottom: 20px;
   padding-top: 10px;
   display: inline-block;
@@ -536,11 +581,21 @@ h6 {
   color: white;
 }
 
+/* .postsContainer .icon-box:hover {
+  transform: scale(1.08);
+  background-color: #ca181e;
+  color: white;
+} */
+
 #hero .icon-box:hover .title a {
   color: white;
-  /* color: #ca181e; */
 
 }
+
+/* .postsContainer .icon-box:hover .title a {
+  color: white;
+
+} */
 
 @media (min-width: 1024px) {
   #hero {

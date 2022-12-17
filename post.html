@@ -76,20 +76,6 @@
             <div class="container">
                 <h3 class="text-center"><b>Latest News</b></h3>
 
-                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img class="d-block w-100" src="..." alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100" src="..." alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100" src="..." alt="Third slide">
-                    </div>
-                  </div>
-                </div>
-
                 <!-- This section is being handled by the javascript calling the wordpress server! -->
                 <!-- DONT FFUCKING TOUCH!!! -->
                 <div class="postsContainer row icon-boxes">
@@ -237,11 +223,11 @@ function createNewPost(title, content) {
 
   const post = document.createElement("div");
 
-  post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+  // post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
   post.innerHTML = `
-          <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
-            <h4 class="title"><a href="">${title}</a></h4>
-            <p class="description">${content.substring(0,80)}...</p>
+        <div>
+          <h3 class="text-center"><b>${title}</b></h3>
+          <p class="description">${content}</p>
         </div>`
 
   posts.append(post)
@@ -249,22 +235,25 @@ function createNewPost(title, content) {
   return post
 
 }
-
-  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts"
+  console.log(window.location.href)
+  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts/11"
   fetch(url)
   .then(function(response) {
     return response.json();
   }).then(function(data) {
     console.log(data)
 
-    for (let index = 0; index <= data.length; index++) {
+    // for (let index = 0; index <= data.length; index++) {
+    //   console.log(data[index]); // this will be a string
 
-      var title = data[index].title.rendered
-      var post = data[index].content.rendered
+      var title = data.title.rendered
+      var post = data.content.rendered
      
+      console.log(title)
+      console.log(post)
 
       createNewPost(title, post)  
-    }
+    // }
   });
 </script>
 
