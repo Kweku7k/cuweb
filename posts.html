@@ -75,7 +75,7 @@
         <section>
             <div class="container">
                 <h3 class="text-center"><b>Latest News</b></h3>
-                <div class="row">
+                <div class="postsContainer row">
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
@@ -191,43 +191,102 @@
   <script src="assets/js/main.js"></script>
 
 </body>
+
+<!-- <script>
+  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts"
+  console.log (fetch(url))
+
+  let promises = [];
+
+  for (let i = 1; i <= 3; i++) {
+    promises.push(fetch(url));
+  }
+  Promise.all(promises)
+    .then(function handleData(data) {
+      return fetch(url) // should be returned 1 time
+        .then(response => {
+          if (response.ok) {
+            data = response.json();
+            console.log("response is okay")
+            console.log(data)
+          }
+          throw new Error(response.statusText);
+        });
+    })
+    .catch(function handleError(error) {
+      console.log("Error" + error);
+    });
+</script> -->
+
 <script>
-  // Get the modal
-var modal = document.getElementById("myModal");
-var modal2 = document.getElementById("myModal2");
+function createNewPost(title, content) {
+  posts = document.getElementsByClassName("postsContainer")[0]
 
-// Get the button that opens the modal
-var btn = document.getElementById("myBtn");
-var btn2 = document.getElementById("myBtn2");
+  const post = document.createElement("div");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-var span2 = document.getElementsByClassName("close2")[0];
+  post.className = "col-md-4";
+  // post.style.backgroundColor = "red";
+  // post.innerText = "innerTest";
+  post.innerHTML = `<div class="card">
+                            <div class="card-body">
+                                <h5>${title}</h5>
+                                <h6>${content.substring(0,80)}...</h6>
+                            </div>
+                        </div>`
 
-// When the user clicks the button, open the modal
-btn.onclick = function() {
-modal.style.display = "block";
-}
-btn2.onclick = function() {
-modal2.style.display = "block";
-}
+  posts.append(post)
 
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-modal.style.display = "none";
-}
-span2.onclick = function() {
-modal2.style.display = "none";
+  return post
+
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-if (event.target == modal || event.target == modal2) {
-  modal.style.display = "none";
-  modal2.style.display = "none";
-}
-}
+  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts"
+  fetch(url)
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    console.log(data)
 
+    for (let index = 0; index <= data.length; index++) {
+      console.log(data[index]); // this will be a string
 
+      var title = data[index].title.rendered
+      var post = data[index].content.rendered
+     
+      console.log(title)
+      console.log(post)
+
+      createNewPost(title, post)  
+    }
+  });
 </script>
+
+<!-- <script>
+url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/"
+add_action('init', 'handle_preflight');
+function handle_preflight() {
+    $origin = get_http_origin();
+    if ($origin === url) {
+        header("Access-Control-Allow-Origin: yourfrontenddomain");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, X-WP-Nonce, Content-Type, Accept, Authorization');
+        if ('OPTIONS' == $_SERVER['REQUEST_METHOD']) {
+            status_header(200);
+            exit();
+        }
+    }
+}
+add_filter('rest_authentication_errors', 'rest_filter_incoming_connections');
+function rest_filter_incoming_connections($errors) {
+    $request_server = $_SERVER['REMOTE_ADDR'];
+    $origin = get_http_origin();
+    if ($origin !== url) return new WP_Error('forbidden_access', $origin, array(
+    ));
+    return $errors;
+}
+
+console.log(fetch(url))
+</script> -->
+
 </html>
