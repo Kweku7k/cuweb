@@ -73,15 +73,19 @@
     </a>
     <nav id="navbar" class="navbar navbar-light ">
       <ul>
-        <li><a class="nav-link scrollto active" href="students.html">Student Body</a></li>
-        <li><a class="nav-link scrollto" href="online.html">Admissions</a></li>
-        <li><a class="nav-link scrollto text-muted" href="#" disabled>Faculty & Staff </a></li>
-        <li><a class="nav-link scrollto text-muted" href="#" disabled>Alumni </a></li>
-        <li><a class="nav-link scrollto text-muted" href="#" disabled>Guidence & Counselling </a></li>
-        <li><a class="nav-link scrollto text-muted" href="#portfolio" disabled>Gallery </a></li>
+        <li><a class="nav-link scrollto active" href="{{url_for("students")}}">Student Body</a></li>
+        <li><a class="nav-link scrollto" href="{{url_for("online")}}">Admissions</a></li>
+        <li><a class="nav-link scrollto text-muted" href="{{url_for("posts")}}">Newsletter </a></li>
+        <li><a class="nav-link scrollto text-muted disabled" href="#" disabled>Faculty & Staff </a></li>
+        <li><a class="nav-link scrollto text-muted disabled" href="#" disabled>Alumni </a></li>
+        <li><a class="nav-link scrollto text-muted disabled" href="#" disabled>Guidence & Counselling </a></li>
+        <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         
-        <button class="pill-button" style="padding: 12px 18px; margin-left: 20px;">Apply Now!
-        </button>
+        <a href="{{url_for("online")}}">
+          <button class="pill-button" style="padding: 12px 18px; margin-left: 20px;">
+            Apply Now!
+          </button>
+        </a>
         
       </ul>
       
@@ -168,7 +172,7 @@
         <!-- You can delete the links only if you purchased the pro version. -->
         <!-- Licensing information: https://bootstrapmade.com/license/ -->
         <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
-        Designed by <a href="https://prestoghana.com/">PrestoSolutions</a>
+        Powered by <a href="https://prestoghana.com/">PrestoSolutions</a>
       </div>
     </div>
     <div class="social-links text-center text-md-right pt-3 pt-md-0">

@@ -1738,6 +1738,10 @@ section {
   display: none;
 }
 
+.disabled{
+  opacity: 0.5;
+}
+
 @media (max-width: 1200px) {
   .faq .faq-list {
     padding: 0;
