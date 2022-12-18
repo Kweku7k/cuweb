@@ -67,10 +67,20 @@
   <!-- ======= Header ======= -->
  <header id="header" class="" style="background: #fff;">
   <div class="container-fluid d-flex align-items-center justify-content-between"> 
+
+    {% if title != "Online Application Form." %}
+
+    <a href="https://www.central.edu.gh">
+      <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+    </a>
+    
+    {% else %}
     <a href="{{url_for("home")}}">
       <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
       <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
     </a>
+    {% endif %}
+
     <nav id="navbar" class="navbar navbar-light ">
 
 
