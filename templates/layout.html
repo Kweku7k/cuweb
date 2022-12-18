@@ -72,7 +72,11 @@
       <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
     </a>
     <nav id="navbar" class="navbar navbar-light ">
+
+
       <ul>
+
+        {% if title != "Online Application Form." %}
         <li><a class="nav-link scrollto active" href="{{url_for("students")}}">Student Body</a></li>
         <li><a class="nav-link scrollto" href="{{url_for("online")}}">Admissions</a></li>
         <li><a class="nav-link scrollto text-muted" href="{{url_for("posts")}}">Newsletter </a></li>
@@ -80,6 +84,7 @@
         <li><a class="nav-link scrollto text-muted disabled" href="#" disabled>Alumni </a></li>
         <li><a class="nav-link scrollto text-muted disabled" href="#" disabled>Guidence & Counselling </a></li>
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
+        {% endif %}
         
         <a href="{{url_for("online")}}">
           <button class="pill-button" style="padding: 12px 18px; margin-left: 20px;">

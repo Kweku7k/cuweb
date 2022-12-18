@@ -7,7 +7,7 @@ def home():
 
 @app.route('/')
 def online():
-    return render_template('online.html')
+    return render_template('online.html', title="Online Application Form.")
 
 @app.route('/post')
 def post():
