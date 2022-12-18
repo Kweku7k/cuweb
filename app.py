@@ -1,11 +1,11 @@
 from flask import Flask,redirect,url_for,render_template,request
 
 app=Flask(__name__)
-@app.route('/',methods=['GET','POST'])
+@app.route('/home',methods=['GET','POST'])
 def home():
     return render_template('index.html')
 
-@app.route('/online')
+@app.route('/')
 def online():
     return render_template('online.html')
 
