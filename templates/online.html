@@ -8,15 +8,17 @@
         <div class="col-lg-6 order-1 order-lg-1 text-left">
           <h6>Central University </h6>
           <h1 style="margin: 8px 0;">Online Application Portal</h1>
-          <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6>
-          <!-- <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="http://online.central.edu.gh/online_forms_manual.pdf">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6> -->
+          <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
+          <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="{{url_for("downloadOnlineManual")}}">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6>
           <br/>
           <div class="d-flex">
 
-            <a href="tel:*887*18#">
+            <!-- <a href="tel:*887*18#"> -->
               <button id="myBtn" class="pill-button" style="width: fit-content;">Click here to buy (*887*18#)</button>
+            <!-- </a> -->
+            <a href="#ourprograms">
+              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Pick a program.</button>
             </a>
-            <button id="myBtn2" class="pill-button" style="width: fit-content; margin-left: 6px;"> Pick a program.</button>
           </div>
         </div>
 
@@ -65,13 +67,13 @@
 
   <main id="main">
 
+      <!-- ======= About Video Section ======= -->
+
+
     <!-- ======= About Video Section ======= -->
     <section id="ourprograms" class="about-video">
       <div class="container" data-aos="fade-up">
-        
- 
 
-        
         <h1>Our Programs</h1>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
@@ -155,6 +157,8 @@
 
       </div>
     </section><!-- End About Video Section -->
+
+
     
     <!-- ======= Frequently Asked Questions Section ======= -->
     <section id="faq" class="faq section-bg">
@@ -221,7 +225,7 @@
   </main><!-- End #main -->
 
   <!-- The Modal -->
-  <div id="myModal" class="container modal" width="50%" style="margin:20px 0;">
+  <div id="myModal" class="modal" width="100%" style="margin:0;">
 
     <!-- Modal content -->
     <div class="modal-content">
@@ -232,10 +236,11 @@
         <div class="modal-body">
             <h3>Steps</h3>
             <ol>
-                <li>Visit any of the banks displayed below.</li>
-                <li>Specify one of the application vouchers to buy.</li>
-                <li>Pay for the voucher and obtain a receipt with <b>SERIAL NUMBER</b> and <b>PIN</b>.</li>
-                <li>Proceed to this page and enter your <b>SERIAL NUMBER</b> and <b>PIN</b> to Continue.</li>
+                <li>Enter the ussd code: <a href="tel:*887*18#">*887*18#</a> on your phone.</li>
+                <li>Enter CU as the name of the university</li>
+                <li>Follow the prompts to pay.</li>
+                <li>Once payment is done, you recieve a <b>SERIAL NUMBER</b> and <b>PIN</b>.</li>
+                <li>Click Pick a program and enter your <b>SERIAL NUMBER</b> and <b>PIN</b> to Continue.</li>
             </ol>
         </div>
     </div>
@@ -257,6 +262,49 @@
       </div>
   </div>
 </div>
+
+
  
+<script>
+  // Get the modal
+var modal = document.getElementById("myModal");
+// var modal2 = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// var span2 = document.getElementsByClassName("close2")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+modal.style.display = "block";
+}
+// btn2.onclick = function() {
+// modal2.style.display = "block";
+// }
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+// span2.onclick = function() {
+// modal2.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal || event.target == modal2) {
+  modal.style.display = "none";
+  modal2.style.display = "none";
+}
+}
+
+
+</script>
+
 
   {% endblock %}
