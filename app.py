@@ -24,6 +24,33 @@ def downloadOnlineManual():
 def post():
     return render_template('post.html')
 
+@app.route('/applicantInformation')
+def applicantInformation():
+    return render_template('applicantInformation.html')
+
+
+@app.route('/applicantEducation')
+def applicantEducation():
+    return render_template('applicantEducation.html')
+
+
+@app.route('/applicantPrograms')
+def applicantPrograms():
+    return render_template('applicantPrograms.html')
+
+@app.route('/applicantGuardian')
+def applicantGuardian():
+    return render_template('applicantGuardian.html')
+
+@app.route('/applicantExam')
+def applicantExam():
+    return render_template('applicantExam.html')
+
+@app.route('/applicantExamresult')
+def applicantExamresult():
+    return render_template('applicantExamresult.html')
+
+
 @app.route('/posts')
 def posts():
     return render_template('posts.html')
