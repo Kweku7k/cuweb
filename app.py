@@ -193,12 +193,28 @@ def post():
 
 @app.route('/applicantInformation')
 def applicantInformation():
-    return render_template('applicantInformation.html')
+    form=ApplicantForm()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+    # check form validation
+    # check errors
+
+    return render_template('applicantInformation.html', form=form)
 
 
 @app.route('/applicantEducation')
 def applicantEducation():
-    return render_template('applicantEducation.html')
+    form=ApplicantEducation()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+        return redirect(url_for('applicationEducation'))
+    # check form validation
+    # check errors
+    return render_template('applicantEducation.html', form=form)
 
 
 @app.route('/applicantPrograms')

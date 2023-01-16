@@ -1,138 +1,67 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Forms</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/static/css/form.css">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  </head>
-  <body>
-      <header>
+{% extends "layout.html" %}
 
-      </header>
-      <main>
-        <nav class="navbar navbar-expand navbar-light bg-transparent">
-            <div class="nav navbar-nav" style="display:flex; justify-content: space-between; width: 100%;">
-                <a class="nav-item nav-link active" href="" aria-current="page">
-                  Back
-                </a>
-                <a href="" class="nav-item nav-link active" ><b>Applicants Information</b></a>
-                <a class="nav-item nav-link active" href="">Restart</a>
-            </div>
-        </nav>
-
+{% block body %}
 
         <div class="container" style="margin-top: 1vh;">
             <div style="padding: 15px;">
                 <form action="">
+                    {{form.hidden_tag()}}
                     <div class="progress" style="height: 5px;">
                         <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
 
-                    <div class="ellipse">
+                    <div class="ellipse" style="margin-top: 3vh;">
                         <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
                     </div>
 
-                    <div class="mb-3 mt-3">
-                        <br>
-                        <label for="frefix" class="form-label">Prefix:</label>
-                        <input class="form-control" list="prefixs" name="prefix" id="prefix" placeholder="--Select--">
-                        <datalist id="prefixs">
-                        <option value="Mr.">
-                        <option value="Mrs.">
-                        <option value="Miss">
-                        
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.prefix (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.prefix.label}}
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="name" class="form-label">Surname:</label>
-                        <input type="name" class="form-control" id="name" placeholder="Enter Surname" name="name">
+                    <div class="form-floating mb-3">
+                        {{form.surname (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.surname.label}}
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="name" class="form-label">Other Names:</label>
-                        <input type="name" class="form-control" id="name" placeholder="Enter other name" name="name">
+                    <div class="form-floating mb-3">
+                        {{form.othername (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.othername.label}}
                     </div>
-                    <div class="mb-3 mt-3">  
-                        <label for="nationality" class="form-label">Nationality:</label>
-                        <input class="form-control" list="country" id="nationality" placeholder="--Select--">
-                        <datalist id="country">
-                        <option value="Mr.">
-                        <option value="Mrs.">
-                        <option value="Miss">
-                        
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.nationality (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.nationality.label}}
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="tel" class="form-label">Mobile:</label>
-                        <input type="tel" class="form-control" id="tel" placeholder="Enter mobile" name="tel">
+                    <div class="form-floating mb-3">
+                        {{form.mobile (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.mobile.label}}
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    <div class="form-floating mb-3">
+                        {{form.email (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.email.label}}
                     </div>
-                    <div class="mb-3 mt-3">  
-                        <label for="sex" class="form-label">Sex:</label>
-                        <input class="form-control" list="gender" id="sex" placeholder="--Select--">
-                        <datalist id="gender">
-                        <option value="Male">
-                        <option value="Female">
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.sex (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.sex.label}}
                     </div>
-                    <div class="mb-3 mt-3">
-                        <label for="dateofbirth" class="form-label">Date of Birth:</label>
-                        <input type="date" class="form-control" id="dateofbirth" placeholder="Enter email" name="dateofbirth">
+                    <div class="form-floating mb-3">
+                        {{form.dateofbirth (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.dateofbirth.label}}
                     </div>
-                    <div class="mb-3 mt-3">  
-                        <label for="campus" class="form-label">Campus:</label>
-                        <input class="form-control" list="camp" id="campus" placeholder="--Select--">
-                        <datalist id="camp">
-                        <option value="Kumasi">
-                        <option value="Mataheko">
-                        <option value="Christ Temple">
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.campus (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.campus.label}}
                     </div>
-                    <div class="mb-3 mt-3">  
-                        <label for="stream" class="form-label">Stream:</label>
-                        <input class="form-control" list="streams" id="stream" placeholder="--Select--">
-                        <datalist id="streams">
-                        <option value="Morning">
-                        <option value="Afternoon">
-                        <option value="Evening">
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.stream (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.stream.label}}
                     </div>
-                    <div class="mb-3 mt-3">  
-                        <label for="mode" class="form-label">Entry Mode:</label>
-                        <input class="form-control" list="entry" id="mode" placeholder="--Select--">
-                        <datalist id="entry">
-                        <option value="Direct">
-                        <option value="Cohort">
-                        </datalist>
+                    <div class="form-floating mb-3">
+                        {{form.entrymode (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.entrymode.label}}
                     </div>
-                    <br>
-                    <a href=""></a>
-                    <button class="pill-button" href="/applicantEducation" >Next</button>
 
+                    {{form.submit (class="pill-button", style="width:100%", onclick="") }}
+                
                 </form>
 
-            </div>
-
-        </div>
-
-
-
-
-
-        
-
-      </main>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
-</html>
+{% endblock %}
