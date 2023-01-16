@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div style="background-color: rgb(250, 250, 250);">
+
+<div class="container">
+
+    <br/>
+    <h4 style="font-weight: 200;">Welcome back!</h4>
+    <h6>Please enter your verification code. You can find this in your email. An sms has also been sent your phone</h6>
+    
+    <form action="" method="post" style="padding-bottom: 2vh; height: 100vh;">
+
+        {{form.hidden_tag()}}
+        <div>
+            <div class="form-floating mb-3">
+                <!-- <input type="text" name="" class="form-control webForm", placeholder="Enter your name" id=""> -->
+                {{form.code (class="form-control webForm", placeholder="Enter your name")}}
+                <label for="">Your verification code</label>
+            </div>
+
+            <div style="text-align: center;">
+               {{form.submit (class="btn")}}
+            </div>
+            <a style="width: 100%; ">
+                <h6 style="text-align:center; margin-top: 10px;">
+                Oops, I lost my verification code, please send again!
+                </h6>
+            </a>
+        </div>
+
+        
+    </form>
+
+</div>
+</div>
+
+{% endblock %} 
