@@ -219,19 +219,51 @@ def applicantEducation():
 
 @app.route('/applicantPrograms')
 def applicantPrograms():
-    return render_template('applicantPrograms.html')
+    form=ApplicantProgram()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+        return redirect(url_for('applicationEducation'))
+    # check form validation
+    # check errors
+    return render_template('applicantPrograms.html', form=form)
 
 @app.route('/applicantGuardian')
 def applicantGuardian():
-    return render_template('applicantGuardian.html')
+    form=ApplicantGuardian()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+        return redirect(url_for('applicationEducation'))
+    # check form validation
+    # check errors
+    return render_template('applicantGuardian.html', form=form)
 
 @app.route('/applicantExam')
 def applicantExam():
-    return render_template('applicantExam.html')
+    form=ApplicantExams()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+        return redirect(url_for('applicationEducation'))
+    # check form validation
+    # check errors
+    return render_template('applicantExam.html', form=form)
 
 @app.route('/applicantExamresult')
 def applicantExamresult():
-    return render_template('applicantExamresult.html')
+    form=ApplicantExamresult()
+    # check request method
+    if request.method=='POST':
+        if form.validate_on_submit:
+            print(form.email.data)
+        return redirect(url_for('applicationEducation'))
+    # check form validation
+    # check errors
+    return render_template('applicantExamresult.html', form=form)
 
 @app.route('/posts')
 def posts():

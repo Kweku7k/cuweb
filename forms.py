@@ -17,19 +17,51 @@ class LoginForm(FlaskForm):
 class ApplicantForm(FlaskForm):
     prefix = SelectField('Prefix', choices=[("Mr","Mr"),("Mrs","Mrs",),("Miss","Miss")])
     surname = StringField('Surname', validators=[DataRequired()])
-    othername = StringField('Othername', validators=[DataRequired()])
+    othername = StringField('Other Name', validators=[DataRequired()])
     nationality = SelectField('Nationality', choices=[("Ghana","Ghana"),("Nigeria","Nigeria")])
     mobile = StringField('Mobile', validators=[DataRequired()])
     email = StringField('Email', validators=[DataRequired()])
     sex = SelectField('Sex', choices=[("Male","Male"),("Female","Female")]) 
-    dateofbirth = DateField('Dateofbirth', format='%Y-%m-%d')
+    dateofbirth = DateField('Date of Birth', format='%Y-%m-%d')
     campus = SelectField('Campus', choices=[("Kumasi","Kumasi"),("Mataheko","Mataheko"),("Christ Temple","Christ Temple")]) 
     stream = SelectField('Stream', choices=[("Morning","Morning"),("Evening","Evening")]) 
-    entrymode = SelectField('Entrymode', choices=[("Direct","Direct"),("Cohort","Cohort")]) 
+    entrymode = SelectField('Entry Mode', choices=[("Direct","Direct"),("Cohort","Cohort")]) 
     submit = SubmitField('Next')
 
 class ApplicantEducation(FlaskForm):
     school = StringField('School', validators=[DataRequired()])
-    start_date = DateField('Startdate', format='%Y-%m-%d')
-    end_date = DateField('Enddate', format='%Y-%m-%d')
+    start_date = DateField('Start Date', format='%Y-%m-%d')
+    end_date = DateField('End Date', format='%Y-%m-%d')
     submit = SubmitField('Next')
+
+class ApplicantExams(FlaskForm):
+    examtype = SelectField('Exam Type', choices=[("Wassce","Wassce"),("Nov-Dec","Nov-Dec")])
+    indexnumber = StringField('Index Number', validators=[DataRequired()])
+    exam_date = DateField('Exam Date', format='%Y-%m-%d')
+    submit = SubmitField('Next')
+
+class ApplicantGuardian(FlaskForm):
+    guardianrelationship = StringField('Guardian Relationship', validators=[DataRequired()])
+    guardianname = StringField('Guardian Name', validators=[DataRequired()])
+    guardianaddress = StringField('Guardian Address', validators=[DataRequired()])
+    guardianmobile = StringField('Guardian Mobile', validators=[DataRequired()])
+    guardianemail = StringField('Guardian Email', validators=[DataRequired()])
+    guardianjob = StringField('Guardian Occupation', validators=[DataRequired()])
+    submit = SubmitField('Next')
+
+class ApplicantProgram(FlaskForm):
+    program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
+    programchoice = SelectField('Program Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
+    submit = SubmitField('Next')
+
+class ApplicantExamresult(FlaskForm):
+    applicantexam = SelectField('Applicant Exam', choices=[("Degree","Degree"),("Diploma","Diploma")])
+    subject = SelectField('Subject', choices=[("Dip.Enterprise Management","Dip.Enterprise Management"), ("Dip.Enterprise Management","Dip.Enterprise Management")])
+    grade = SelectField('Grade', choices=[("1st Class Upper","1st Class Upper"),("2nd Class Upper","2nd Class Upper")])
+    submit = SubmitField('Next')
+    
+
+
+
+
+    
