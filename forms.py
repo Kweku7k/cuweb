@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField, FileField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
 class BuyForms(FlaskForm):
@@ -41,12 +41,12 @@ class ApplicantExams(FlaskForm):
     submit = SubmitField('Next')
 
 class ApplicantGuardian(FlaskForm):
-    guardianrelationship = StringField('Guardian Relationship', validators=[DataRequired()])
-    guardianname = StringField('Guardian Name', validators=[DataRequired()])
-    guardianaddress = StringField('Guardian Address', validators=[DataRequired()])
-    guardianmobile = StringField('Guardian Mobile', validators=[DataRequired()])
-    guardianemail = StringField('Guardian Email', validators=[DataRequired()])
-    guardianjob = StringField('Guardian Occupation', validators=[DataRequired()])
+    guardianrelationship = StringField('Relationship', validators=[DataRequired()])
+    guardianname = StringField('Name', validators=[DataRequired()])
+    guardianaddress = StringField('Address', validators=[DataRequired()])
+    guardianmobile = StringField('Mobile', validators=[DataRequired()])
+    guardianemail = StringField('Email', validators=[DataRequired()])
+    guardianjob = StringField('Occupation', validators=[DataRequired()])
     submit = SubmitField('Next')
 
 class ApplicantProgram(FlaskForm):
@@ -60,8 +60,41 @@ class ApplicantExamresult(FlaskForm):
     grade = SelectField('Grade', choices=[("1st Class Upper","1st Class Upper"),("2nd Class Upper","2nd Class Upper")])
     submit = SubmitField('Next')
     
+class ApplicantContant(FlaskForm):
+    contactrelationship = StringField('Relationship', validators=[DataRequired()])
+    contactname = StringField('Name', validators=[DataRequired()])
+    contactaddress = StringField('Address', validators=[DataRequired()])
+    contactmobile = StringField('Mobile', validators=[DataRequired()])
+    contactemail = StringField('Email', validators=[DataRequired()])
+    contactjob = StringField('Occupation', validators=[DataRequired()])
+    submit = SubmitField('Next')
 
+class ApplicantAttachment(FlaskForm):
+    attachmenttype = SelectField('Type', choices=[("Transcript","Transcript")])
+    attachmentname = StringField('File Name', validators=[DataRequired()])
+    attachmentfile = FileField('Upload file', validators=[DataRequired()])
+    submit = SubmitField('Next')
 
+class ApplicantPhoto(FlaskForm):
+    photoname = StringField('File Name', validators=[DataRequired()])
+    photofile = FileField('Upload file', validators=[DataRequired()])
+    submit = SubmitField('Next')
 
+class ApplicantAnswer(FlaskForm):
+    applicantanswer = StringField('How did you get to know about Central University', validators=[DataRequired()])
+    submit = SubmitField('Next')
 
-    
+class ApplicantRefree(FlaskForm):
+    refreesname = StringField('Name', validators=[DataRequired()])
+    refreesmobile = StringField('Mobile', validators=[DataRequired()])
+    refreesemail = StringField('Email', validators=[DataRequired()])
+    refreesjob = StringField('Occupation', validators=[DataRequired()])
+    submit = SubmitField('Next')
+
+class ApplicantHall(FlaskForm):
+    applicanthall = SelectField('Hall of Affilliation', choices=[("CU Male Hostel","CU Male Hostel"), ("CU Female Hostel","CU Female Hostel")])
+    submit = SubmitField('Next')
+
+class ApplicantMiscellaneousInformation(FlaskForm):
+    applicantmisinfo = StringField('Number of Children', validators=[DataRequired()])
+    submit = SubmitField('Next')
