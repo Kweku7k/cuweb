@@ -8,12 +8,11 @@ import httpx
 from datetime import datetime
 import urllib.request, urllib.parse
 
-
 import random
 import string
 
 app=Flask(__name__)
-baseUrl = "https:online.central.edu.gh"
+baseUrl = "http://online.central.edu.gh"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
@@ -123,7 +122,7 @@ def payWithPresto(paymentId):
 
     payment = Payments.query.get_or_404(paymentId)
 
-    prestoUrl = "prestoghana.com/api/pay"
+    prestoUrl = "https://sandbox.prestoghana.com/korba"
     paymentInfo = {
             "appId":"cu",
             "ref":payment.ref,
@@ -132,7 +131,7 @@ def payWithPresto(paymentId):
             "phone":"0"+payment.phone[-9:],
             "amount":payment.amount,
             "total":payment.total,
-            "recipient":"payment", #TODO:Change!
+            "recipient":"external", #TODO:Change!
             "percentage":"5",
             "callbackUrl":baseUrl+"/confirm/"+str(payment.id),#TODO: UPDATE THIS VALUE
             "firstName":payment.name,
@@ -156,7 +155,7 @@ def apply():
             if user != None:
                 print(user)
                 login_user(user)
-                return redirect(url_for('applicationform'))
+                return redirect(url_for('applicantInformation'))
             else:
                 flash(f'Oopss, no code was found. please check and try again', "danger")
             # route to acc form. Prefill the data with user, phone, email and code.
@@ -183,7 +182,7 @@ def confirm(transactionId):
             newuser = User(name = payment.name, code=code, phone=payment.phone, paid=True)
             db.session.add(newuser)
             db.session.commit()
-            
+
             message = "Hi "+ payment.name + "\nYou have successfully purchased bought an application form. Your code is: " + code + "\n You can apply here: http://online.central.edu.gh/apply/"+code
             sendsms(payment.phone, message, "Exception sending sms after successful payment of form!")
             
