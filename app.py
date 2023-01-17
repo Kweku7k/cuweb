@@ -13,6 +13,7 @@ import string
 
 app=Flask(__name__)
 baseUrl = "http://online.central.edu.gh"
+baseIp = "http://45.222.128.225:5000"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
@@ -100,10 +101,10 @@ def buyforms():
                 db.session.add(newPayment)
                 db.session.commit()
             
-                confirm(newPayment.id)
+                # confirm(newPayment.id)
 
-                # response = payWithPresto(newPayment.id)
-                # print(response)
+                response = payWithPresto(newPayment.id)
+                print(response)
                 return redirect(url_for('apply'))
 
             except Exception as e:
@@ -123,17 +124,18 @@ def payWithPresto(paymentId):
     payment = Payments.query.get_or_404(paymentId)
 
     prestoUrl = "https://sandbox.prestoghana.com/korba"
+
     paymentInfo = {
             "appId":"cu",
-            "ref":payment.ref,
-            "reference":payment.ref,
+            "ref":payment.name,
+            "reference":payment.name,
             "paymentId":payment.id, 
             "phone":"0"+payment.phone[-9:],
             "amount":payment.amount,
-            "total":payment.total,
+            "total":payment.amount, #TODO:CHANGE THIS!
             "recipient":"external", #TODO:Change!
             "percentage":"5",
-            "callbackUrl":baseUrl+"/confirm/"+str(payment.id),#TODO: UPDATE THIS VALUE
+            "callbackUrl":baseIp+"/confirm/"+str(payment.id),#TODO: UPDATE THIS VALUE
             "firstName":payment.name,
             "network":payment.network,
         }
