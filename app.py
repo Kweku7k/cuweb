@@ -6,6 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import httpx
 from datetime import datetime
+import urllib.request, urllib.parse
+
+
 import random
 import string
 
@@ -62,6 +65,24 @@ def user_loader(user_id):
 @app.route('/home',methods=['GET','POST'])
 def home():
     return render_template('index.html')
+
+# def payWithPresto():
+#     httpx.get('prestoghana.com/pay')
+
+def sendsms(phone,message, exceptionPath):
+    api_key = "aniXLCfDJ2S0F1joBHuM0FcmH" #Remember to put your own API Key here
+    message  = message + "\n \nPowered by PrestoGhana"
+    params = {"key":api_key,"to":phone,"msg":message,"sender_id":"PrestoSl"}
+    url = 'https://apps.mnotify.net/smsapi?'+ urllib.parse.urlencode(params)
+    
+    try:
+        content = urllib.request.urlopen(url).read()
+        print (content)
+        print (url)
+    except Exception as e:
+        print("Exception at " + exceptionPath + "from send sms function.")
+
+    return content
 
 @app.route('/buyforms', methods=['GET', 'POST'])
 def buyforms():
@@ -153,7 +174,8 @@ def confirm(transactionId):
     except Exception as e:
         print(e)
 
-    code = randomLetters(10)
+    code = randomLetters(10).upper()
+
 
     if payment != None:
 
@@ -161,6 +183,9 @@ def confirm(transactionId):
             newuser = User(name = payment.name, code=code, phone=payment.phone, paid=True)
             db.session.add(newuser)
             db.session.commit()
+            
+            message = "Hi "+ payment.name + "\nYou have successfully purchased bought an application form. Your code is: " + code + "\n You can apply here: http://online.central.edu.gh/apply/"+code
+            sendsms(payment.phone, message, "Exception sending sms after successful payment of form!")
             
         except Exception as e:
             print("Exception creating user after successful payment!")
