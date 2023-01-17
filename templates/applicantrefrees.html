@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<div class="container" style="margin-top: 1vh;">
+    <div style="padding: 18px;">
+        <form action="">
+            <div class="progress" style="height: 5px; margin-bottom: 3vh;">
+                <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
+
+            <!-- <div class="ellipse">
+                <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
+            </div> -->
+
+            <div class="form-floating mb-3">
+                {{form.refreesname (class="form-control webForm", placeholder="Enter")}}
+                {{form.refreesname.label}}
+            </div>
+            <div class="form-floating mb-3">
+                {{form.refreesmobile (class="form-control webForm", placeholder="Enter")}}
+                {{form.refreesmobile.label}}
+            </div>
+            <div class="form-floating mb-3">
+                {{form.refreesemail (class="form-control webForm", placeholder="Enter")}}
+                {{form.refreesemail.label}}
+            </div>
+            <div class="form-floating mb-3">
+                {{form.refreesjob (class="form-control webForm", placeholder="Enter")}}
+                {{form.refreesjob.label}}
+            </div>
+            
+            {{form.submit (class="pill-button", style="width:100%", onclick="") }}
+           
+        </form>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
