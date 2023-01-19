@@ -7,6 +7,7 @@ from flask_migrate import Migrate
 import httpx
 from datetime import datetime
 import urllib.request, urllib.parse
+import csv
 
 import random
 import string
@@ -83,6 +84,25 @@ def sendsms(phone,message, exceptionPath):
         print("Exception at " + exceptionPath + "from send sms function.")
 
     return content
+
+
+@app.route('/readcsv', methods=['GET', 'POST'])
+def readcsv():
+    with open('Documents/Lecturers.csv', 'r') as csv_file:
+        csv_reader = csv.DictReader(csv_file)
+
+        array = []
+
+        for line in csv_file:
+            line = line.split(",")
+            lec = line[0] + " " + line[2] + " " + line[1]
+            dep = line[4]
+            print(lec)
+            array.append(dep)
+        
+        array = list(dict.fromkeys(array))
+            
+        return array
 
 @app.route('/buyforms', methods=['GET', 'POST'])
 def buyforms():
