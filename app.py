@@ -56,6 +56,29 @@ class Payments(db.Model, UserMixin):
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
+    
+
+class ApplicantInformation(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'applicantinformation'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    surname = db.Column(db.String,nullable=False,unique=False)
+    othername = db.Column(db.String,nullable=False,unique=False)
+    nationality = db.Column(db.String,nullable=False,unique=False)
+    email = db.Column(db.String,nullable=False,unique=False)
+    campus = db.Column(db.String,nullable=False,unique=False)
+    stream = db.Column(db.String,nullable=False,unique=False)
+    date_of_birth = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    phone = db.Column(db.String)
+    entry_mode = db.Column(db.String)
+    filed = db.Column(db.Boolean, default=True)
+
+    def __repr__(self):
+        return '<User {}>'.format(self.name)
 
 
 @login_manager.user_loader
@@ -121,7 +144,7 @@ def buyforms():
                 db.session.add(newPayment)
                 db.session.commit()
             
-                # confirm(newPayment.id)
+                confirm(newPayment.id)
 
                 response = payWithPresto(newPayment.id)
                 print(response)
@@ -171,16 +194,13 @@ def apply():
     form = LoginForm()
     if request.method == "POST":
         if form.validate_on_submit: 
-
             user = User.query.filter_by(code = form.code.data).first()
-
             if user != None:
                 print(user)
                 login_user(user)
                 return redirect(url_for('applicantInformation'))
             else:
                 flash(f'Oopss, no code was found. please check and try again', "danger")
-            # route to acc form. Prefill the data with user, phone, email and code.
     else:
         print("asdf")
         flash(f'The verification code has been sent to your email and your sms.', category="success")
@@ -196,7 +216,6 @@ def confirm(transactionId):
         print(e)
 
     code = randomLetters(10).upper()
-
 
     if payment != None:
 
@@ -237,42 +256,73 @@ def downloadOnlineManual():
 def post():
     return render_template('post.html')
 
-@app.route('/applicantInformation')
+@app.route('/applicantInformation', methods=['GET', 'POST'])
 def applicantInformation():
     form=ApplicantForm()
-    # check request method
+    # save form as session?
+    print(current_user.code)
+    
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-    # check form validation
-    # check errors
+            try:
+                newapplicantInformation = ApplicantInformation(
+                    surname = form.surname.data,
+                    othername = form.othername.data,
+                    nationality = form.nationality.data,
+                    email = form.email.data,
+                    campus = form.campus.data,
+                    stream = form.stream.data,
+                    data_of_birth = form.dateofbirth.data,
+                    phone = form.phone.data,
+                    entry_mode = form.entrymode.data,
+                    filed = True
+                ) 
+                db.session.add(newapplicantInformation)
+                db.session.commit()
+
+            except Exception as e:
+                print("e")
+                print(e)
+
+            return redirect('applicantEducation')
+        else:
+            print(form.errors)
+            flash(form.errors[0],"danger")
+    elif request.method=='GET':
+        surname = surname
+        form.othername.data = othername 
+        form.nationality.data = nationality
+        email = form.email.data,
+        campus = form.campus.data,
+        stream = form.stream.data,
+        data_of_birth = form.dateofbirth.data,
+        phone = form.phone.data,
+        entry_mode = form.entrymode.data,
+        filed = True
 
     return render_template('applicantInformation.html', form=form)
 
 
-@app.route('/applicantEducation')
+@app.route('/applicantEducation', methods=['GET', 'POST'])
 def applicantEducation():
     form=ApplicantEducation()
-    # check request method
+
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
-    # check form validation
-    # check errors
+            return redirect(url_for('applicantPrograms'))
+        else:
+            print(form.errors)
+
     return render_template('applicantEducation.html', form=form)
 
 
 @app.route('/applicantPrograms')
 def applicantPrograms():
     form=ApplicantProgram()
-    # check request method
     if request.method=='POST':
         if form.validate_on_submit:
             print(form.email.data)
         return redirect(url_for('applicationEducation'))
-    # check form validation
-    # check errors
     return render_template('applicantPrograms.html', form=form)
 
 @app.route('/applicantGuardian')
