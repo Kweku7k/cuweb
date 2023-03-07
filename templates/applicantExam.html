@@ -5,16 +5,19 @@
         
         <div class="container" style="margin-top: 1vh;">
             <div style="padding: 18px;">
-                <form action="">
-                    <div class="progress" style="height: 5px; margin-bottom: 3vh;">
-                        <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <form action="" method="post">
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width:4     0%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
+                    <br>
 
 
                     <!-- <div class="ellipse">
                         <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
                     </div> -->
 
+                    {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
                         {{form.examtype (class="form-control webForm")}}

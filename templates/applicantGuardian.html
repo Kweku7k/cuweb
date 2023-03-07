@@ -3,7 +3,8 @@
 {% block body %}
         <div class="container" style="margin-top: 1vh;">
             <div style="padding: 18px;">
-                <form action="">
+                <form action="", method="post">
+                    {{form.hidden_tag()}}
                     <div class="progress" style="height: 5px; margin-bottom: 3vh;">
                         <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>

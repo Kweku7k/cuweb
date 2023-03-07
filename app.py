@@ -36,7 +36,7 @@ class User(db.Model, UserMixin):
     code = db.Column(db.String,nullable=False,unique=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     phone = db.Column(db.String)
-    paid = db.Column(db.Boolean, default=True)
+    paid = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
@@ -52,7 +52,7 @@ class Payments(db.Model, UserMixin):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     phone = db.Column(db.String)
     network = db.Column(db.String)
-    paid = db.Column(db.Boolean, default=True)
+    paid = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
@@ -73,12 +73,93 @@ class ApplicantInformation(db.Model, UserMixin):
     stream = db.Column(db.String,nullable=False,unique=False)
     date_of_birth = db.Column(db.DateTime)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    phone = db.Column(db.String)
-    entry_mode = db.Column(db.String)
-    filed = db.Column(db.Boolean, default=True)
+    phone = db.Column(db.String())
+    entry_mode = db.Column(db.String())
+    filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<User {}>'.format(self.name)
+
+
+class Education(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'applicanteducation'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    school = db.Column(db.String,nullable=False,unique=False)
+    start = db.Column(db.DateTime,nullable=False,unique=False)
+    endDate = db.Column(db.DateTime,nullable=False,unique=False)
+    entry_mode = db.Column(db.String())
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Education {}>'.format(self.school)
+
+class Programs(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'programs'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    program = db.Column(db.String,nullable=False,unique=False)
+    programchoice = db.Column(db.String,nullable=False,unique=False)
+    entry_mode = db.Column(db.String())
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Program {}>'.format(self.program)
+
+
+class Guardian(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'guardian'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    relationship = db.Column(db.String,nullable=False)
+    name = db.Column(db.String,nullable=True)
+    address = db.Column(db.String,nullable=True)
+    mobile = db.Column(db.String,nullable=True)
+    email = db.Column(db.String,nullable=True)
+    occupation = db.Column(db.String,nullable=True)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Guardian {}>'.format(self.program)
+
+class Exam(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'exam'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    indexNumber = db.Column(db.String)
+    exam = db.Column(db.String)
+    date = db.Column(db.DateTime)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Exam {}>'.format(self.program)
+
+class ExamResult(db.Model, UserMixin):
+    """Model for user accounts."""
+    __tablename__ = 'examResult'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    indexNumber = db.Column(db.String)
+    exam = db.Column(db.String)
+    date = db.Column(db.DateTime)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Exam {}>'.format(self.program)
 
 
 @login_manager.user_loader
@@ -169,7 +250,7 @@ def payWithPresto(paymentId):
     prestoUrl = "https://sandbox.prestoghana.com/korba"
 
     paymentInfo = {
-            "appId":"cu",
+            "appId":"centraluniversity",
             "ref":payment.name,
             "reference":payment.name,
             "paymentId":payment.id, 
@@ -257,26 +338,30 @@ def post():
     return render_template('post.html')
 
 @app.route('/applicantInformation', methods=['GET', 'POST'])
+@login_required
 def applicantInformation():
     form=ApplicantForm()
     # save form as session?
     print(current_user.code)
-    
+
     if request.method=='POST':
         if form.validate_on_submit:
             try:
                 newapplicantInformation = ApplicantInformation(
                     surname = form.surname.data,
+                    userId = current_user.id,
+                    usercode = current_user.code,
                     othername = form.othername.data,
                     nationality = form.nationality.data,
                     email = form.email.data,
                     campus = form.campus.data,
                     stream = form.stream.data,
-                    data_of_birth = form.dateofbirth.data,
-                    phone = form.phone.data,
+                    date_of_birth = form.dateofbirth.data,
+                    phone = form.mobile.data,
                     entry_mode = form.entrymode.data,
                     filed = True
                 ) 
+
                 db.session.add(newapplicantInformation)
                 db.session.commit()
 
@@ -285,20 +370,27 @@ def applicantInformation():
                 print(e)
 
             return redirect('applicantEducation')
+
         else:
             print(form.errors)
             flash(form.errors[0],"danger")
     elif request.method=='GET':
-        surname = surname
-        form.othername.data = othername 
-        form.nationality.data = nationality
-        email = form.email.data,
-        campus = form.campus.data,
-        stream = form.stream.data,
-        data_of_birth = form.dateofbirth.data,
-        phone = form.phone.data,
-        entry_mode = form.entrymode.data,
-        filed = True
+
+        userdata = ApplicantInformation.query.filter_by(usercode = current_user.code).first()
+    
+        if userdata:
+            if userdata.filed == True:
+                form.surname.data = userdata.surname
+                form.othername.data = userdata.othername 
+                form.nationality.data = userdata.nationality
+                form.email.data = userdata.email,
+                form.campus.data = userdata.campus,
+                form.stream.data = userdata.stream,
+                form.dateofbirth.data = userdata.date_of_birth,
+                form.mobile.data = userdata.phone,
+                form.entrymode.data = userdata.entry_mode
+        else:
+            pass
 
     return render_template('applicantInformation.html', form=form)
 
@@ -309,45 +401,142 @@ def applicantEducation():
 
     if request.method=='POST':
         if form.validate_on_submit:
+
+            newApplicantEducation = Education(
+            userId = current_user.id,
+            usercode = current_user.code,
+            school = form.school.data,
+            start = form.start_date.data,
+            endDate = form.end_date.data,
+            filed = True
+            )    
+            db.session.add(newApplicantEducation)
+            db.session.commit()        
+
             return redirect(url_for('applicantPrograms'))
+        else:
+            print(form.errors)
+
+    if request.method == 'GET':
+        userdata = Education.query.filter_by(usercode = current_user.code).first()
+        
+        # print(userdata.school)
+        # print(type(userdata.school))
+
+        if userdata:
+            if userdata.filed == True:
+                form.school.data = userdata.school,
+                #TODO:
+                # form.start_date.data = userdata.start,
+                # form.end_date.data = userdata.endDate
         else:
             print(form.errors)
 
     return render_template('applicantEducation.html', form=form)
 
 
-@app.route('/applicantPrograms')
+@app.route('/applicantPrograms', methods=['GET', 'POST'])
 def applicantPrograms():
     form=ApplicantProgram()
     if request.method=='POST':
+        print("POST FORM!")
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print(form.program.data)
+
+            newPrograms = Programs(
+            userId = current_user.id,
+            usercode = current_user.code,
+            program = form.program.data,
+            programchoice = form.programchoice.data,
+            filed = True
+            )    
+
+            db.session.add(newPrograms)
+            db.session.commit() 
+            return redirect(url_for('applicantGuardian'))
+
+        else:
+            print(form.errors)
+        
+        return redirect(url_for('applicantGuardian'))
+
+    if request.method == 'GET':
+        print("lol")
+
     return render_template('applicantPrograms.html', form=form)
 
-@app.route('/applicantGuardian')
+@app.route('/applicantGuardian', methods=['GET', 'POST'])
 def applicantGuardian():
     form=ApplicantGuardian()
-    # check request method
+
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
-    # check form validation
-    # check errors
+            applicationGuardian = Guardian(
+                    userId = current_user.id,
+                    usercode = current_user.code,
+                    relationship = form.guardianrelationship.data,
+                    name = form.guardianname.data,
+                    address = form.guardianaddress.data,
+                    mobile = form.guardianmobile.data,
+                    email = form.guardianemail.data,
+                    occupation = form.guardianjob.data,
+                    filed = True
+                    )
+            db.session.add(applicationGuardian)
+            db.session.commit()
+        else:
+            print("Home asdf")
+            print(form)
+
+    elif request.method == 'GET':
+        userdata = Guardian.query.filter_by(usercode = current_user.code).first()
+
+        if userdata:
+            if userdata.filed == True:
+                form.guardianrelationship.data = userdata.relationship
+                form.guardianname.data = userdata.name
+                form.guardianaddress.data = userdata.address
+                form.guardianmobile.data = userdata.mobile
+                form.guardianemail.data = userdata.email,
+                form.guardianjob.data = userdata.occupation
+
+        else:
+            pass
+
+        return redirect(url_for('applicantExam'))
+
+    else:
+        print("asfd")
+
     return render_template('applicantGuardian.html', form=form)
 
-@app.route('/applicantExam')
+@app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
     form=ApplicantExams()
-    # check request method
+
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
-    # check form validation
-    # check errors
+            print("form.exam.data")
+            exam = Exam(
+                    userId = current_user.id,
+                    usercode = current_user.code,
+                    exam = form.examtype.data,
+                    indexNumber = form.indexnumber.data,
+                    date = form.exam_date.data,
+                    filed = True)
+            db.session.add(exam)
+            db.session.commit()
+            return redirect(url_for('applicantExamresult'))
+    elif request.method == 'GET':
+        userdata = Exam.query.filter_by(usercode = current_user.code).first()
+
+        if userdata:
+            if userdata.filed == True:
+                form.indexnumber.data = userdata.indexNumber
+                # form.exam.data = userdata.exam
+            
     return render_template('applicantExam.html', form=form)
+
 
 @app.route('/applicantExamresult')
 def applicantExamresult():
@@ -355,8 +544,15 @@ def applicantExamresult():
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
+            ExamResult
+            print("formvalidated")
         return redirect(url_for('applicationEducation'))
+    elif request.method == 'GET':
+        userdata = ExamResult.query.filter_by(usercode = current_user.code).first()
+
+        if userdata:
+            if userdata.filed == True:
+                pass
     # check form validation
     # check errors
     return render_template('applicantExamresult.html', form=form)
@@ -365,7 +561,7 @@ def applicantExamresult():
 @app.route('/applicantcontacts')
 def applicantcontacts():
     form=ApplicantContant()
-    # check request method
+
     if request.method=='POST':
         if form.validate_on_submit:
             print(form.email.data)

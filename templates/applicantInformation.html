@@ -7,7 +7,8 @@
                 <form method="post">
                     {{form.hidden_tag()}}
                     <div class="progress" style="height: 5px;">
-                        <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width:10%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
 
 
@@ -43,10 +44,7 @@
                         {{form.sex (class="form-control webForm", placeholder="Enter your name")}}
                         {{form.sex.label}}
                     </div>
-                    <div class="form-floating mb-3">
-                        {{form.dateofbirth (class="form-control webForm", placeholder="Enter your name")}}
-                        {{form.dateofbirth.label}}
-                    </div>
+                   <!-- TODO: DATE OF BIRTH! -->
                     <div class="form-floating mb-3">
                         {{form.campus (class="form-control webForm", placeholder="Enter your name")}}
                         {{form.campus.label}}
