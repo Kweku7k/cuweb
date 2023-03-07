@@ -434,7 +434,6 @@ def applicantEducation():
 
     return render_template('applicantEducation.html', form=form)
 
-
 @app.route('/applicantPrograms', methods=['GET', 'POST'])
 def applicantPrograms():
     form=ApplicantProgram()
