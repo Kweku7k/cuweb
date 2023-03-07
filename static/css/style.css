@@ -136,10 +136,14 @@ h6 {
 # Header
 --------------------------------------------------------------*/
 #header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   transition: all 0.5s;
-  background: #f2f2f2;
+  background: #b8b0b0;
   z-index: 997;
-  padding: 15px 0;
+  padding: 10px 0;
   border-bottom: 1px solid #f2f2f2;
 }
 
