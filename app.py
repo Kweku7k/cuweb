@@ -326,6 +326,14 @@ def applicationform():
 def online():
     return render_template('online.html', title="Online Application Form.")
 
+@app.route('/cu')
+def cu():
+    return render_template('cu.html')
+
+@app.route('/staff')
+def staff():
+    return render_template('staff.html')
+
 @app.route('/downloadOnlineManual', methods=['GET', 'POST'])
 def downloadOnlineManual():
     path = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])

@@ -65,21 +65,17 @@
 <body>
 
   <!-- ======= Header ======= -->
-<<<<<<< HEAD
  <header id="header" class="sticky-top" style="background: #fff;">
-=======
- <header id="header" class="sticky header" style="background: #fff;">
->>>>>>> 7df5549 (new)
   <div class="container-fluid d-flex align-items-center justify-content-between"> 
 
     {% if title != "Online Application Form." %}
 
-    <a href="https://www.central.edu.gh">
+    <a href="{{url_for('home')}}">
       <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
     </a>
     
     {% else %}
-    <a href="{{url_for("home")}}">
+    <a href="{{url_for('home')}}">
       <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
       <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
     </a>
@@ -90,13 +86,13 @@
       <ul>
 
         {% if title != "Online Application Form." %}
-        <li><a class="nav-link scrollto active" href="{{url_for("students")}}">Student Body</a></li>
-        <li><a class="nav-link scrollto" href="{{url_for("online")}}">Admissions</a></li>
-        <li><a class="nav-link scrollto" href="{{url_for("home")}}">About CU</a></li>
-        <li><a class="nav-link scrollto" href="#" disabled>Faculty & Staff </a></li>
-        <li><a class="nav-link scrollto" href="#" disabled>Alumni </a></li>
-        <!-- <li><a class="nav-link scrollto" href="#" disabled>Guidence & Counselling </a></li> -->
-        <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}">Gallery </a></li>
+        <a class="nav-link scrollto active" href="{{url_for("students")}}"><li> Student Body</li></a>
+        <a class="nav-link scrollto" href="{{url_for("online")}}"><li>Admissions</li></a>
+        <!-- <a class="nav-link scrollto" href="{{url_for('home')}}"><li>About CU</li></a> -->
+        <a class="nav-link scrollto" href="{{url_for("staff")}}" ><li>Faculty & Staff </li></a>
+        <a class="nav-link scrollto" href="#" ><li>Alumni </li></a>
+        <a class="nav-link scrollto" href="{{url_for("cu")}}" ><li>Guidence & Counselling </li></a>
+        <!-- <a class="nav-link scrollto text-muted" href="{{url_for("home")}}"><li>Gallery </li></a> -->
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         {% endif %}
         
@@ -133,7 +129,7 @@
 
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" style="margin-top: 3vh;">
 
   <div class="footer-top">
     <div class="container">

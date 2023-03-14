@@ -170,11 +170,25 @@ h6 {
   max-height: 120px;
 }
 
+.hero5 {
+  width: 100%;
+  height: 55vh;
+  background: linear-gradient(
+      rgba(3, 0, 0, 0.444),
+      rgba(13, 1, 1, 0.436)
+    ), url(https://www.central.edu.gh/directory/gallery/news/FASS%20NEW%20YEAR%20SCHOOL%20AND%20PRAYER%202022_44.jpg
+    ) center no-repeat;
+  background-size: cover;
+  position: relative;
+  background-attachment: fixed;
+}
+
 @media (max-width: 992px) {
   #header .logo {
     font-size: 28px;
   }
 }
+
 
 /*--------------------------------------------------------------
 # Navigation Menu
