@@ -167,7 +167,7 @@ def user_loader(user_id):
     #TODO change here
     return User.query.get(user_id)
 
-@app.route('/home',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def home():
     return render_template('index.html')
 
@@ -322,7 +322,7 @@ def confirm(transactionId):
 def applicationform():
     return current_user.name
 
-@app.route('/')
+@app.route('/online')
 def online():
     return render_template('online.html', title="Online Application Form.")
 
@@ -330,9 +330,21 @@ def online():
 def cu():
     return render_template('cu.html')
 
+@app.route('/news')
+def news():
+    return render_template('news.html')
+
+@app.route('/expand')
+def expand():
+    return render_template('expand.html')
+
 @app.route('/staff')
 def staff():
     return render_template('staff.html')
+
+@app.route('/alumni')
+def alumni():
+    return render_template('alumni.html')
 
 @app.route('/downloadOnlineManual', methods=['GET', 'POST'])
 def downloadOnlineManual():

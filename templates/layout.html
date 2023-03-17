@@ -33,6 +33,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
 
   <!-- Vendor CSS Files -->
   <!-- <link href="assets/vendor/aos/aos.css" rel="stylesheet"> -->
@@ -86,18 +87,18 @@
       <ul>
 
         {% if title != "Online Application Form." %}
+        <a class="nav-link scrollto" href="{{url_for('news')}}"><li>Blog</li></a>
         <a class="nav-link scrollto active" href="{{url_for("students")}}"><li> Student Body</li></a>
         <a class="nav-link scrollto" href="{{url_for("online")}}"><li>Admissions</li></a>
-        <!-- <a class="nav-link scrollto" href="{{url_for('home')}}"><li>About CU</li></a> -->
         <a class="nav-link scrollto" href="{{url_for("staff")}}" ><li>Faculty & Staff </li></a>
-        <a class="nav-link scrollto" href="#" ><li>Alumni </li></a>
+        <a class="nav-link scrollto" href="{{url_for("alumni")}}"  ><li>Alumni </li></a>
         <a class="nav-link scrollto" href="{{url_for("cu")}}" ><li>Guidence & Counselling </li></a>
         <!-- <a class="nav-link scrollto text-muted" href="{{url_for("home")}}"><li>Gallery </li></a> -->
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         {% endif %}
         
         <a href="{{url_for("online")}}">
-          <button class="pill-button" style="padding: 12px 18px; margin-left: 20px;">
+          <button class="pill-button" style="padding: 10px 18px; margin-left: 10px;">
             Apply Now!
           </button>
         </a>
