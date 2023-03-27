@@ -346,6 +346,10 @@ def staff():
 def alumni():
     return render_template('alumni.html')
 
+@app.route('/library')
+def library():
+    return render_template('library.html')
+
 @app.route('/downloadOnlineManual', methods=['GET', 'POST'])
 def downloadOnlineManual():
     path = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
