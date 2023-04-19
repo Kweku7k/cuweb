@@ -39,6 +39,7 @@
     </div>
 </section>
 
+
 <section style="padding: 20px 0;">
     <div class="container">
         <div class="row">
@@ -181,10 +182,25 @@
                     </div>
                 </a>
             </div>
-                       
+               
+            
+            <div id="demo"></div>
         </div>
     </div>
 </section>
 
+
+<script>
+    let file = "https://swapi.dev/api/people"
+    fetch(file)
+    .then(x => x.json())
+    .then(y => updateHtml(y));
+
+    function updateHtml(data) {
+        console.log(data)
+        document.getElementById("demo").innerText = "data"
+    }
+
+</script>
 
 {% endblock %}

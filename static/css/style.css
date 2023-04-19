@@ -199,7 +199,7 @@ h6 {
 
 .navbar li {
   position: relative;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .navbar a,
@@ -529,10 +529,6 @@ h6 {
 #hero .icon-boxes {
   margin-top: 100px;
 }
-
-.icon-boxes {
-  margin-top: 100px;
-}
 #hero .icon-boxes {
   margin-top: 100px;
 }
@@ -552,6 +548,10 @@ h6 {
   justify-content: center;
 }
 
+
+.icon-boxes {
+  margin-top: 100px;
+}
 .postsContainer .icon-box {
   padding: 50px 30px;
   position: relative;
@@ -685,11 +685,12 @@ section {
 
 .section-title {
   text-align: center;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
 }
 
 .section-title h2 {
-  font-size: 40px;
+  font-size: 35px;
+  font-family: Open sans,serif;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 20px;

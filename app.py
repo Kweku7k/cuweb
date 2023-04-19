@@ -330,6 +330,11 @@ def online():
 def cu():
     return render_template('cu.html')
 
+
+@app.route('/admission')
+def admission():
+    return render_template('admission.html')
+
 @app.route('/news')
 def news():
     return render_template('news.html')
