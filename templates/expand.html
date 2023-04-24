@@ -9,8 +9,9 @@
             <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
         </div>
 
-        <div class="row justify-content-center">
-            <div style="margin: 2vh auto; width: 70%;">
+        <div class="row justify-content-center" id="content">
+            <!-- {{ content }} -->
+            <!-- <div style="margin: 2vh auto; width: 70%;">
                 <img class="card-img-top" src="{{url_for('static', filename='img/blog1.jpg')}}" width="100%" alt="Card image cap"> 
                 
                 <div style="padding-top: 10px;">
@@ -32,9 +33,36 @@
                     <h6 class="text-muted" style="padding: 2px 0 0 6px;"><b>Mr.Softlife</b> - Jan 25, 2021</h6>
                 </div>
             </div>
-            
+             -->
         </div>
     </div>
 </section>
+
+<script>
+
+console.log("asd")
+url = "{{url}}"
+  fetch(url)
+  .then(function(response) {
+      return response.json();
+    }).then(function(data) {
+        console.log("data")
+        
+        document.getElementById("content").innerHTML = data.content.rendered
+        console.log(data)
+
+    // for (let index = 0; index <= data.length; index++) {
+    //   console.log(data[index]); // this will be a string
+
+      var title = data.title.rendered
+      var post = data.content.rendered
+     
+      console.log(title)
+      console.log(post)
+
+      createNewPost(title, post)  
+    // }
+  })    // fetch directly 3108
+</script>
 
 {% endblock %}

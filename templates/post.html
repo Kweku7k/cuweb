@@ -45,25 +45,25 @@
 </script> -->
 
 <script>
-function createNewPost(title, content) {
-  posts = document.getElementsByClassName("postsContainer")[0]
+// function createNewPost(title, content) {
+//   posts = document.getElementsByClassName("postsContainer")[0]
 
-  const post = document.createElement("div");
+//   const post = document.createElement("div");
 
-  // post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
-  post.innerHTML = `
-        <div>
-          <h3 class="text-center"><b>${title}</b></h3>
-          <p class="description">${content}</p>
-        </div>`
+//   // post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+//   post.innerHTML = `
+//         <div>
+//           <h3 class="text-center"><b>${title}</b></h3>
+//           <p class="description">${content}</p>
+//         </div>`
 
-  posts.append(post)
+//   posts.append(post)
 
-  return post
+//   return post
 
-}
+// }
   console.log(window.location.href)
-  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts/11"
+  url = url
   fetch(url)
   .then(function(response) {
     return response.json();

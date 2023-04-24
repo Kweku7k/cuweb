@@ -67,7 +67,7 @@
             <div class="text"><b> Alumni Stories</b></div>
           </div>
           
-          <h4>The UniCamp community is a widespread network made up of 5 schools and over 60,000 alumni in more than 140 countries worldwide.
+          <h4>The CU community is a widespread network made up of 5 schools and over 60,000 alumni in more than 140 countries worldwide.
             This is where you can tell us what you want to hear about from your college, department. we want you to know that UniCamp alumni community is here to support you. </h4>
           <button class="pill-button" style="margin: 10px 0 25px 0;">Connect with other Alumni</button>
         </div>
@@ -79,163 +79,68 @@
     </div>
   </section><!-- End About Video Section -->
 
-  <section id="portfolio" class="portfolio">
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
     <div class="container" data-aos="fade-up">
 
-      <div class="section-title" style="padding: 0 0;">
+      <div class="section-title">
         <h2>Alumni Gallery</h2>
-        <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        <!-- <p>Some kind words from some of our students that have passed through Central University.</p> -->
       </div>
 
-      <div class="row" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">Current</li>
-            <li data-filter=".filter-grad">Past</li>
-            <!-- <li data-filter=".filter-staff">Staff</li> -->
-            <!-- <li data-filter=".filter-student">Students</li> -->
-            <!-- <li data-filter=".filter-web">Sports</li> -->
-          </ul>
-        </div>
-      </div>
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="50">
+        <div class="swiper-wrapper">
 
-      <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu1.jpg")}}" class="img-fluid" alt="">
-          </div>
-        </div>
-
-        <!-- <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/cuGram/cu2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu1.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div> -->
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu3.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          </div><!-- End testimonial item -->
+          
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu4.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div>
+          </div><!-- End testimonial item -->
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu4.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu3.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div>
+          </div><!-- End testimonial item -->
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu5.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu5.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div>
+          </div><!-- End testimonial item -->
 
-
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src={{url_for("static",filename="img/cuGram/cu6.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu6.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div>
+          </div><!-- End testimonial item -->
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu7.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu7.jpg')}}" class="img-fluid" alt="">
             </div>
-          </div>
-        </div>
+          </div><!-- End testimonial item -->
 
-        <div class="col-lg-4 col-md-6 portfolio-item filter-student">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu8.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="portfolio-wrap">
+                <img src="{{url_for('static',filename='img/cuGram/cu11.jpg')}}" class="img-fluid" alt="">
+              </div>
             </div>
-          </div>
+          </div><!-- End testimonial item -->
+
         </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu9.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-student">
-          <div class="portfolio-wrap">
-            <img src="{{url_for("static",filename="img/cuGram/cu10.jpg")}}" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <!-- <div class="portfolio-links">
-                <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
-              </div> -->
-            </div>
-          </div>
-        </div>
-
-
+        <div class="swiper-pagination"></div>
       </div>
 
     </div>
-  </section>
+  </section><!-- End Testimonials Section -->
 
  
 

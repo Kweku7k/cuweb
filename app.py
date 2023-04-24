@@ -8,7 +8,7 @@ import httpx
 from datetime import datetime
 import urllib.request, urllib.parse
 import csv
-
+import requests
 import random
 import string
 
@@ -337,11 +337,21 @@ def admission():
 
 @app.route('/news')
 def news():
-    return render_template('news.html')
+    # Get URL
+    url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
+    r=requests.get(url)
+    news= r.json()
+    print(news[0]["id"])
+    return render_template('news.html', news=news)
 
-@app.route('/expand')
-def expand():
-    return render_template('expand.html')
+@app.route('/expand/<string:id>')
+def expand(id):
+    # Get URL
+    url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts/"+id
+    r=requests.get(url)
+    content= r.json()["content"]["rendered"]
+    print(content[0])
+    return render_template('expand.html', content=content,url=url)
 
 @app.route('/staff')
 def staff():

@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
 {% block body %}
-
 <!-- caurosel-->
 <section style="padding-top: 15vh;">
     <div class="container">
@@ -43,23 +42,27 @@
 <section style="padding: 20px 0;">
     <div class="container">
         <div class="row">
-            <div class="col-md-3"  style="margin-bottom: 20px;">
+
+{% for article in news %}
+
+           <div class="col-md-3"  style="margin-bottom: 20px;">
                 <a href="/expand" style="text-decoration: none;">
                     <div class="card">
                         <img class="card-img-top" src="{{url_for('static', filename='img/blog1.jpg')}}" width="100%" alt="Card image cap">                
                     <div class="card-body">
                         <div class="card-title" style="display: flex;">
                             <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> ALUMNI</b></h6>
+                            <h6 class="text-muted category"><b> {{article.id}}</b></h6>
                         </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Higher education is part of the Agenda 2030 ecosystem.</b></p>
+                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title.rendered}}</b></p>
                     </div>
                     <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
+                        <small class="text-muted">Mr.Softlife - {{article.date}}</small>
                     </div>
                     </div>
                 </a>
             </div>
+            {% endfor %} 
             <div class="col-md-3" style="margin-bottom: 20px;">
                 <a href="/expand" style="text-decoration: none;">
                     <div class="card">
@@ -190,7 +193,7 @@
 </section>
 
 
-<script>
+<!-- <script>
     let file = "https://swapi.dev/api/people"
     fetch(file)
     .then(x => x.json())
@@ -201,6 +204,46 @@
         document.getElementById("demo").innerText = "data"
     }
 
-</script>
+</script> -->
+
+<script>
+    function createNewPost(title, content) {
+      posts = document.getElementsByClassName("postsContainer")[0]
+    
+      const post = document.createElement("div");
+    
+      post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+      post.innerHTML = `
+            <a href="{{url_for("post")}}">
+            <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+                <h4 class="title"><a href="">${title}</a></h4>
+                <p class="description">${content.substring(0,80)}...</p>
+            </div>
+            </a>
+            `
+    
+      posts.append(post)
+    
+      return post
+    
+    }
+    
+      url = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
+      fetch(url)
+      .then(function(response) {
+        return response.json();
+      }).then(function(data) {
+        console.log(data)
+    
+        for (let index = 0; index <= data.length; index++) {
+    
+          var title = data[index].title.rendered
+          var post = data[index].content.rendered
+         
+    
+          createNewPost(title, post)  
+        }
+      });
+    </script>
 
 {% endblock %}
