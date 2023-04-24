@@ -46,9 +46,9 @@
 {% for article in news %}
 
            <div class="col-md-3"  style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
+                <a href="/expand/{{article.id}}" style="text-decoration: none;">
                     <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog1.jpg')}}" width="100%" alt="Card image cap">                
+                        <!-- <img class="card-img-top" src=getImageUrl() width="100%" alt="Card image cap">                 -->
                     <div class="card-body">
                         <div class="card-title" style="display: flex;">
                             <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
@@ -63,7 +63,7 @@
                 </a>
             </div>
             {% endfor %} 
-            <div class="col-md-3" style="margin-bottom: 20px;">
+            <!-- <div class="col-md-3" style="margin-bottom: 20px;">
                 <a href="/expand" style="text-decoration: none;">
                     <div class="card">
                         <img class="card-img-top" src="{{url_for('static', filename='img/blog2.jpg')}}" width="100%" alt="Card image cap">                
@@ -184,7 +184,7 @@
                     </div>
                     </div>
                 </a>
-            </div>
+            </div> -->
                
             
             <div id="demo"></div>
@@ -193,18 +193,20 @@
 </section>
 
 
-<!-- <script>
-    let file = "https://swapi.dev/api/people"
-    fetch(file)
-    .then(x => x.json())
-    .then(y => updateHtml(y));
-
+<script>
+    function getImageUrl(id) { 
+        let file = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/media/"+id
+        fetch(file)
+        .then(x => x.json())
+        .then(y => updateHtml(y));
+    }
+        
     function updateHtml(data) {
         console.log(data)
         document.getElementById("demo").innerText = "data"
     }
 
-</script> -->
+</script>
 
 <script>
     function createNewPost(title, content) {
