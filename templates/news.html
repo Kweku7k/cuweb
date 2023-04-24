@@ -48,13 +48,13 @@
            <div class="col-md-3"  style="margin-bottom: 20px;">
                 <a href="/expand/{{article.id}}" style="text-decoration: none;">
                     <div class="card">
-                        <!-- <img class="card-img-top" src=getImageUrl() width="100%" alt="Card image cap">                 -->
+                        <img class="card-img-top" src="{{article.image}}" width="100%" alt="Card image cap">                
                     <div class="card-body">
                         <div class="card-title" style="display: flex;">
                             <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
                             <h6 class="text-muted category"><b> {{article.id}}</b></h6>
                         </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title.rendered}}</b></p>
+                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
                     </div>
                     <div class="card-footer">
                         <small class="text-muted">Mr.Softlife - {{article.date}}</small>

@@ -335,13 +335,35 @@ def cu():
 def admission():
     return render_template('admission.html')
 
+def getImageUrl(id):
+    print(id)
+    try:
+        url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/media/"+str(id)
+        r=requests.get(url)
+        print(r)
+        image = r.json()["guid"]["rendered"]
+    except Exception as e:
+        print(e)
+        image = "https://banner2.cleanpng.com/20190216/fox/kisspng-central-university-ghana-technology-university-col-school-of-theology-amp-missions-central-univer-5c67c799ec2858.1783459915503051779673.jpg"
+
+    return image
+    
+
 @app.route('/news')
 def news():
     # Get URL
     url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
     r=requests.get(url)
-    news= r.json()
-    print(news[0]["id"])
+    response= r.json()
+    news = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        # article["title"] = i["title"]
+        news.append(article)
+    print(news)
     return render_template('news.html', news=news)
 
 @app.route('/expand/<string:id>')
