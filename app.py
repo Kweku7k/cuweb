@@ -326,6 +326,10 @@ def applicationform():
 def online():
     return render_template('online.html', title="Online Application Form.")
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/cu')
 def cu():
     return render_template('cu.html')
