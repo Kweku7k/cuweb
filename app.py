@@ -330,8 +330,10 @@ def online():
 
 @app.route('/about')
 def about():
-    # getByCategory=About
     response = requests.get(wpUrl+"/categories?parent=4")
+    print("all categories with parent category 4")
+    print(response)
+    print("-----------------")
     posts = requests.get(wpUrl+"/posts?categories=4")
     posts = posts.json()
     print("posts")
@@ -345,11 +347,7 @@ def about():
 
     print("allposts")
     print(allposts)
-        # remove 4
 
-    # print(posts)
-    # storeArticlesBy
-    # print(response.json())
     tags = response.json()
 
     alltags=[]
@@ -450,9 +448,61 @@ def staff():
 def alumni():
     return render_template('alumni.html')
 
+def returnTags(id, categoryName):
+    response = requests.get(wpUrl+"/categories?parent="+str(id))
+    print("Returning categories under parent category "+str(id) + str(categoryName))
+    print(response)
+    print("-----------------")
+    posts = requests.get(wpUrl+"/posts?categories="+str(id))
+    posts = posts.json()
+    print("posts")
+    allposts = []
+    for p in posts:
+        categories = p["categories"]
+        categories.remove(id)
+        allposts.append({"id":str(categories[0]),"content":p["content"]["rendered"]})
+
+    alltags=[]
+    tags = response.json()
+
+    for t in tags:
+        alltags.append({"id":t["id"], "name":t["name"]})
+    print(alltags)
+
+    return alltags
+
 @app.route('/library')
 def library():
-    return render_template('library.html')
+    id = 19
+    alltags = returnTags(id, "library",)
+    return render_template('library-dynamic.html',tags=alltags)
+
+@app.route('/libraryapi')
+def libraryapi():
+    # getByCategory=About
+    posts = requests.get(wpUrl+"/posts?categories=19")
+    posts = posts.json()
+    print("posts")
+    allposts = []
+    for p in posts:
+        categories = p["categories"]
+        categories.remove(19)
+        allposts.append({"id":str(categories[0]),
+                         "title":p["title"]["rendered"],
+                        "content":p["content"]["rendered"]
+                        })
+
+    print("allposts")
+    print(allposts)
+        # remove 4
+
+    # print(posts)
+    # storeArticlesBy
+    # print(response.json())
+    return allposts
+
+    # return render_template('about.html' posts=allposts)
+
 
 @app.route('/downloadOnlineManual', methods=['GET', 'POST'])
 def downloadOnlineManual():
