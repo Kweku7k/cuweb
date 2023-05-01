@@ -1283,6 +1283,11 @@ section {
   background: #ca181e !important;
   color: #fff !important;
 }
+
+.nav-link .side-nav .active{
+  background: #ca181e !important;
+  color: #fff !important;
+}
 .side-nav{
   background: #ca181e;
   color: #fff;
@@ -1776,6 +1781,7 @@ section {
   right: 0;
   top: 0;
 }
+
 
 .faq .faq-list p {
   margin-bottom: 0;

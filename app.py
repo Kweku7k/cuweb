@@ -162,6 +162,8 @@ class ExamResult(db.Model, UserMixin):
         return '<Exam {}>'.format(self.program)
 
 
+wpUrl = "https://wptemp-807994.ingress-florina.ewp.live/wp-json/wp/v2"
+
 @login_manager.user_loader
 def user_loader(user_id):
     #TODO change here
@@ -328,7 +330,59 @@ def online():
 
 @app.route('/about')
 def about():
-    return render_template('about.html')
+    # getByCategory=About
+    response = requests.get(wpUrl+"/categories?parent=4")
+    posts = requests.get(wpUrl+"/posts?categories=4")
+    posts = posts.json()
+    print("posts")
+    allposts = []
+    for p in posts:
+        categories = p["categories"]
+        categories.remove(4)
+        allposts.append({"id":str(categories[0]),
+                        "content":p["content"]["rendered"]
+                        })
+
+    print("allposts")
+    print(allposts)
+        # remove 4
+
+    # print(posts)
+    # storeArticlesBy
+    # print(response.json())
+    tags = response.json()
+
+    alltags=[]
+    for t in tags:
+        alltags.append({"id":t["id"], "name":t["name"]})
+    print(alltags)
+    return render_template('about.html', tags = alltags, posts=allposts)
+
+@app.route('/aboutapi')
+def aboutapi():
+    # getByCategory=About
+    posts = requests.get(wpUrl+"/posts?categories=4")
+    posts = posts.json()
+    print("posts")
+    allposts = []
+    for p in posts:
+        categories = p["categories"]
+        categories.remove(4)
+        allposts.append({"id":str(categories[0]),
+                         "title":p["title"]["rendered"],
+                        "content":p["content"]["rendered"]
+                        })
+
+    print("allposts")
+    print(allposts)
+        # remove 4
+
+    # print(posts)
+    # storeArticlesBy
+    # print(response.json())
+    return allposts
+
+    # return render_template('about.html' posts=allposts)
 
 @app.route('/cu')
 def cu():
@@ -349,9 +403,18 @@ def getImageUrl(id):
     except Exception as e:
         print(e)
         image = "https://banner2.cleanpng.com/20190216/fox/kisspng-central-university-ghana-technology-university-col-school-of-theology-amp-missions-central-univer-5c67c799ec2858.1783459915503051779673.jpg"
-
     return image
-    
+
+def fetch(url, params):
+    try:
+        url="https://wptemp-807994.ingress-florina.ewp.live/wp-json/wp/v2/posts"+str(id)
+        r=requests.get(url)
+        print(r)
+        image = r.json()["guid"]["rendered"]
+    except Exception as e:
+        print(e)
+        image = "https://banner2.cleanpng.com/20190216/fox/kisspng-central-university-ghana-technology-university-col-school-of-theology-amp-missions-central-univer-5c67c799ec2858.1783459915503051779673.jpg"
+    return image
 
 @app.route('/news')
 def news():
