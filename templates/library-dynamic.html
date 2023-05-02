@@ -40,7 +40,7 @@ const tagid = {{id}}
 const allwpposts = {{allposts|safe}}
 const tableRows = allwpposts.map((item, index) =>  `   
           <div class="tab-pane fade ${item.id == tagid ? 'show active' : ''} " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
-            <h1>${item.title} ${item.id}</h1>
+            <h1>${item.title}</h1>
             ${item.content}
           </div>
           `).join('');
