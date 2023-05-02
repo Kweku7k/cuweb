@@ -328,57 +328,57 @@ def applicationform():
 def online():
     return render_template('online.html', title="Online Application Form.")
 
-@app.route('/about')
-def about():
-    response = requests.get(wpUrl+"/categories?parent=4")
-    print("all categories with parent category 4")
-    print(response)
-    print("-----------------")
-    posts = requests.get(wpUrl+"/posts?categories=4")
-    posts = posts.json()
-    print("posts")
-    allposts = []
-    for p in posts:
-        categories = p["categories"]
-        categories.remove(4)
-        allposts.append({"id":str(categories[0]),
-                        "content":p["content"]["rendered"]
-                        })
+# @app.route('/about')
+# def about():
+#     response = requests.get(wpUrl+"/categories?parent=4")
+#     print("all categories with parent category 4")
+#     print(response)
+#     print("-----------------")
+#     posts = requests.get(wpUrl+"/posts?categories=4")
+#     posts = posts.json()
+#     print("posts")
+#     allposts = []
+#     for p in posts:
+#         categories = p["categories"]
+#         categories.remove(4)
+#         allposts.append({"id":str(categories[0]),
+#                         "content":p["content"]["rendered"]
+#                         })
 
-    print("allposts")
-    print(allposts)
+#     print("allposts")
+#     print(allposts)
 
-    tags = response.json()
+#     tags = response.json()
 
-    alltags=[]
-    for t in tags:
-        alltags.append({"id":t["id"], "name":t["name"]})
-    print(alltags)
-    return render_template('about.html', tags = alltags, posts=allposts)
+#     alltags=[]
+#     for t in tags:
+#         alltags.append({"id":t["id"], "name":t["name"]})
+#     print(alltags)
+#     return render_template('about.html', tags = alltags, posts=allposts)
 
-@app.route('/aboutapi')
-def aboutapi():
-    # getByCategory=About
-    posts = requests.get(wpUrl+"/posts?categories=4")
-    posts = posts.json()
-    print("posts")
-    allposts = []
-    for p in posts:
-        categories = p["categories"]
-        categories.remove(4)
-        allposts.append({"id":str(categories[0]),
-                         "title":p["title"]["rendered"],
-                        "content":p["content"]["rendered"]
-                        })
+# @app.route('/aboutapi')
+# def aboutapi():
+#     # getByCategory=About
+#     posts = requests.get(wpUrl+"/posts?categories=4")
+#     posts = posts.json()
+#     print("posts")
+#     allposts = []
+#     for p in posts:
+#         categories = p["categories"]
+#         categories.remove(4)
+#         allposts.append({"id":str(categories[0]),
+#                          "title":p["title"]["rendered"],
+#                         "content":p["content"]["rendered"]
+#                         })
 
-    print("allposts")
-    print(allposts)
-        # remove 4
+#     print("allposts")
+#     print(allposts)
+#         # remove 4
 
-    # print(posts)
-    # storeArticlesBy
-    # print(response.json())
-    return allposts
+#     # print(posts)
+#     # storeArticlesBy
+#     # print(response.json())
+#     return allposts
 
     # return render_template('about.html' posts=allposts)
 
@@ -387,9 +387,9 @@ def cu():
     return render_template('cu.html')
 
 
-@app.route('/admission')
-def admission():
-    return render_template('admission.html')
+# @app.route('/admission')
+# def admission():
+#     return render_template('admission.html')
 
 def getImageUrl(id):
     print(id)
@@ -460,7 +460,7 @@ def returnTags(id, categoryName):
     for p in posts:
         categories = p["categories"]
         categories.remove(id)
-        allposts.append({"id":str(categories[0]),"content":p["content"]["rendered"]})
+        allposts.append({"id":str(categories[0]),"title":p["title"]["rendered"],"content":p["content"]["rendered"]})
 
     alltags=[]
     tags = response.json()
@@ -469,37 +469,86 @@ def returnTags(id, categoryName):
         alltags.append({"id":t["id"], "name":t["name"]})
     print(alltags)
 
-    return alltags
+    return {"tags":alltags, "posts":allposts}
 
 @app.route('/library')
 def library():
     id = 19
-    alltags = returnTags(id, "library",)
-    return render_template('library-dynamic.html',tags=alltags)
-
-@app.route('/libraryapi')
-def libraryapi():
-    # getByCategory=About
-    posts = requests.get(wpUrl+"/posts?categories=19")
-    posts = posts.json()
-    print("posts")
-    allposts = []
-    for p in posts:
-        categories = p["categories"]
-        categories.remove(19)
-        allposts.append({"id":str(categories[0]),
-                         "title":p["title"]["rendered"],
-                        "content":p["content"]["rendered"]
-                        })
-
-    print("allposts")
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
     print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',tags=alltags, id=startingPoint, allposts=allposts)
+
+@app.route('/about')
+def about():
+    id = 4
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+
+@app.route('/admission')
+def admission():
+    id=34
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+
+@app.route('/international')
+def international():
+    id=43
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+@app.route('/chaplaincy')
+def chaplaincy():
+    id=29
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+# @app.route('/libraryapi')
+# def libraryapi():
+#     id = 19
+#     allposts = returnTags(id, "library")["posts"]
+
+    # # getByCategory=About
+    # posts = requests.get(wpUrl+"/posts?categories=19")
+    # posts = posts.json()
+    # print("posts")
+    # allposts = []
+    # for p in posts:
+    #     categories = p["categories"]
+    #     categories.remove(19)
+    #     allposts.append({"id":str(categories[0]),
+    #                      "title":p["title"]["rendered"],
+    #                     "content":p["content"]["rendered"]
+    #                     })
+
+    # print("allposts")
+    # print(allposts)
         # remove 4
 
     # print(posts)
     # storeArticlesBy
     # print(response.json())
-    return allposts
+    # return allposts
 
     # return render_template('about.html' posts=allposts)
 

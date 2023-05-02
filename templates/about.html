@@ -35,26 +35,19 @@
     </div>
 </section>
 
-
 <script>
 
-fetch('/aboutapi')
-  .then(response => response.json())
-  .then(data => {
-    console.log(data)
-    // Define the HTML content with the JSON data rendered in a table
-    const tableRows = data.map((item, index) =>  `   
-              <div class="tab-pane fade ${item.id == 11 ? 'show active' : ''} " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
-                <h1>${item.title} ${item.id}</h1>
-                ${item.content}
-              </div>
-              `).join('');
-    console.log("tableRows")
-    console.log(tableRows)
-    
-    document.getElementById('pills-tabContent').innerHTML = tableRows;
-  })
-  .catch(error => console.error(error));
-</script>
-
+  const allwpposts = {{allposts|safe}}
+  
+  const tableRows = allwpposts.map((item, index) =>  `   
+            <div class="tab-pane fade " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
+              <h1>${item.title} ${item.id}</h1>
+              ${item.content}
+            </div>
+            `).join('');
+  console.log("tableRows")
+  console.log(tableRows)
+  document.getElementById('pills-tabContent').innerHTML = tableRows;
+   
+  </script>
 {% endblock %}
