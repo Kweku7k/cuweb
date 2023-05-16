@@ -444,6 +444,10 @@ def expand(id):
 def staff():
     return render_template('staff.html')
 
+@app.route('/privacypolicy', methods=['GET', 'POST'])
+def privacypolicy():
+    return render_template('privacypolicy.html')
+
 @app.route('/alumni')
 def alumni():
     return render_template('alumni.html')
