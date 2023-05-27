@@ -16,6 +16,7 @@ app=Flask(__name__)
 baseUrl = "http://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
 
+
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
 app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
@@ -162,7 +163,9 @@ class ExamResult(db.Model, UserMixin):
         return '<Exam {}>'.format(self.program)
 
 
-wpUrl = "https://wptemp-807994.ingress-florina.ewp.live/wp-json/wp/v2"
+baseWpUrl = "http://45.222.128.105"
+wpUrl = baseWpUrl+"/wp-json/wp/v2"
+
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -394,7 +397,7 @@ def cu():
 def getImageUrl(id):
     print(id)
     try:
-        url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/media/"+str(id)
+        url=baseWpUrl+"/?rest_route=/wp/v2/media/"+str(id)
         r=requests.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
@@ -405,7 +408,7 @@ def getImageUrl(id):
 
 def fetch(url, params):
     try:
-        url="https://wptemp-807994.ingress-florina.ewp.live/wp-json/wp/v2/posts"+str(id)
+        url=baseWpUrl+"/wp-json/wp/v2/posts"+str(id)
         r=requests.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
@@ -417,7 +420,7 @@ def fetch(url, params):
 @app.route('/news')
 def news():
     # Get URL
-    url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
+    url=baseWpUrl+"/?rest_route=/wp/v2/posts"
     r=requests.get(url)
     response= r.json()
     news = []
@@ -434,7 +437,7 @@ def news():
 @app.route('/expand/<string:id>')
 def expand(id):
     # Get URL
-    url="https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts/"+id
+    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     r=requests.get(url)
     content= r.json()["content"]["rendered"]
     print(content[0])
