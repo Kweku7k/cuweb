@@ -162,7 +162,7 @@ class ExamResult(db.Model, UserMixin):
     def __repr__(self):
         return '<Exam {}>'.format(self.program)
 
-
+    
 baseWpUrl = "http://45.222.128.105"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
 
