@@ -480,7 +480,7 @@ def returnTags(id, categoryName):
 
 @app.route('/library')
 def library():
-    id = 19
+    id = 17
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
@@ -490,7 +490,7 @@ def library():
 
 @app.route('/about')
 def about():
-    id = 4
+    id = 2
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
@@ -501,7 +501,7 @@ def about():
 
 @app.route('/admission')
 def admission():
-    id=34
+    id=4
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
@@ -512,7 +512,7 @@ def admission():
 
 @app.route('/international')
 def international():
-    id=43
+    id=15
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
@@ -522,7 +522,7 @@ def international():
 
 @app.route('/chaplaincy')
 def chaplaincy():
-    id=29
+    id=6
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
@@ -892,6 +892,6 @@ def students():
 
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(port=5000, host='0.0.0.0', debug=True)
+    app.run(port=4000, host='0.0.0.0', debug=True)
 
 
