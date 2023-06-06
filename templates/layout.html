@@ -95,7 +95,7 @@
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         {% endif %}
         
-        <a href="{{url_for("online")}}">
+        <a href="{{url_for('online')}}">
           <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
             Apply Now!
           </button>
@@ -121,7 +121,7 @@
   {% endif %}
 {% endwith %}
 </div>
-
+<br/>
 {% block body %}
 
 {% endblock %}
@@ -135,7 +135,7 @@
       <div class="row">
 
         <div class="col-lg-6 col-md-6 footer-contact">
-          <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150"> 
+          <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150"> 
           <p>
             Miotso near Dawhenya <br>
             Accra -Aflao<br>
