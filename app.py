@@ -335,22 +335,22 @@ def online():
 def chapel():
     return render_template('chapel.html')
 
-@app.route('/about')
-def about():
-    response = requests.get(wpUrl+"/categories?parent=4")
-    print("all categories with parent category 4")
-    print(response)
-    print("-----------------")
-    posts = requests.get(wpUrl+"/posts?categories=4")
-    posts = posts.json()
-    print("posts")
-    allposts = []
-    for p in posts:
-        categories = p["categories"]
-        categories.remove(4)
-        allposts.append({"id":str(categories[0]),
-                        "content":p["content"]["rendered"]
-                        })
+# @app.route('/about')
+# def about():
+#     response = requests.get(wpUrl+"/categories?parent=4")
+#     print("all categories with parent category 4")
+#     print(response)
+#     print("-----------------")
+#     posts = requests.get(wpUrl+"/posts?categories=4")
+#     posts = posts.json()
+#     print("posts")
+#     allposts = []
+#     for p in posts:
+#         categories = p["categories"]
+#         categories.remove(4)
+#         allposts.append({"id":str(categories[0]),
+#                         "content":p["content"]["rendered"]
+#                         })
 
 #     print("allposts")
 #     print(allposts)
