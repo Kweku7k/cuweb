@@ -4,15 +4,15 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row" style="padding-top: 6vh;">
+      <div class="row">
         <div class="col-xl-6 col-lg-6 text-left">
           <h6>Central University </h6>
-          <h1>Students Portal</h1>
+          <h1 style="margin: 10px 0;">Students Portal</h1>
           <h5>Welcome student to the new and improved CU Students Portal. You can find information about your course, request help, leave a comment or a suggestion!
           </h5>
           <br/>
           <div class="row" style="padding: 5px;">
-            <a href="#about" class="pill-button" style="margin-right: 10px; margin-bottom:10px">Online Learning</a>
+            <a href="#about" class="pill-button" style="margin-right: 10px; margin-bottom:10px">View all Student Resources</a>
             <!-- <a href="#about" class="pill-button-alternate">Guidance And Counselling</a> -->
           </div>
         </div>
@@ -23,33 +23,7 @@
       <div class="text-center">
       </div>
 
-      <div class="row icon-boxes">
-        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="">Integrity</a></h4>
-            <p class="description">We pride our successes and strides on transparency and accountability</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-palette-line"></i></div>
-            <h4 class="title"><a href="">Faith</a></h4>
-            <p class="description">As a christian institution we focus on leadership and faith in the Lord!</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-command-line"></i></div>
-            <h4 class="title"><a href="">Excellence</a></h4>
-            <p class="description">As our record may show. We top charts holistically. Aiming to pesevere</p>
-          </div>
-        </div>
-
-
-      </div>
+      
     </div>
   </section><!-- End Hero -->
 
@@ -59,15 +33,15 @@
     <section id="about" class="about-video">
       <div class="container" data-aos="fade-up">
         
- 
-
-        
-        <h1>Student Resources</h1>
+        <div class="section-title">
+          <h2>Student Resources</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-          <div class="col-md-6">
+          <div class="col-md-6" style="margin-bottom: 10px;">
             <div class="imgContainer">
-              <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto"> 
+              <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
             </div>
           </div>
           <div class="col-md-6 content">
@@ -83,7 +57,7 @@
           </div>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-            <div class="col-md-6 content">
+            <div class="col-md-6 content" style="margin-bottom: 10px;">
               <h4 class="studentHeader">Student Councelling</h4>
               <hr>
               <br>
@@ -95,13 +69,13 @@
             </div>
             <div class="col-md-6">
               <div class="imgContainer">
-                <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+                <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
               </div>
             </div>
             </div>
 
             <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-              <div class="col-md-6">
+              <div class="col-md-6" style="margin-bottom: 10px;">
                 <div class="imgContainer">
                   <img src="{{url_for ("static", filename="img/cuInter.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
                 </div>
@@ -142,7 +116,7 @@
 
         <div class="section-title">
           <h2>Frequently Asked Questions</h2>
-          <p>Here are some frequently asked questions about admission and enrollment.</p>
+          <p>Here are some frequently asked questions about student portal.</p>
         </div>
 
         <div class="faq-list">
