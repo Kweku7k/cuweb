@@ -64,17 +64,24 @@
  <header id="header" class="sticky-top" style="background: #fff;">
   <div class="container-fluid d-flex align-items-center justify-content-between"> 
 
+    {% if title != "Online Application Form." %}
 
     <a href="{{url_for('home')}}">
       <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
     </a>
     
-  
+    {% else %}
+    <a href="{{url_for('home')}}">
+      <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
+      <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+    </a>
+    {% endif %}
+
     <nav id="navbar" class="navbar navbar-light ">
 
       <ul>
 
-
+        {% if title != "Online Application Form." %}
         <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News</li></a>
         <a class="nav-link scrollto" href="{{url_for('about')}}"><li>About CU</li></a>
         <a class="nav-link scrollto active" href="{{url_for('students')}}"><li> Student Portal</li></a>
@@ -85,7 +92,7 @@
         <a class="nav-link scrollto text-muted" href="{{url_for('library')}}"><li>Library </li></a>
         <a class="nav-link scrollto text-muted" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
-
+        {% endif %}
         
         <a href="{{url_for('online')}}">
           <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
