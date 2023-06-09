@@ -331,6 +331,10 @@ def applicationform():
 def online():
     return render_template('online.html', title="Online Application Form.")
 
+@app.route('/chapel')
+def chapel():
+    return render_template('chapel.html')
+
 # @app.route('/about')
 # def about():
 #     response = requests.get(wpUrl+"/categories?parent=4")

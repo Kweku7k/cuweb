@@ -2,82 +2,49 @@
   {% block body %}
 
   <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+  <section id="hero" class="d-flex align-items-center" style="height: 90vh;">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row gy-5" style="padding-top: 6vh;">
-        <div class="col-lg-6 order-1 order-lg-1 text-left">
+        <div class="col-lg-7 order-1 order-lg-1 text-left">
           <h6>Central University </h6>
-          <h1 style="margin: 8px 0;">Online Application Portal</h1>
+          <h1>Online Application Portal</h1>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
           <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="{{url_for("downloadOnlineManual")}}">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6>
           <br/>
           <div class="d-flex">
 
             <!-- <a href="tel:*887*18#"> -->
-              <button id="myBtn" class="pill-button" style="width: fit-content;">Click here to buy (*887*18#)</button>
+              <button id="myBtn" class="pill-button" style="width: fit-content;">Click here to buy eVoucher (*887*18#)</button>
             <!-- </a> -->
             <a href="#ourprograms">
-              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Pick a program.</button>
+              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Click here to select a program.</button>
             </a>
           </div>
         </div>
 
-        <div class="col-lg-6 order-2 order-lg-2">
+        <div class="col-lg-5 order-2 order-lg-2">
             <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/hero-img.svg")}}" alt="" srcset="">
         </div>
-      </div>
-
-      <div class="row icon-boxes">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="#undergraduate">Undergraduate</a></h4>
-            <p class="description">Welcome to Undergraduate Online Application Portal.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-palette-line"></i></div>
-            <h4 class="title"><a href="#postgraduate">Postgraduate</a></h4>
-            <p class="description">Welcome to Postgraduate Online Application Portal.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-command-line"></i></div>
-            <h4 class="title"><a href="#diploma">Diploma</a></h4>
-            <p class="description">Welcome to Diploma Online Application Portal.</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-            <div class="icon-box">
-              <div class="icon"><i class="ri-command-line"></i></div>
-              <h4 class="title"><a href="#atle">Distance Education (ATHE)</a></h4>
-              <p class="description">Welcome to ATHE Online Application Portal.</p>
-            </div>
-          </div>
-
-
       </div>
     </div>
   </section><!-- End Hero -->
 
   <main id="main">
 
-      <!-- ======= About Video Section ======= -->
+    
 
 
     <!-- ======= About Video Section ======= -->
-    <section id="ourprograms" class="about-video">
-      <div class="container" data-aos="fade-up">
+    <section id="ourprograms" class="about-video" >
+      <div class="container" data-aos="fade-up" data-aos-delay="">
 
-        <h1>Our Programs</h1>
+        <div class="section-title">
+          <h2>Our Programs</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-          <div class="col-md-6" style="margin: 15px 0;">
+          <div class="col-md-6" style="margin: 5px 0;">
             <div class="imgContainer">
               <img src="{{url_for ("static", filename="img/cuInter.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
             </div>
@@ -89,12 +56,12 @@
             <p class="description">Welcome to the Undergraduate Online Application portal.
                 October Admissions are opened to Nursing Professionals, Law first degree holders and students joining mid stream (i.e. Level 200 & 300) in other programmes.
                 February Admission is opened to all prospective Level 100 applicants. <b>Apply Now!</b> <br>
-                <b>Price: Ghc 100 </b>
+                <b>Price: Ghc 150 </b>
             </p>
             <br>
             <div class="d-flex">
-                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/71f28b22-d053-4d24-b92f-58fd4ad5aa8c" style="color: #fff;">Oct. 2022 Admissions</a></div>
-                <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Feb. 2023 Admissions</a></div>
+                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/71f28b22-d053-4d24-b92f-58fd4ad5aa8c" style="color: #fff;">Oct. 2023 Admissions</a></div>
+                <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Feb. 2024 Admissions</a></div>
             </div>
             </div>
           </div>
@@ -108,7 +75,10 @@
                 February Admission is opened to all prospective Level 100 applicants. You can earn a master's or a doctoral degree at the School of Graduate Studies from over 50+ programmes offered by various departments.<b>Apply Now!</b>
               </p>
               <br>
-              <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Feb. 2023 Admissions</a></div>
+              <div class="d-flex">
+                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Oct. 2023 Admissions</a></div>
+                <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Feb. 2024 Admissions</a></div>
+              </div>
             </div>
             <div class="col-md-6" style="margin: 15px 0;">
               <div class="imgContainer">
@@ -117,7 +87,7 @@
             </div>
             </div>
 
-            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+            <!-- <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
               <div class="col-md-6" style="margin: 15px 0;">
                 <div class="imgContainer">
                   <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
@@ -132,11 +102,11 @@
                 <br>
                 <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/8c7e3cc0-0c5b-49d7-849a-bc0b0e891b82" style="color: #fff;">Apply Now!</a></div>
               </div>
-            </div>
+            </div> -->
 
             <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
                 <div class="col-md-6 content" id="atle">
-                  <h4 class="studentHeader">Distance Education (ATHE)</h4>
+                  <h4 class="studentHeader">Diploma (ATHE)</h4>
                   <hr>
                   <br>
                   <p class="description">
@@ -145,7 +115,7 @@
                   </p>
                   <br>
                   <!-- <div class="pill-button" style="width: fit-content;"><a href="http://vcampus.central.edu.gh/vcampus" style="color: #fff;">Apply Now!</a></div> -->
-                  <div class="pill-button disabled" style="width: fit-content;">Apply Now!</div>
+                  <div class="pill-button" style="width: fit-content;">Apply Now!</div>
                 </div>
                 <div class="col-md-6" style="margin: 15px 0;">
                   <div class="imgContainer">
@@ -231,7 +201,7 @@
     <!-- Modal content -->
     <div class="modal-content">
         <div class="modal-header" style="background: #ca181e; color: #fff;">
-          <h2>How to Buy a Voucher</h2>
+          <h2>How to Buy a eVoucher</h2>
           <span class="close">&times;</span>
         </div>
         <div class="modal-body">
