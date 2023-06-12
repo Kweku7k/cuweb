@@ -455,6 +455,10 @@ def staff():
 def privacypolicy():
     return render_template('privacypolicy.html')
 
+@app.route('/admissions', methods=['GET', 'POST'])
+def admissions():
+    return render_template('admissions.html')
+
 @app.route('/alumni')
 def alumni():
     return render_template('alumni.html')
