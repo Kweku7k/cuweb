@@ -6,12 +6,15 @@
       <div class="row justify-content-center" style="padding-top: 6vh;">
         <div class="col-xl-7 col-lg-9 text-center">
           <h1>Welcome to Central University</h1>
-          <h2>Unfortunately our website is currently under construction.</h2>
+          <h2>Our website is currently under maintainance.</h2>
         </div>
       </div>
       <div class="text-center" style="margin-top: 2vh;">
-        <a href="#">
-          <button class="pill-button" style="margin-top: 10px;">Contact Us</button>
+        <a href="{{url_for('online')}}">
+          <button class="pill-button" style="margin-top: 10px;">Apply Now</button>
+        </a>
+        <a href="#contact">
+          <button class="pill-button-alternate" style="margin-top: 10px;">Contact Us</button>
         </a>
       </div>
 
@@ -47,7 +50,7 @@
 
   <section id="contact">
     <div class="container">
-        <h1>Contact Us</h1>
+        <h1><b>Contact Us</b></h1>
         <h6>You can leave a message and we would respond if need be.</h6>
         <br/>
         <form method="post">
@@ -59,7 +62,7 @@
             </div>
             <div class="form-floating mb-3">
                 {{form.number (class="form-control webForm", placeholder="Enter your number")}}
-                {{form.name.label}}
+                {{form.number.label}}
             </div>
             <div class="form-floating mb-3">
                 {{form.message (class="form-control webForm", placeholder="Enter your name")}}

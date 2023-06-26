@@ -445,11 +445,18 @@ def maintenance():
     if request.method == 'POST':
         if form.validate_on_submit():
             print("firing form")
-            # httpx.post('prestoghana.com/sendMail')
-            flash('Your message has been submitted successfully.','success')
+            try:
+                httpx.get('https://sandbox.prestoghana.com/sendPrestoMail?recipient=mr.adumatta@gmail.com?text='+form.message.data)
+                flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
+            except Exception as e:
+                print(e)
+                print("Unable to send emails!")
+                flash('Oops, there was an error sending your email, please check and try again.','fail')
+            # return render_template('maintenance.html',hideNav=True, form=form)
+            return redirect(url_for('maintenance'))
         else:
             print(form.errors) 
-            
+
     return render_template('maintenance.html',hideNav=True, form=form)
 
 @app.route('/expand/<string:id>')
