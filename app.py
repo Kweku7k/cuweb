@@ -446,7 +446,8 @@ def maintenance():
         if form.validate_on_submit():
             print("firing form")
             try:
-                httpx.get('https://sandbox.prestoghana.com/sendPrestoMail?recipient=mr.adumatta@gmail.com?text='+form.message.data)
+                message = "From: " + form.name.data + "\n Phone: " + form.number.data + "\n Message: " + form.message.data
+                httpx.get('https://sandbox.prestoghana.com/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
                 flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
             except Exception as e:
                 print(e)
