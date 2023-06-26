@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center" style="padding-top: 6vh;">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Welcome to Central University</h1>
+          <h2>Unfortunately our website is currently under construction.</h2>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top: 2vh;">
+        <a href="#">
+          <button class="pill-button" style="margin-top: 10px;">Contact Us</button>
+        </a>
+      </div>
+
+      <!-- <div class="row icon-boxes">
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-stack-line"></i></div>
+            <h4 class="title"><a href="">Integrity</a></h4>
+            <p class="description">We pride our successes and strides on transparency and accountability</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-palette-line"></i></div>
+            <h4 class="title"><a href="">Faith</a></h4>
+            <p class="description">As a christian institution we focus on leadership and faith in the Lord!</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-command-line"></i></div>
+            <h4 class="title"><a href="">Excellence</a></h4>
+            <p class="description">As our record may show. We top charts holistically. Aiming to pesevere</p>
+          </div>
+        </div>
+
+
+      </div> -->
+    </div>
+  </section><!-- End Hero -->
+
+  <section id="contact">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <h6>You can leave a message and we would respond if need be.</h6>
+        <br/>
+        <form method="post">
+            {{form.hidden_tag()}}
+            
+            <div class="form-floating mb-3">
+                {{form.name (class="form-control webForm", placeholder="Enter your name")}}
+                {{form.name.label}}
+            </div>
+            <div class="form-floating mb-3">
+                {{form.number (class="form-control webForm", placeholder="Enter your number")}}
+                {{form.name.label}}
+            </div>
+            <div class="form-floating mb-3">
+                {{form.message (class="form-control webForm", placeholder="Enter your name")}}
+                {{form.message.label}}
+            </div>
+
+            {{form.submit (class="pill-button", style="width:100%") }}
+
+        </form>
+    </div>
+  </section>
+{% endblock %}

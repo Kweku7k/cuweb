@@ -172,7 +172,7 @@ def user_loader(user_id):
     #TODO change here
     return User.query.get(user_id)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/home',methods=['GET','POST'])
 def home():
     return render_template('index.html')
 
@@ -329,7 +329,7 @@ def applicationform():
 
 @app.route('/online')
 def online():
-    return render_template('online.html', title="Online Application Form.")
+    return render_template('online.html', hideNav = True, title="Online Application Form.")
 
 @app.route('/chapel')
 def chapel():
@@ -437,6 +437,20 @@ def news():
         news.append(article)
     print(news)
     return render_template('news.html', news=news)
+
+@app.route('/', methods=['GET', 'POST'])
+def maintenance():
+    form = ContactForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            print("firing form")
+            # httpx.post('prestoghana.com/sendMail')
+            flash('Your message has been submitted successfully.','success')
+        else:
+            print(form.errors) 
+            
+    return render_template('maintenance.html',hideNav=True, form=form)
 
 @app.route('/expand/<string:id>')
 def expand(id):
