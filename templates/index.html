@@ -462,7 +462,7 @@
 
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-    <section id="faq" class="faq section-bg">
+    <section id="faq" class="faq section-bg" style="padding: 30px;">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -523,25 +523,48 @@
       </div>
     </section><!-- End Frequently Asked Questions Section -->
 
-    <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact">
-      <div class="container" data-aos="fade-up">
+    <!-- Contact Us Section -->
 
-        <div class="section-title">
-          <h2>Contact</h2>
-          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+      <section id="contact" style="padding: 0;">
+        <div class="container">
+          <h1><b>Contact Us</b></h1>
+          <div class="row">
+            <div class="col-md-6">
+                <h6><b>You can leave a message and we would respond if need be.</b></h6>
+                <br/>
+                <form method="post">
+                    {{form.hidden_tag()}}
+                    
+                    <div class="form-floating mb-3">
+                        {{form.name (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.name.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.number (class="form-control webForm", placeholder="Enter your number")}}
+                        {{form.number.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.message (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.message.label}}
+                    </div>
+        
+                    {{form.submit (class="pill-button", style="width:100%") }}
+        
+                </form>
+            </div>
+
+            <div class="col-md-6">
+              <div>
+                <h6><b>Locate Us.</b></h6>
+
+                <!-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> -->
+                <iframe style="border:0; width: 100%; height: 32vh;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015560.2534173054!2d-1.3031758448857569!3d6.12636390104031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf817eb79d2f75%3A0x3d99be9dfb765ce6!2sCentral%20University!5e0!3m2!1sen!2sgh!4v1669718940848!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>  
         </div>
-
-        <div>
-          <!-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> -->
-          <iframe style="border:0; width: 100%; height: 100vh;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015560.2534173054!2d-1.3031758448857569!3d6.12636390104031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf817eb79d2f75%3A0x3d99be9dfb765ce6!2sCentral%20University!5e0!3m2!1sen!2sgh!4v1669718940848!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-
-
-
-
-      </div>
-    </section><!-- End Contact Section -->
+      </section>
+    <!-- End of Contact Us Section   -->
 
   </main><!-- End #main -->
 
