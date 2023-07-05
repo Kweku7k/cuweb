@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField, FileField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
 class BuyForms(FlaskForm):
@@ -14,13 +14,12 @@ class LoginForm(FlaskForm):
     code = StringField('Code', validators=[DataRequired()])
     submit = SubmitField('Verify')
 
-
 class ContactForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Phone Number', validators=[DataRequired()])
-    message = StringField('Message', validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    message = TextAreaField('Message', validators=[DataRequired()])
 
+    submit = SubmitField('Submit')
 
 class ApplicantForm(FlaskForm):
     prefix = SelectField('Prefix', choices=[("Mr","Mr"),("Mrs","Mrs",),("Miss","Miss")])

@@ -97,7 +97,7 @@
         <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News</li></a>
         <a class="nav-link scrollto" href="{{url_for('about')}}"><li>About CU</li></a>
         <a class="nav-link scrollto active" href="{{url_for('students')}}"><li> Student Portal</li></a>
-        <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Admissions</li></a>
+        <a class="nav-link scrollto" href="{{url_for('admissions')}}"><li>Admissions</li></a>
         <a class="nav-link scrollto" href="{{url_for('staff')}}" ><li>Schools </li></a>
         <a class="nav-link scrollto" href="{{url_for('alumni')}}"  ><li>Alumni </li></a>
         <a class="nav-link scrollto" href="{{url_for('cu')}}" ><li>Guidance & Counselling </li></a>
@@ -106,7 +106,7 @@
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         {% endif %}
         
-        <a href="{{url_for('online')}}">
+        <a href="{{url_for('online')}}" target="_blank">
           <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
             Apply Now!
           </button>
@@ -227,7 +227,7 @@
 </footer><!-- End Footer -->
 
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
 
 
 <script src="{{url_for("static", filename="vendor/purecounter/purecounter_vanilla.js")}}"></script>
