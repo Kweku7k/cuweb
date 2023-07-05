@@ -177,10 +177,10 @@ def sendTelegram(params):
         app.logger.info(e)
         return e
 
-@app.errorhandler(404)
-def not_found_error(error):
-    sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
-    return render_template('error.html', code="404", message="You are either misspelling the URL or requesting a page that's no longer here."), 404
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+#     return render_template('error.html', code="404", message="You are either misspelling the URL or requesting a page that's no longer here."), 404
 
 
 @app.errorhandler(500)
