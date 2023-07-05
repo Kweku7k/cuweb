@@ -16,7 +16,7 @@ app=Flask(__name__)
 baseUrl = "http://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
 prestoBot = "5876869228:AAFk644pEKRBnEhZ6jbG2nXRlj4fsyZEYgg"
-centralAlertChannel = "-1001976261666"
+# centralAlertChannel = "-1001976261666"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
