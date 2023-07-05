@@ -204,7 +204,7 @@ def user_loader(user_id):
     #TODO change here
     return User.query.get(user_id)
 
-@app.route('/home',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def home():
     form = ContactForm()
 
@@ -225,7 +225,7 @@ def home():
         else:
             print(form.errors) 
 
-    return render_template('index.html',hideNav=True, form=form)
+    return render_template('index.html',hideNav=False, form=form)
 
 # def payWithPresto():
 #     httpx.get('prestoghana.com/pay')
