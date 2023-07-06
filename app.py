@@ -213,7 +213,7 @@ def home():
             print("firing form")
             try:
                 message = "From: " + form.name.data + "\n Phone: " + form.number.data + "\n Message: " + form.message.data
-                prestoUrl = 'http://192.168.8.100:5000'
+                prestoUrl = 'https://sandbox.prestoghana.com'
                 httpx.get(prestoUrl+'/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
                 flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
             except Exception as e:
