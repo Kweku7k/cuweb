@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block body %}
+    <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center">
+        <div class="col-xl-7 col-lg-9 text-center">
+            <h1><b>{{code}}</b></h1>
+            <h2>{{message}}</h2>
+          <img src="../static/img/error.png" alt="" style="object-fit: cover; width:100%; height:auto">
+          
+        </div>
+      </div>
+
+
+      <div class="text-center" style="margin-top: 2vh;">
+        <a href="{{url_for('online')}}">
+          <button class="pill-button" style="margin-top: 10px;">Apply Now</button>
+        </a>
+        <a href="#contact">
+          <button class="pill-button-alternate" style="margin-top: 10px;">Contact Us</button>
+        </a>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+
+{% endblock %}

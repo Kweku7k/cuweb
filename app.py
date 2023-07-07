@@ -15,7 +15,8 @@ import string
 app=Flask(__name__)
 baseUrl = "http://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
-
+prestoBot = "5876869228:AAFk644pEKRBnEhZ6jbG2nXRlj4fsyZEYgg"
+# centralAlertChannel = "-1001976261666"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
@@ -162,9 +163,40 @@ class ExamResult(db.Model, UserMixin):
     def __repr__(self):
         return '<Exam {}>'.format(self.program)
 
-    
+
 baseWpUrl = "http://45.222.128.105"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
+
+def sendTelegram(params):
+    try:
+        url = "https://api.telegram.org/bot"+prestoBot+"/sendMessage?chat_id="+centralAlertChannel+"&text=" + urllib.parse.quote(params)
+        content = urllib.request.urlopen(url).read()
+        app.logger.info(content)
+        return content
+    except Exception as e:
+        app.logger.info(e)
+        return e
+
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+#     return render_template('error.html', code="404", message="You are either misspelling the URL or requesting a page that's no longer here."), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+    return render_template('error.html', code="500", message="There has been an internal error. Our engineers are on it, please check and try again later."), 500
+
+# @app.errorhandler(500)
+# def not_found_error(error):
+#     sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+#     return render_template('error.html', code=error, message="You are either misspelling the URL or requesting a page that's no longer here."), 500
+
+# @app.errorhandler(503)
+# def not_found_error(error):
+#     sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+#     return render_template('error.html', code=error, message="You are either misspelling the URL or requesting a page that's no longer here."), 503
 
 
 @login_manager.user_loader
@@ -172,9 +204,28 @@ def user_loader(user_id):
     #TODO change here
     return User.query.get(user_id)
 
-@app.route('/home',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def home():
-    return render_template('index.html')
+    form = ContactForm()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            print("firing form")
+            try:
+                message = "From: " + form.name.data + "\n Phone: " + form.number.data + "\n Message: " + form.message.data
+                prestoUrl = 'https://sandbox.prestoghana.com'
+                httpx.get(prestoUrl+'/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
+                flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
+            except Exception as e:
+                print(e)
+                print("Unable to send emails!")
+                flash('Oops, there was an error sending your email, please check and try again.','fail')
+            # return render_template('index.html',hideNav=True, form=form)
+            return redirect(url_for('home'))
+        else:
+            print(form.errors) 
+
+    return render_template('index.html',hideNav=False, form=form)
 
 # def payWithPresto():
 #     httpx.get('prestoghana.com/pay')
@@ -331,6 +382,10 @@ def applicationform():
 def online():
     return render_template('online.html', hideNav = True, title="Online Application Form.")
 
+@app.route('/404')
+def error():
+    return not_found_error(404)
+
 @app.route('/chapel')
 def chapel():
     return render_template('chapel.html')
@@ -461,7 +516,10 @@ def maintenance():
     return render_template('maintenance.html',hideNav=True, form=form)
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8fb584c4703b91f2cd831efedae2778652321a5d
 @app.route('/wppost/<string:id>')
 def wppost(id):
     # Get URL
@@ -481,6 +539,11 @@ def expand(id):
     # content=r.json()["content"]["rendered"]
     # print(content)
     return render_template('expand.html', url=wppost)
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 8fb584c4703b91f2cd831efedae2778652321a5d
 
 @app.route('/staff')
 def staff():
