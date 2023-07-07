@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center">
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row justify-content-center" style="padding-top: 6vh;">
         <div class="col-xl-7 col-lg-9 text-center">
@@ -40,51 +40,20 @@
             <p class="description">As our record may show. We top charts holistically. Aiming to pesevere</p>
           </div>
         </div>
-
-
+        
+        
       </div>
     </div>
   </section>
   <!-- End Hero -->
-
+  
   <main id="main">
-
-    <!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?controls=0?rel=0&hd=1qY?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe> -->
-
-    <!-- ======= About Video Section ======= -->
-    <section id="about" class="about-video">
-      <div class="container" data-aos="fade-up">
-        
-        <div class="videoWrapper">
-          <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?autoplay=1&mute=1&loop=1" frameborder="0" ></iframe>
-        </div>
-        
-
-          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="50">
-            <h3>About Central University</h3>
-            <p class="fst-italic">
-              It has its origins in a short-term Pastoral training institute, which was started in October 1988 by ICGC. It was later incorporated, in June 1991 under the name, Central Bible College. In 1993, the name was changed again to Central Christian College. The College later upgraded its programmes to the baccalaureate level, and in line with national aspirations, expanded its programmes to include an integrated and practice oriented business school, named Central Business School.
-            </p>
-            
-            <p>
-              To reflect its new status as a liberal arts tertiary institution, the university was re-christened Central University College in 1998. The National Accreditation Board has since accredited it as a tertiary Institution. It is co-educational with equal access for male and female enrolment. Central University has eight (8) faculties/schools, namely the Central Business School (CBS), the School of Architecture and Design (SADe), School of Graduate Studies (SGS), Faculty of Arts and Social Sciences (FASS), Faculty of Law(FOL), School of Pharmacy(SOP), School of Engineering and Technology (SET) and the School of Medicine and Health Sciences (SMHS)
-           
-            </p>
-            <a href="#" class="btn-learn-more">Learn More</a>
-          </div>
-
-
-
-      </div>
-    </section>
-    <!-- End About Video Section -->
-
     <!-- caurosel-->
-    <section style="margin: 4vh;">
+    <section>
       <div class="container">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-
+    
             <div class="carousel-item active" data-bs-interval="3000">
               <img src="{{url_for("static", filename="img/carosel/1.png")}}" class="d-block w-100 img-caro" alt="...">
             </div>
@@ -108,15 +77,17 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-
+    
         <a href="{{url_for("news")}}">
           <button class="pill-button" style="padding: 10px 18px; margin: 8px 0 0 0;">
-          View all news <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+            View all news
           </button>
         </a>
       </div>
     </section>
     <!--End of Caurosel  -->
+
+
 
     <!-- ======= Cta Section ======= -->
     <section id="admissions" class="cta">
@@ -124,10 +95,48 @@
        <div class="text-center">
          <h3>Are you eligible for our 2023-2024 enrollment?</h3>
          <p> Check to see which courses you are eligible for on our eligibility platform. </p>
-         <a class="cta-btn" href="https://eligibility.central.edu.gh/">Check Eligibility</a>
+         
+         <div class="d-flex-center">
+           <a class="cta-btn" href="https://eligibility.central.edu.gh/">Check Eligibility</a>
+           <a class="cta-btn" href="https://eligibility.central.edu.gh/" style="margin-left: 8px;">Our Programs</a>
+         </div>
        </div>
      </div>
    </section><!-- End Cta Section -->
+    
+    <!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?controls=0?rel=0&hd=1qY?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe> -->
+
+
+
+    <!-- ======= About Video Section ======= -->
+    <section id="about" class="about-video">
+      <div class="container" data-aos="fade-up">
+        
+        <div class="videoWrapper">
+          <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?autoplay=1&mute=1&loop=1&rel=0" frameborder="0" ></iframe>
+        </div>
+        
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="50">
+            <h3>About Central University</h3>
+            <p class="fst-italic">
+              It has its origins in a short-term Pastoral training institute, which was started in October 1988 by ICGC. It was later incorporated, in June 1991 under the name, Central Bible College. In 1993, the name was changed again to Central Christian College. The College later upgraded its programmes to the baccalaureate level, and in line with national aspirations, expanded its programmes to include an integrated and practice oriented business school, named Central Business School.
+            </p>
+            
+            <p>
+              To reflect its new status as a liberal arts tertiary institution, the university was re-christened Central University College in 1998. The National Accreditation Board has since accredited it as a tertiary Institution. It is co-educational with equal access for male and female enrolment. Central University has eight (8) faculties/schools, namely the Central Business School (CBS), the School of Architecture and Design (SADe), School of Graduate Studies (SGS), Faculty of Arts and Social Sciences (FASS), Faculty of Law(FOL), School of Pharmacy(SOP), School of Engineering and Technology (SET) and the School of Medicine and Health Sciences (SMHS)
+           
+            </p>
+            <a href="#" class="btn-learn-more">Learn More</a>
+          </div>
+
+
+
+      </div>
+    </section>
+    <!-- End About Video Section -->
+
+
 
 
     <!-- ======= Counts Section ======= -->
@@ -169,7 +178,44 @@
       </div>
     </section>
     <!-- End Counts Section -->
-    
+
+
+    <section style="padding-top: 40px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6" style="padding-bottom: 10px;">
+            <div class="section-title">
+              <h2>Upcoming News</h2>
+            </div>
+              <!-- Upcoming events content goes here -->
+              <div class="single_event position-relative">
+                <div class="event_thumb">
+                    <img src="/static/img/event.jpeg" alt="" style="object-fit: contain; width: 100%;"/>
+                </div>
+                <div class="event_details">
+                    <div class="d-flex mb-4">
+                        <div class="date"><span>25</span> July</div>
+                        <div class="time-location">
+                            <p><span class="ti-time mr-2"></span> 12:00 PM - 5:30 PM</p>
+                            <p><span class="ti-location-pin mr-2"></span> Trinity Hall</p>
+                        </div>
+                    </div>
+                    <p>
+                        One make creepeth man for so bearing their firmament won't fowl meat over seas great
+                    </p>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="section-title">
+              <h2>Latest News</h2>
+            </div>
+              <!-- Latest news content goes here -->
+              <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Chief Moomen doing what he does best on stage...<a href="https://twitter.com/hashtag/PoetryUnderTheEagle2023?src=hash&amp;ref_src=twsrc%5Etfw">#PoetryUnderTheEagle2023</a><a href="https://twitter.com/hashtag/PoetryAsSong?src=hash&amp;ref_src=twsrc%5Etfw">#PoetryAsSong</a> <a href="https://t.co/6sU69pfR9e">pic.twitter.com/6sU69pfR9e</a></p>&mdash; Central University (@centralunivgh) <a href="https://twitter.com/centralunivgh/status/1651941292325105665?ref_src=twsrc%5Etfw">April 28, 2023</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          </div>
+        </div> 
+      </div>
+    </section>
    
     <!-- ======= Portfolio Section ======= -->
     <!-- <section id="portfolio" class="portfolio" style="padding: 20px 0;">
@@ -229,7 +275,7 @@
     </section>End Portfolio Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
+    <section id="testimonials" class="testimonials" style="padding-top: 30px;">
       <div class="container" data-aos="fade-up">
 
         <div class="section-title">
@@ -281,89 +327,6 @@
                 <div class="portfolio-wrap">
                   <img src="{{url_for('static',filename='img/cuGram/cu11.jpg')}}" class="img-fluid" alt="">
                 </div>
-              </div>
-            </div><!-- End testimonial item -->
-
-          </div>
-          <div class="swiper-pagination"></div>
-        </div>
-
-      </div>
-    </section><!-- End Testimonials Section -->
-
-
-   
-    <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials">
-      <div class="container" data-aos="fade-up">
-
-        <div class="section-title">
-          <h2>Testimonials</h2>
-          <!-- <p>Some kind words from some of our students that have passed through Central University.</p> -->
-        </div>
-
-        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
-          <div class="swiper-wrapper">
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Central university ghana is the best so far …condusive environment,highly professionally lecturers and a top graded school                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{url_for("static",filename="img/testimonials/kweku.jpg")}}" class="testimonial-img" alt="">
-                <h3>Nana Kweku Adumatta</h3>
-                <h4>Old Student</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Ultramodern campus with state of the art infrastructure. Neat washrooms and decent classroom sizes and a huge parking space.                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{url_for("static",filename="img/testimonials/t-2.jpeg")}}" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Central University is a very serene environment. The strategically planted trees make the environment very beautiful                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{url_for("static",filename="img/testimonials/t-3.jpeg")}}" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Old Student</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Teaching and learning are at the best peak. And the environment is conducive for learning. Rapid access to food variety.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{url_for("static",filename="img/testimonials/t-4.jpeg")}}" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
-              </div>
-            </div><!-- End testimonial item -->
-
-            <div class="swiper-slide">
-              <div class="testimonial-item">
-                <p>
-                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Looks a very beautiful place to learn. In the outskirts of Tema which is an ideal place to learn. Away from the noise of the city.
-                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-                </p>
-                <img src="{{url_for("static",filename="img/testimonials/t-5.jpeg")}}" class="testimonial-img" alt="">
-                <h3>Johna Larson</h3>
-                <h4>Entrepreneur</h4>
               </div>
             </div><!-- End testimonial item -->
 

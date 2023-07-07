@@ -100,11 +100,24 @@
         <a class="nav-link scrollto" href="{{url_for('admissions')}}"><li>Admissions</li></a>
         <a class="nav-link scrollto" href="{{url_for('staff')}}" ><li>Schools </li></a>
         <a class="nav-link scrollto" href="{{url_for('alumni')}}"  ><li>Alumni </li></a>
-        <a class="nav-link scrollto" href="{{url_for('cu')}}" ><li>Guidance & Counselling </li></a>
-        <a class="nav-link scrollto text-muted" href="{{url_for('library')}}"><li>Library </li></a>
-        <a class="nav-link scrollto text-muted" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
+        <a href="#" class="nav-link scrollto"style="padding-left: 15px;">
+          <li class="dropdown">Auxiliaries <i class="bi bi-chevron-down dropdown-indicator"></i>
+            <ul>
+              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>International </li></a>
+              <a class="nav-link scrollto" href="{{url_for('cu')}}" ><li>Guidance & Counselling </li></a>
+              <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library </li></a>
+              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
+              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Research </li></a>
+              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Corporate </li></a>
+            </ul>
+          </li>
+        </a>
+        <!-- <a class="nav-link scrollto" href="{{url_for('cu')}}" ><li>Guidance & Counselling </li></a>
+        <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library </li></a> -->
         <!-- <li><a class="nav-link scrollto text-muted" href="{{url_for("home")}}" disabled>Gallery </a></li> -->
         {% endif %}
+        
+
         
         <a href="{{url_for('online')}}" target="_blank">
           <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
@@ -225,6 +238,36 @@
       <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
     </div>
   </div>
+
+  <!-- Privacy Policy Modal -->
+  <!-- <div class="modal fade" id="privacyPolicyModal" tabindex="-1" role="dialog" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background: #ca181e;">
+                <h5 class="modal-title" id="privacyPolicyModalLabel" style="color: #fff;">Privacy Policy</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background: #ca181e; ">
+                    <span aria-hidden="true" style="font-size: 25px; color: #fff;">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                
+                <p>This website collects and processes personal data. By using this website, you consent to the collection and processing of your personal information as described in our data protection statement.</p>
+              </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #ca181e; box-shadow: none;">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#privacyPolicyModal').modal('show');
+        });
+  </script> -->
+
 </footer><!-- End Footer -->
 
 
@@ -240,6 +283,7 @@
 <script src="{{url_for("static", filename="vendor/php-email-form/validate.js")}}"></script>
 
 
+
 <!-- Vendor JS Files -->
 <!-- <script src="static/vendor/purecounter/purecounter_vanilla.js"></script>
 <script src="static/vendor/aos/aos.js"></script>
@@ -252,6 +296,16 @@
 <!-- Template Main JS File -->
 <!-- <script src="static/js/main.js"></script> -->
 <script src="{{url_for("static", filename="js/main.js")}}"></script>
+
+<!-- <script>
+  function showDataProtectionStatement() {
+      alert("This website collects and processes personal data. By using this website, you consent to the collection and processing of your personal information as described in our data protection statement.");
+  }
+  
+  window.onload = function() {
+      showDataProtectionStatement();
+  };
+</script> -->
 
 </body>
 
