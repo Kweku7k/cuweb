@@ -39,25 +39,26 @@
 </section>
 
 <script>
+posturl = "{{posturl}}"
 
-console.log("asd")
-url = "{{url}}"
-  fetch(url)
+
+fetch(posturl)
   .then(function(response) {
       return response.json();
     }).then(function(data) {
         console.log("data")
-        
-        document.getElementById("content").innerHTML = data.content.rendered
         console.log(data)
+        console.log(data.rendered_content)
+        document.getElementById("content").innerHTML = data
 
     // for (let index = 0; index <= data.length; index++) {
     //   console.log(data[index]); // this will be a string
 
-      var title = data.title.rendered
-      var post = data.content.rendered
+      var title = "data.title.rendered"
+      var post = data.rendered_content
      
       console.log(title)
+      console.log("post")
       console.log(post)
 
       createNewPost(title, post)  

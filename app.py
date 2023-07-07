@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request, send_from_directory, current_app, flash
+from flask import Flask,jsonify,redirect,url_for,render_template,request, send_from_directory, current_app, flash
 import os
 from forms import *
 from flask_login import UserMixin, login_user, login_required, LoginManager, current_user
@@ -163,8 +163,8 @@ class ExamResult(db.Model, UserMixin):
     def __repr__(self):
         return '<Exam {}>'.format(self.program)
 
-    
-baseWpUrl = "https://45.222.128.105"
+
+baseWpUrl = "http://45.222.128.105"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
 
 def sendTelegram(params):
@@ -507,14 +507,22 @@ def maintenance():
             
     return render_template('maintenance.html',hideNav=True, form=form)
 
+
+@app.route('/wppost/<string:id>')
+def wppost(id):
+    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
+    r=requests.get(url)
+    print(r.json())
+    content= r.json()["content"]["rendered"]
+    print("In Expand!")
+    print(content)
+    return jsonify({'rendered_content': content})
+
 @app.route('/expand/<string:id>')
 def expand(id):
     # Get URL
-    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
-    r=requests.get(url)
-    content= r.json()["content"]["rendered"]
-    print(content[0])
-    return render_template('expand.html', content=content,url=url)
+    posturl="/wppost/"+id
+    return render_template('expand.html', posturl=posturl)
 
 @app.route('/staff')
 def staff():
