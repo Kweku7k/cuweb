@@ -47,20 +47,21 @@ url = "{{url}}"
       return response.json();
     }).then(function(data) {
         console.log("data")
+        console.log(data)
         
-        document.getElementById("content").innerHTML = data.content.rendered
+        document.getElementById("content").innerHTML = data.rendered_content.content.rendered
         console.log(data)
 
     // for (let index = 0; index <= data.length; index++) {
     //   console.log(data[index]); // this will be a string
 
-      var title = data.title.rendered
-      var post = data.content.rendered
+      var title = data.rendered_content.title.rendered
+      var post = data.rendered_content.content.rendered
      
       console.log(title)
       console.log(post)
 
-      createNewPost(title, post)  
+    //   createNewPost(title, post)  
     // }
   })    // fetch directly 3108
 </script>

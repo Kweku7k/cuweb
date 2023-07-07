@@ -1,4 +1,4 @@
-from flask import Flask,redirect,url_for,render_template,request, send_from_directory, current_app, flash
+from flask import Flask,jsonify,redirect,url_for,render_template,request, send_from_directory, current_app, flash
 import os
 from forms import *
 from flask_login import UserMixin, login_user, login_required, LoginManager, current_user
@@ -460,14 +460,27 @@ def maintenance():
 
     return render_template('maintenance.html',hideNav=True, form=form)
 
-@app.route('/expand/<string:id>')
-def expand(id):
+
+
+@app.route('/wppost/<string:id>')
+def wppost(id):
     # Get URL
     url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     r=requests.get(url)
     content= r.json()["content"]["rendered"]
     print(content[0])
-    return render_template('expand.html', content=content,url=url)
+    return jsonify({'rendered_content': r.json()})
+
+
+@app.route('/expand/<string:id>')
+def expand(id):
+    # Get URL
+    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
+    wppost = '/wppost/'+str(id)
+    # r=requests.get(url)
+    # content=r.json()["content"]["rendered"]
+    # print(content)
+    return render_template('expand.html', url=wppost)
 
 @app.route('/staff')
 def staff():
