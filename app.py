@@ -510,19 +510,25 @@ def maintenance():
 
 @app.route('/wppost/<string:id>')
 def wppost(id):
+    # Get URL
     url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     r=requests.get(url)
-    print(r.json())
     content= r.json()["content"]["rendered"]
-    print("In Expand!")
-    print(content)
-    return jsonify({'rendered_content': content})
+    print(content[0])
+    return jsonify({'rendered_content': r.json()})
+
 
 @app.route('/expand/<string:id>')
 def expand(id):
     # Get URL
-    posturl="/wppost/"+id
-    return render_template('expand.html', posturl=posturl)
+    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
+    wppost = '/wppost/'+str(id)
+    # r=requests.get(url)
+    # content=r.json()["content"]["rendered"]
+    # print(content)
+    return render_template('expand.html', url=wppost)
+
+
 
 @app.route('/staff')
 def staff():
