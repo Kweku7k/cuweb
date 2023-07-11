@@ -203,6 +203,10 @@ h6 {
   font-weight: 600;
 }
 
+button .active{
+  background-color: #ff0000 !important; 
+}
+
 .whatsapp-icon {
   position: fixed;
   bottom: 20px;

@@ -479,7 +479,9 @@ def fetch(url, params):
 @app.route('/news')
 def news():
     # Get URL
-    url=baseWpUrl+"/?rest_route=/wp/v2/posts"
+    id = 24
+    url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
     r=requests.get(url)
     response= r.json()
     news = []
@@ -610,6 +612,18 @@ def international():
     print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+
+@app.route('/schools')
+def schools():
+    id=60
+    alltags = returnTags(id, "schools")["tags"]
+    allposts = returnTags(id, "schools")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
 
 @app.route('/chaplaincy')
 def chaplaincy():

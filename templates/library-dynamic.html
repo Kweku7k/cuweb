@@ -20,7 +20,7 @@
               {% for tag in tags %}
                 {% if loop.index == 1 %}
                   <li class="nav-item list-group-item" role="presentation">
-                    <button class="nav-link side-nav active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
+                    <button class="nav-link side-nav active activate" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
                   </li>
                 {% else %}
                   <li class="nav-item list-group-item" role="presentation">
