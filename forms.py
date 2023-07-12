@@ -18,13 +18,9 @@ class ContactForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Phone Number', validators=[DataRequired()])
     message = TextAreaField('Message', validators=[DataRequired()])
-<<<<<<< HEAD
 
     submit = SubmitField('Submit')
-=======
->>>>>>> 8fb584c4703b91f2cd831efedae2778652321a5d
 
-    submit = SubmitField('Submit')
 
 class ApplicantForm(FlaskForm):
     prefix = SelectField('Prefix', choices=[("Mr","Mr"),("Mrs","Mrs",),("Miss","Miss")])
