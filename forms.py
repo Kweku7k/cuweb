@@ -14,7 +14,6 @@ class LoginForm(FlaskForm):
     code = StringField('Code', validators=[DataRequired()])
     submit = SubmitField('Verify')
 
-
 class ContactForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
     number = StringField('Phone Number', validators=[DataRequired()])
