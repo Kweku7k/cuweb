@@ -516,10 +516,7 @@ def maintenance():
     return render_template('maintenance.html',hideNav=True, form=form)
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 8fb584c4703b91f2cd831efedae2778652321a5d
 @app.route('/wppost/<string:id>')
 def wppost(id):
     # Get URL
