@@ -204,7 +204,7 @@ def user_loader(user_id):
     #TODO change here
     return User.query.get(user_id)
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/home',methods=['GET','POST'])
 def home():
     form = ContactForm()
 
