@@ -539,11 +539,8 @@ def expand(id):
     # content=r.json()["content"]["rendered"]
     # print(content)
     return render_template('expand.html', url=wppost)
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 8fb584c4703b91f2cd831efedae2778652321a5d
 
 @app.route('/staff')
 def staff():
