@@ -540,6 +540,10 @@ def staff():
 def privacypolicy():
     return render_template('privacypolicy.html')
 
+@app.route('/school', methods=['GET', 'POST'])
+def school():
+    return render_template('school.html')
+
 @app.route('/admissions', methods=['GET', 'POST'])
 def admissions():
     return render_template('admissions.html')
