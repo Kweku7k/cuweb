@@ -207,7 +207,7 @@ def user_loader(user_id):
 @app.route('/',methods=['GET','POST'])
 def home():
     form = ContactForm()
-    gallery = wpgallery(2)
+    gallery = wpgallery(5)
 
     print("gallery")
     print(gallery)
@@ -543,6 +543,15 @@ def wppost(id):
     print(content[0])
     return jsonify({'rendered_content': r.json()})
 
+@app.route('/wppostbyslug/<string:slug>')
+def wppostbyslug(slug):
+    # Get URL
+    url=wpUrl+"/posts/"+slug
+    r=requests.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug=school-name")
+    content=r.json()[0]["content"]["rendered"]
+    print(content[0])
+    return jsonify({'rendered_content': r.json()})
+
 @app.route('/wpgallery/<string:id>')
 def wpgallery(id):
     images = []
@@ -564,15 +573,29 @@ def wpgallery(id):
 
     return images   
 
+@app.route('/schoolpage/<string:slug>', methods=['GET', 'POST'])
+def schoolpage(slug):
+    # print("slug")
+    # print(slug)
+
+    # url = wpUrl+"/posts?slug="+slug
+
+    # response = requests.get(url)
+    # print(response)
+    # print(response.json())
+
+    # print(url)
+
+    wppost = '/wppostbyslug/'+str(slug)
+    return render_template('schoolpage.html', url=wppost)
+
+    # return wppostbyslug(slug)
 
 @app.route('/expand/<string:id>')
 def expand(id):
     # Get URL
-    url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
+    # url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     wppost = '/wppost/'+str(id)
-    # r=requests.get(url)
-    # content=r.json()["content"]["rendered"]
-    # print(content)
     return render_template('expand.html', url=wppost)
 
 
@@ -596,7 +619,6 @@ def admissions():
 @app.route('/alumni')
 def alumni():
     return render_template('alumni.html')
-
 
 
 

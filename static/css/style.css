@@ -203,8 +203,9 @@ h6 {
   font-weight: 600;
 }
 
-button .active{
-  background-color: #ff0000 !important; 
+button{
+  background-color: #ff0000; 
+  text-align: left;
 }
 
 .whatsapp-icon {
