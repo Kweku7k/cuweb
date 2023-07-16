@@ -499,6 +499,26 @@ def news():
     print(news)
     return render_template('news.html', news=news)
 
+
+@app.route('/gallery')
+def gallery():
+    # Get URL
+    id = 24
+    url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r=requests.get(url)
+    response= r.json()
+    news = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        # article["title"] = i["title"]
+        news.append(article)
+    print(news)
+    return render_template('gallery.html', gallery=gallery)
+
 @app.route('/', methods=['GET', 'POST'])
 def maintenance():
     form = ContactForm()
@@ -667,6 +687,29 @@ def chaplaincy():
     print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+
+@app.route('/research')
+def research():
+    id=69
+    alltags = returnTags(id, "research")["tags"]
+    allposts = returnTags(id, "research")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+
+@app.route('/corporate')
+def corporate():
+    id=70
+    alltags = returnTags(id, "corporate")["tags"]
+    allposts = returnTags(id, "corporate")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
 
 # @app.route('/libraryapi')
 # def libraryapi():
