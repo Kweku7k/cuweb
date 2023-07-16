@@ -163,7 +163,7 @@ class ExamResult(db.Model, UserMixin):
         return '<Exam {}>'.format(self.program)
 
 
-baseWpUrl = "http://45.222.128.105"
+baseWpUrl = "https://webcms.central.edu.gh"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
 
 def sendTelegram(params):
