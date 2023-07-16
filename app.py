@@ -8,7 +8,6 @@ import httpx
 from datetime import datetime
 import urllib.request, urllib.parse
 import csv
-import requests
 import random
 import string
 
@@ -396,11 +395,11 @@ def chapel():
 
 # @app.route('/about')
 # def about():
-#     response = requests.get(wpUrl+"/categories?parent=4")
+#     response = httpx.get(wpUrl+"/categories?parent=4")
 #     print("all categories with parent category 4")
 #     print(response)
 #     print("-----------------")
-#     posts = requests.get(wpUrl+"/posts?categories=4")
+#     posts = httpx.get(wpUrl+"/posts?categories=4")
 #     posts = posts.json()
 #     print("posts")
 #     allposts = []
@@ -425,7 +424,7 @@ def chapel():
 # @app.route('/aboutapi')
 # def aboutapi():
 #     # getByCategory=About
-#     posts = requests.get(wpUrl+"/posts?categories=4")
+#     posts = httpx.get(wpUrl+"/posts?categories=4")
 #     posts = posts.json()
 #     print("posts")
 #     allposts = []
@@ -461,7 +460,7 @@ def getImageUrl(id):
     print(id)
     try:
         url=baseWpUrl+"/?rest_route=/wp/v2/media/"+str(id)
-        r=requests.get(url)
+        r=httpx.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
     except Exception as e:
@@ -472,7 +471,7 @@ def getImageUrl(id):
 def fetch(url, params):
     try:
         url=baseWpUrl+"/wp-json/wp/v2/posts"+str(id)
-        r=requests.get(url)
+        r=httpx.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
     except Exception as e:
@@ -486,7 +485,7 @@ def news():
     id = 24
     url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=requests.get(url)
+    r=httpx.get(url)
     response= r.json()
     news = []
     for i in response:
@@ -506,7 +505,7 @@ def gallery():
     id = 24
     url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=requests.get(url)
+    r=httpx.get(url)
     response= r.json()
     news = []
     for i in response:
@@ -538,7 +537,7 @@ def maintenance():
 def wppost(id):
     # Get URL
     url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
-    r=requests.get(url)
+    r=httpx.get(url)
     content= r.json()["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
@@ -547,7 +546,7 @@ def wppost(id):
 def wppostbyslug(slug):
     # Get URL
     url=wpUrl+"/posts/"+slug
-    r=requests.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug=school-name")
+    r=httpx.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug=school-name")
     content=r.json()[0]["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
@@ -557,7 +556,7 @@ def wpgallery(id):
     images = []
     # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
     url = wpUrl+"/media?author="+str(id)
-    r=requests.get(url)
+    r= httpx.get(url)
 
     response = r.json()
     
@@ -580,7 +579,7 @@ def schoolpage(slug):
 
     # url = wpUrl+"/posts?slug="+slug
 
-    # response = requests.get(url)
+    # response = httpx.get(url)
     # print(response)
     # print(response.json())
 
@@ -624,11 +623,11 @@ def alumni():
 
 
 def returnTags(id, categoryName):
-    response = requests.get(wpUrl+"/categories?parent="+str(id))
+    response = httpx.get(wpUrl+"/categories?parent="+str(id))
     print("Returning categories under parent category "+str(id) + str(categoryName))
     print(response)
     print("-----------------")
-    posts = requests.get(wpUrl+"/posts?categories="+str(id))
+    posts = httpx.get(wpUrl+"/posts?categories="+str(id))
     posts = posts.json()
     print("posts")
     allposts = []
@@ -739,7 +738,7 @@ def corporate():
 #     allposts = returnTags(id, "library")["posts"]
 
     # # getByCategory=About
-    # posts = requests.get(wpUrl+"/posts?categories=19")
+    # posts = httpx.get(wpUrl+"/posts?categories=19")
     # posts = posts.json()
     # print("posts")
     # allposts = []
