@@ -207,6 +207,10 @@ def user_loader(user_id):
 @app.route('/',methods=['GET','POST'])
 def home():
     form = ContactForm()
+    gallery = wpgallery(2)
+
+    print("gallery")
+    print(gallery)
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -225,7 +229,7 @@ def home():
         else:
             print(form.errors) 
 
-    return render_template('index.html',hideNav=False, form=form)
+    return render_template('index.html',hideNav=False, form=form, gallery=gallery)
 
 # def payWithPresto():
 #     httpx.get('prestoghana.com/pay')
@@ -519,6 +523,27 @@ def wppost(id):
     print(content[0])
     return jsonify({'rendered_content': r.json()})
 
+@app.route('/wpgallery/<string:id>')
+def wpgallery(id):
+    images = []
+    # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
+    url = wpUrl+"/media?author="+str(id)
+    r=requests.get(url)
+
+    response = r.json()
+    
+    # find length
+    noOfImages = len(response)
+    print(noOfImages)
+
+    for i, index in enumerate(response):
+        content= r.json()[i]["guid"]["rendered"]
+        images.append(content)
+
+    print(images)
+
+    return images   
+
 
 @app.route('/expand/<string:id>')
 def expand(id):
@@ -551,6 +576,10 @@ def admissions():
 @app.route('/alumni')
 def alumni():
     return render_template('alumni.html')
+
+
+
+
 
 def returnTags(id, categoryName):
     response = requests.get(wpUrl+"/categories?parent="+str(id))
