@@ -50,18 +50,18 @@
   <main id="main">
     <!-- caurosel-->
     <section>
-      <div class="container">
+      <div class="container-fluid" style="width: 100%; height: auto;">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
 
             {% for image in gallery %}
               {% if loop.index == 1 %}
                 <div class="carousel-item active" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="width: 100%; height: 70vh; object-fit: cover;" alt="...">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto;" alt="...">
                 </div>
                 {% else %}
                 <div class="carousel-item" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="width: 100%; height: 70vh; object-fit: cover;" alt="...">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto;" alt="...">
                 </div>
                 {% endif %}
 
@@ -101,10 +101,10 @@
     <!--End of Caurosel  -->
 
 
-
+    
     <!-- ======= Cta Section ======= -->
     <section id="admissions" class="cta">
-     <div class="container" data-aos="zoom-in">
+     <div class="container">
        <div class="text-center">
          <h3>Are you eligible for our 2023-2024 enrollment?</h3>
          <p> Check to see which courses you are eligible for on our eligibility platform. </p>
@@ -131,7 +131,7 @@
         </div>
         
 
-          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="50">
+          <div class="row pt-3 pt-lg-0 mt-5 content" >
             <h3>About Central University</h3>
             <p class="fst-italic">
               It has its origins in a short-term Pastoral training institute, which was started in October 1988 by ICGC. It was later incorporated, in June 1991 under the name, Central Bible College. In 1993, the name was changed again to Central Christian College. The College later upgraded its programmes to the baccalaureate level, and in line with national aspirations, expanded its programmes to include an integrated and practice oriented business school, named Central Business School.
@@ -194,7 +194,7 @@
     <!-- End Counts Section -->
 
 
-    <section style="padding-top: 40px;">
+    <section style="margin-bottom: 50px;">
       <div class="container">
         <div class="row">
           <div class="col-md-6" style="padding-bottom: 10px;">
@@ -290,7 +290,7 @@
 
     <!-- ======= Testimonials Section ======= -->
     <section id="testimonials" class="testimonials" style="padding-top: 30px;">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
 
         <div class="section-title">
           <h2>Gallery</h2>
@@ -309,7 +309,7 @@
             {% for image in gallery %}
               <div class="swiper-slide">
                 <div class="testimonial-item">
-                    <img src={{image}} style="object-fit: cover; width: 100%; height: 40vh;" class="img-fluid" alt="">
+                    <img src={{image}} style="object-fit: cover; width: 100%; height: 100%; object-fit: cover;" class="img-fluid" alt="">
                 </div>
               </div>
             {% endfor %}

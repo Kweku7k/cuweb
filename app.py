@@ -972,6 +972,9 @@ def applicantExam():
             
     return render_template('applicantExam.html', form=form)
 
+@app.route('/faq')
+def faq():
+    return render_template('faq.html')
 
 @app.route('/applicantExamresult')
 def applicantExamresult():
