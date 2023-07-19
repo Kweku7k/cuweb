@@ -57,11 +57,11 @@
             {% for image in gallery %}
               {% if loop.index == 1 %}
                 <div class="carousel-item active" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto;" alt="...">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto; opacity: 1;" alt="...">
                 </div>
                 {% else %}
                 <div class="carousel-item" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto;" alt="...">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto; opacity: 1;" alt="...">
                 </div>
                 {% endif %}
 
@@ -81,14 +81,14 @@
             </div>
              -->
           </div>
-          <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
           <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
-          </button> -->
+          </button>
         </div>
     
         <!-- <a href="{{url_for("news")}}">
@@ -123,7 +123,7 @@
 
     <!-- ======= About Video Section ======= -->
     <section id="about" class="about-video">
-      <div class="container" data-aos="fade-up">
+      <div class="container">
         
         <div class="videoWrapper">
           <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?autoplay=1&mute=1&loop=1&rel=0" frameborder="0" ></iframe>
@@ -154,7 +154,7 @@
 
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg" >
+    <section id="counts" class="counts section-bg" style="padding-top: 1px;">
       <div class="container">
         
         <div class="row justify-content-end">
@@ -194,7 +194,7 @@
     <!-- End Counts Section -->
 
 
-    <section style="margin-bottom: 50px;">
+    <section style="padding-top: 1px;">
       <div class="container">
         <div class="row">
           <div class="col-md-6" style="padding-bottom: 10px;">
@@ -225,8 +225,9 @@
               <h2>Latest News</h2>
             </div>
               <!-- Latest news content goes here -->
-              <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fcentraledugh%2Fposts%2Fpfbid0KEEEpG1QurjRiKoFtPGM9YiaAFcicDTvY6MrcuSpGxziHKUwfH7DgqERd5s12VDel&show_text=true&width=500" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
-          </div>
+              <!-- <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fcentraledugh%2Fposts%2Fpfbid0KEEEpG1QurjRiKoFtPGM9YiaAFcicDTvY6MrcuSpGxziHKUwfH7DgqERd5s12VDel&show_text=true&width=500" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
+              <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcentraledugh%2F&amp;tabs=timeline&amp;width=340&amp;height=600&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=215976095088446" width="500 !important" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
         </div> 
       </div>
     </section>
