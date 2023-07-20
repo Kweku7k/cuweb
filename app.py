@@ -533,7 +533,6 @@ def maintenance():
             
     return render_template('maintenance.html',hideNav=True, form=form)
 
-
 @app.route('/wppost/<string:id>')
 def wppost(id):
     # Get URL
