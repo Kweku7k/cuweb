@@ -26,14 +26,12 @@
         <br/>
         <br/>
 
-        <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
-            <div class="line" style="width: 50px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
-            <h3 style="padding-top: 3px;">DEPARTMENTS</h3>
-            <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
-        </div>
-
+        
         <!-- DEPARTMENTS -->
         <div class="row justify-content-center">
+            <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
+                <h3 style="padding-top: 3px;">DEPARTMENTS</h3>
+            </div>
             
             {% for article in departments %}
             <div class="col-md-3"  style="margin-bottom: 20px;">
@@ -57,36 +55,34 @@
         </div>
 
 
+       <!-- Administrative Staff -->
+       <div class="row justify-content-center">
+        <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
+            <h3 style="padding-top: 3px;">Administrative Staff</h3>
+        </div>
+        
+        {% for article in administrative staff %}
+        <div class="col-md-3"  style="margin-bottom: 20px;">
+            <a href="/expand/{{article.id}}" style="text-decoration: none;">
+                <div class="card"  style="flex-grow: 1;">
+                    <img class="card-img-top" src="{{article.image}}" width="100%" height="200px" style="object-fit: cover;" alt="Card image cap">                
+                <div class="card-body">
+                    <!-- <div class="card-title" style="display: flex;">
+                        <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
+                        <h6 class="text-muted category"><b> {{article.id}}</b></h6>
+                    </div> -->
+                    <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
+                    </div>
+                   
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
         
 
-        <!-- <h1>{{title}}</h1> -->
+    </div> 
 
-        <div class="row justify-content-center" id="content">
-            <!-- {{ content }} -->
-            <!-- <div style="margin: 2vh auto; width: 70%;">
-                <img class="card-img-top" src="{{url_for('static', filename='img/blog1.jpg')}}" width="100%" alt="Card image cap"> 
-                
-                <div style="padding-top: 10px;">
-                    <h2 class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Higher education is part of the Agenda 2030 ecosystem.</b></h2>
-                </div>
-
-
-                <div class="card-title" style="display: flex; margin-top: 3vh;">
-                    <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
-                    <h6 class="text-muted category"><b> ALUMNI</b></h6>
-                </div>
-
-                <h4>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusamus aliquid reiciendis pariatur. Libero laborum molestias architecto provident voluptas modi molestiae autem, veritatis omnis reiciendis a placeat tempora ipsam vel iste! Lorem ipsum, dolor sit amet consectetur adipisicing elit. Odit esse impedit dolor similique, debitis nulla reprehenderit tempora nostrum doloremque facere ipsa? Cum hic quos laborum soluta esse saepe mollitia magni! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iusto at nobis dolores enim sit molestiae eum, alias unde ea placeat in beatae voluptate tenetur voluptates asperiores ad repellendus consequatur odit!
-                </h4>
-
-                <div class="card-footer" style="margin-top: 5vh; display: flex;">
-                    <p class="category">Author :</p>
-                    <h6 class="text-muted" style="padding: 2px 0 0 6px;"><b>Mr.Softlife</b> - Jan 25, 2021</h6>
-                </div>
-            </div>
-             -->
-        </div>
+       
     </div>
 </section>
 
