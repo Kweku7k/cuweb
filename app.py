@@ -10,6 +10,7 @@ import urllib.request, urllib.parse
 import csv
 import random
 import string
+import pprint
 
 app=Flask(__name__)
 baseUrl = "http://online.central.edu.gh"
@@ -546,7 +547,7 @@ def wppost(id):
 def wppostbyslug(slug):
     # Get URL
     url=wpUrl+"/posts/"+slug
-    r=httpx.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug=school-name")
+    r=httpx.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug="+slug)
     content=r.json()[0]["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
@@ -572,23 +573,56 @@ def wpgallery(id):
 
     return images   
 
+
+
+# FindPostByCategoryId
+# url = wpUrl+"posts?categories=63"
+
 @app.route('/schoolpage/<string:slug>', methods=['GET', 'POST'])
 def schoolpage(slug):
-    # print("slug")
-    # print(slug)
 
-    # url = wpUrl+"/posts?slug="+slug
-
-    # response = httpx.get(url)
-    # print(response)
-    # print(response.json())
-
-    # print(url)
-
+    print("Logging articles by slug - " + slug)
+    
     wppost = '/wppostbyslug/'+str(slug)
-    return render_template('schoolpage.html', url=wppost)
+    post = wppostbyslug(slug).json
 
-    # return wppostbyslug(slug)
+    print("Response:")
+    pprint.pprint(post)
+
+    # Returning School Image.
+    imageUlr = getImageUrl(post["rendered_content"][0]["featured_media"])
+    print(imageUlr)
+
+    # Getting sub departments
+    print("Getting Sub Departments")
+    departments = []
+    
+    # find category by name
+    print("Finding Category By Name")
+    url = wpUrl+"/categories?slug="+str(slug)
+    subdepartments = httpx.get(url).json()
+
+    if subdepartments != []:
+
+        try:
+            print("SubDepartments Found:")
+            pprint.pprint(subdepartments[0]["id"])
+        except Exception as e:
+            print(e)
+
+        # categoryId = subdepartments
+        if subdepartments != None:
+            categoryId = subdepartments[0]["id"]
+
+            print("Category Id: " + str(categoryId))
+
+            departments = returnPostsUnderCategoryId(categoryId)
+
+            print("------- POSTS BY ID ---------")
+            print(departments)
+
+    return render_template('schoolpage.html', url=wppost, image=imageUlr, departments=departments)
+
 
 @app.route('/expand/<string:id>')
 def expand(id):
@@ -611,6 +645,7 @@ def privacypolicy():
 def school():
     return render_template('school.html')
 
+
 @app.route('/admissions', methods=['GET', 'POST'])
 def admissions():
     return render_template('admissions.html')
@@ -619,6 +654,26 @@ def admissions():
 def alumni():
     return render_template('alumni.html')
 
+
+def returnPostsUnderCategoryId(id):
+    print("Fetching Posts Under Category: " + str(id))
+    # posts = httpx.get(wpUrl+"/posts?categories="+str(id))
+    posts = httpx.get(wpUrl+"/posts?categories="+str(id))
+    posts = posts.json()
+
+    pprint.pprint(posts)
+
+    allposts = []
+    for p in posts:
+        print(p)
+        print(p["featured_media"])
+        allposts.append({
+            "id":p["id"],
+            "title":p["title"]["rendered"],
+            "image":getImageUrl(p["featured_media"])
+        })
+
+    return allposts
 
 
 

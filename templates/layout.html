@@ -115,13 +115,13 @@
         <a href="#" class="nav-link scrollto"style="padding-left: 15px;">
           <li class="dropdown">Schools <i class="bi bi-chevron-down dropdown-indicator"></i>
             <ul>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Pharmacy </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Law </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Technology </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Social Sciences </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Architecture </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>Business </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schools')}}"><li>CODE </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sop')}}"><li>Pharmacy </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='facultyoflaw')}}"><li>Law </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='soeat')}}"><li>Technology </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='fass')}}"><li>Social Sciences </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>Architecture </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Business </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CODE </li></a>
             </ul>
           </li>
         </a>                                                                          
@@ -212,13 +212,15 @@
         <div class="col-lg-3 col-md-6 footer-links">
           <h4>Faculties</h4>
           <ul>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">School Of Pharmacy</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">Faculty Of Law</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">School of Applied Science</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">Central Business School</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">Arts and Social Sciences</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schools')}}">School of Health and Medicine </a></li>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sop')}}"><li>Pharmacy </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='facultyoflaw')}}"><li>Law </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='soeat')}}"><li>Technology </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='fass')}}"><li>Social Sciences </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>Architecture </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Business </li></a>
+            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CODE </li></a>
           </ul>
+          
         </div>
         
         <div class="col-lg-3 col-md-6 footer-links">
