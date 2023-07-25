@@ -29,6 +29,9 @@ login_manager.login_view = "apply"
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
+lecturerId = 92
+adminStaffId = 93
+
 class User(db.Model, UserMixin):
     """Model for user accounts."""
     __tablename__ = 'users'
@@ -586,10 +589,10 @@ def schoolpage(slug):
     post = wppostbyslug(slug).json
 
     print("Response:")
-    pprint.pprint(post)
+    pprint.pprint(post) #This prints the post in json format.
 
     # Returning School Image.
-    imageUlr = getImageUrl(post["rendered_content"][0]["featured_media"])
+    imageUlr = getImageUrl(post["rendered_content"][0]["featured_media"]) 
     print(imageUlr)
 
     # Getting sub departments
@@ -600,9 +603,11 @@ def schoolpage(slug):
     print("Finding Category By Name")
     url = wpUrl+"/categories?slug="+str(slug)
     subdepartments = httpx.get(url).json()
+    
+    lecturers = []
+    adminStaff = []
 
     if subdepartments != []:
-
         try:
             print("SubDepartments Found:")
             pprint.pprint(subdepartments[0]["id"])
@@ -615,13 +620,40 @@ def schoolpage(slug):
 
             print("Category Id: " + str(categoryId))
 
-            departments = returnPostsUnderCategoryId(categoryId)
-
+            allPosts = returnPostsUnderCategoryId(categoryId)
+            # filter by respective category ids?
             print("------- POSTS BY ID ---------")
-            print(departments)
+            pprint.pprint(allPosts)
 
-    return render_template('schoolpage.html', url=wppost, image=imageUlr, departments=departments)
 
+            for p in allPosts:
+                if p["id"] == post["rendered_content"][0]["id"]:
+                    pass
+                elif find_in_array(p["categories"], lecturerId):
+                    lecturers.append(p)
+                elif find_in_array(p["categories"], adminStaffId):
+                    adminStaff.append(p)
+                else:   
+                    departments.append(p)
+
+    # 
+        print("------LECTURERS-------")
+        pprint.pprint(lecturers)
+    
+    else:
+        return "Not found."
+
+
+    return render_template('schoolpage.html', url=wppost, image=imageUlr, departments=departments, adminStaff=adminStaff, lecturers=lecturers)
+
+
+def find_in_array(arr, target_char):
+    for i in arr:
+        if target_char == i:
+            return True
+    return False
+
+    # return any(target_char in item for item in arr)
 
 @app.route('/expand/<string:id>')
 def expand(id):
@@ -656,7 +688,6 @@ def alumni():
 
 def returnPostsUnderCategoryId(id):
     print("Fetching Posts Under Category: " + str(id))
-    # posts = httpx.get(wpUrl+"/posts?categories="+str(id))
     posts = httpx.get(wpUrl+"/posts?categories="+str(id))
     posts = posts.json()
 
@@ -666,13 +697,19 @@ def returnPostsUnderCategoryId(id):
     for p in posts:
         print(p)
         print(p["featured_media"])
+
+        # TODO: Remove currently opened post
+
         allposts.append({
             "id":p["id"],
+            "categories":p["categories"],
             "title":p["title"]["rendered"],
             "image":getImageUrl(p["featured_media"])
         })
 
     return allposts
+
+
 
 
 
@@ -1098,8 +1135,6 @@ def applicantanswers():
     # check form validation
     # check errors
     return render_template('applicantanswers.html', form=form)
-
-
 
 @app.route('/applicantrefrees')
 def applicantrefrees():
