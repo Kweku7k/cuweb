@@ -1,5 +1,7 @@
 from flask import Flask,jsonify,redirect,url_for,render_template,request, send_from_directory, current_app, flash
 import os
+
+import requests
 from forms import *
 from flask_login import UserMixin, login_user, login_required, LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
@@ -219,9 +221,12 @@ def home():
         if form.validate_on_submit():
             print("firing form")
             try:
-                message = "From: " + form.name.data + "\n Phone: " + form.number.data + "\n Message: " + form.message.data
+                message = "From: " + form.name.data + "\nPhone: " + form.number.data + "\nMessage: " + form.message.data
+                print("message")
+                print(message)
                 prestoUrl = 'https://sandbox.prestoghana.com'
-                httpx.get(prestoUrl+'/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
+                r = requests.get(prestoUrl+'/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
+                print(r.url)
                 flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
             except Exception as e:
                 print(e)
