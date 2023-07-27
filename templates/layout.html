@@ -19,11 +19,11 @@
   <meta content="" name="keywords">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  <script>
+  <!-- <script>
     $('.carousel').carousel({
   interval: 2000
 })
-  </script>
+  </script> -->
   <!-- Favicons -->
   <!-- <link href="assets/img/fav.png" rel="icon"> -->
   <link href="{{url_for("static", filename="img/fav.png")}}" rel="icon">
@@ -55,6 +55,8 @@
   <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
   <link href="{{url_for("static", filename="css/style.css")}}" rel="stylesheet">
 
+  {% block head %}
+  {% endblock %}
 
 </head>
 
@@ -194,7 +196,7 @@
       <div class="row">
 
         <div class="col-lg-6 col-md-6 footer-contact">
-          <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150"> 
+          <img class="" src="{{url_for('static',filename='img/Central-Uni-logo.png')}}" alt="" width="150"> 
           <p>
             Miotso near Dawhenya <br>
             Accra -Aflao<br>
@@ -329,7 +331,7 @@
 
 <!-- Template Main JS File -->
 <!-- <script src="static/js/main.js"></script> -->
-<script src="{{url_for("static", filename="js/main.js")}}"></script>
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
 
 <!-- <script>
   function showDataProtectionStatement() {

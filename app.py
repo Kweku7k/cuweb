@@ -485,22 +485,27 @@ def fetch(url, params):
 
 @app.route('/news')
 def news():
+    page = request.args.get("page","1")
+    print("page")
+    print(page)
     # Get URL
     id = 24
-    url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
+    url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
     r=httpx.get(url)
     response= r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = (r.headers["x-wp-totalpages"])
     news = []
     for i in response:
         article = {}
         article["id"] = i["id"]
         article["image"] = getImageUrl(i["featured_media"])
         article["title"] = i["title"]["rendered"]
-        # article["title"] = i["title"]
         news.append(article)
     print(news)
-    return render_template('news.html', news=news)
+    return render_template('news.html', news=news, totalPages=totalPages, page=page)
 
 
 @app.route('/gallery')

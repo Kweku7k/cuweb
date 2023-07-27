@@ -1,4 +1,30 @@
 {% extends "layout.html" %}
+{% block head %}
+<style>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .pagination button {
+        padding: 8px 16px;
+        margin: 0 5px;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        cursor: pointer;
+    }
+
+    .pagination button:hover {
+        background-color: #ddd;
+    }
+
+    .pagination button.active {
+        background-color: #007BFF;
+        color: white;
+    }
+</style>
+{% endblock %}
 {% block body %}
 
 <section style="padding-top: 15vh;">
@@ -195,10 +221,72 @@
                
             
             <div id="demo"></div>
+
+            <div class="pagination" id="pagination">
+                <button id="prevButton" onclick="previousPage()" disabled>Previous</button>
+                <button id="nextButton" onclick="nextPage()" disabled>Next</button>
+            </div>
         </div>
     </div>
 </section>
 
+<script>
+    // Backend values passed to the frontend
+    const allPages = '{{totalPages}}'/* value from the backend */;
+    let currentPage = '{{page}}'/* value from the backend */;
+    const itemsPerPage = 10/* value from the backend */;
+
+    totalPages = parseInt(allPages)
+    currentPage = parseInt(currentPage)
+    updatePaginationButtons()
+    // console.log(currentPage)
+
+    function updatePaginationButtons() {
+        const prevButton = document.getElementById("prevButton");
+        const nextButton = document.getElementById("nextButton");
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+    }
+
+    function showPage(pageNumber) {
+    //     // Replace this section with code to fetch items from the backend based on 'pageNumber' and 'itemsPerPage'
+    //     // and update the 'items' container accordingly
+    //     // Example:
+    //     const itemsContainer = document.getElementById("items");
+    //     itemsContainer.innerHTML = `<p>Page ${pageNumber}</p>`;
+
+    //     currentPage = pageNumber;
+    //     updatePaginationButtons();
+
+    // this should update the page based on 
+    console.log("Currently on page: " + pageNumber)
+
+    }
+
+    function previousPage() {
+        nextPage = currentPage - 1
+        console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+        if (currentPage > 1) {
+            window.location.href = "/news?page="+nextPage;
+            // showPage(currentPage - 1);
+        }
+    }
+
+    function nextPage() {
+        nextPage = currentPage + 1
+        console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+        if (currentPage < totalPages) {
+            window.location.href = "/news?page="+nextPage;
+            // showPage(currentPage + 1);
+        }
+    }
+
+    // Show the initial page
+    showPage(currentPage);
+</script>
 
 <script>
     function getImageUrl(id) { 
@@ -237,22 +325,22 @@
     
     }
     
-      url = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
-      fetch(url)
-      .then(function(response) {
-        return response.json();
-      }).then(function(data) {
-        console.log(data)
+    //   url = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
+    //   fetch(url)
+    //   .then(function(response) {
+    //     return response.json();
+    //   }).then(function(data) {
+    //     console.log(data)
     
-        for (let index = 0; index <= data.length; index++) {
+    //     for (let index = 0; index <= data.length; index++) {
     
-          var title = data[index].title.rendered
-          var post = data[index].content.rendered
+    //       var title = data[index].title.rendered
+    //       var post = data[index].content.rendered
          
     
-          createNewPost(title, post)  
-        }
-      });
+    //       createNewPost(title, post)  
+    //     }
+    //   });
     </script>
 
 {% endblock %}
