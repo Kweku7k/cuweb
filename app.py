@@ -778,7 +778,7 @@ def alumni():
 
 
 def returnPostsUnderCategoryId(id):
-    per_page = 20
+    per_page = 60
     print("Fetching Posts Under Category: " + str(id))
     posts = requests.get(wpUrl+"/posts?categories="+str(id)+"&per_page="+str(per_page))
     posts = posts.json()
