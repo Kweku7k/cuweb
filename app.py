@@ -33,6 +33,7 @@ migrate = Migrate(app, db)
 
 lecturerId = 92
 adminStaffId = 93
+eventsId = 101
 
 class User(db.Model, UserMixin):
     """Model for user accounts."""
@@ -213,6 +214,9 @@ def user_loader(user_id):
 def home():
     form = ContactForm()
     gallery = wpgallery(5)
+    events = getEvents()[0]
+    print("------------------events------------------")
+    print(events)
 
     print("gallery")
     print(gallery)
@@ -235,9 +239,9 @@ def home():
             # return render_template('index.html',hideNav=True, form=form)
             return redirect(url_for('home'))
         else:
-            print(form.errors) 
+            print(form.errors)
 
-    return render_template('index.html',hideNav=False, form=form, gallery=gallery)
+    return render_template('index.html',hideNav=False, form=form, gallery=gallery, events=events)
 
 # def payWithPresto():
 #     httpx.get('prestoghana.com/pay')
@@ -541,6 +545,55 @@ def lecturers():
 
 
 
+@app.route('/lecturers/<string:department>')
+def lecturersByDepartment(department):
+    page = request.args.get("page","1")
+    print("page")
+    print(page)
+    # Get URL
+    id = lecturerId
+    per_page=10
+    url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)+"&per_page="+str(per_page)
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r=httpx.get(url)
+    response= r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = (r.headers.get("x-wp-totalpages"))
+    news = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        news.append(article)
+    print(news)
+    return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page)
+
+
+
+
+@app.route('/events')
+def getEvents():
+    # Get URL
+    url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(eventsId)
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r=httpx.get(url)
+    response= r.json()
+    pprint.pprint(response)
+    events = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        # article["title"] = i["title"]
+        events.append(article)
+    print(events)
+    return events
+    # return render_template('gallery.html', gallery=gallery)
+
+
 @app.route('/gallery')
 def gallery():
     # Get URL
@@ -725,7 +778,7 @@ def alumni():
 
 
 def returnPostsUnderCategoryId(id):
-    per_page = 30
+    per_page = 20
     print("Fetching Posts Under Category: " + str(id))
     posts = httpx.get(wpUrl+"/posts?categories="+str(id)+"&per_page="+str(per_page))
     posts = posts.json()
