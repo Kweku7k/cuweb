@@ -6,7 +6,7 @@ from forms import *
 from flask_login import UserMixin, login_user, login_required, LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import httpx
+import requests
 from datetime import datetime
 import urllib.request, urllib.parse
 import csv
@@ -244,7 +244,7 @@ def home():
     return render_template('index.html',hideNav=False, form=form, gallery=gallery, events=events)
 
 # def payWithPresto():
-#     httpx.get('prestoghana.com/pay')
+#     requests.get('prestoghana.com/pay')
 
 def sendsms(phone,message, exceptionPath):
     api_key = "aniXLCfDJ2S0F1joBHuM0FcmH" #Remember to put your own API Key here
@@ -335,7 +335,7 @@ def payWithPresto(paymentId):
             "firstName":payment.name,
             "network":payment.network,
         }
-    r = httpx.post(prestoUrl, json=paymentInfo)
+    r = requests.post(prestoUrl, json=paymentInfo)
     return r.json()
 
 def randomLetters(y):
@@ -408,11 +408,11 @@ def chapel():
 
 # @app.route('/about')
 # def about():
-#     response = httpx.get(wpUrl+"/categories?parent=4")
+#     response = requests.get(wpUrl+"/categories?parent=4")
 #     print("all categories with parent category 4")
 #     print(response)
 #     print("-----------------")
-#     posts = httpx.get(wpUrl+"/posts?categories=4")
+#     posts = requests.get(wpUrl+"/posts?categories=4")
 #     posts = posts.json()
 #     print("posts")
 #     allposts = []
@@ -437,7 +437,7 @@ def chapel():
 # @app.route('/aboutapi')
 # def aboutapi():
 #     # getByCategory=About
-#     posts = httpx.get(wpUrl+"/posts?categories=4")
+#     posts = requests.get(wpUrl+"/posts?categories=4")
 #     posts = posts.json()
 #     print("posts")
 #     allposts = []
@@ -473,7 +473,7 @@ def getImageUrl(id):
     print(id)
     try:
         url=baseWpUrl+"/?rest_route=/wp/v2/media/"+str(id)
-        r=httpx.get(url)
+        r=requests.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
     except Exception as e:
@@ -484,7 +484,7 @@ def getImageUrl(id):
 def fetch(url, params):
     try:
         url=baseWpUrl+"/wp-json/wp/v2/posts"+str(id)
-        r=httpx.get(url)
+        r=requests.get(url)
         print(r)
         image = r.json()["guid"]["rendered"]
     except Exception as e:
@@ -502,7 +502,7 @@ def news():
     per_page=30
     url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)+"&per_page="+str(per_page)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=httpx.get(url)
+    r=requests.get(url)
     response= r.json()
     print("response.headers")
     print(r.headers)
@@ -528,7 +528,7 @@ def lecturers():
     per_page=10
     url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)+"&per_page="+str(per_page)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=httpx.get(url)
+    r=requests.get(url)
     response= r.json()
     print("response.headers")
     print(r.headers)
@@ -555,7 +555,7 @@ def lecturersByDepartment(department):
     per_page=10
     url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)+"&per_page="+str(per_page)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=httpx.get(url)
+    r=requests.get(url)
     response= r.json()
     print("response.headers")
     print(r.headers)
@@ -578,7 +578,7 @@ def getEvents():
     # Get URL
     url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(eventsId)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=httpx.get(url)
+    r=requests.get(url)
     response= r.json()
     pprint.pprint(response)
     events = []
@@ -600,7 +600,7 @@ def gallery():
     id = 24
     url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(id)
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
-    r=httpx.get(url)
+    r=requests.get(url)
     response= r.json()
     news = []
     for i in response:
@@ -620,7 +620,7 @@ def maintenance():
     if request.method == 'POST':
         if form.validate_on_submit():
             print("firing form")
-            # httpx.post('prestoghana.com/sendMail')
+            # requests.post('prestoghana.com/sendMail')
             flash('Your message has been submitted successfully.','success')
         else:
             print(form.errors) 
@@ -631,7 +631,7 @@ def maintenance():
 def wppost(id):
     # Get URL
     url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
-    r=httpx.get(url)
+    r=requests.get(url)
     content= r.json()["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
@@ -640,7 +640,7 @@ def wppost(id):
 def wppostbyslug(slug):
     # Get URL
     url=wpUrl+"/posts/"+slug
-    r=httpx.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug="+slug)
+    r=requests.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug="+slug)
     content=r.json()[0]["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
@@ -650,7 +650,7 @@ def wpgallery(id):
     images = []
     # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
     url = wpUrl+"/media?author="+str(id)
-    r= httpx.get(url)
+    r= requests.get(url)
 
     response = r.json()
     
@@ -693,7 +693,7 @@ def schoolpage(slug):
     # find category by name
     print("Finding Category By Name")
     url = wpUrl+"/categories?slug="+str(slug)
-    subdepartments = httpx.get(url).json()
+    subdepartments = requests.get(url).json()
     
     lecturers = []
     adminStaff = []
@@ -780,7 +780,7 @@ def alumni():
 def returnPostsUnderCategoryId(id):
     per_page = 20
     print("Fetching Posts Under Category: " + str(id))
-    posts = httpx.get(wpUrl+"/posts?categories="+str(id)+"&per_page="+str(per_page))
+    posts = requests.get(wpUrl+"/posts?categories="+str(id)+"&per_page="+str(per_page))
     posts = posts.json()
 
     pprint.pprint(posts)
@@ -806,11 +806,11 @@ def returnPostsUnderCategoryId(id):
 
 
 def returnTags(id, categoryName):
-    response = httpx.get(wpUrl+"/categories?parent="+str(id))
+    response = requests.get(wpUrl+"/categories?parent="+str(id))
     print("Returning categories under parent category "+str(id) + str(categoryName))
     print(response)
     print("-----------------")
-    posts = httpx.get(wpUrl+"/posts?categories="+str(id))
+    posts = requests.get(wpUrl+"/posts?categories="+str(id))
     posts = posts.json()
     print("posts")
     allposts = []
@@ -921,7 +921,7 @@ def corporate():
 #     allposts = returnTags(id, "library")["posts"]
 
     # # getByCategory=About
-    # posts = httpx.get(wpUrl+"/posts?categories=19")
+    # posts = requests.get(wpUrl+"/posts?categories=19")
     # posts = posts.json()
     # print("posts")
     # allposts = []
