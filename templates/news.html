@@ -235,7 +235,7 @@
     // Backend values passed to the frontend
     const allPages = '{{totalPages}}'/* value from the backend */;
     let currentPage = '{{page}}'/* value from the backend */;
-    const itemsPerPage = 10/* value from the backend */;
+    const itemsPerPage = '{{per_page}}'/* value from the backend */;
 
     totalPages = parseInt(allPages)
     currentPage = parseInt(currentPage)
@@ -270,7 +270,7 @@
         console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
 
         if (currentPage > 1) {
-            window.location.href = "/news?page="+nextPage;
+            window.location.href = "?page="+nextPage;
             // showPage(currentPage - 1);
         }
     }
@@ -280,7 +280,7 @@
         console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
 
         if (currentPage < totalPages) {
-            window.location.href = "/news?page="+nextPage;
+            window.location.href = "?page="+nextPage;
             // showPage(currentPage + 1);
         }
     }
