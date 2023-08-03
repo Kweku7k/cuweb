@@ -553,20 +553,24 @@ def lecturersByDepartment(department):
     # Get URL
     id = lecturerId
     per_page=10
-    url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&categories="+str(id)+"&per_page="+str(per_page)
-    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    url=baseWpUrl+"/wp-json/wp/v2/posts?page="+str(page)+"&parent="+str(id)+"&categories="+str(department)+"&per_page="+str(per_page)
     r=requests.get(url)
     response= r.json()
+    pprint.pprint("-------------")
+    pprint.pprint(response)
+    pprint.pprint("-------------")
     print("response.headers")
     print(r.headers)
     totalPages = (r.headers.get("x-wp-totalpages"))
     news = []
     for i in response:
-        article = {}
-        article["id"] = i["id"]
-        article["image"] = getImageUrl(i["featured_media"])
-        article["title"] = i["title"]["rendered"]
-        news.append(article)
+        # if find_in_array(i["categories"], id) and find_in_array(i["categories"], department):
+        if find_in_array(i["categories"], id):
+            article = {}
+            article["id"] = i["id"]
+            article["image"] = getImageUrl(i["featured_media"])
+            article["title"] = i["title"]["rendered"]
+            news.append(article)
     print(news)
     return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page)
 
@@ -574,7 +578,7 @@ def lecturersByDepartment(department):
 @app.route('/events')
 def events_view():
     news = getEvents()
-    return render_template('news.html', news=news , totalPages=1, page=1, per_page=10)
+    return render_template('news.html', news=news , totalPages=1, page=1, per_page=10, title="Upcoming Events")
 
 
 def getEvents():
@@ -737,7 +741,9 @@ def schoolpage(slug):
         return "Not found."
 
 
-    return render_template('schoolpage.html', url=wppost, image=imageUlr, departments=departments, adminStaff=adminStaff, lecturers=lecturers)
+    print("CategoryId: " + str(categoryId))
+
+    return render_template('schoolpage.html', url=wppost, image=imageUlr, departments=departments, adminStaff=adminStaff, lecturers=lecturers, categoryId=str(categoryId))
 
 
 def find_in_array(arr, target_char):
