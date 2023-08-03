@@ -1817,6 +1817,14 @@ section {
   color: #ca181e;
 }
 
+
+.flex-row {
+  flex: 1;
+  border: 1px solid #ccc;
+  padding: 10px;
+  text-align: center;
+}
+
 /*--------------------------------------------------------------
 # Frequently Asked Questions
 --------------------------------------------------------------*/

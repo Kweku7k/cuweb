@@ -23,31 +23,32 @@
         <br/>
         <br/>
 
-        <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
+        <div style="display: flex; align-items: center; justify-content: center;">
             <div class="line" style="width: 50px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
             <h3 style="padding-top: 3px; font-weight: 600;">DEPARTMENTS</h3>
             <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
         </div>
 
         <!-- DEPARTMENTS -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-center" style="margin-top: 2vh;">
             
             {% for article in departments %}
-            <div class="col-md-3 col-6"  style="margin-bottom: 20px;">
+            <div class="col-md-3">
                 <a href="/expand/{{article.id}}" style="text-decoration: none;">
-                    <div class="card"  style="flex-grow: 1;">
-                        <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
-                    <div class="card-body">
-                        <!-- <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> {{article.id}}</b></h6>
-                        </div> -->
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
+                    <div class="card"  style="flex-grow: 1; margin-bottom: 20px;">
+                        <img class="card-img-top" src="{{article.image}}" width="100%" height="200px" style="object-fit: cover;" alt="Card image cap">                
+                        <div class="card-body">
+                            <!-- <div class="card-title" style="display: flex;">
+                                <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
+                                <h6 class="text-muted category"><b> {{article.id}}</b></h6>
+                            </div> -->
+                            <p class="card-text" style="font-size: 16px Butler; color: #111111;"><b>{{article.title}}</b></p>
                         </div>
+                          
                        
-                        </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
+            </div>
             {% endfor %}
             
 
@@ -57,17 +58,14 @@
           
 
         <br/>
-        <br/>
-        <br/>
-        <br/>
-
-        <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
+        
+        <div style="display: flex; align-items: center; justify-content: center;">
             <div class="line" style="width: 50px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
             <h3 style="padding-top: 3px; font-weight: 600;">ADMINSTRATIVE STAFF</h3>
             <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
         </div>
          <!-- LECTURERS -->
-         <div class="row justify-content-center">
+         <div class="row justify-content-center" style="margin-top: 2vh;">
             
             {% for article in adminStaff %}
             <div class="col-md-3 col-6"  style="margin-bottom: 20px;">
@@ -94,9 +92,6 @@
        
 
         <br/>
-        <br/>
-        <br/>
-        <br/>
 
         <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
             <div class="line" style="width: 50px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
@@ -104,10 +99,10 @@
             <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
         </div>
          <!-- LECTURERS -->
-         <div class="row justify-content-center">
+         <div class="row justify-content-center" style="margin-top: 2vh;">
             
             {% for article in lecturers %}
-            <div class="col-md-3 col-6"  style="margin-bottom: 20px;">
+            <div class="col-md-3 col-6"  style="margin-top: 20px;">
                 <a href="/expand/{{article.id}}" style="text-decoration: none;">
                     <div class="card"  style="flex-grow: 1;">
                         <img class="card-img-top" src="{{article.image}}" width="200px" height="200px" style="object-fit: cover; object-position: center;" alt="Card image cap">                
@@ -119,7 +114,7 @@
                     </a>
                 </div> 
             {% endfor %}
-            <a style="display: flex; justify-content: space-around; align-items: center;" href="/lecturers/{{categoryId}}">
+            <a style="display: flex; justify-content: space-around; align-items: center;" href="/lecturers/{{categoryId}}?page=2">
                 <button class="pill-button">Load More</button>
             </a>
           
