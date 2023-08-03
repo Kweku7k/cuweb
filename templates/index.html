@@ -50,6 +50,7 @@
   <main id="main">
     <!-- caurosel-->
     <section>
+      <a href="{{url_for('online')}}">
       <div class="container-fluid" style="width: 100%; height: auto;">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -97,6 +98,7 @@
           </button>
         </a> -->
       </div>
+    </a>
     </section>
     <!--End of Caurosel  -->
 
@@ -197,7 +199,7 @@
     <section>
       <div class="container">
         <div class="row">
-          <div class="col-md-8" style="padding-bottom: 5vh;">
+          <div class="col-md-8" style="height: 500px;">
             <div class="section-title">
               <h2>Upcoming News</h2>
             </div>
@@ -205,7 +207,7 @@
               <a href="/events">
               <div class="single_event position-relative">
                 <div class="event_thumb">
-                    <img src={{events.image}} width="100" height="300px" alt="" style="object-fit: contain;"/>
+                    <img src={{events.image}} width="100%" alt="" style="object-fit: contain;"/>
                 </div>
                 <!-- <div class="event_details">
                     <div class="d-flex mb-4">
@@ -225,12 +227,12 @@
           </div>
           <div class="col-md-4">
             <div class="section-title">
-              <h2>Latest News</h2>
+              <h2>Social Media</h2>
             </div>
               <!-- Latest news content goes here -->
               <!-- <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fcentraledugh%2Fposts%2Fpfbid0KEEEpG1QurjRiKoFtPGM9YiaAFcicDTvY6MrcuSpGxziHKUwfH7DgqERd5s12VDel&show_text=true&width=500" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
               <!-- <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcentraledugh%2F&amp;tabs=timeline&amp;width=400&amp;height=600&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=215976095088446" width="500 !important" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
-              <div class="fb-page" data-href="https://www.facebook.com/centraledugh" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/centraledugh" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/centraledugh">Central University</a></blockquote></div>
+              <div class="fb-page" data-href="https://www.facebook.com/centraledugh" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/centraledugh" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/centraledugh"> Please wait while we load Central Univeristy Feed</a></blockquote></div>
             </div>
         </div> 
       </div>
@@ -294,7 +296,7 @@
     </section>End Portfolio Section -->
 
     <!-- ======= Testimonials Section ======= -->
-    <section id="testimonials" class="testimonials" style="padding-top: 30px;">
+    <section id="testimonials" class="testimonials">
       <div class="container">
 
         <div class="section-title">

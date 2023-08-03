@@ -544,6 +544,14 @@ def lecturers():
     return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page)
 
 
+def getCategoryInformation(categoryId):
+    url = wpUrl+"/categories/"+str(categoryId)
+    print(url)
+    response = requests.get(url).json()
+    print("------getCategoryData------")
+    pprint.pprint(response)
+    print("------endGetCategoryData------")
+    return response
 
 @app.route('/lecturers/<string:department>')
 def lecturersByDepartment(department):
@@ -572,7 +580,11 @@ def lecturersByDepartment(department):
             article["title"] = i["title"]["rendered"]
             news.append(article)
     print(news)
-    return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page)
+
+    category = getCategoryInformation(department)
+    categoryTitle = category["name"]
+
+    return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page, title=categoryTitle)
 
 
 @app.route('/events')
