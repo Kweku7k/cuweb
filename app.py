@@ -571,9 +571,12 @@ def lecturersByDepartment(department):
     return render_template('news.html', news=news, totalPages=totalPages, page=page, per_page=per_page)
 
 
-
-
 @app.route('/events')
+def events_view():
+    news = getEvents()
+    return render_template('news.html', news=news , totalPages=1, page=1, per_page=10)
+
+
 def getEvents():
     # Get URL
     url=baseWpUrl+"/wp-json/wp/v2/posts?categories="+str(eventsId)
@@ -591,7 +594,6 @@ def getEvents():
         events.append(article)
     print(events)
     return events
-    # return render_template('gallery.html', gallery=gallery)
 
 
 @app.route('/gallery')
