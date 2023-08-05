@@ -214,6 +214,7 @@ def user_loader(user_id):
 def home():
     form = ContactForm()
     gallery = wpgallery(5)
+    supportGallery = wpgallery(6)
     events = getEvents()[0]
     print("------------------events------------------")
     print(events)
@@ -241,7 +242,7 @@ def home():
         else:
             print(form.errors)
 
-    return render_template('index.html',hideNav=False, form=form, gallery=gallery, events=events)
+    return render_template('index.html',hideNav=False, form=form, gallery=gallery, events=events, supportGallery=supportGallery)
 
 # def payWithPresto():
 #     requests.get('prestoghana.com/pay')
@@ -631,19 +632,19 @@ def gallery():
     print(news)
     return render_template('gallery.html', gallery=gallery)
 
-@app.route('/', methods=['GET', 'POST'])
-def maintenance():
-    form = ContactForm()
+# @app.route('/maintenance', methods=['GET', 'POST'])
+# def maintenance():
+#     form = ContactForm()
 
-    if request.method == 'POST':
-        if form.validate_on_submit():
-            print("firing form")
-            # requests.post('prestoghana.com/sendMail')
-            flash('Your message has been submitted successfully.','success')
-        else:
-            print(form.errors) 
+#     if request.method == 'POST':
+#         if form.validate_on_submit():
+#             print("firing form")
+#             # requests.post('prestoghana.com/sendMail')
+#             flash('Your message has been submitted successfully.','success')
+#         else:
+#             print(form.errors) 
             
-    return render_template('maintenance.html',hideNav=True, form=form)
+#     return render_template('maintenance.html',hideNav=True, form=form)
 
 @app.route('/wppost/<string:id>')
 def wppost(id):
