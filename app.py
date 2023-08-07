@@ -15,9 +15,10 @@ import string
 import pprint
 
 app=Flask(__name__)
-baseUrl = "http://online.central.edu.gh"
+baseUrl = "https://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
 prestoBot = "5876869228:AAFk644pEKRBnEhZ6jbG2nXRlj4fsyZEYgg"
+prestoUrl = "https://prestoghana.com"
 # centralAlertChannel = "-1001976261666"
 
 app.config['UPLOAD_FOLDER']='Documents'
@@ -229,7 +230,7 @@ def home():
                 message = "From: " + form.name.data + "\nPhone: " + form.number.data + "\nMessage: " + form.message.data
                 print("message")
                 print(message)
-                prestoUrl = 'https://sandbox.prestoghana.com'
+                prestoUrl
                 r = requests.get(prestoUrl+'/sendPrestoMail?recipient=info@central.edu.gh&subject='+form.name.data+'&message='+message)
                 print(r.url)
                 flash('Hi, ' + form.name.data +' your message has been submitted successfully.','success')
