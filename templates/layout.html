@@ -64,6 +64,8 @@
 
 <body>
   <br/>
+  <br>
+  <br>
   {% with messages = get_flashed_messages() %}
     {% if messages %}
         <div class="container">
@@ -173,7 +175,7 @@
   </div>
  </header>
 
-<div class="container">
+<!-- <div class="container">
   {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     {% for category, message in messages %}
@@ -183,8 +185,8 @@
     {% endfor %}
   {% endif %}
 {% endwith %}
-</div>
-<br/>
+</div> -->
+<!-- <br/> -->
 {% block body %}
 
 {% endblock %}
