@@ -227,7 +227,7 @@ def home():
         if form.validate_on_submit():
             print("firing form")
             try:
-                message = "From: " + form.name.data + "\nPhone: " + form.number.data + "\nMessage: " + form.message.data
+                message = "From: " + form.name.data + "\nPhone: " + form.number.data + "\nEmail: " + form.email.data + "\nMessage: " + form.message.data
                 print("message")
                 print(message)
                 prestoUrl
@@ -887,6 +887,16 @@ def international():
     id=15
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template('library-dynamic.html',id=startingPoint,tags=alltags, allposts=allposts)
+
+@app.route('/cirp')
+def cirp():
+    id=102
+    alltags = returnTags(id, "cirp")["tags"]
+    allposts = returnTags(id, "cirp")["posts"]
     print("allposts being returned")
     print(allposts)
     startingPoint = alltags[0]["id"]
