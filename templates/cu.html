@@ -5,12 +5,11 @@
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row gy-5" style="padding-top: 3vh;" >
-        <div class="col-lg-6 order-1 order-lg-1 text-left">
+        <div class="col-lg-6 order-1 order-lg-1 text-left" style="padding-top: 5vh;">
           <h6>Central University </h6>
           <h3 style="margin: 20px 0; font-weight: bold;">COUNSELLING AND CAREER SERVICES CENTRE</h3>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
-          <h5 class="text-muted">Central University has established the Counselling and Career Services at <strong>Academic Block C Ground Floor
-            C03/C05</strong> 
+          <h5 class="text-muted" style="text-align: justify;">Central University has established the Counselling and Career Services  
             Centre with the mandate to promote a healthy campus environment and
             enhance student learning. The Centre is to help both students and staff to
             deal with psychosocial barriers to success and personal wellbeing and
@@ -18,9 +17,11 @@
           <br/>
           <div class="d-flex">
 
-            <a href="mailto:careers@central.edu.gh">
-              <button id="myBtn" class="pill-button" style="width: fit-content;">Contact Us</button>
-            </a>
+            
+            <button id="myBtn" class="pill-button" style="width: fit-content;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Contact Us</button>
+            
+
+            
             <a href="https://prestoghana.com/donate/CuCare">
               <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Donate Now</button>
             </a>
@@ -28,10 +29,18 @@
         </div>
        
         <div class="col-lg-6 order-2 order-lg-2">
-            <img style="width:110%; object-fit:cover ;" src="{{ url_for ("static", filename="img/donation.png")}}" alt="" srcset="">
+            <img style="width:110%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cuc2.jpg")}}" alt="" srcset="">
         </div>
       </div>
-      <div class="row icon-boxes">
+      <div class="row icon-boxes" style="margin-bottom: 2vh;">
+        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-palette-line"></i></div>
+            <h4 class="title"><a href="#">Guidance and Counselling</a></h4>
+            <h6 class="description">"A counseling program provides guidance and support for individuals to improve their mental and emotional well-being."</h6>
+          </div>
+        </div>
+
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
           <div class="icon-box">
             <div class="icon"><i class="ri-stack-line"></i></div>
@@ -40,13 +49,6 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-palette-line"></i></div>
-            <h4 class="title"><a href="#">Guidance and Counselling</a></h4>
-            <h6 class="description">"A counseling program provides guidance and support for individuals to improve their mental and emotional well-being."</h6>
-          </div>
-        </div>
 
         <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
           <div class="icon-box">
@@ -79,15 +81,15 @@
                     <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ca181e;"></div>
                     <div style="color: #333; font-size: 20px;">Our Statement</div>
                 </div>
-                <h4 style="font-size: 22px; margin-bottom: 3vh; color: #333;"><b>Our Vision</b> is to be an effective Counselling and Career Services provider for staff and students of the Central University and its surrounding communities.</h4>
-                <h4 style="font-size: 22px; margin-bottom: 3vh; color: #333;"><b>Our Mission</b> is to provide guidance, counselling and career services that enhance personal and professional development and employability nationally and globally. We support student recruitment, enrolment, retention, graduation and transition into the world of work by helping to deal with the issues which affect student success and employability.</h4>
+                <h4 style="font-size: 20px; margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Vision</b> is to be an effective Counselling and Career Services provider for staff and students of the Central University and its surrounding communities.</h4>
+                <h5 style=" margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Mission</b> is to provide guidance, counselling and career services that enhance personal and professional development and employability nationally and globally. We support student recruitment, enrolment, retention, graduation and transition into the world of work by helping to deal with issues which affect student success and employability.</h5>
               
               <br>
               <div class="pill-button" style="width: fit-content; margin-bottom: 2vh;">Learn More !</div>
             </div>
             <div class="col-md-6">
               <div class="imgContainer">
-                <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto"> 
+                <img src="{{url_for ("static", filename="img/cuc.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto"> 
               </div>
             </div>
         </div>
@@ -117,7 +119,7 @@
               </svg>
               <i class="bx bx-book"></i>
             </div>
-            <h4><a href="">Support Life-Changing Scholarship </a></h4>
+            <h4><a href="">Alumni Engagement </a></h4>
             <p>Empowering individuals to pursue education and opportunities that can profoundly transform their future prospects and positively impact society.</p>
           </div>
         </div>
@@ -130,7 +132,7 @@
               </svg>
               <i class="bx bx-leaf"></i>
             </div>
-            <h4><a href="">Support Research </a></h4>
+            <h4><a href="">Sudent care and emergency resource funds </a></h4>
             <p>Providing resources, funding, and encouragement to advance scientific and academic investigations, ultimately promoting innovation and knowledge expansion</p>
           </div>
         </div>
@@ -143,7 +145,7 @@
               </svg>
               <i class="bx bx-cog"></i>
             </div>
-            <h4><a href="">Support Specific Area</a></h4>
+            <h4><a href="">Success Ambassadors</a></h4>
             <p>Providing targeted assistance or resources to address a particular areas, topic, or aspect of a broader context.</p>
           </div>
         </div>
@@ -354,6 +356,29 @@
 
     </div>
   </section><!-- End Testimonials Section -->
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><b>Reach Counselling and Career Services at:</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5><b>Email:</b><a href="mailto:careers@central.edu.gh"> careers@central.edu.gh</a></h5>
+        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 208816822/+233 598574577 </h5>
+        <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="background: #ca181e; border: none;" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+      </div>
+    </div>
+  </div>
+</div>
 
 
 {% endblock %}
