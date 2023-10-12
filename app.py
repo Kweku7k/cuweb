@@ -858,7 +858,7 @@ def library():
     print("allposts being returned")
     print(allposts)
     startingPoint = alltags[0]["id"]
-    return render_template('library-dynamic.html',tags=alltags, id=startingPoint, allposts=allposts)
+    return render_template('library.html',tags=alltags, id=startingPoint, allposts=allposts)
 
 @app.route('/about')
 def about():

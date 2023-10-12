@@ -493,6 +493,16 @@ button{
   position: relative;
 }
 
+.hero8 {
+  width: 100%;
+  height: 55vh;
+  position: relative;
+  background: url("../img/about2.jpeg") top center;
+  background-size: cover;
+  position: relative;
+  object-fit: cover;
+}
+
 --------------------------------------------------------------*/
 #blankHero {
   width: 100%;

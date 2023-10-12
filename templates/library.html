@@ -1,123 +1,53 @@
 {% extends "layout.html" %}
+
 {% block body %}
 
-<section class="hero6" style=" padding-top:18vh;">
-    <div cllass="container-fluid">
-         
+<section class="hero8" style="padding-top: 15vh; height: 45vh;">
         
-    </div>
-    <div>
-        <div class="header-text text-center" style="padding-top: 100px;">
-            <div data-aos="fade-up"
-            data-aos-duration="500">
-              <h2 style="color: #fff; font-size: 35px; font-weight: 900; margin-bottom: 0;">Library</h2>
-            </div>
-            
-            
-          </div>
-       </div>
 </section>
 
- <!-- ======= About Video Section ======= -->
- <section id="about" class="about-video" style="padding: 10vh 0;">
-    <div class="container" data-aos="fade-up">
-      
-
-      <div class="row">
-        <div class="col">
-          <div style="display: flex; align-items: center; margin-bottom: 3vh;">
-            <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ff4a17;"></div>
-            <div class="text"><b> ABOUT LIBRARY</b></div>
-          </div>
-          
-          <h5 style="padding-left: 5px;">The Central University Library was set up to provide the informational and research needs of the University community. Knowledge is said to connote power, and the mission of a library is to package this knowledge in a way that can be easily accessible to support teaching, research, give information and to entertain. Since the Vision of the University is to train transformational leaders, the Library provides accurate, current, relevant and timely information to empower users. The Library presently has staff strength of 20, made up of 7 professionals, 7 sub professionals and 6 others.</h5>
-          <br>
-            <h5>A higher percentage of the Library’s collection is funded from the University’s budget.  However, we receive donations from donors’ both in Ghana and abroad.  We also have E-Journal services by our membership to the Consortium for Academic and Research Libraries in Ghana (CARLIGH), E-book Service and an Electronic Catalogue both built in-house and powered by the Destiny Library Manager’s Software.</h5>
-            
-        </div>
-       
-      </div>
-
-      <div style="padding-top: 7vh;">
-
-        <h5>
-            Central University currently has seven (7) libraries, stocking mostly books on programmes being run at the various campuses.  The libraries are as follows:
-        </h5>
-        <br>
-        <table class="table table-bordered">
-            <thead>
-              <tr>
-                <th scope="col-1">S/N</th>
-                <th scope="col-md-5">NAME OF LIBRARY</th>
-                <th scope="col-md-5">LOCATION OF LIBRARY</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>School of Architecture and Design Library (SAD)</td>
-                <td>First floor of the Central Plaza, Miotso</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Faculty of Law Library</td>
-                <td>Ground floor of the Central Plaza, Miotso</td> 
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Business and Social Science Library	</td>
-                <td>First floor of Kanda Block, Miotso</td> 
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>School of Graduate Studies Library</td>
-                <td>The International Central Gospel Church, Christ Temple, Abossey Okai</td> 
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Mataheko Library	</td>
-                <td>Mataheko Campus, off First Light, Kaneshie</td> 
-              </tr>
-              <tr>
-                <th scope="row">6</th>
-                <td>Kumasi Library</td>
-                <td>Within the premises of Calvary Charismatic Centre (CCC), Kumasi</td> 
-              </tr>
-              
-            </tbody>
-          </table>
-      </div>
-
-    </div>
-  </section>
-
-    <div class="container">  
+<section>
+    <div class="container">
         <div class="row">
-            <div class="col">
-                <div style="display: flex; align-items: center; margin-bottom: 3vh;">
-                <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ff4a17;"></div>
-                <div class="text"><b> VISSION STATEMENT</b></div>
-                </div>
-                
-                <h5 style="padding-left: 5px;">To strive for excellence in the provision of quality, relevant, current and timely information to raise transformational leaders.</h5>
-                
-            </div>
-            
-        </div>
+          <div class="col-md-8 text-justify order-1 order-lg-1" style="padding: 0 0 7px 7px;">
+            <div class="tab-content" id="pills-tabContent" style="padding: 0 7px;">
+              <!-- JS IS INJECTED -->
+            </div>    
+          </div>
 
-        <div class="row" style="padding-top: 5vh;">
-            <div class="col">
-                <div style="display: flex; align-items: center; margin-bottom: 3vh;">
-                <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ff4a17;"></div>
-                <div class="text"><b> MISSION STATEMENT</b></div>
-                </div>
-                
-                <h5 style="padding-left: 5px;">To pursue excellent modern practices to source, preserve, disseminate and apply information in support of learning, teaching and research.</h5>
-                
-            </div>
-            
+          <div class="col-md-4 order-1 order-lg-2">
+            <ul class="nav nav-pills mb-3 list-group list-group-flush" id="pills-tab" role="tablist">
+              {% for tag in tags %}
+                {% if loop.index == 1 %}
+                  <li class="nav-item list-group-item" role="presentation">
+                    <button class="nav-link side-nav active activate" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
+                  </li>
+                {% else %}
+                  <li class="nav-item list-group-item" role="presentation">
+                    <button class="nav-link side-nav" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
+                  </li>
+                  {% endif %}
+              {% endfor %}  
+              </ul>
+          </div>
+                    
         </div>
     </div>
-  </div>
+</section>
+
+<script>
+const tagid = {{id}}
+const allwpposts = {{allposts|safe}}
+const tableRows = allwpposts.map((item, index) =>  `   
+          <div class="tab-pane fade ${item.id == tagid ? 'show active' : ''} " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
+            <h1>${item.title}</h1>
+            ${item.content}
+          </div>
+          `).join('');
+console.log("tableRows")
+console.log(tableRows)
+document.getElementById('pills-tabContent').innerHTML = tableRows;
+ 
+</script>
 
 {% endblock %}
