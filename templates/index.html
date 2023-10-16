@@ -551,10 +551,78 @@
         </div>
       </section>
     <!-- End of Contact Us Section   -->
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="padding: 23px;">
+          <div class="modal-body">
+            <header>
+              <h5 style="color: #ca1e18;"><i class="bx bx-cookie"></i> <b>Cookies Consent</b></h5>
+            </header>
+
+            <h6>We use cookies to improve site functionality, analyse site traffic, and enhance user experience. By clicking "Accept" you agree to this cookie use. <a href="/privacypolicy" style="color:#ca1e18;">Read our cookie policy</a>.</h6>
+            
+            <div style="display: flex; justify-content: flex-end; align-items: flex-end;">
+              <button class="pill-button"  id="acceptBtn" data-bs-dismiss="modal" style="padding: 10px 13px; border-radius: 3px;">Accept</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+   
+
+
 
   </main><!-- End #main -->
 
+  <script>
+    // Function to set a cookie with an expiration time
+    function setCookie(cname, cvalue, hours) {
+      var d = new Date();
+      d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
 
+    // Function to check if the cookie exists
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Function to close the modal and set the cookie on "Accept"
+    function acceptAndClose() {
+      var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+      modal.hide(); // Close the modal
+      setCookie("cookieAccepted", "true", 2); // Set the cookie for 2 hours
+    }
+
+    // Wait for the document to be fully loaded before executing the code
+    document.addEventListener("DOMContentLoaded", function () {
+      // Check if the "cookieAccepted" cookie exists
+      if (!getCookie("cookieAccepted")) {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show(); // Show the modal
+      }
+    });
+
+    // Add event listener for the "Accept" button
+    document.getElementById("acceptBtn").addEventListener("click", acceptAndClose);
+  </script>
 
 <!-- <script>
   const tagid = {{id}}
@@ -570,5 +638,6 @@
   document.getElementById('pills-tabContent').innerHTML = tableRows;
    
   </script> -->
+
 
   {% endblock %}
