@@ -3,25 +3,71 @@
 
 <div class="container" style="margin-top: 1vh;">
     <div style="padding: 18px;">
-        <form action="">
+        <form method="post">
             <div class="progress" style="height: 5px; margin-bottom: 3vh;">
                 <div class="progress-bar bg-primary" role="progressbar" width="100" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
+
+            {{form.hidden_tag()}}
+
+            <label for="image-picker">
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    {% if userdata.picture %}
+                    <img id="image-preview" style="width: 100%; object-fit:contain" src={{userdata.picture}}/>
+                    {% else %}
+                    <div class="ellipse" style="margin-top: 3vh;">
+                        <img id="image-preview" width="100" style="border-radius: 50%; object-fit:contain" src="{{url_for('static', filename='img/testimonials/kweku.jpg')}}" alt="your image" />
+                    </div>
+                    {% endif %}
+                </div>      
+                <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
+            </label>
+        
+            <input style="display:none" id="image-picker" type="file" accept="image/*" />
+
+            <div class="controls" style="display: flex; align-items: center;">
+                <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Photos</button>
+            </div>
+            
+            <br/>
+              
+              
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Add Photos</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <div id="dynamicForm">
+                            <div class="">
+                                <div class="form-floating mb-3">
+                                    {{form.photoname (class="form-control webForm", placeholder="Enter")}}
+                                    {{form.photoname.label}}
+                                </div>
+                                <div class="form-floating mb-3">
+                                    {{form.photofile (class="form-control webForm", placeholder="Enter")}}
+                                    {{form.photofile.label}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
+                      <button type="button" class="pill-button">Add Photos</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
             <!-- <div class="ellipse">
                 <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
             </div> -->
-
-            
-            <div class="form-floating mb-3">
-                {{form.photoname (class="form-control webForm", placeholder="Enter")}}
-                {{form.photoname.label}}
-            </div>
-            <div class="form-floating mb-3">
-                {{form.photofile (class="form-control webForm", placeholder="Enter")}}
-                {{form.photofile.label}}
-            </div>
             
             
             {{form.submit (class="pill-button", style="width:100%", onclick="") }}

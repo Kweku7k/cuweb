@@ -23,6 +23,7 @@ class ContactForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class ApplicantForm(FlaskForm):
+    firebaseLink = StringField('Upload an Image')
     prefix = SelectField('Prefix', choices=[("Mr","Mr"),("Mrs","Mrs",),("Miss","Miss")])
     surname = StringField('Surname', validators=[DataRequired()])
     othername = StringField('Other Name', validators=[DataRequired()])
@@ -69,7 +70,7 @@ class ApplicantExamresult(FlaskForm):
     submit = SubmitField('Next')
     
 class ApplicantContant(FlaskForm):
-    contactrelationship = StringField('Relationship', validators=[DataRequired()])
+    contactrelationship = SelectField('Relationship', choices=[("Mother","Mother"),("Father","Father")])
     contactname = StringField('Name', validators=[DataRequired()])
     contactaddress = StringField('Address', validators=[DataRequired()])
     contactmobile = StringField('Mobile', validators=[DataRequired()])

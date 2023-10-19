@@ -1043,7 +1043,7 @@ def applicantInformation():
         else:
             pass
 
-    return render_template('applicantInformation.html', form=form)
+    return render_template('applicantInformation.html', form=form, userdata=userdata)
 
 
 @app.route('/applicantEducation', methods=['GET', 'POST'])
@@ -1191,16 +1191,20 @@ def applicantExam():
 def faq():
     return render_template('faq.html')
 
-@app.route('/applicantExamresult')
+@app.route('/applicantExamresult', methods=['GET', 'POST'])
 def applicantExamresult():
     form=ApplicantExamresult()
     # check request method
     if request.method=='POST':
+        print("postrequest")
         if form.validate_on_submit:
-            ExamResult
+            # ExamResult
             print("formvalidated")
-        return redirect(url_for('applicationEducation'))
+            return redirect(url_for('applicantcontacts'))
+        else:
+            print(form.errors)
     elif request.method == 'GET':
+        print("getrequest")
         userdata = ExamResult.query.filter_by(usercode = current_user.code).first()
 
         if userdata:
@@ -1211,90 +1215,93 @@ def applicantExamresult():
     return render_template('applicantExamresult.html', form=form)
 
 
-@app.route('/applicantcontacts')
+@app.route('/applicantcontacts', methods=["GET", "POST"])
 def applicantcontacts():
     form=ApplicantContant()
 
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print(form.contactemail.data)
+        else:
+            print(form.errors)
+        return redirect(url_for('applicantattachments'))
+
     # check form validation
     # check errors
     return render_template('applicantcontacts.html', form=form)
 
-@app.route('/applicantattachments')
+@app.route('/applicantattachments', methods=['GET', 'POST'])
 def applicantattachments():
     form=ApplicantAttachment()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            # print(form.email.data)
+            return redirect(url_for('applicantphotos'))
     # check form validation
     # check errors
-    return render_template('applicantattachments.html', form=form)
+    return render_template('applicantattachments.html', form=form, userdata={'name':'None','picture':'lol'})
 
-@app.route('/applicantphotos')
+@app.route('/applicantphotos', methods=['GET', 'POST'])
 def applicantphotos():
     form=ApplicantPhoto()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            # print(form.email.data)
+            return redirect(url_for('applicantanswers'))
     # check form validation
     # check errors
     return render_template('applicantphotos.html', form=form)
 
 
-@app.route('/applicantanswers')
+@app.route('/applicantanswers', methods=['GET', 'POST'])
 def applicantanswers():
     form=ApplicantAnswer()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print("form.email.data")
+            return redirect(url_for('applicantrefrees'))
     # check form validation
     # check errors
     return render_template('applicantanswers.html', form=form)
 
-@app.route('/applicantrefrees')
+@app.route('/applicantrefrees', methods=['GET', 'POST'])
 def applicantrefrees():
     form=ApplicantRefree()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print("form.email.data")
+            return redirect(url_for('applicanthalls'))
     # check form validation
     # check errors
     return render_template('applicantrefrees.html', form=form)
 
 
 
-@app.route('/applicanthalls')
+@app.route('/applicanthalls', methods=['GET', 'POST'])
 def applicanthalls():
     form=ApplicantHall()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print("form.email.data")
+            return redirect(url_for('applicantmisinfos'))
     # check form validation
     # check errors
     return render_template('applicanthalls.html', form=form)
 
 
-@app.route('/applicantmisinfos')
+@app.route('/applicantmisinfos', methods=['GET', 'POST'])
 def applicantmisinfos():
     form=ApplicantMiscellaneousInformation()
     # check request method
     if request.method=='POST':
         if form.validate_on_submit:
-            print(form.email.data)
-        return redirect(url_for('applicationEducation'))
+            print("form.email.data")
+            return "summary"
     # check form validation
     # check errors
     return render_template('applicantmisinfos.html', form=form)

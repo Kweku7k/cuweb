@@ -12,17 +12,63 @@
 <br>
 
                     <div class="controls" style="display: flex; align-items: center;">
-                        <button id="add_more_fields" class="pill-button"> Add Another School</button>
-                        <br/>
+                        <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Another School</button>
                     </div>
-
+                    
+                    <br/>
+                      
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add School</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="dynamicForm">
+                                    <div class="">
+                                        <div class="form-floating mb-3">
+                                            {{form.school (class="form-control webForm", placeholder="Enter your Senior High School")}}
+                                            {{form.school.label}}
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            {{form.start_date (class="form-control webForm")}}
+                                            {{form.start_date.label}}
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            {{form.end_date (class="form-control webForm")}}
+                                            {{form.end_date.label}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
+                              <button type="button" class="pill-button">Add School</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
                     <!-- <div class="ellipse">
                         <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
                     </div> -->
-
+                    <br>
+                    
                     <div id="dynamicForm">
                         <div class="row">
+                            <div class="col-md-4">
+                                <div class="card" style="padding: 20px 12px;">
+                                    <h6 class="text-muted">Boateng</h6>
+                                    <h4>Sankwan shs</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
                             <div class="form-floating mb-3 col-md-4">
                                 {{form.school (class="form-control webForm", placeholder="Enter your Senior High School")}}
                                 {{form.school.label}}
@@ -35,7 +81,7 @@
                                 {{form.end_date (class="form-control webForm")}}
                                 {{form.end_date.label}}
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     </div>
 
