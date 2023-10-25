@@ -816,6 +816,10 @@ section {
 .carousel-item {
   overflow: hidden;
 }
+
+select{
+  padding: 20px;
+}
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
@@ -1028,8 +1032,15 @@ section {
   width: fit-content;
   }
 
+.full{
+  width: 100%;
+}
 
-.pill-button:hover {
+.full:hover{
+  width: 100%;
+}
+
+/* .pill-button:hover {
   background-color: #ca181e;
   font: 'Poppins',sans-serif;
   border: none;
@@ -1041,7 +1052,12 @@ section {
   font-weight: bold;
   transition: width 2s;
   width: fit-content;
-  }
+  } */
+
+.flexRow{
+  display: flex;
+  justify-content: space-between;
+}
 
 .pill-button-alternate{
   background-color: #ca181e;

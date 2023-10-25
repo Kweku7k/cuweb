@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-0PK8SXFW8Q"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-0PK8SXFW8Q');
+</script>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Central University</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="T2FyoL8J"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <!-- <script>
+    $('.carousel').carousel({
+  interval: 2000
+})
+  </script> -->
+  <!-- Favicons -->
+  <!-- <link href="assets/img/fav.png" rel="icon"> -->
+  <link href="{{url_for('static', filename="img/fav.png")}}" rel="icon">
+
+  <!-- <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon"> -->
+  <link href="{{url_for('static', filename="img/fav.png")}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <!-- Vendor CSS Files -->
+  <!-- <link href="assets/vendor/aos/aos.css" rel="stylesheet"> -->
+  <link href="{{url_for('static', filename="vendor/aos/aos.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/bootstrap/css/bootstrap.min.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/bootstrap-icons/bootstrap-icons.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/boxicons/css/boxicons.min.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/glightbox/css/glightbox.min.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/remixicon/remixicon.css")}}" rel="stylesheet">
+  <link href="{{url_for('static', filename="vendor/swiper/swiper-bundle.min.css")}}" rel="stylesheet">
+  <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
+
+  <!-- Template Main CSS File -->
+  <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
+  <link href="{{url_for('static', filename="css/style.css")}}" rel="stylesheet">
+
+  {% block head %}
+  {% endblock %}
+
+</head>
+
+<body style="padding-top:15vh ;">
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- ======= Header ======= -->
+ <header id="header" class="sticky-top" style="background: #fff;">
+  <div class="container-fluid d-flex align-items-center justify-content-between"> 
+
+    {% if hideNav == True %}
+
+    <a href="{{url_for('home')}}">
+      <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+    </a>
+    
+    {% else %}
+
+      <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
+    <a href="{{url_for('home')}}">
+        <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+      </a>
+    {% endif %}
+
+    <nav id="navbar" class="navbar navbar-light ">
+
+      <ul>
+
+        {% if hideNav != True %}
+        <a class="nav-link scrollto" href="{{url_for('home')}}"><li>Home</li></a>
+        <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News</li></a>
+        <a class="nav-link scrollto" href="{{url_for('about')}}"><li>About CU</li></a>
+
+        <a href="#" class="nav-link scrollto"style="padding-left: 15px;">
+          <li class="dropdown">Student Resources <i class="bi bi-chevron-down dropdown-indicator"></i>
+            <ul>
+              <a class="nav-link scrollto" href="https://vcampus.central.edu.gh"><li>Online Learning(VCAMPUS) </li></a>
+              <a class="nav-link scrollto" href="https://osissip.osis.online"><li>Student Information Portal(SIP) </li></a>
+              <a class="nav-link scrollto" href="http://sfp.central.edu.gh"><li>Fees Portal(SFP) </li></a>
+              <a class="nav-link scrollto" href="https://eligibility.central.edu.gh/"><li>Eligibility </li></a>
+              <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2023/08/Students-Handbook2018FINAL-2.pdf"><li>Student HandBook </li></a>
+              <a class="nav-link scrollto" href="https://secure.theclearinghub.com/"><li>Clearing Hub </li></a>
+              
+            </ul>
+          </li>
+        </a>
+        
+        <a href="#" class="nav-link scrollto"style="padding-left: 15px;">
+          <li class="dropdown">Schools <i class="bi bi-chevron-down dropdown-indicator"></i>
+            <ul>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sop')}}"><li>Pharmacy </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='facultyoflaw')}}"><li>Law </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='somah')}}"><li>Medical Sciences </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='snm')}}"><li>Nursing and Midwifery</li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='soeat')}}"><li>Engineering & Technology </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='fass')}}"><li>Social Sciences </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>Architecture </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Business </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sogs')}}"><li>Graduate School </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CDPE </li></a>
+            </ul>
+          </li>
+        </a>                                                                          
+
+
+        <!-- <a class="nav-link scrollto" href="{{url_for('schools')}}" ><li>Schools </li></a> -->
+        <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library </li></a>
+        <a href="#" class="nav-link scrollto"style="padding: 0 15px;">
+          <li class="dropdown">More <i class="bi bi-chevron-down dropdown-indicator"></i>
+            <ul>
+              <a class="nav-link scrollto" href="{{url_for('international')}}"><li>Programmes </li></a>
+              <a class="nav-link scrollto" href="{{url_for('cirp')}}"><li>International Relations </li></a>
+              <!-- <a class="nav-link scrollto" href="{{url_for('cu')}}" ><li>Counselling & Career Services </li></a> -->
+              <!-- <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library </li></a> -->
+              <a class="nav-link scrollto" href="{{url_for('alumni')}}"  ><li>Alumni </li></a>
+              <a class="nav-link scrollto" href="{{url_for('admissions')}}"><li>Admissions</li></a>
+              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
+              <a class="nav-link scrollto" href="{{url_for('research')}}"><li>Research </li></a>
+              <a class="nav-link scrollto" href="{{url_for('corporate')}}"><li>Corporate </li></a>
+            </ul>
+          </li>
+        </a>
+
+        {% endif %}
+        
+
+        
+        <a href="{{url_for('online')}}" target="_blank">
+          <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
+            Profile Summary
+          </button>
+        </a>
+        
+      </ul>
+      
+      <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+
+    
+  </div>
+ </header>
+
+<div class="container">
+
+  <div class="flexRow">
+    <div>  
+      <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      {{Back}}
+    </div>
+    <div>
+      Next
+      <i class="fa fa-arrow-right" aria-hidden="true"></i>
+    </div>
+
+  </div>
+    <!-- <h1>Title</h1> -->
+    <h4 >{{formtitle}}</h4>
+    <h6 class="text-muted">{{formdescription}}</h6>
+    <div class="progress" style="height: 5px;">
+        <div class="progress-bar bg-primary" role="progressbar" style="width:{{percentage}}%;"
+        aria-valuenow={{percentage}} aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+</div>
+{% block body %}
+
+{% endblock %}
+ 
+<a href="https://api.whatsapp.com/send?phone=233233313180" target="_blank" class="whatsapp-icon">
+  <img src="{{url_for('static', filename="img/whatsappIcon.png")}}" alt="WhatsApp Icon">
+</a>
+
+
+<!-- ======= Footer ======= -->
+<footer id="footer" style="margin-top: 3vh;">
+
+  <div class="footer-top">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6 footer-contact">
+          <img class="" src="{{url_for('static',filename='img/Central-Uni-logo.png')}}" alt="" width="150"> 
+          <p>
+            Miotso near Dawhenya <br>
+            Accra -Aflao<br>
+            P.O Box 2305 Tema or P.O. Box DS 2310 Dansoman,<br> Accra- Ghana -West Africa <br><br>
+            <strong>Main Phone(Miotso):</strong><a href="tel:+2330303318580">+2330303318580</a>  <br>
+            <strong>Admission</strong><a href="tel:+2330307020540">+2330307020540</a>  <br>
+              
+              <strong>Kumasi Campus</strong><a href="tel:+233 0322396189">+233 0322396189</a><br>
+             <strong>Christ Temple </strong><a href="+2330302313185">+2330302313185</a><br>
+             <strong>Whatsapp</strong><a href="tel:+2330233313180">+2330233313180</a> <br>
+            <strong>Email:</strong><a href="mailto:verification@central.edu.gh">verification@central.edu.gh</a> <br>
+            <strong>Email:</strong><a href="mailto:academicdirector@central.edu.gh">academicdirector@central.edu.gh</a> <br>
+            <strong>Email:</strong><a href="mailto:international.relations@central.edu.gh">international.relations@central.edu.gh</a> <br>
+
+          </p>
+        </div>
+
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Faculties</h4>
+          <ul>   
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sop')}}">Pharmacy</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='facultyoflaw')}}">Law</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='somah')}}">Medical Sciences</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='snm')}}">Nursing and Midwifery</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='soeat')}}">Engineering & Technology</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='fass')}}">Social Sciences</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sad')}}">Architecture</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='cbs')}}">Business</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sogs')}}">Graduate School</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='code')}}">CDPE</a></li>
+            
+          </ul>
+          
+        </div>
+        
+        <div class="col-lg-3 col-md-6 footer-links">
+          <h4>Useful Links</h4>
+          <ul>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('home')}}">Home</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('about')}}">About us</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('admissions')}}">Admissions</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('faq')}}">FAQ</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('online')}}">Apply Now</a></li>
+            <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
+          </ul>
+        </div>
+
+        
+
+      </div>
+    </div>
+  </div>
+
+  <div class="container d-md-flex py-4">
+
+    <div class="me-md-auto text-center text-md-start">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Central University</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/ -->
+        Powered by <a href="https://prestoghana.com/">PrestoSolutions</a>
+      </div>
+    </div>
+    <div class="social-links text-center text-md-right pt-3 pt-md-0">
+      <a href="https://twitter.com/centralunivgh?s=20" class="twitter"><i class="bx bxl-twitter"></i></a>
+      <a href="https://facebook.com/centraledugh" class="facebook"><i class="bx bxl-facebook"></i></a>
+      <a href="https://www.instagram.com/centralunivgh/" class="instagram"><i class="bx bxl-instagram"></i></a>
+      <a href="https://www.youtube.com/@central_university1790" class="linkedin"><i class="bx bxl-youtube"></i></a>
+    </div>
+  </div>
+
+
+</footer><!-- End Footer -->
+
+
+<!-- <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a> -->
+
+
+<script src="{{url_for('static', filename="vendor/purecounter/purecounter_vanilla.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/aos/aos.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/bootstrap/js/bootstrap.bundle.min.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/glightbox/js/glightbox.min.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/isotope-layout/isotope.pkgd.min.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/swiper/swiper-bundle.min.js")}}"></script>
+<script src="{{url_for('static', filename="vendor/php-email-form/validate.js")}}"></script>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-analytics.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.1/firebase-storage.js"></script>
+
+<!-- <script defer src="//firebase/8.9.1/firebase-storage.js"></script> -->
+
+
+
+  <script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+      apiKey: "AIzaSyCg_EQEs71TGryjko97MGRCMjNR_5RES30",
+      authDomain: "ineruu-142dc.firebaseapp.com",
+      databaseURL: "https://ineruu-142dc-default-rtdb.firebaseio.com",
+      projectId: "ineruu-142dc",
+      storageBucket: "ineruu-142dc.appspot.com",
+      messagingSenderId: "718515493607",
+      appId: "1:718515493607:web:72d459e0c8f56319b1a042",
+      measurementId: "G-EEYCGFWVER"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+
+<script src="{{url_for('static', filename='js/main.js')}}"></script>
+
+
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-{% extends "layout.html" %}
+{% extends "admissions/admissionslayout.html" %}
 
 {% block body %}
 
@@ -6,19 +6,16 @@
             <div style="padding: 15px;">
                 <form method="post">
                     {{form.hidden_tag()}}
-                    <div class="progress" style="height: 5px;">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width:10%;"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
+                   
 
 
                     <label for="image-picker">
-                        <div style="display: flex; justify-content: center; align-items: center;">
+                        <div style="display: flex; justify-content: left; align-items: center;">
                             {% if userdata.picture %}
                             <img id="image-preview" style="width: 100%; object-fit:contain" src={{userdata.picture}}/>
                             {% else %}
-                            <div class="ellipse" style="margin-top: 3vh;">
-                                <img id="image-preview" width="100" style="border-radius: 50%; object-fit:contain" src="{{url_for('static', filename='img/testimonials/kweku.jpg')}}" alt="your image" />
+                            <div class="ellipse webForm" style="margin-top: 3vh;">
+                                <img id="image-preview" width="100" style="border-radius: 50%; object-fit:contain" src="{{url_for('static', filename='img/profile.jpg')}}" alt="your image" />
                             </div>
                             {% endif %}
                         </div>      
