@@ -36,6 +36,8 @@ lecturerId = 92
 adminStaffId = 93
 eventsId = 101
 
+totalNumberOfAdmissionForms = 10
+
 class User(db.Model, UserMixin):
     """Model for user accounts."""
     __tablename__ = 'users'
@@ -991,6 +993,7 @@ def post():
 @app.route('/applicantInformation', methods=['GET', 'POST'])
 @login_required
 def applicantInformation():
+    formId = 1
     form=ApplicantForm()
     # save form as session?
     print(current_user.code)
@@ -1034,20 +1037,35 @@ def applicantInformation():
                 form.surname.data = userdata.surname
                 form.othername.data = userdata.othername 
                 form.nationality.data = userdata.nationality
-                form.email.data = userdata.email,
-                form.campus.data = userdata.campus,
-                form.stream.data = userdata.stream,
-                form.dateofbirth.data = userdata.date_of_birth,
-                form.mobile.data = userdata.phone,
+                form.email.data = userdata.email
+                form.campus.data = userdata.campus
+                form.stream.data = userdata.stream
+                form.dateofbirth.data = userdata.date_of_birth
+                form.mobile.data = userdata.phone
                 form.entrymode.data = userdata.entry_mode
         else:
             pass
 
-    return render_template('applicantInformation.html', form=form, userdata=userdata)
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)
+    return render_template('admissions/applicantInformation.html', form=form, formtitle='Personal Information', formdescription='This section is solely about profiling and identification. Please fill this form accordingly.',  userdata=userdata, hideNav=True, percentage=int(percentage))
 
+
+@app.route('/deleteEducation/<string:id>', methods=['GET', 'POST'])
+def deleteEducation(id):
+    education = Education.query.get_or_404(id)
+    if education is not None:
+        try:
+            db.session.delete(education)
+            db.session.commit()
+            flash(f'{education.school} has been deleted')
+        except Exception as e:
+            print(e)
+    return redirect(url_for('applicantEducation'))
 
 @app.route('/applicantEducation', methods=['GET', 'POST'])
 def applicantEducation():
+    formId=2
     form=ApplicantEducation()
 
     if request.method=='POST':
@@ -1064,29 +1082,24 @@ def applicantEducation():
             db.session.add(newApplicantEducation)
             db.session.commit()        
 
-            return redirect(url_for('applicantPrograms'))
+            flash(f'{newApplicantEducation.school} has been added')
+            return redirect(url_for('applicantEducation'))
         else:
             print(form.errors)
 
     if request.method == 'GET':
-        userdata = Education.query.filter_by(usercode = current_user.code).first()
-        
-        # print(userdata.school)
-        # print(type(userdata.school))
+        userdata = Education.query.filter_by(usercode = current_user.code).all()
+        print(userdata)
 
-        if userdata:
-            if userdata.filed == True:
-                form.school.data = userdata.school,
-                #TODO:
-                # form.start_date.data = userdata.start,
-                # form.end_date.data = userdata.endDate
-        else:
-            print(form.errors)
-
-    return render_template('applicantEducation.html', form=form)
+    formtitle='Education History'
+    formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)
+    return render_template('admissions/applicantEducation.html',percentage=percentage, userdata=userdata, formtitle=formtitle, formdescription=formdescription ,form=form)
 
 @app.route('/applicantPrograms', methods=['GET', 'POST'])
 def applicantPrograms():
+    formId=3
     form=ApplicantProgram()
     if request.method=='POST':
         print("POST FORM!")
@@ -1113,10 +1126,15 @@ def applicantPrograms():
     if request.method == 'GET':
         print("lol")
 
-    return render_template('applicantPrograms.html', form=form)
+    formtitle='Education History'
+    formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)
+    return render_template('admissions/applicantPrograms.html', formtitle=formtitle, formdescription=formdescription, percentage=percentage, form=form)
 
 @app.route('/applicantGuardian', methods=['GET', 'POST'])
 def applicantGuardian():
+    formId=4
     form=ApplicantGuardian()
 
     if request.method=='POST':
@@ -1158,10 +1176,15 @@ def applicantGuardian():
     else:
         print("asfd")
 
-    return render_template('applicantGuardian.html', form=form)
+    formtitle='Education History'
+    formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)
+    return render_template('/admissions/applicantGuardian.html', form=form, formtitle=formtitle, formdescription=formdescription, percentage=percentage )
 
 @app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
+    formId=5
     form=ApplicantExams()
 
     if request.method=='POST':
@@ -1193,6 +1216,7 @@ def faq():
 
 @app.route('/applicantExamresult', methods=['GET', 'POST'])
 def applicantExamresult():
+    formId=6
     form=ApplicantExamresult()
     # check request method
     if request.method=='POST':
@@ -1217,6 +1241,7 @@ def applicantExamresult():
 
 @app.route('/applicantcontacts', methods=["GET", "POST"])
 def applicantcontacts():
+    formId=7
     form=ApplicantContant()
 
     if request.method=='POST':
@@ -1232,6 +1257,7 @@ def applicantcontacts():
 
 @app.route('/applicantattachments', methods=['GET', 'POST'])
 def applicantattachments():
+    formId=8
     form=ApplicantAttachment()
     # check request method
     if request.method=='POST':
@@ -1244,6 +1270,7 @@ def applicantattachments():
 
 @app.route('/applicantphotos', methods=['GET', 'POST'])
 def applicantphotos():
+    formId=9
     form=ApplicantPhoto()
     # check request method
     if request.method=='POST':
@@ -1257,6 +1284,7 @@ def applicantphotos():
 
 @app.route('/applicantanswers', methods=['GET', 'POST'])
 def applicantanswers():
+    formId=10
     form=ApplicantAnswer()
     # check request method
     if request.method=='POST':
@@ -1269,6 +1297,7 @@ def applicantanswers():
 
 @app.route('/applicantrefrees', methods=['GET', 'POST'])
 def applicantrefrees():
+    formId=11
     form=ApplicantRefree()
     # check request method
     if request.method=='POST':
@@ -1283,6 +1312,7 @@ def applicantrefrees():
 
 @app.route('/applicanthalls', methods=['GET', 'POST'])
 def applicanthalls():
+    formId=12
     form=ApplicantHall()
     # check request method
     if request.method=='POST':
@@ -1296,6 +1326,7 @@ def applicanthalls():
 
 @app.route('/applicantmisinfos', methods=['GET', 'POST'])
 def applicantmisinfos():
+    formId=13
     form=ApplicantMiscellaneousInformation()
     # check request method
     if request.method=='POST':
