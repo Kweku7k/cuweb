@@ -23,11 +23,6 @@
                     </label>
                 
                     <input style="display:none" id="image-picker" type="file" accept="image/*" />
-                   
-
-                    <!-- <div class="ellipse" style="margin-top: 3vh;">
-                        <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
-                    </div> -->
 
                     <div class="mb-3" style="display: none;">
                         {{form.firebaseLink.label}}
@@ -48,6 +43,10 @@
                     <div class="mb-3">
                         {{form.nationality.label}}
                         {{form.nationality (class="form-control webForm", placeholder="Enter your name")}} 
+                    </div>
+                    <div class="mb-3">
+                        {{form.dateofbirth.label}}
+                        {{form.dateofbirth (class="form-control webForm", placeholder="Enter your name")}} 
                     </div>
                     <div class="form-floating mb-3">
                         {{form.mobile (class="form-control webForm", placeholder="Enter your name")}} 

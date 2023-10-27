@@ -14,6 +14,8 @@ import random
 import string
 import pprint
 
+
+
 app=Flask(__name__)
 baseUrl = "https://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
@@ -37,6 +39,10 @@ adminStaffId = 93
 eventsId = 101
 
 totalNumberOfAdmissionForms = 10
+
+def reportError(e):
+    print(e)
+    return "Noted!"
 
 class User(db.Model, UserMixin):
     """Model for user accounts."""
@@ -117,6 +123,9 @@ class Programs(db.Model, UserMixin):
     usercode = db.Column(db.String,nullable=False,unique=False)
     program = db.Column(db.String,nullable=False,unique=False)
     programchoice = db.Column(db.String,nullable=False,unique=False)
+    firstchoice = db.Column(db.String())
+    seconschoice = db.Column(db.String())
+    thirdchoice = db.Column(db.String())
     entry_mode = db.Column(db.String())
     filed = db.Column(db.Boolean, default=False)
 
@@ -211,7 +220,7 @@ def internal_server_error(error):
 @login_manager.user_loader
 def user_loader(user_id):
     #TODO change here
-    return User.query.get(user_id)
+    return User.query.get_or_404(user_id)
 
 @app.route('/',methods=['GET','POST'])
 def home():
@@ -346,6 +355,60 @@ def randomLetters(y):
        return ''.join(random.choice(string.ascii_letters) for x in range(y))
 
 
+admissionMap = {
+    1:{
+        'previousUrl':'applicantInformation',
+        'nextUrl':'applicantEducation',
+        'current':'applicantInformation',
+        'next':'Education History',
+        'description':'Something nice',
+        'title':'Testing',
+        'percentage': (1/totalNumberOfAdmissionForms)*100
+    },
+    2:{
+        'previous':'Personal Information',
+        'previousUrl':'applicantInformation',
+        'nextUrl':'applicantPrograms',
+        'current':'applicantEducation',
+        'next':'Program Choices',
+        'description':'Please include your schools and the years in which you comleted.',
+        'title':'Applicant Education',
+        'percentage': (2/totalNumberOfAdmissionForms)*100
+    },
+    3:{
+        'previous':'Personal Information',
+        'previousUrl':'applicantEducation',
+        'nextUrl':'applicantPrograms',
+        'current':'Something',
+        'next':'Guardians',
+        'description':'Please include all previously attempted courses and programs of study.',
+        'title':'Program Choices',
+        'percentage': (3/totalNumberOfAdmissionForms)*100
+    },
+    4:{
+        'previous':'Personal Information',
+        'previousUrl':'applicantInformation',
+        'nextUrl':'applicantEducation',
+        'current':'Something',
+        'next':'Something else',
+        'description':'Something nice',
+        'title':'Guardian Data',
+        'percentage': (4/totalNumberOfAdmissionForms)*100
+    },
+    5:{
+        'previous':'Personal Information',
+        'previousUrl':'applicantInformation',
+        'nextUrl':'applicantEducation',
+        'current':'Something',
+        'next':'Something else',
+        'description':'Something nice',
+        'title':'Testing',
+        'percentage': (5/totalNumberOfAdmissionForms)*100
+    }
+    
+}
+
+
 @app.route('/apply', methods=['GET', 'POST'])
 def apply():
     form = LoginForm()
@@ -360,7 +423,7 @@ def apply():
                 flash(f'Oopss, no code was found. please check and try again', "danger")
     else:
         print("asdf")
-        flash(f'The verification code has been sent to your email and your sms.', category="success")
+        # flash(f'The verification code has been sent to your email and your sms.', category="success")
     return render_template('verification.html', form=form)
 
 @app.route('/confirm/<transactionId>', methods=['GET', 'POST'])
@@ -995,42 +1058,66 @@ def post():
 def applicantInformation():
     formId = 1
     form=ApplicantForm()
-    # save form as session?
     print(current_user.code)
 
+    userdata = ApplicantInformation.query.filter_by(usercode = current_user.code).first()
+
     if request.method=='POST':
-        if form.validate_on_submit:
-            try:
-                newapplicantInformation = ApplicantInformation(
-                    surname = form.surname.data,
-                    userId = current_user.id,
-                    usercode = current_user.code,
-                    othername = form.othername.data,
-                    nationality = form.nationality.data,
-                    email = form.email.data,
-                    campus = form.campus.data,
-                    stream = form.stream.data,
-                    date_of_birth = form.dateofbirth.data,
-                    phone = form.mobile.data,
-                    entry_mode = form.entrymode.data,
-                    filed = True
-                ) 
+        if form.validate_on_submit():
+            if userdata is not None:
+                try:
+                    userdata.surname = form.surname.data
+                    userdata.userId = current_user.id
+                    userdata.usercode = current_user.code
+                    userdata.othername = form.othername.data
+                    userdata.nationality = form.nationality.data
+                    userdata.email = form.email.data
+                    userdata.campus = form.campus.data
+                    userdata.stream = form.stream.data
+                    userdata.date_of_birth = form.dateofbirth.data
+                    userdata.phone = form.mobile.data
+                    userdata.picture = form.firebaseLink.data
+                    userdata.entry_mode = form.entrymode.data
+                    userdata.filed = True
 
-                db.session.add(newapplicantInformation)
-                db.session.commit()
+                    db.session.commit()
+                    return redirect(url_for('applicantEducation'))
 
-            except Exception as e:
-                print("e")
-                print(e)
+                except Exception as e:
+                    print("e")
+                    print(e)
 
-            return redirect('applicantEducation')
+            else:
+                try:
+                    newapplicantInformation = ApplicantInformation(
+                        surname = form.surname.data,
+                        userId = current_user.id,
+                        usercode = current_user.code,
+                        othername = form.othername.data,
+                        nationality = form.nationality.data,
+                        email = form.email.data,
+                        campus = form.campus.data,
+                        stream = form.stream.data,
+                        date_of_birth = form.dateofbirth.data,
+                        phone = form.mobile.data,
+                        entry_mode = form.entrymode.data,
+                        filed = True
+                    ) 
+
+                    db.session.add(newapplicantInformation)
+                    db.session.commit()
+
+                except Exception as e:
+                    print("e")
+                    print(e)
+
+                return redirect('applicantEducation')
 
         else:
             print(form.errors)
-            flash(form.errors[0],"danger")
+            flash(form.errors.values[0],"danger")
     elif request.method=='GET':
 
-        userdata = ApplicantInformation.query.filter_by(usercode = current_user.code).first()
     
         if userdata:
             if userdata.filed == True:
@@ -1048,7 +1135,7 @@ def applicantInformation():
 
     percentage = (formId/totalNumberOfAdmissionForms)*100
     print(percentage)
-    return render_template('admissions/applicantInformation.html', form=form, formtitle='Personal Information', formdescription='This section is solely about profiling and identification. Please fill this form accordingly.',  userdata=userdata, hideNav=True, percentage=int(percentage))
+    return render_template('admissions/applicantInformation.html', metadata=admissionMap[formId],form=form, userdata=userdata)
 
 
 @app.route('/deleteEducation/<string:id>', methods=['GET', 'POST'])
@@ -1079,6 +1166,7 @@ def applicantEducation():
             endDate = form.end_date.data,
             filed = True
             )    
+
             db.session.add(newApplicantEducation)
             db.session.commit()        
 
@@ -1095,29 +1183,55 @@ def applicantEducation():
     formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
     percentage = (formId/totalNumberOfAdmissionForms)*100
     print(percentage)
-    return render_template('admissions/applicantEducation.html',percentage=percentage, userdata=userdata, formtitle=formtitle, formdescription=formdescription ,form=form)
+    return render_template('admissions/applicantEducation.html', metadata=admissionMap[formId], userdata=userdata, form=form)
 
 @app.route('/applicantPrograms', methods=['GET', 'POST'])
 def applicantPrograms():
     formId=3
     form=ApplicantProgram()
+    programs = Programs.query.filter_by(usercode=current_user.code).first()
+    # check to see if there is already an entry with this id
+    # if not create 3 entries: 1, 2 3
+    # this form will be edit only
+
     if request.method=='POST':
         print("POST FORM!")
-        if form.validate_on_submit:
-            print(form.program.data)
+        if form.validate_on_submit():
+            if programs is not None: 
+                try:
+                    programs.userId = current_user.id,
+                    programs.usercode = current_user.code,
+                    programs.program = form.program.data,
+                    programs.firstchoice = form.firstchoice.data,
+                    programs.secondchoice = form.secondchoice.data,
+                    programs.thirdchoice = form.thirdchoice.data,
+                    programs.filed = True
 
-            newPrograms = Programs(
-            userId = current_user.id,
-            usercode = current_user.code,
-            program = form.program.data,
-            programchoice = form.programchoice.data,
-            filed = True
-            )    
+                    db.session.commit()
+                except Exception as e:
+                    reportError(e)
 
-            db.session.add(newPrograms)
-            db.session.commit() 
-            return redirect(url_for('applicantGuardian'))
+            else:
+                print(form.program.data)
 
+                try:
+                    newPrograms = Programs(
+                    userId = current_user.id,
+                    usercode = current_user.code,
+                    program = form.program.data,
+                    programchoice = form.programchoice.data,
+                    firstchoice = form.firstchoice.data,
+                    secondchoice = form.secondchoice.data,
+                    thirdchoice = form.thirdchoice.data,
+                    filed = True
+                    )    
+
+                    db.session.add(newPrograms)
+                    db.session.commit() 
+                except Exception as e:
+                    reportError(e)
+
+                return redirect(url_for('applicantGuardian'))
         else:
             print(form.errors)
         
@@ -1130,7 +1244,7 @@ def applicantPrograms():
     formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
     percentage = (formId/totalNumberOfAdmissionForms)*100
     print(percentage)
-    return render_template('admissions/applicantPrograms.html', formtitle=formtitle, formdescription=formdescription, percentage=percentage, form=form)
+    return render_template('admissions/applicantPrograms.html', metadata=admissionMap[formId], form=form)
 
 @app.route('/applicantGuardian', methods=['GET', 'POST'])
 def applicantGuardian():
@@ -1184,31 +1298,57 @@ def applicantGuardian():
 
 @app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
-    formId=5
+    formId=4
     form=ApplicantExams()
 
     if request.method=='POST':
         if form.validate_on_submit:
             print("form.exam.data")
-            exam = Exam(
+
+            try:
+                exam = Exam(
                     userId = current_user.id,
                     usercode = current_user.code,
                     exam = form.examtype.data,
                     indexNumber = form.indexnumber.data,
                     date = form.exam_date.data,
                     filed = True)
-            db.session.add(exam)
-            db.session.commit()
-            return redirect(url_for('applicantExamresult'))
+                db.session.add(exam)
+                db.session.commit()
+                flash(f'{exam.exam} has been added successfully.')
+                return redirect(url_for('applicantExam'))
+
+            except Exception as e:
+                reportError(e)
+
+        else:
+            print(form.errors)
+            reportError(form.errors)
+
     elif request.method == 'GET':
-        userdata = Exam.query.filter_by(usercode = current_user.code).first()
+        userdata = Exam.query.filter_by(usercode = current_user.code).all()
 
         if userdata:
-            if userdata.filed == True:
-                form.indexnumber.data = userdata.indexNumber
+            pass
                 # form.exam.data = userdata.exam
-            
-    return render_template('applicantExam.html', form=form)
+
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)   
+    return render_template('admissions/applicantExam.html', form=form, metadata=admissionMap[formId], userdata=userdata)
+
+@app.route('/deleteApplicantExam/<string:id>', methods=['GET', 'POST'])
+@login_required
+def deleteApplicantExam(id):
+    exam = Exam.query.get_or_404(id)
+    if exam is not None:
+        try:
+            db.session.delete(exam)
+            db.session.commit()
+            flash(f'{exam.school} has been deleted')
+        except Exception as e:
+            print(e)
+    return redirect(url_for('applicantExam'))
+
 
 @app.route('/faq')
 def faq():

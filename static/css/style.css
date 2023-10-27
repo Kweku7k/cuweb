@@ -1728,10 +1728,23 @@ select{
   color: #777777;
 }
 
+.card{
+  margin-bottom: 20px;
+  border: none;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: rgba(8, 7, 7, 0.1) 0px 4px 12px;
+
+}
+
 .team .member:hover .social {
   opacity: 1;
 }
 
+
+.progress{
+  margin-top: 10px;
+}
 /*--------------------------------------------------------------
 # Pricing
 --------------------------------------------------------------*/

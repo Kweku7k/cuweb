@@ -1,44 +1,86 @@
-{% extends "layout.html" %}
+{% extends "admissions/admissionslayout.html" %}
 
 {% block body %}
 
+<div class="container" style="margin-top: 1vh;">
+    <div style="padding: 18px;">
+            
+    <div class="controls" style="display: flex; align-items: center;">
+
+        {% if userdata|length > 1 %}
+            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Another Exam</button>
+        {% else %}
+            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add An Exam</button>
+        {% endif %}
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <form action="" method="post">
+            
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add School</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <br/>
+                <div class="modal-body">
+                    <div id="dynamicForm">
+
+                            {{form.hidden_tag()}}
+                            
+                            <div class="mb-3">
+                                {{form.examtype.label}}
+                                {{form.examtype (class="form-control webForm")}}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{form.indexnumber (class="form-control webForm", placeholder="Enter your Index Number")}}
+                                {{form.indexnumber.label}}
+                            </div>
+                            <div class="form-floating mb-3">
+                                {{form.exam_date (class="form-control webForm")}}
+                                {{form.exam_date.label}}
+                            </div>
+
+                        
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
+                        {{form.submit (class='pill-button')}}
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
         
-        <div class="container" style="margin-top: 1vh;">
-            <div style="padding: 18px;">
-                <form action="" method="post">
-                    <div class="progress" style="height: 5px;">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width:4     0%;"
-                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    <div id="dynamicForm">
+                            
+        <div class="row">
+                {% for school in userdata %}
+                <div class="col-md-4">
+                    <div class="card" style="padding: 20px 12px;">
+                        <div class="flexRow">
+                            <h6 class="text-muted">{{school.exam}} - {{school.school}}</h6>
+                            <a href="{{url_for('deleteApplicantExam', id=school.id)}}">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                        <h4>{{school.indexNumber}}</h4>
                     </div>
-                    <br>
+                </div>
+                {% endfor %}
+            </div>
 
-
-                    <!-- <div class="ellipse">
-                        <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
-                    </div> -->
-
-                    {{form.hidden_tag()}}
-                    
-                    <div class="mb-3">
-                        {{form.examtype.label}}
-                        {{form.examtype (class="form-control webForm")}}
-                    </div>
-                    <div class="form-floating mb-3">
-                        {{form.indexnumber (class="form-control webForm", placeholder="Enter your Index Number")}}
-                        {{form.indexnumber.label}}
-                    </div>
-                    <div class="form-floating mb-3">
-                        {{form.exam_date (class="form-control webForm")}}
-                        {{form.exam_date.label}}
-                    </div>
-                   
-                    {{form.submit (class="pill-button", style="width:100%", onclick="")}}
-                    
-                  
-                </form>
+    </div>
 
             </div>
 
+            <a href="{{url_for(metadata.nextUrl)}}">
+                <button class="pill-button full">Next</button>
+            </a>
         </div>
 
 

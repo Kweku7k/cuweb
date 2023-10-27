@@ -99,7 +99,7 @@
 
       <ul>
 
-        {% if hideNav != True %}
+        {% if hideNav == True %}
         <a class="nav-link scrollto" href="{{url_for('home')}}"><li>Home</li></a>
         <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News</li></a>
         <a class="nav-link scrollto" href="{{url_for('about')}}"><li>About CU</li></a>
@@ -174,25 +174,35 @@
  </header>
 
 <div class="container">
-
-  <div class="flexRow">
-    <div>  
-      <i class="fa fa-arrow-left" aria-hidden="true"></i>
-      {{Back}}
-    </div>
-    <div>
-      Next
-      <i class="fa fa-arrow-right" aria-hidden="true"></i>
-    </div>
-
-  </div>
+  
     <!-- <h1>Title</h1> -->
-    <h4 >{{formtitle}}</h4>
-    <h6 class="text-muted">{{formdescription}}</h6>
+    <h4 >{{metadata.title}}</h4>
+    <h6 class="text-muted">{{metadata.description}}</h6>
     <div class="progress" style="height: 5px;">
-        <div class="progress-bar bg-primary" role="progressbar" style="width:{{percentage}}%;"
-        aria-valuenow={{percentage}} aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-primary" role="progressbar" style="width:{{metadata.percentage}}%;"
+        aria-valuenow={{metadata.percentage}} aria-valuemin="0" aria-valuemax="100"></div>
     </div>
+
+    <div class="flexRow" style="margin-top: 10px;">
+      {% if metadata.previous %}
+      <a href="{{url_for(metadata.previousUrl)}}">
+        <div>  
+          <i class="fa fa-arrow-left" aria-hidden="true"></i>
+          {{metadata.previous}}
+        </div>
+      </a>
+      {% else %}
+      <div></div>
+      {% endif %}
+
+      <a href="{{url_for(metadata.nextUrl)}}">
+        <div>
+          {{metadata.next}}
+          <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        </div>
+      </a>
+  </div>
+
 </div>
 {% block body %}
 

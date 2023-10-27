@@ -61,6 +61,9 @@ class ApplicantGuardian(FlaskForm):
 class ApplicantProgram(FlaskForm):
     program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
     programchoice = SelectField('Program Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
+    firstchoice = SelectField('First Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
+    secondchoice = SelectField('Second Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
+    thirdchoice = SelectField('Third Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
     submit = SubmitField('Next')
 
 class ApplicantExamresult(FlaskForm):
