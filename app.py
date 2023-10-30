@@ -357,53 +357,44 @@ def randomLetters(y):
 
 admissionMap = {
     1:{
-        'previousUrl':'applicantInformation',
-        'nextUrl':'applicantEducation',
         'current':'applicantInformation',
-        'next':'Education History',
-        'description':'Something nice',
-        'title':'Testing',
+        'previousUrl':'applicantInformation',
+        'nextUrl':'applicantPrograms',
+        'next':'Applicant Programs',
+        'description':'Please be very discriptive and fill the form accordingly so we have a clear picture of who you are',
+        'title':'Personal Information',
         'percentage': (1/totalNumberOfAdmissionForms)*100
     },
     2:{
-        'previous':'Personal Information',
+        'current':'applicantInformation',
+        'previous':'Applicant Information',
         'previousUrl':'applicantInformation',
-        'nextUrl':'applicantPrograms',
-        'current':'applicantEducation',
-        'next':'Program Choices',
-        'description':'Please include your schools and the years in which you comleted.',
-        'title':'Applicant Education',
+        'nextUrl':'applicantEducation',
+        'next':'ApplicantEducation',
+        'description':'Please select your program choices',
+        # 'description':'Please include your schools and the years in which you comleted.',
+        'title':'Program Choices',
         'percentage': (2/totalNumberOfAdmissionForms)*100
     },
     3:{
-        'previous':'Personal Information',
-        'previousUrl':'applicantEducation',
-        'nextUrl':'applicantPrograms',
-        'current':'Something',
-        'next':'Guardians',
-        'description':'Please include all previously attempted courses and programs of study.',
-        'title':'Program Choices',
+        'previous':'Program Choices',
+        'previousUrl':'applicantPrograms',
+        'nextUrl':'applicantEmployment', #TODO!
+        'current':'applicantEducation',
+        'next':'Employment',
+        'description':'Please fill the form containing the data ',
+        'title':'Applicant Education',
         'percentage': (3/totalNumberOfAdmissionForms)*100
     },
     4:{
-        'previous':'Personal Information',
-        'previousUrl':'applicantInformation',
-        'nextUrl':'applicantEducation',
-        'current':'Something',
-        'next':'Something else',
-        'description':'Something nice',
-        'title':'Guardian Data',
-        'percentage': (4/totalNumberOfAdmissionForms)*100
-    },
-    5:{
-        'previous':'Personal Information',
-        'previousUrl':'applicantInformation',
-        'nextUrl':'applicantEducation',
-        'current':'Something',
-        'next':'Something else',
-        'description':'Something nice',
-        'title':'Testing',
-        'percentage': (5/totalNumberOfAdmissionForms)*100
+        'title':'Applicant Employment',
+        'previous':'Prog',
+        'previousUrl':'applicantPrograms',
+        'nextUrl':'applicantEmployment', #TODO!
+        'current':'applicantEducation',
+        'next':'Employment',
+        'description':'Please fill the form containing the data ',
+        'percentage': (3/totalNumberOfAdmissionForms)*100
     }
     
 }
@@ -1081,7 +1072,7 @@ def applicantInformation():
                     userdata.filed = True
 
                     db.session.commit()
-                    return redirect(url_for('applicantEducation'))
+                    return redirect(url_for('applicantPrograms'))
 
                 except Exception as e:
                     print("e")
@@ -1111,7 +1102,7 @@ def applicantInformation():
                     print("e")
                     print(e)
 
-                return redirect('applicantEducation')
+                return redirect('applicantPrograms')
 
         else:
             print(form.errors)
@@ -1152,7 +1143,7 @@ def deleteEducation(id):
 
 @app.route('/applicantEducation', methods=['GET', 'POST'])
 def applicantEducation():
-    formId=2
+    formId=3
     form=ApplicantEducation()
 
     if request.method=='POST':
@@ -1187,7 +1178,7 @@ def applicantEducation():
 
 @app.route('/applicantPrograms', methods=['GET', 'POST'])
 def applicantPrograms():
-    formId=3
+    formId=2
     form=ApplicantProgram()
     programs = Programs.query.filter_by(usercode=current_user.code).first()
     # check to see if there is already an entry with this id
@@ -1231,11 +1222,11 @@ def applicantPrograms():
                 except Exception as e:
                     reportError(e)
 
-                return redirect(url_for('applicantGuardian'))
+                return redirect(url_for('applicantEducation'))
         else:
             print(form.errors)
         
-        return redirect(url_for('applicantGuardian'))
+        return redirect(url_for('applicantEducation'))
 
     if request.method == 'GET':
         print("lol")
@@ -1296,9 +1287,13 @@ def applicantGuardian():
     print(percentage)
     return render_template('/admissions/applicantGuardian.html', form=form, formtitle=formtitle, formdescription=formdescription, percentage=percentage )
 
+@app.route('/applicantEmployment', methods=['GET', 'POST'])
+def applicantEmployment():
+    return "Done"
+
 @app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
-    formId=4
+    formId=3
     form=ApplicantExams()
 
     if request.method=='POST':
