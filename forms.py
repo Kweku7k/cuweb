@@ -43,6 +43,14 @@ class ApplicantEducation(FlaskForm):
     end_date = DateField('End Date', format='%Y-%m-%d')
     submit = SubmitField('Next')
 
+class ApplicantEmployment(FlaskForm):
+    institution = StringField('Institution', validators=[DataRequired()])
+    start_date = DateField('Start Date', format='%Y-%m-%d')
+    end_date = DateField('End Date', format='%Y-%m-%d')
+    position = StringField('Position', validators=[DataRequired()])
+    submit = SubmitField('Next')
+
+
 class ApplicantExams(FlaskForm):
     examtype = SelectField('Exam Type', choices=[("Wassce","Wassce"),("Nov-Dec","Nov-Dec")])
     indexnumber = StringField('Index Number', validators=[DataRequired()])

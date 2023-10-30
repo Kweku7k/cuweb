@@ -11,9 +11,9 @@
                     <div class="controls" style="display: flex; align-items: center;">
 
                         {% if userdata|length > 1 %}
-                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Another Guardian</button>
+                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Another Contacts</button>
                         {% else %}
-                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Guardian</button>
+                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Contacts</button>
                         {% endif %}
                     </div>
                     
@@ -34,28 +34,28 @@
                                 <div id="dynamicForm">
                                     <div class="">
                                         <div class="form-floating mb-3">
-                                            {{form.guardianrelationship (class="form-control webForm", placeholder="Enter Institution")}}
-                                            {{form.guardianrelationship.label}}
+                                            {{form.contactrelationship (class="form-control webForm", placeholder="Enter Institution")}}
+                                            {{form.contactrelationship.label}}
                                         </div>
                                         <div class="form-floating mb-3">
-                                            {{form.guardianname (class="form-control webForm", placeholder="Enter Institution")}}
-                                            {{form.guardianname.label}}
+                                            {{form.contactname (class="form-control webForm", placeholder="Enter Institution")}}
+                                            {{form.contactname.label}}
                                         </div>
                                         <div class="form-floating mb-3">
-                                            {{form.guardianaddress (class="form-control webForm", placeholder="Enter Institution")}}
-                                            {{form.guardianaddress.label}}
+                                            {{form.contactaddress (class="form-control webForm", placeholder="Enter Institution")}}
+                                            {{form.contactaddress.label}}
                                         </div>
                                         <div class="form-floating mb-3">
-                                            {{form.guardianmobile (class="form-control webForm", placeholder="Enter Institution")}}
-                                            {{form.guardianmobile.label}}
+                                            {{form.contactmobile (class="form-control webForm", placeholder="Enter Institution")}}
+                                            {{form.contactmobile.label}}
                                         </div>
                                         <div class="form-floating mb-3">
-                                            {{form.guardianemail (class="form-control webForm", placeholder="Enter Institution", type="email")}}
-                                            {{form.guardianemail.label}}
+                                            {{form.contactemail (class="form-control webForm", placeholder="Enter Institution", type="email")}}
+                                            {{form.contactemail.label}}
                                         </div>
                                         <div class="form-floating mb-3">
-                                            {{form.guardianjob (class="form-control webForm", placeholder="Enter Institution")}}
-                                            {{form.guardianjob.label}}
+                                            {{form.contactjob (class="form-control webForm", placeholder="Enter Institution")}}
+                                            {{form.contactjob.label}}
                                         </div>
                                     
                                     </div>
