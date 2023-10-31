@@ -14,7 +14,7 @@
             <input style="display:none" id="image-picker" type="file" accept="image/*" />
 
             <div class="controls" style="display: flex; align-items: center;">
-                <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Identity</button>
+                <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal">Miscellanoeus Information</button>
             </div>
             
             <br/>
@@ -25,7 +25,7 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Add Identity</h5>
+                      <h5 class="modal-title" id="exampleModalLabel">Miscellaneous Information</h5>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                       </button>
@@ -34,23 +34,16 @@
                         <div id="dynamicForm">
                             <div class="">
                                 <div class="mb-3">
-                                    {{form.identitytype.label}}
-                                    {{form.identitytype (class="form-control webForm", placeholder="Enter")}}
+                                    {{form.applicantmisinfo.label}}
+                                    {{form.applicantmisinfo (class="form-control webForm", placeholder="Enter")}}
                                 </div>
-                                <div class="form-floating mb-3">
-                                    {{form.identitynumber (class="form-control webForm", placeholder="Enter")}}
-                                    {{form.identitynumber.label}}
-                                </div>
-                                <div class="form-floating mb-3">
-                                    {{form.identityexpire (class="form-control webForm", placeholder="Enter")}}
-                                    {{form.identityexpire.label}}
-                                </div>
+                    
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="pill-button">Add Identity</button>
+                      <button type="button" class="pill-button">Add Information</button>
                     </div>
                   </div>
                 </div>

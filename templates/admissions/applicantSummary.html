@@ -1,0 +1,74 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<style>
+    .summary{
+        margin-left: 2vw;
+    }
+    .profile {
+            display: flex;
+            align-items: center;
+        }
+    .elipse {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+        .profile-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+</style>
+
+
+        <div class="container" style="margin-top: 1vh;">
+            <div style="padding: 15px;">
+                <h2 class="text-center" style="margin-top: 2vh;">Applicant Profile Summary</h2>
+            </div>
+            
+            <section>
+                <div class="summary">
+                    <div class="profile">
+                        <div class="elipse">
+                            <img class="profile-image" src="/static/img/about.jpg">
+                        </div>
+                        <div class="info" style="margin-left: 5vw;">
+                            <h5>Name: <b style="font-size: 22px;">Adumatta Nana Kweku</b></h5>
+                            <h5>Mobile: <b style="font-size: 20px;">+233592033701</b></h5>
+                            <h5>Email: <b style="font-size: 20px;">info@gmail.com</b></h5>
+                        </div>
+                    </div>
+
+                    <hr >
+                    <br>
+
+                    <div>
+                        <h6>Personal Information</h6>
+                        <div class="row">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div style="margin-top: 7vh;">
+                        <a href="">
+                            <button type="button" class="pill-button full">Submit</button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+{% endblock %}

@@ -450,11 +450,31 @@ admissionMap = {
         'title':'Applicant Exam',
         'previous':'Applicant Hall',
         'previousUrl':'applicantHall',
-        'nextUrl':'applicantHall', #TODO!
+        'nextUrl':'applicantMisinfos', #TODO!
         'current':'applicantExam',
         'next':'Miscellaneous Information',
         'description':'Please fill the form containing the data ',
         'percentage': (10/totalNumberOfAdmissionForms)*100
+    },
+    11:{
+        'title':'Miscellanoeus Information',
+        'previous':'Applicant Exam',
+        'previousUrl':'applicantExam',
+        'nextUrl':'applicantReferees', #TODO!
+        'current':'applicantMisinfos',
+        'next':'Refrees',
+        'description':'Please fill the form containing the data ',
+        'percentage': (11/totalNumberOfAdmissionForms)*100
+    },
+    12:{
+        'title':'Applicant Referees',
+        'previous':'Miscellanoeus Information',
+        'previousUrl':'applicantMisinfos',
+        'nextUrl':'applicantSummary', #TODO!
+        'current':'applicantReferees',
+        'next':'Profile Summary',
+        'description':'Please fill the form containing the data ',
+        'percentage': (12/totalNumberOfAdmissionForms)*100
     }
     
 }
@@ -1486,18 +1506,22 @@ def applicantanswers():
     # check errors
     return render_template('applicantanswers.html', form=form)
 
-@app.route('/applicantrefrees', methods=['GET', 'POST'])
-def applicantrefrees():
-    formId=11
+@app.route('/applicantReferees', methods=['GET', 'POST'])
+def applicantReferees():
+    formId=12
     form=ApplicantRefree()
     # check request method
-    if request.method=='POST':
-        if form.validate_on_submit:
-            print("form.email.data")
-            return redirect(url_for('applicanthalls'))
     # check form validation
     # check errors
-    return render_template('applicantrefrees.html', form=form)
+    return render_template('admissions/applicantReferees.html', form=form, metadata=admissionMap[formId], userdata=[])
+
+
+@app.route('/applicantSummary', methods=['GET', 'POST'])
+def applicantSummary():
+    # check request method
+    # check form validation
+    # check errors
+    return render_template('admissions/applicantSummary.html')
 
 
 
@@ -1512,18 +1536,14 @@ def applicantHall():
     return render_template('admissions/applicantHall.html', form=form, metadata=admissionMap[formId], userdata=[])
 
 
-@app.route('/applicantmisinfos', methods=['GET', 'POST'])
-def applicantmisinfos():
-    formId=13
+@app.route('/applicantMisinfos', methods=['GET', 'POST'])
+def applicantMisinfos():
+    formId=11
     form=ApplicantMiscellaneousInformation()
     # check request method
-    if request.method=='POST':
-        if form.validate_on_submit:
-            print("form.email.data")
-            return "summary"
     # check form validation
     # check errors
-    return render_template('applicantmisinfos.html', form=form)
+    return render_template('admissions/applicantMisinfos.html', form=form, metadata=admissionMap[formId], userdata=[])
 
 
 @app.route('/posts')

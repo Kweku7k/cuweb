@@ -54,8 +54,10 @@
                 <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
             </div> -->
             
-            
-            {{form.submit (class="pill-button", style="width:100%", onclick="") }}
+            <a href="{{url_for(metadata.nextUrl)}}">
+              <button type="button" class="pill-button full">Next</button>
+            </a>
+            <!-- {{form.submit (class="pill-button", style="width:100%", onclick="") }} -->
            
         </form>
 
