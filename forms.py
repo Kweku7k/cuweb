@@ -95,6 +95,12 @@ class ApplicantAttachment(FlaskForm):
     attachmentfile = FileField('Upload file', validators=[DataRequired()])
     submit = SubmitField('Next')
 
+class ApplicantIdentity(FlaskForm):
+    identitytype = SelectField('Type', choices=[("Ghana Card","Ghana Card"), ("Passport","Passport")])
+    identitynumber = StringField('Identity Number', validators=[DataRequired()])
+    identityexpire = DateField('Exam Date', format='%Y-%m-%d')
+    submit = SubmitField('Next')
+
 class ApplicantPhoto(FlaskForm):
     photoname = StringField('File Name', validators=[DataRequired()])
     photofile = FileField('Upload file', validators=[DataRequired()])

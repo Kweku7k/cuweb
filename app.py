@@ -420,21 +420,41 @@ admissionMap = {
         'title':'Applicant Contacts',
         'previous':'Applicant Guardian',
         'previousUrl':'applicantGuardian',
-        'nextUrl':'applicantHall', #TODO!
+        'nextUrl':'applicantIdentity', #TODO!
         'current':'applicantContacts',
         'next':'Identity',
         'description':'Please fill the form containing the data ',
         'percentage': (7/totalNumberOfAdmissionForms)*100
     },
     8:{
-        'title':'Applicant Hall',
-        'previous':'Applicant Guardian',
-        'previousUrl':'applicantGuardian',
+        'title':'Applicant Identity',
+        'previous':'Applicant Contacts',
+        'previousUrl':'applicantContacts',
         'nextUrl':'applicantHall', #TODO!
-        'current':'applicantContacts',
-        'next':'Identity',
-        'description':'Please fill the form containing the data ',
+        'current':'applicantIdentity',
+        'next':'Hall',
+        'description':'Please add an Identity ',
         'percentage': (8/totalNumberOfAdmissionForms)*100
+    },
+    9:{
+        'title':'Applicant Hall',
+        'previous':'Applicant Identity',
+        'previousUrl':'applicantIdentity',
+        'nextUrl':'applicantExam', #TODO!
+        'current':'applicantHall',
+        'next':'Exam',
+        'description':'Please fill the form containing the data ',
+        'percentage': (9/totalNumberOfAdmissionForms)*100
+    },
+    10:{
+        'title':'Applicant Exam',
+        'previous':'Applicant Hall',
+        'previousUrl':'applicantHall',
+        'nextUrl':'applicantHall', #TODO!
+        'current':'applicantExam',
+        'next':'Miscellaneous Information',
+        'description':'Please fill the form containing the data ',
+        'percentage': (10/totalNumberOfAdmissionForms)*100
     }
     
 }
@@ -1330,7 +1350,7 @@ def applicantEmployment():
 
 @app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
-    formId=3
+    formId=10
     form=ApplicantExams()
 
     if request.method=='POST':
@@ -1425,13 +1445,19 @@ def applicantAttachments():
     formId=5
     form=ApplicantAttachment()
     # check request method
-    if request.method=='POST':
-        if form.validate_on_submit:
-            # print(form.email.data)
-            return redirect(url_for('applicantphotos'))
     # check form validation
     # check errors
     return render_template('admissions/applicantAttachments.html', form=form, metadata=admissionMap[formId], userdata={'name':'None','picture':'lol'})
+
+@app.route('/applicantIdentity', methods=['GET', 'POST'])
+def applicantIdentity():
+    formId=8
+    form=ApplicantIdentity()
+    # check request method
+    # check form validation
+    # check errors
+    return render_template('admissions/applicantIdentity.html', form=form, metadata=admissionMap[formId], userdata={'name':'None','picture':'lol'})
+
 
 @app.route('/applicantphotos', methods=['GET', 'POST'])
 def applicantphotos():
@@ -1477,7 +1503,7 @@ def applicantrefrees():
 
 @app.route('/applicantHall', methods=['GET', 'POST'])
 def applicantHall():
-    formId=8
+    formId=9
     form=ApplicantHall()
     # check request method
     
