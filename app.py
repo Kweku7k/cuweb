@@ -1,3 +1,5 @@
+from email.message import EmailMessage
+import smtplib
 from flask import Flask,jsonify,redirect,url_for,render_template,request, send_from_directory, current_app, flash
 import os
 
@@ -25,7 +27,8 @@ prestoUrl = "https://prestoghana.com"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
-app.config['SQLALCHEMY_DATABASE_URI']= 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI']= 'postgresql://postgres:new_password@45.222.128.55:5432/cu'
+
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -53,6 +56,7 @@ class User(db.Model, UserMixin):
     code = db.Column(db.String,nullable=False,unique=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     phone = db.Column(db.String)
+    email = db.Column(db.String)
     paid = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -68,6 +72,7 @@ class Payments(db.Model, UserMixin):
     amount = db.Column(db.String,nullable=False,unique=False)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     phone = db.Column(db.String)
+    email = db.Column(db.String)
     network = db.Column(db.String)
     paid = db.Column(db.Boolean, default=False)
 
@@ -302,6 +307,7 @@ def buyforms():
             try:
                 newPayment = Payments(
                     name=form.name.data,
+                    email=form.email.data,
                     amount = form.amount.data,
                     phone=form.phone.data,
                     network=form.network.data
@@ -511,13 +517,13 @@ def confirm(transactionId):
     if payment != None:
 
         try:
-            newuser = User(name = payment.name, code=code, phone=payment.phone, paid=True)
+            newuser = User(name = payment.name, code=code, phone=payment.phone, email=payment.email, paid=True)
             db.session.add(newuser)
             db.session.commit()
 
-            message = "Hi "+ payment.name + "\nYou have successfully purchased bought an application form. Your code is: " + code + "\n You can apply here: http://online.central.edu.gh/apply/"+code
+            message = "Hi "+ payment.name + "\nYou have successfully purchased bought an application form. Your code is: " + code + "\n You can apply here: http://central.edu.gh/apply/"+code
             sendsms(payment.phone, message, "Exception sending sms after successful payment of form!")
-            
+            sendAnEmail("CENTRAL UNIVERSITY ","Application Form Temporary Code.", message, newuser.email )
         except Exception as e:
             print("Exception creating user after successful payment!")
             print(e)
@@ -1176,6 +1182,7 @@ def applicantInformation():
                         date_of_birth = form.dateofbirth.data,
                         phone = form.mobile.data,
                         entry_mode = form.entrymode.data,
+                        picture = form.firebaseLink.data,
                         filed = True
                     ) 
 
@@ -1324,6 +1331,7 @@ def applicantPrograms():
 @app.route('/applicantGuardian', methods=['GET', 'POST'])
 def applicantGuardian():
     formId=6
+    formId=6
     form=ApplicantGuardian()
 
     if request.method=='POST':
@@ -1361,10 +1369,16 @@ def applicantGuardian():
             pass
 
         # return redirect(url_for('applicantExam'))
+        # return redirect(url_for('applicantExam'))
 
     else:
         print("asfd")
-    return render_template('admissions/applicantGuardian.html', form=form, metadata=admissionMap[formId])
+
+    formtitle='Education History'
+    formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
+    percentage = (formId/totalNumberOfAdmissionForms)*100
+    print(percentage)
+    return render_template('/admissions/applicantGuardian.html', form=form, metadata=admissionMap[formId])
 
 @app.route('/applicantEmployment', methods=['GET', 'POST'])
 def applicantEmployment():
@@ -1550,6 +1564,74 @@ def applicantMisinfos():
     return render_template('admissions/applicantMisinfos.html', form=form, metadata=admissionMap[formId], userdata=[])
 
 
+@app.route('/sendMail', methods=['GET','POST'])
+def sendAnEmail(title="Empty", subject="Testing", message="Message", email_receiver="mr.adumatta@gmail.com", path=None):
+    print("Attempting to send an email")
+    print(email_receiver)
+    print(type(email_receiver))
+
+    email_sender = 'pay@prestoghana.com'
+    email_password = 'nimda@2023'
+
+
+    html_content = f"""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <style>
+        @font-face {{
+            font-family: 'Plus Jakarta';
+            src: url('PlusJakartaSans-VariableFont_wght.woff2') format('woff2-variations'),
+                url('PlusJakartaSans-Italic-VariableFont_wght.woff2') format('woff2-variations');
+            font-weight: 100 500; /* Adjust font weights based on available weights */
+            font-style: normal;
+        }}
+
+        body {{
+            font-family: 'Plus Jakarta', sans-serif;
+            color:black;
+            margin: auto 10px;
+        }}
+
+        div{{
+            font-family: 'Plus Jakarta', sans-serif;
+            font-weight:200;
+        }}
+
+        </style>
+
+    </head>
+    <body style="margin:auto 10px; color:black; font-family: 'Plus Jakarta', sans-serif;">
+        {message}
+        <h6 style="font-weight:200">This email is powered by <a href='https://prestoghana.com'>PrestoGhana</a></h6>
+    </body>
+    </html>
+    """
+
+    em = EmailMessage()
+    em["From"] = f"{title} <{email_sender}>"
+    em['To'] = email_receiver
+    em['Subject'] = subject
+
+    em.set_content('')  
+    em.add_alternative(html_content, subtype='html')
+
+    print(em)
+
+    if path != None:
+        em.add_attachment(open(path, 'rb').read(), maintype='application', subtype='pdf', filename=title)
+
+    smtp_server = 'mail.privateemail.com'
+    port = 465
+
+
+    server = smtplib.SMTP_SSL(smtp_server, port)
+    server.login(email_sender, email_password)
+    server.sendmail(email_sender, email_receiver, em.as_string())
+    server.quit()
+    return "Done!"
+    
+
 @app.route('/posts')
 def posts():
     return render_template('posts.html')
@@ -1557,6 +1639,8 @@ def posts():
 @app.route('/students')
 def students():
     return render_template('students.html')
+
+
 
 if __name__ == '__main__':
     #DEBUG is SET to TRUE. CHANGE FOR PROD
