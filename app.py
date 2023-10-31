@@ -532,6 +532,10 @@ def confirm(transactionId):
 def applicationform():
     return current_user.name
 
+@app.route('/mail')
+def mail():
+    return render_template('admissions/mail.html')
+
 @app.route('/online')
 def online():
     return render_template('online.html', hideNav = True, title="Online Application Form.")
