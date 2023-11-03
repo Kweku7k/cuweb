@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Pull Changes
+# PULL CHANGES
 git pull origin production
 
 #Delete the previous environment
