@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Delete the previous environment
-sudo rm -r env
+sudo rm -r env  
 
 # Set the name of the virtual environment
 venv_name="env"
