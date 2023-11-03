@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Pull Changes
-git pul origin master
-
 #Delete the previous environment
 sudo rm -r env
 
