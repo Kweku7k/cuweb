@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Pull Changes
+git pull origin production
+
 #Delete the previous environment
 sudo rm -r env  
 
