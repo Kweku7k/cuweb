@@ -2,8 +2,6 @@ from email.message import EmailMessage
 import smtplib
 from flask import Flask,jsonify,redirect,url_for,render_template,request, send_from_directory, current_app, flash
 import os
-
-import requests
 from forms import *
 from flask_login import UserMixin, login_user, login_required, LoginManager, current_user
 from flask_sqlalchemy import SQLAlchemy
