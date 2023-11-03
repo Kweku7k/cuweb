@@ -33,6 +33,9 @@
                             <div class="modal-body">
                                 <div id="dynamicForm">
                                     <div class="">
+                                        {{form.hidden_tag()}}
+
+
                                         <div class="form-floating mb-3">
                                             {{form.institution (class="form-control webForm", placeholder="Enter Institution")}}
                                             {{form.institution.label}}
@@ -73,8 +76,8 @@
                                     <div class="col-md-4">
                                         <div class="card" style="padding: 20px 12px;">
                                             <div class="flexRow">
-                                                <h6 class="text-muted">{{school.start.strftime("%m/%d/%Y") }} - {{school.endDate.strftime("%m/%d/%Y") }}</h6>
-                                                <a href="{{url_for('deleteEducation', id=school.id)}}">
+                                                <h6 class="text-muted">{{school.startdate.strftime("%m/%d/%Y") }} - {{school.enddate.strftime("%m/%d/%Y") }}</h6>
+                                                <a href="{{url_for('deleteEmployment', id=school.id)}}">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </div>

@@ -1,7 +1,12 @@
 from flask_wtf import FlaskForm
+import requests
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
+programChoices = requests.get('https://forms.central.edu.gh/api/departments')
+# print(programChoices.json())
+allProgramChoices = [program["name"] for program in programChoices.json()["data"]]
+           
 class BuyForms(FlaskForm):
     name = StringField('Your Name', validators=[DataRequired()])
     network = SelectField('Network', choices=[("MTN","MTN"),("AIRTELTIGO","AIRTELTIGO"),("VODAFONE","VODAFONE")])
@@ -32,8 +37,8 @@ class ApplicantForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     sex = SelectField('Sex', choices=[("Male","Male"),("Female","Female")]) 
     dateofbirth = DateField('Date of Birth', format='%Y-%m-%d')
-    campus = SelectField('Campus', choices=[("Kumasi","Kumasi"),("Mataheko","Mataheko"),("Christ Temple","Christ Temple")]) 
-    stream = SelectField('Stream', choices=[("Morning","Morning"),("Evening","Evening")]) 
+    campus = SelectField('Campus', choices=[("Kumasi","Kumasi"),("Mataheko","Mataheko"),("Miosto","Miosto"),("Christ Temple","Christ Temple")]) 
+    stream = SelectField('Stream', choices=[("Morning","Morning"),("Evening","Evening"),("Weekend","Weekend")]) 
     entrymode = SelectField('Entry Mode', choices=[("Direct","Direct"),("Cohort","Cohort")]) 
     submit = SubmitField('Next')
 
@@ -67,11 +72,11 @@ class ApplicantGuardian(FlaskForm):
     submit = SubmitField('Next')
 
 class ApplicantProgram(FlaskForm):
-    program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
-    programchoice = SelectField('Program Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
-    firstchoice = SelectField('First Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
-    secondchoice = SelectField('Second Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
-    thirdchoice = SelectField('Third Choice', choices=[("First Choice","First Choice"),("Second Choice","Second Choice")])
+    # program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
+    # programchoice = SelectField('Program Choice', choices=allProgramChoices)
+    firstchoice = SelectField('First Choice', choices=allProgramChoices)
+    secondchoice = SelectField('Second Choice', choices=allProgramChoices)
+    thirdchoice = SelectField('Third Choice', choices=allProgramChoices)
     submit = SubmitField('Next')
 
 class ApplicantExamresult(FlaskForm):

@@ -7,15 +7,15 @@
                 <form method="post">
                     {{form.hidden_tag()}}
                    
-
-
                     <label for="image-picker">
                         <div style="display: flex; justify-content: left; align-items: center;">
                             {% if userdata.picture %}
-                            <img id="image-preview" style="width: 100%; object-fit:contain" src={{userdata.picture}}/>
+                            <div class="ellipse webForm" style="margin-top: 3vh;">
+                                <img id="image-preview" width="100" style=" object-fit:cover; width: 300px; height: 300px;" src="{{userdata.picture}}" alt="your image" />
+                            </div>
                             {% else %}
                             <div class="ellipse webForm" style="margin-top: 3vh;">
-                                <img id="image-preview" width="100" style="border-radius: 50%; object-fit:contain" src="{{url_for('static', filename='img/profile.jpg')}}" alt="your image" />
+                                <img id="image-preview" width="100" style=" object-fit:cover; width: 300px; height: 300px;" src="{{url_for('static', filename='img/profile.jpg')}}" alt="your image" />
                             </div>
                             {% endif %}
                         </div>      

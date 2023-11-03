@@ -16,14 +16,11 @@ import random
 import string
 import pprint
 
-
-
 app=Flask(__name__)
 baseUrl = "https://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
 prestoBot = "5876869228:AAFk644pEKRBnEhZ6jbG2nXRlj4fsyZEYgg"
 prestoUrl = "https://prestoghana.com"
-# centralAlertChannel = "-1001976261666"
 
 app.config['UPLOAD_FOLDER']='Documents'
 app.config['SECRET_KEY'] = '5791628basdfsadfa32242sdfsfde280ba245'
@@ -96,6 +93,7 @@ class ApplicantInformation(db.Model, UserMixin):
     date_of_birth = db.Column(db.DateTime)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     phone = db.Column(db.String())
+    picture = db.Column(db.String())
     entry_mode = db.Column(db.String())
     filed = db.Column(db.Boolean, default=False)
 
@@ -170,6 +168,26 @@ class Exam(db.Model, UserMixin):
 
     def __repr__(self):
         return '<Exam {}>'.format(self.program)
+
+
+
+
+class ApplicantEmployments(db.Model, UserMixin):
+    """Model for applicant employment history."""
+    __tablename__ = 'applicantEmployment'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    institution = db.Column(db.String)
+    position = db.Column(db.String)
+    startdate = db.Column(db.DateTime)
+    enddate = db.Column(db.DateTime)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Employment {}>'.format(self.institution)
+
 
 class ExamResult(db.Model, UserMixin):
     """Model for user accounts."""
@@ -1146,6 +1164,7 @@ def applicantInformation():
     if request.method=='POST':
         if form.validate_on_submit():
             if userdata is not None:
+                print("This is an update!")
                 try:
                     userdata.surname = form.surname.data
                     userdata.userId = current_user.id
@@ -1162,6 +1181,8 @@ def applicantInformation():
                     userdata.filed = True
 
                     db.session.commit()
+
+                    flash('Applicant Information has been updated successfully.')
                     return redirect(url_for('applicantPrograms'))
 
                 except Exception as e:
@@ -1186,12 +1207,15 @@ def applicantInformation():
                         filed = True
                     ) 
 
+                    flash('Applicant Information has been saved successfully.')
                     db.session.add(newapplicantInformation)
                     db.session.commit()
 
                 except Exception as e:
                     print("e")
                     print(e)
+                    flash('Saving of data has failed. Please check and try again.')
+
 
                 return redirect('applicantPrograms')
 
@@ -1210,13 +1234,12 @@ def applicantInformation():
                 form.campus.data = userdata.campus
                 form.stream.data = userdata.stream
                 form.dateofbirth.data = userdata.date_of_birth
+                form.firebaseLink.data = userdata.picture
                 form.mobile.data = userdata.phone
                 form.entrymode.data = userdata.entry_mode
         else:
             pass
-
-    percentage = (formId/totalNumberOfAdmissionForms)*100
-    print(percentage)
+        
     return render_template('admissions/applicantInformation.html', metadata=admissionMap[formId],form=form, userdata=userdata)
 
 
@@ -1278,14 +1301,17 @@ def applicantPrograms():
 
     if request.method=='POST':
         print("POST FORM!")
+        print(form.data)
         if form.validate_on_submit():
+
+            print("Programs Form validated successfully!")
             if programs is not None: 
                 try:
                     programs.userId = current_user.id,
                     programs.usercode = current_user.code,
-                    programs.program = form.program.data,
+                    programs.program = "PENDING",
                     programs.firstchoice = form.firstchoice.data,
-                    programs.secondchoice = form.secondchoice.data,
+                    programs.seconschoice = form.secondchoice.data,
                     programs.thirdchoice = form.thirdchoice.data,
                     programs.filed = True
 
@@ -1294,33 +1320,37 @@ def applicantPrograms():
                     reportError(e)
 
             else:
-                print(form.program.data)
+                print(form.data)
 
                 try:
                     newPrograms = Programs(
                     userId = current_user.id,
                     usercode = current_user.code,
-                    program = form.program.data,
-                    programchoice = form.programchoice.data,
+                    program = "PENDING",
+                    programchoice = "PENDING",
                     firstchoice = form.firstchoice.data,
-                    secondchoice = form.secondchoice.data,
+                    seconschoice = form.secondchoice.data,
                     thirdchoice = form.thirdchoice.data,
                     filed = True
                     )    
 
                     db.session.add(newPrograms)
                     db.session.commit() 
+                    return redirect(url_for('applicantEducation'))
+                
                 except Exception as e:
                     reportError(e)
 
-                return redirect(url_for('applicantEducation'))
         else:
             print(form.errors)
-        
-        return redirect(url_for('applicantEducation'))
+            reportError(form.errors)
+            flash(f'There was a problem submitting the form')
 
     if request.method == 'GET':
-        print("lol")
+        if programs is not None:
+            form.firstchoice.data = programs.firstchoice
+            form.secondchoice.data = programs.secondchoice
+            form.thirdchoice.data = programs.thirdchoice
 
     formtitle='Education History'
     formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
@@ -1333,6 +1363,7 @@ def applicantGuardian():
     formId=6
     formId=6
     form=ApplicantGuardian()
+    userdata = Guardian.query.filter_by(usercode = current_user.code).all()
 
     if request.method=='POST':
         if form.validate_on_submit:
@@ -1353,38 +1384,54 @@ def applicantGuardian():
             print("Home asdf")
             print(form)
 
-    elif request.method == 'GET':
-        userdata = Guardian.query.filter_by(usercode = current_user.code).first()
+    return render_template('/admissions/applicantGuardian.html', form=form, metadata=admissionMap[formId], userdata=userdata)
 
-        if userdata:
-            if userdata.filed == True:
-                form.guardianrelationship.data = userdata.relationship
-                form.guardianname.data = userdata.name
-                form.guardianaddress.data = userdata.address
-                form.guardianmobile.data = userdata.mobile
-                form.guardianemail.data = userdata.email,
-                form.guardianjob.data = userdata.occupation
-
-        else:
-            pass
-
-        # return redirect(url_for('applicantExam'))
-        # return redirect(url_for('applicantExam'))
-
+def postformroute(form, data, redirectUrl):
+    if form.validate_on_submit():
+        try:
+            db.session.add(data)
+            db.session.commit()
+            flash(f'Data has been updated successfully.')
+            return redirect(url_for(redirectUrl))
+        except Exception as e:
+            reportError(e)
+            print(e)
+            flash(e)
     else:
-        print("asfd")
+        print(form.errors)
+        flash(f'There was an issue updating your data. Please check and try again')
 
-    formtitle='Education History'
-    formdescription='Include your school history. This is a broad entry. Please be as thorough as possible.'
-    percentage = (formId/totalNumberOfAdmissionForms)*100
-    print(percentage)
-    return render_template('/admissions/applicantGuardian.html', form=form, metadata=admissionMap[formId])
+def deleteEntry(dbEntry,id, name):
+    entry = dbEntry.query.get_or_404(id)
+    if entry is not None:
+        try:
+            db.session.delete(entry)
+            db.session.commit()
+            flash(f'{name} has been deleted')
+        except Exception as e:
+            print(e)
 
+# FOR MODALS GOING FORWARD
 @app.route('/applicantEmployment', methods=['GET', 'POST'])
 def applicantEmployment():
     formId=4
     form=ApplicantEmployment()
-    return render_template('/admissions/applicantEmployment.html', metadata=admissionMap[formId], form=form, userdata=[])
+    employmentHistory = ApplicantEmployments.query.filter_by(usercode=current_user.code).all()
+    if request.method=='POST':
+        data = ApplicantEmployments(userId=current_user.id, usercode=current_user.code, institution=form.institution.data, position=form.position.data, startdate=form.start_date.data, enddate=form.end_date.data)
+        postformroute(form, data, "applicantEmployment" )
+    return render_template('/admissions/applicantEmployment.html', metadata=admissionMap[formId], form=form, userdata=employmentHistory)
+
+
+@app.route('/deleteEmployment/<int:id>', methods=['GET', 'POST'])
+def deleteEmployment(id):
+    deleteEntry(ApplicantEmployments, id, "Employment")
+    return redirect(url_for("applicantEmployment"))
+
+@app.route('/deleteapplicantGuardian/<int:id>', methods=['GET', 'POST'])
+def deleteapplicantGuardian(id):
+    deleteEntry(Guardian, id, "Guardian")
+    return redirect(url_for("applicantGuardian"))
 
 @app.route('/applicantExam', methods=['GET', 'POST'])
 def applicantExam():
@@ -1420,7 +1467,6 @@ def applicantExam():
 
         if userdata:
             pass
-                # form.exam.data = userdata.exam
 
     percentage = (formId/totalNumberOfAdmissionForms)*100
     print(percentage)   

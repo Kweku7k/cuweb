@@ -78,16 +78,16 @@
                         <div id="dynamicForm">
                             
                             <div class="row">
-                                    {% for school in userdata %}
+                                    {% for entry in userdata %}
                                     <div class="col-md-4">
                                         <div class="card" style="padding: 20px 12px;">
                                             <div class="flexRow">
-                                                <h6 class="text-muted">{{school.start.strftime("%m/%d/%Y") }} - {{school.endDate.strftime("%m/%d/%Y") }}</h6>
-                                                <a href="{{url_for('deleteEducation', id=school.id)}}">
+                                                <h6 class="text-muted">{{entry.relationship}}</h6>
+                                                <a href="{{url_for('delete'+metadata.current, id=entry.id)}}">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </div>
-                                            <h4>{{school.institution}}</h4>
+                                            <h4>{{entry.name}}</h4>
                                         </div>
                                     </div>
                                     {% endfor %}

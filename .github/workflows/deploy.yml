@@ -1,0 +1,34 @@
+name: Deploy Forms
+
+on:
+  push:
+    branches:
+      - production # Replace with the branch you want to trigger the deployment
+
+jobs:
+  deploy:
+    name: Delploy On CU Prod Server
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2      
+      
+      - name: Deploy to Server 1
+        uses: easingthemes/ssh-deploy@main
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.HOST_DNS }}
+          REMOTE_USER: ${{ secrets.USERNAME }}
+          TARGET: ${{ secrets.TARGET_DIR }}
+
+      - name: Executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_DNS }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            echo "Deploying changes to cuweb"
+            cd /var/www/cuweb && ./build.sh
+            # sudo systemctl restart forms.service
