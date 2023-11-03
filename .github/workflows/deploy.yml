@@ -22,5 +22,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "Deploying changes to cuweb!"
-            # cd /var/www/cuweb && ./build.sh
+            cd /var/www/cuweb && ./build.sh
             # sudo systemctl restart forms.service
