@@ -59,6 +59,7 @@ class ApplicantEmployment(FlaskForm):
 class ApplicantExams(FlaskForm):
     examtype = SelectField('Exam Type', choices=[("Wassce","Wassce"),("Nov-Dec","Nov-Dec")])
     indexnumber = StringField('Index Number', validators=[DataRequired()])
+    school = StringField('Institution', validators=[DataRequired()])
     exam_date = DateField('Exam Date', format='%Y-%m-%d')
     submit = SubmitField('Next')
 
@@ -92,15 +93,15 @@ class ApplicantContant(FlaskForm):
     contactmobile = StringField('Mobile', validators=[DataRequired()])
     contactemail = StringField('Email', validators=[DataRequired()])
     contactjob = StringField('Occupation', validators=[DataRequired()])
-    submit = SubmitField('Next')
+    submit = SubmitField('Add Contact')
 
 class ApplicantAttachment(FlaskForm):
     attachmenttype = SelectField('Type', choices=[("Transcript","Transcript")])
     attachmentname = StringField('File Name', validators=[DataRequired()])
     attachmentfile = FileField('Upload file', validators=[DataRequired()])
-    submit = SubmitField('Next')
+    submit = SubmitField('Add Attatchment')
 
-class ApplicantIdentity(FlaskForm):
+class ApplicantIdentityForm(FlaskForm):
     identitytype = SelectField('Type', choices=[("Ghana Card","Ghana Card"), ("Passport","Passport")])
     identitynumber = StringField('Identity Number', validators=[DataRequired()])
     identityexpire = DateField('Exam Date', format='%Y-%m-%d')
@@ -115,7 +116,7 @@ class ApplicantAnswer(FlaskForm):
     applicantanswer = StringField('How did you get to know about Central University', validators=[DataRequired()])
     submit = SubmitField('Next')
 
-class ApplicantRefree(FlaskForm):
+class ApplicantRefreeForm(FlaskForm):
     refreesname = StringField('Name', validators=[DataRequired()])
     refreesmobile = StringField('Mobile', validators=[DataRequired()])
     refreesemail = StringField('Email', validators=[DataRequired()])

@@ -21,7 +21,10 @@
   <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="T2FyoL8J"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
   <!-- <script>
+
     $('.carousel').carousel({
   interval: 2000
 })
@@ -48,12 +51,6 @@
   <link href="{{url_for('static', filename="vendor/glightbox/css/glightbox.min.css")}}" rel="stylesheet">
   <link href="{{url_for('static', filename="vendor/remixicon/remixicon.css")}}" rel="stylesheet">
   <link href="{{url_for('static', filename="vendor/swiper/swiper-bundle.min.css")}}" rel="stylesheet">
-  <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
 
   <!-- Template Main CSS File -->
   <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
@@ -84,14 +81,17 @@
     {% if hideNav == True %}
 
     <a href="{{url_for('home')}}">
-      <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+      <img class="" src="{{url_for('static',filename='img/Central-Uni-logo.png')}}" alt="" width="150">
     </a>
     
     {% else %}
 
       <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
+      <a class="navbar-brand" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >
+        <box-icon name='menu'></box-icon>
+      </a>
     <a href="{{url_for('home')}}">
-        <img class="" src="{{url_for('static',filename="img/Central-Uni-logo.png")}}" alt="" width="150">
+        <img class="" src="{{url_for('static',filename='img/Central-Uni-logo.png')}}" alt="" width="150">
       </a>
     {% endif %}
 
@@ -158,15 +158,21 @@
         
 
         
-        <a href="{{url_for('online')}}" target="_blank">
-          <button class="pill-button" style="padding: 10px 14px; margin-left: 10px; font-size: 16px;">
-            Profile Summary
-          </button>
-        </a>
-        
       </ul>
+        <a href="{{url_for('apply', code=current_user.code )}}" target="_blank">
+          {% if current_user.picture %}
+          <img src="{{current_user.picture}}" class="profileellipse" alt="">
+          {% else %}
+          <img src="https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png" class="profileellipse" alt="">
+          {% endif %}
+          <div>
+              <h6 style="color: black;"><b>{{current_user.code}}</b>
+              </b></h6>
+              <h6 class="text-muted">{{current_user.phone}}</h6>
+            </div>
+        </a>
       
-      <i class="bi bi-list mobile-nav-toggle"></i>
+      <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
     </nav>
 
     
@@ -174,9 +180,40 @@
  </header>
 
 <div class="container">
+
+  <!-- <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    Link with href
+  </a>
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+    Button with data-bs-target
+  </button> -->
+  
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasExampleLabel">CU Admissions Portal</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <div>You can jump through the many options from this side bar.</div>
+      
+      <a href="#">
+        <div class="sidenav-item">
+          <div style="display: flex;">
+            <box-icon type='solid' name='balloon'></box-icon>
+            <h6>Item</h6>
+          </div>
+          <box-icon name='circle'></box-icon>
+        </div>
+      </a>
+
+
+    </div>
+  </div>
   
     <!-- <h1>Title</h1> -->
-    <h4 >{{metadata.percentage}}{{metadata.title}}</h4>
+    <h4 > {{'%0.0f'| format(metadata.percentage|float)}}% {{metadata.title}}</h4>
+    
+
     <h6 class="text-muted">{{metadata.description}}</h6>
     <div class="progress" style="height: 5px;">
         <div class="progress-bar bg-primary" role="progressbar" style="width:{{metadata.percentage}}%;"
@@ -207,9 +244,34 @@
 {% block body %}
 
 {% endblock %}
+<div id="loading" style="height: 100vh; width: 100vw; display: none; background-color: white; position: fixed; top: 0; align-items: center; justify-content: center;">
+  <div>
+
+    <div style="width: 100%; text-align: center;">
+
+      <div class="spinner-border text-danger m-5" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <h6 style="text-align: center;">{{metadata.loadingMessage}}</h6>
+    </div>
+  </div>
+  </div>
+
+  <script>
+    function showLoadingScreen() {
+        console.log("Loading screen")
+        document.getElementById("loading").style.display = "flex"
+
+        setTimeout(function() {
+            document.getElementById("loading").style.display = "none";
+            }, 10000); // 10000 milliseconds = 10 seconds
+       
+
+      }
+  </script>
  
 <a href="https://api.whatsapp.com/send?phone=233233313180" target="_blank" class="whatsapp-icon">
-  <img src="{{url_for('static', filename="img/whatsappIcon.png")}}" alt="WhatsApp Icon">
+  <img src="{{url_for('static', filename='img/whatsappIcon.png')}}" alt="WhatsApp Icon">
 </a>
 
 

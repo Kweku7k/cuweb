@@ -36,7 +36,7 @@ lecturerId = 92
 adminStaffId = 93
 eventsId = 101
 
-totalNumberOfAdmissionForms = 10
+totalNumberOfAdmissionForms = 12
 
 def reportError(e):
     print(e)
@@ -89,7 +89,7 @@ class ApplicantInformation(db.Model, UserMixin):
     campus = db.Column(db.String,nullable=False,unique=False)
     stream = db.Column(db.String,nullable=False,unique=False)
     date_of_birth = db.Column(db.DateTime)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
     phone = db.Column(db.String())
     picture = db.Column(db.String())
     entry_mode = db.Column(db.String())
@@ -110,6 +110,7 @@ class Education(db.Model, UserMixin):
     start = db.Column(db.DateTime,nullable=False,unique=False)
     endDate = db.Column(db.DateTime,nullable=False,unique=False)
     entry_mode = db.Column(db.String())
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -127,6 +128,7 @@ class Programs(db.Model, UserMixin):
     firstchoice = db.Column(db.String())
     seconschoice = db.Column(db.String())
     thirdchoice = db.Column(db.String())
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
     entry_mode = db.Column(db.String())
     filed = db.Column(db.Boolean, default=False)
 
@@ -147,6 +149,7 @@ class Guardian(db.Model, UserMixin):
     mobile = db.Column(db.String,nullable=True)
     email = db.Column(db.String,nullable=True)
     occupation = db.Column(db.String,nullable=True)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -160,14 +163,36 @@ class Exam(db.Model, UserMixin):
     userId = db.Column(db.String,nullable=False,unique=False)
     usercode = db.Column(db.String,nullable=False,unique=False)
     indexNumber = db.Column(db.String)
+    school = db.Column(db.String)
     exam = db.Column(db.String)
     date = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
         return '<Exam {}>'.format(self.program)
 
 
+class ApplicantContacts(db.Model, UserMixin):
+    """Model for applicant contact history."""
+    __tablename__ = 'applicantContacts'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    relationship = db.Column(db.String)
+    name = db.Column(db.String)
+    address = db.Column(db.String)
+    email = db.Column(db.String)
+    mobile = db.Column(db.String)
+    job = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return '<Contact {self.relationship}>'.format(self.institution)
 
 
 class ApplicantEmployments(db.Model, UserMixin):
@@ -187,6 +212,59 @@ class ApplicantEmployments(db.Model, UserMixin):
         return '<Employment {}>'.format(self.institution)
 
 
+class ApplicantAttatchments(db.Model, UserMixin):
+    """Model for applicant employment history."""
+    __tablename__ = 'applicantAttatchments'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    filename = db.Column(db.String)
+    filetype = db.Column(db.String)
+    attatchmentUrl = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Attatchment {self.filetype} - {self.filename}>'
+
+
+
+class ApplicantIdentity(db.Model, UserMixin):
+    """Model for applicant employment history."""
+    __tablename__ = 'applicantIdentity'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    identitytype = db.Column(db.String)
+    identitynumber = db.Column(db.String)
+    identityexpire = db.Column(db.DateTime)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Identity {self.usercode} - {self.identitytype} - {self.identityexpire}>'
+
+
+class ApplicantReferees(db.Model, UserMixin):
+    """Model for applicant employment history."""
+    __tablename__ = 'applicantReferees'
+
+    id = db.Column(db.Integer,primary_key=True)
+    userId = db.Column(db.String,nullable=False,unique=False)
+    usercode = db.Column(db.String,nullable=False,unique=False)
+    name = db.Column(db.String)
+    mobile = db.Column(db.String)
+    email = db.Column(db.String)
+    job = db.Column(db.String)
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return f'<Referee {self.usercode} - {self.usercode} - {self.name}>'
+
+
+
 class ExamResult(db.Model, UserMixin):
     """Model for user accounts."""
     __tablename__ = 'examResult'
@@ -194,7 +272,7 @@ class ExamResult(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     userId = db.Column(db.String,nullable=False,unique=False)
     usercode = db.Column(db.String,nullable=False,unique=False)
-    indexNumber = db.Column(db.String)
+    school = db.Column(db.String)
     exam = db.Column(db.String)
     date = db.Column(db.DateTime)
     filed = db.Column(db.Boolean, default=False)
@@ -203,7 +281,8 @@ class ExamResult(db.Model, UserMixin):
         return '<Exam {}>'.format(self.program)
 
 
-baseWpUrl = "https://webcms.central.edu.gh"
+# baseWpUrl = "https://webcms.central.edu.gh"
+baseWpUrl = "http://52.203.70.80"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
 
 def sendTelegram(params):
@@ -394,7 +473,6 @@ admissionMap = {
         'nextUrl':'applicantEducation',
         'next':'ApplicantEducation',
         'description':'Please select your program choices',
-        # 'description':'Please include your schools and the years in which you comleted.',
         'title':'Program Choices',
         'percentage': (2/totalNumberOfAdmissionForms)*100
     },
@@ -445,6 +523,7 @@ admissionMap = {
         'nextUrl':'applicantIdentity', #TODO!
         'current':'applicantContacts',
         'next':'Identity',
+        'deleteUrl':'deleteContact',
         'description':'Please fill the form containing the data ',
         'percentage': (7/totalNumberOfAdmissionForms)*100
     },
@@ -453,6 +532,7 @@ admissionMap = {
         'previous':'Applicant Contacts',
         'previousUrl':'applicantContacts',
         'nextUrl':'applicantHall', #TODO!
+        'deleteUrl':'deleteIdentity',
         'current':'applicantIdentity',
         'next':'Hall',
         'description':'Please add an Identity ',
@@ -496,10 +576,23 @@ admissionMap = {
         'current':'applicantReferees',
         'next':'Profile Summary',
         'description':'Please fill the form containing the data ',
-        'percentage': (12/totalNumberOfAdmissionForms)*100
+        'percentage': (12/totalNumberOfAdmissionForms)*100,
+        'loadingMessage':"Submitting Your Final Application"
     }
     
 }
+
+@app.route('/apply/<string:code>', methods=['GET', 'POST'])
+def applywithcode(code):
+    user = User.query.filter_by(code = code).first()
+    if user is not None:
+        login_user(user)
+        flash(f'Welcome back {user.name}')
+        return redirect(url_for('applicantInformation'))
+    else:
+        flash('There is no user with this code.')
+        return redirect(url_for('apply'))
+
 
 
 @app.route('/apply', methods=['GET', 'POST'])
@@ -516,7 +609,6 @@ def apply():
                 flash(f'Oopss, no code was found. please check and try again', "danger")
     else:
         print("asdf")
-        # flash(f'The verification code has been sent to your email and your sms.', category="success")
     return render_template('verification.html', form=form)
 
 @app.route('/confirm/<transactionId>', methods=['GET', 'POST'])
@@ -1253,6 +1345,8 @@ def deleteEducation(id):
             print(e)
     return redirect(url_for('applicantEducation'))
 
+# ----------------------------
+
 @app.route('/applicantEducation', methods=['GET', 'POST'])
 def applicantEducation():
     formId=3
@@ -1313,7 +1407,10 @@ def applicantPrograms():
                     programs.thirdchoice = form.thirdchoice.data,
                     programs.filed = True
 
+                    flash(f'Programs has been updated')
+
                     db.session.commit()
+                    return redirect(url_for('applicantEducation'))
                 except Exception as e:
                     reportError(e)
 
@@ -1347,7 +1444,7 @@ def applicantPrograms():
     if request.method == 'GET':
         if programs is not None:
             form.firstchoice.data = programs.firstchoice
-            form.secondchoice.data = programs.secondchoice
+            form.secondchoice.data = programs.seconschoice
             form.thirdchoice.data = programs.thirdchoice
 
     formtitle='Education History'
@@ -1358,7 +1455,6 @@ def applicantPrograms():
 
 @app.route('/applicantGuardian', methods=['GET', 'POST'])
 def applicantGuardian():
-    formId=6
     formId=6
     form=ApplicantGuardian()
     userdata = Guardian.query.filter_by(usercode = current_user.code).all()
@@ -1378,6 +1474,7 @@ def applicantGuardian():
                     )
             db.session.add(applicationGuardian)
             db.session.commit()
+            return redirect(url_for('applicantGuardian'))
         else:
             print("Home asdf")
             print(form)
@@ -1385,12 +1482,12 @@ def applicantGuardian():
     return render_template('/admissions/applicantGuardian.html', form=form, metadata=admissionMap[formId], userdata=userdata)
 
 def postformroute(form, data, redirectUrl):
+    print("Attempting to upload {redirectUrl} to db.")
     if form.validate_on_submit():
         try:
             db.session.add(data)
             db.session.commit()
-            flash(f'Data has been updated successfully.')
-            return redirect(url_for(redirectUrl))
+            flash(f'{redirectUrl} has been updated successfully.')
         except Exception as e:
             reportError(e)
             print(e)
@@ -1418,6 +1515,7 @@ def applicantEmployment():
     if request.method=='POST':
         data = ApplicantEmployments(userId=current_user.id, usercode=current_user.code, institution=form.institution.data, position=form.position.data, startdate=form.start_date.data, enddate=form.end_date.data)
         postformroute(form, data, "applicantEmployment" )
+        return redirect(url_for(admissionMap[formId]["current"]))
     return render_template('/admissions/applicantEmployment.html', metadata=admissionMap[formId], form=form, userdata=employmentHistory)
 
 
@@ -1446,6 +1544,7 @@ def applicantExam():
                     usercode = current_user.code,
                     exam = form.examtype.data,
                     indexNumber = form.indexnumber.data,
+                    school = form.school.data,
                     date = form.exam_date.data,
                     filed = True)
                 db.session.add(exam)
@@ -1495,7 +1594,7 @@ def applicantExamresult():
     # check request method
     if request.method=='POST':
         print("postrequest")
-        if form.validate_on_submit:
+        if form.validate_on_submit():
             # ExamResult
             print("formvalidated")
             return redirect(url_for('applicantcontacts'))
@@ -1506,40 +1605,77 @@ def applicantExamresult():
         userdata = ExamResult.query.filter_by(usercode = current_user.code).first()
 
         if userdata:
-            if userdata.filed == True:
+            if userdata.filed == True: 
                 pass
-    # check form validation
-    # check errors
+
     return render_template('applicantExamresult.html', form=form)
+
+def reportFormError(form):
+    print(form.errors) 
+    flash(f'THere was an error with your form')
 
 
 @app.route('/applicantContacts', methods=["GET", "POST"])
 def applicantContacts():
     formId=7
     form=ApplicantContant()
+    contactHistory = ApplicantContacts.query.filter_by(usercode=current_user.code).all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            data = ApplicantContacts(userId=current_user.id, usercode=current_user.code, relationship=form.contactrelationship.data, name=form.contactname.data, address=form.contactaddress.data, email=form.contactemail.data, mobile=form.contactmobile.data, job=form.contactjob.data)
+            postformroute(form, data, "applicantContacts" )
+            return redirect(url_for(admissionMap[formId]["current"]))
+        else:
+            reportFormError(form)
+    return render_template('admissions/applicantContacts.html', form=form, metadata=admissionMap[formId], userdata=contactHistory)
 
-    # check form validation
-    # check errors
-    return render_template('admissions/applicantContacts.html', form=form, metadata=admissionMap[formId], userdata=[])
+@app.route('/deleteContact/<int:id>', methods=['GET', 'POST'])
+def deleteContact(id):
+    deleteEntry(ApplicantContacts, id, "Contacts")
+    return redirect(url_for("applicantContacts"))
+
+
+# -------------------------
 
 @app.route('/applicantAttachments', methods=['GET', 'POST'])
 def applicantAttachments():
     formId=5
     form=ApplicantAttachment()
-    # check request method
-    # check form validation
-    # check errors
-    return render_template('admissions/applicantAttachments.html', form=form, metadata=admissionMap[formId], userdata={'name':'None','picture':'lol'})
+    attatchmentHistory = ApplicantAttatchments.query.filter_by(usercode=current_user.code).all()
+    if form.validate_on_submit():
+        data = ApplicantAttatchments(userId=current_user.id, usercode=current_user.code, filename=form.attachmentname.data, filetype=form.attachmenttype.data)
+        postformroute(form, data, "applicantAttachments" )
+        return redirect(url_for(admissionMap[formId]["current"]))
+    return render_template('admissions/applicantAttachments.html', form=form, metadata=admissionMap[formId], userdata=attatchmentHistory)
 
+@app.route('/deleteAttatchment/<int:id>', methods=['GET', 'POST'])
+def deleteAttatchment(id):
+    deleteEntry(ApplicantAttatchments, id, "Attatchment")
+    return redirect(url_for("applicantAttachments"))
+
+# -------------------------
 @app.route('/applicantIdentity', methods=['GET', 'POST'])
+@login_required
 def applicantIdentity():
     formId=8
-    form=ApplicantIdentity()
-    # check request method
-    # check form validation
-    # check errors
-    return render_template('admissions/applicantIdentity.html', form=form, metadata=admissionMap[formId], userdata={'name':'None','picture':'lol'})
+    form=ApplicantIdentityForm()
+    metadata = admissionMap[formId]
+    userdata = ApplicantIdentity.query.filter_by(usercode=current_user.code).all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            data = ApplicantIdentity(userId=current_user.id, usercode=current_user.code, identitytype = form.identitytype.data, identitynumber=form.identitynumber.data, identityexpire=form.identityexpire.data)
+            postformroute(form, data, "applicantIdentity" )
+            return redirect(url_for("applicantIdentity"))
+        else:
+            reportFormError(form)
+    return render_template('admissions/applicantIdentity.html', form=form, metadata=metadata, userdata=userdata)
 
+@app.route('/deleteIdentity/<int:id>', methods=['GET', 'POST'])
+def deleteIdentity(id):
+    deleteEntry(ApplicantIdentity, id, "Applicant Identity")
+    return redirect(url_for("applicantIdentity"))
+
+# -------------------------
 
 @app.route('/applicantphotos', methods=['GET', 'POST'])
 def applicantphotos():
@@ -1571,11 +1707,17 @@ def applicantanswers():
 @app.route('/applicantReferees', methods=['GET', 'POST'])
 def applicantReferees():
     formId=12
-    form=ApplicantRefree()
-    # check request method
-    # check form validation
-    # check errors
-    return render_template('admissions/applicantReferees.html', form=form, metadata=admissionMap[formId], userdata=[])
+    form=ApplicantRefreeForm()
+    metadata = admissionMap[formId]
+    userdata = ApplicantReferees.query.filter_by(usercode=current_user.code).all()
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            data = ApplicantReferees(userId=current_user.id, usercode=current_user.code, name=form.refreesname.data, mobile=form.refreesmobile.data, email=form.refreesemail.data, job=form.refreesjob.data)
+            postformroute(form, data, "applicantReferees" )
+            return redirect(url_for("applicantReferees"))
+        else:
+            reportFormError(form)
+    return render_template('admissions/applicantReferees.html', form=form, metadata=metadata, userdata=userdata )
 
 
 @app.route('/applicantSummary', methods=['GET', 'POST'])

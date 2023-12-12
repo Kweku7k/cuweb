@@ -8,6 +8,9 @@
 
 <br>
 
+                    {{form.hidden_tag()}}
+
+
                     <div class="controls" style="display: flex; align-items: center;">
 
                         {% if userdata|length > 1 %}
@@ -75,22 +78,21 @@
                                     <div class="col-md-4">
                                         <div class="card" style="padding: 20px 12px;">
                                             <div class="flexRow">
-                                                <h6 class="text-muted">{{school.start.strftime("%m/%d/%Y") }} - {{school.endDate.strftime("%m/%d/%Y") }}</h6>
+                                                <h6 class="text-muted">{{school.job}}</h6>
                                                 <a href="{{url_for('deleteEducation', id=school.id)}}">
                                                     <i class="fa fa-trash" aria-hidden="true"></i>
                                                 </a>
                                             </div>
-                                            <h4>{{school.refrees}}</h4>
+                                            <h4>{{school.name}}</h4>
                                         </div>
                                     </div>
                                     {% endfor %}
                                 </div>
-
                         </div>
                     </div>
 
                     <a href="{{url_for(metadata.nextUrl)}}">
-                        <button type="button" class="pill-button full">Next</button>
+                        <button type="button" class="pill-button full">Finish Application</button>
                     </a>
                     
                     

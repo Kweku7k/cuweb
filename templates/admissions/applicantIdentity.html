@@ -50,22 +50,35 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="pill-button">Add Identity</button>
+                      {{form.submit (class='pill-button')}}
                     </div>
                   </div>
                 </div>
               </div>
 
+              <div id="dynamicForm">
+                            
+                <div class="row">
+                        {% for data in userdata %}
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 20px 12px;">
+                                <div class="flexRow">
+                                    <h6 class="text-muted">{{data.identitytype }}</h6>
+                                    <a href="{{url_for(metadata.deleteUrl, id=data.id)}}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <h4>{{data.identitynumber}}</h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
 
-            <!-- <div class="ellipse">
-                <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
-            </div> -->
+            </div>
             
             <a href="{{url_for(metadata.nextUrl)}}">
               <button type="button" class="pill-button full">Next</button>
             </a>
-            <!-- {{form.submit (class="pill-button", style="width:100%", onclick="") }} -->
-           
         </form>
 
     </div>

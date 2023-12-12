@@ -596,6 +596,15 @@ button{
   display: flex;
   justify-content: center;
 }
+.profileellipse{
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+  margin-right: 10px;
+  object-fit: cover;
+  
+}
 
 
 .icon-boxes {
@@ -735,6 +744,16 @@ section {
 
 .section-title {
   text-align: center;
+}
+
+.sidenav-item{
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+box-icon{
+  margin-right: 10px;
 }
 
 .section-title h2 {

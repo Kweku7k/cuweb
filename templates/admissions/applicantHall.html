@@ -49,6 +49,27 @@
                 </div>
               </div>
 
+              <div id="dynamicForm">
+                            
+                <div class="row">
+                        {% for data in userdata %}
+                        <div class="col-md-4">
+                            <div class="card" style="padding: 20px 12px;">
+                                <div class="flexRow">
+                                    <h6 class="text-muted">{{data.identitytype }}</h6>
+                                    <a href="{{url_for(metadata.deleteUrl, id=data.id)}}">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                                <h4>{{data.identitynumber}}</h4>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+            </div>
+            
+
 
             <!-- <div class="ellipse">
                 <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
