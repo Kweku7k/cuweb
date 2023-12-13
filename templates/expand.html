@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<section style="padding-top: 15vh;">
+    <div class="container">
+        <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+            <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+            <h4 style="padding-top: 1px;" id="title"><b></b></h4>
+            <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+        </div>
+
+        <div class="row justify-content-center" id="content">
+            
+        </div>
+    </div>
+</section>
+
+<script>
+
+console.log("Calling api!!")
+url = "{{url}}"
+  fetch(url)
+  .then(function(response) {
+      return response.json();
+    }).then(function(data) {
+        console.log("data")
+        console.log(data)
+        
+        document.getElementById("content").innerHTML = data.rendered_content.content.rendered
+        document.getElementById("title").innerHTML = data.rendered_content.title.rendered
+        console.log(data)
+        
+      var title = data.rendered_content.title.rendered
+      var post = data.rendered_content.content.rendered
+     
+      console.log("title")
+      console.log(title)
+      console.log("post")
+      console.log(post)
+
+  })   
+</script>
+
+{% endblock %}
+
+

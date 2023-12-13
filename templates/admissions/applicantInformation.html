@@ -1,0 +1,177 @@
+{% extends "admissions/admissionslayout.html" %}
+
+{% block body %}
+
+        <div class="container" style="margin-top: 1vh;">
+            <div style="padding: 15px;">
+                <form method="post">
+                    {{form.hidden_tag()}}
+                   
+                    <label for="image-picker">
+                        <div style="display: flex; justify-content: left; align-items: center;">
+                            {% if userdata.picture %}
+                            <div class="ellipse webForm" style="margin-top: 3vh;">
+                                <img id="image-preview" width="100" style=" object-fit:cover; width: 300px; height: 300px;" src="{{userdata.picture}}" alt="your image" />
+                            </div>
+                            {% else %}
+                            <div class="ellipse webForm" style="margin-top: 3vh;">
+                                <img id="image-preview" width="100" style=" object-fit:cover; width: 300px; height: 300px;" src="{{url_for('static', filename='img/profile.jpg')}}" alt="your image" />
+                            </div>
+                            {% endif %}
+                        </div>      
+                        <h6 id="error" style="color: red; display: none;">Please upload an image to continue</h6>
+                    </label>
+                
+                    <input style="display:none" id="image-picker" type="file" accept="image/*" />
+
+                    <div class="mb-3" style="display: none;">
+                        {{form.firebaseLink.label}}
+                        {{form.firebaseLink (class="form-control webForm", id="firebaseLink", placeholder="Enter your name")}} 
+                    </div>
+                    <div class="mb-3">
+                        {{form.prefix.label}}
+                        {{form.prefix (class="form-control webForm", placeholder="Enter your name")}} 
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.surname (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.surname.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.othername (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.othername.label}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.nationality.label}}
+                        {{form.nationality (class="form-control webForm", placeholder="Enter your name")}} 
+                    </div>
+                    <div class="mb-3">
+                        {{form.dateofbirth.label}}
+                        {{form.dateofbirth (class="form-control webForm", placeholder="Enter your name")}} 
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.mobile (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.mobile.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.email (class="form-control webForm", placeholder="Enter your name")}} 
+                        {{form.email.label}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.sex.label}}
+                        {{form.sex (class="form-control webForm", placeholder="Enter your name")}}
+                    </div>
+                   <!-- TODO: DATE OF BIRTH! -->
+                    <div class="mb-3">
+                        {{form.campus.label}}
+                        {{form.campus (class="form-control webForm", placeholder="Enter your name")}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.stream.label}}
+                        {{form.stream (class="form-control webForm", placeholder="Enter your name")}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.entrymode.label}}
+                        {{form.entrymode (class="form-control webForm", placeholder="Enter your name")}}
+                    </div>
+
+                    {{form.submit (class="pill-button", id="submitButton", style="width:100%", onclick="") }}
+                
+                </form>
+
+
+                <script>
+
+                    $("#image-picker").change(function (event) {
+                        readURL(this);
+                        document.getElementById('error').style.display = 'none';
+                    
+                    });
+                        function readURL(input) {
+                        if (input.files && input.files[0]) {
+                            var reader = new FileReader();
+                            pushImage(input.files[0])
+                    
+                            reader.onload = function (e) {
+                                $('#image-preview').attr('src', e.target.result);
+                            }
+                    
+                            reader.readAsDataURL(input.files[0]);
+                    
+                    
+                        }
+                    }
+                    </script>
+                    
+                    
+                    <script>
+                    
+                        var firebaseLink = document.getElementById("firebaseLink").innerText
+                        // Push batch images to storage and store references in the database
+                        var pushImage = function (file) {
+                            document.getElementById('submitButton').innerHTML = `
+                            <button class="pill-button-alternate" style=" width=100%"><i class="fa fa-pause-circle-o" aria-hidden="true" style="color:'white'"></i>Please wait while we upload your image</button>
+                            `
+                    
+                           // var uid = firebase.auth().currentUser.uid;
+                           // Create storage reference
+                           var ref = firebase.storage().ref(`/ineruu-142dc-default-rtdb/Images/`).child(file.name + ".jpg");
+                       
+                           // Upload file and get task
+                           var task = ref.put(file, {contentType: file.type});
+                        
+                           // Monitor task for progress
+                           task.on('state_changed',
+                               // Shows progress of task
+                               function progress(snapshot) {
+                                   var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                   console.log(percentage);
+                               },
+                               // Shows any errors occurring during progress
+                               function error(err) {
+                                   // Handle unsuccessful uploads
+                                   console.log(err.message);
+                       
+                               },
+                               // Shows when task is completed
+                               function complete() {
+                                   // Handle successful uploads on complete
+                                   var image = task.snapshot.downloadUrl;
+                                   var secondImage = task.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+                               console.log('File available at', downloadURL);
+                            //    firebaseLink = downloadURL
+                               document.getElementById("firebaseLink").value = downloadURL
+                            //    console.log("Firebase Link: " + firebaseLink)
+                                document.getElementById('submitButton').innerHTML = `{{form.submit (class="pill-button",onclick="showLoadingScreen()", style="width:100%")}}`
+                    
+                             });
+                                //    console.log(task);
+                                //    console.log(image);
+                                //    console.log(secondImage.PromiseResult).then(res => {
+                                //        console.log("THis is" + res)
+                                       
+                                //    });
+                       
+                                   // Data model to be uploaded to the database
+                                   var data = {
+                                       imageUrl: image
+                                   };
+                                   
+                                   // var db = firebase.database().ref(/GHotelBookMan/Hotels/${uid}/Images).push();
+                                   // db.set(data).then(() => {
+                                   //     row.empty();
+                                   //     loadCurrentHotel(uid);
+                                   // });
+                               });  
+                        };
+                       
+                       
+                         function changeimagesss(event) {
+                           console.log(event)
+                           pushImage(event)
+                       
+                           
+                         }
+                       
+                        </script> 
+
+{% endblock %}

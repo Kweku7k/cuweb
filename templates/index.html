@@ -1,0 +1,643 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<!-- ======= Hero Section ======= -->
+<!-- <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row justify-content-center" style="padding-top: 6vh;">
+        <div class="col-xl-7 col-lg-9 text-center">
+          <h1>Welcome to Central University</h1>
+          <h2>Faith, Integrity and Excellence</h2>
+        </div>
+      </div>
+      <div class="text-center" style="margin-top: 2vh;">
+        <a href="{{url_for("online")}}">
+          <button class="pill-button" style="margin-top: 10px;">Apply Now</button>
+        </a>
+      </div>
+
+      <div class="row icon-boxes">
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-stack-line"></i></div>
+            <h4 class="title"><a href="">Integrity</a></h4>
+            <p class="description">We pride our successes and strides on transparency and accountability</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-palette-line"></i></div>
+            <h4 class="title"><a href="">Faith</a></h4>
+            <p class="description">As a christian institution we focus on leadership and faith in the Lord!</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+          <div class="icon-box">
+            <div class="icon"><i class="ri-command-line"></i></div>
+            <h4 class="title"><a href="">Excellence</a></h4>
+            <p class="description">As our record may show. We top charts holistically. Aiming to pesevere</p>
+          </div>
+        </div>
+        
+        
+      </div>
+    </div>
+  </section> -->
+  <!-- End Hero -->
+  
+  <main id="main">
+    <!-- caurosel-->
+    <section>
+      <a href="#">
+      <div class="container-fluid" style="width: 100%; height: auto;">
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+
+            {% for image in gallery %}
+              {% if loop.index == 1 %}
+                <div class="carousel-item active" data-bs-interval="3000">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto; opacity: 1;" alt="...">
+                </div>
+                {% else %}
+                <div class="carousel-item" data-bs-interval="3000">
+                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: auto; opacity: 1;" alt="...">
+                </div>
+                {% endif %}
+
+            {% endfor %}
+<!--            
+            <div class="carousel-item active" data-bs-interval="3000">
+              <img src="{{url_for("static", filename="img/carosel/1.png")}}" class="d-block w-100 img-caro" alt="...">
+            </div> -->
+            <!-- <div class="carousel-item" data-bs-interval="3000">
+              <img src="{{url_for("static", filename="img/carosel/2.png")}}" class="d-block w-100 img-caro" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="3000">
+              <img src="{{url_for("static", filename="img/carosel/3.png")}}" class="d-block w-100 img-caro" alt="...">
+            </div>
+            <div class="carousel-item" data-bs-interval="3000">
+              <img src="{{url_for("static", filename="img/carosel/4.png")}}" class="d-block w-100 img-caro" alt="...">
+            </div>
+             -->
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+    
+        <!-- <a href="{{url_for("news")}}">
+          <button class="pill-button" style="padding: 10px 18px; margin: 8px 0 0 0;">
+            View all news
+          </button>
+        </a> -->
+      </div>
+    </a>
+    </section>
+    <!--End of Caurosel  -->
+
+
+    
+    <!-- ======= Cta Section ======= -->
+    <section id="admissions" class="cta">
+     <div class="container">
+       <div class="text-center">
+         <h3>Are you eligible for our 2023-2024 enrollment?</h3>
+         <p> Check to see which courses you are eligible for on our eligibility platform. </p>
+         
+         <div class="d-flex-center">
+           <a class="cta-btn" href="https://eligibility.central.edu.gh/">Check Eligibility</a>
+           <a class="cta-btn" href="{{url_for('international')}}" style="margin-left: 8px;">Our Programs</a>
+         </div>
+       </div>
+     </div>
+   </section><!-- End Cta Section -->
+    
+    <!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?controls=0?rel=0&hd=1qY?autoplay=1&mute=1" frameborder="0" allowfullscreen></iframe> -->
+
+
+
+    <!-- ======= About Video Section ======= -->
+    <section id="about" class="about-video">
+      <div class="container">
+        
+        <div class="videoWrapper">
+          <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?autoplay=1&mute=1&loop=1&rel=0" frameborder="0" ></iframe>
+          <!-- <iframe width="560" height="349" src="https://www.youtube.com/embed/hvPhrmf46Jo?autoplay=1&mute=1&loop=1" frameborder="0" ></iframe> -->
+        </div>
+        
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" >
+            <h3>About Central University</h3>
+            <p class="fst-italic">
+              It has its origins in a short-term Pastoral training institute, which was started in October 1988 by ICGC. It was later incorporated, in June 1991 under the name, Central Bible College. In 1993, the name was changed again to Central Christian College. The College later upgraded its programmes to the baccalaureate level, and in line with national aspirations, expanded its programmes to include an integrated and practice oriented business school, named Central Business School.
+            </p>
+            
+            <p>
+              To reflect its new status as a liberal arts tertiary institution, the university was re-christened Central University College in 1998. The National Accreditation Board has since accredited it as a tertiary Institution. It is co-educational with equal access for male and female enrolment. Central University has eight (8) faculties/schools, namely the Central Business School (CBS), the School of Architecture and Design (SADe), School of Graduate Studies (SGS), Faculty of Arts and Social Sciences (FASS), Faculty of Law(FOL), School of Pharmacy(SOP), School of Engineering and Technology (SET) and the School of Medicine and Health Sciences (SMHS)
+           
+            </p>
+            <a href="{{url_for('about')}}" class="btn-learn-more">Learn More</a>
+          </div>
+
+
+
+      </div>
+    </section>
+    <!-- End About Video Section -->
+
+
+
+
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts section-bg">
+      <div class="container">
+        
+        <div class="row justify-content-end">
+
+          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <span data-purecounter-start="0" data-purecounter-end="29803" data-purecounter-duration="2" class="purecounter"></span>
+              <p style="color: #111111;"><b>Graduants</b></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <span data-purecounter-start="0" data-purecounter-end="22" data-purecounter-duration="2" class="purecounter"></span>
+              <p style="color: #111111;"><b>Graduation</b></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <span data-purecounter-start="0" data-purecounter-end="25" data-purecounter-duration="2" class="purecounter"></span>
+              <p style="color: #111111;"><b>Years</b></p>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-5 col-6 d-md-flex align-items-md-stretch">
+            <div class="count-box">
+              <span data-purecounter-start="0" data-purecounter-end="6" data-purecounter-duration="2" class="purecounter"></span>
+              <p style="color: #111111;"><b>Awards</b></p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+    <!-- End Counts Section -->
+
+
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8" style="margin-bottom: 20px;">
+            <div class="section-title">
+              <h2>Upcoming News</h2>
+            </div>
+              <!-- Upcoming events content goes here -->
+              <a href="/events">
+              <div class="single_event position-relative">
+                <div class="event_thumb" >
+                    <img src={{events.image}} width="100%" alt="" style="object-fit: contain;"/>
+                </div>
+
+            </div>
+          </a>
+
+          </div>
+          <div class="col-md-4">
+            <div class="section-title">
+              <h2>Social Media</h2>
+            </div>
+              <!-- Latest news content goes here -->
+              <!-- <iframe src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fweb.facebook.com%2Fcentraledugh%2Fposts%2Fpfbid0KEEEpG1QurjRiKoFtPGM9YiaAFcicDTvY6MrcuSpGxziHKUwfH7DgqERd5s12VDel&show_text=true&width=500" width="100%" height="100%" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe> -->
+              <!-- <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2Fcentraledugh%2F&amp;tabs=timeline&amp;width=400&amp;height=600&amp;small_header=true&amp;adapt_container_width=true&amp;hide_cover=false&amp;show_facepile=true&amp;appId=215976095088446" width="500 !important" height="600" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> -->
+              <div class="fb-page" data-href="https://www.facebook.com/centraledugh" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/centraledugh" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/centraledugh"> Please wait while we load Central Univeristy Feed</a></blockquote></div>
+            </div>
+        </div> 
+      </div>
+    </section>
+   
+    <!-- ======= Portfolio Section ======= -->
+    <!-- <section id="portfolio" class="portfolio" style="padding: 20px 0;">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row" data-aos="fade-up" data-aos-delay="150">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">All</li>
+              <li data-filter=".filter-grad">Graduants</li>
+              <li data-filter=".filter-staff">Staff</li>
+              <li data-filter=".filter-student">Students</li>
+              <li data-filter=".filter-web">Sports</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="300">
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
+            <div class="portfolio-wrap">
+              <img src="{{url_for("static",filename="img/cuGram/cu1.jpg")}}" class="img-fluid" alt="">
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app">
+            <div class="portfolio-wrap">
+              <img src="assets/img/cuGram/cu2.jpg" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>App 1</h4>
+                <p>App</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 portfolio-item filter-grad">
+            <div class="portfolio-wrap">
+              <img src="{{url_for("static",filename="img/cuGram/cu3.jpg")}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>App 1</h4>
+                <p>App</p>
+                <div class="portfolio-links">
+                  <a href="assets/img/cuGram/cu1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
+                  <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>End Portfolio Section -->
+
+    <!-- ======= Testimonials Section ======= -->
+    <section id="testimonials" class="testimonials">
+      <div class="container">
+
+        <div class="section-title">
+          <h2>Gallery</h2>
+          <!-- <p>Some kind words from some of our students that have passed through Central University.</p> -->
+        </div>
+
+        <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="50">
+          <div class="swiper-wrapper">
+
+            <!-- <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src="{{url_for('static',filename='img/cuGram/cu1.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div> -->
+            
+            {% for image in supportGallery %}
+              <div class="swiper-slide">
+                <div class="testimonial-item">
+                    <img src={{image}} style="object-fit: cover; width: 100%; height: 100%; object-fit: cover;" class="img-fluid" alt="">
+                </div>
+              </div>
+            {% endfor %}
+
+<!-- 
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src="{{url_for('static',filename='img/cuGram/cu3.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src="{{url_for('static',filename='img/cuGram/cu5.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src="{{url_for('static',filename='img/cuGram/cu6.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src="{{url_for('static',filename='img/cuGram/cu7.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                <div class="portfolio-wrap">
+                  <img src="{{url_for('static',filename='img/cuGram/cu11.jpg')}}" class="img-fluid" alt="">
+                </div>
+              </div>
+            </div> -->
+
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+
+      </div>
+    </section><!-- End Testimonials Section -->
+
+    
+
+    <!-- ======= Team Section ======= -->
+   <!-- <section id="team" class="team section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Team</h2>
+          <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+        </div>
+
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-1.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-2.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-3.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="member">
+              <div class="member-img">
+                <img src="assets/img/team/team-4.jpg" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section> -->
+    <!-- End Team Section -->
+
+
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <!-- <section id="faq" class="faq section-bg" style="padding: 30px;">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Here are some frequently asked questions about admission and enrollment.</p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Can I continue if I have a diploma degree<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">Do you accept international students, and are the rates the same? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Can I attend Central University as a distant student <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">Do I get a discount as a member of the ICGC? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">Do you offer any kind of scholarships? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section> -->
+    <!-- End Frequently Asked Questions Section -->
+
+    <!-- Contact Us Section -->
+
+      <section id="contact" style="padding: 0;">
+        <div class="container">
+          <h1><b>Contact Us</b></h1>
+          <div class="row">
+            <div class="col-md-6">
+                <h6><b>You can leave a message and we would respond if need be.</b></h6>
+                <br/>
+                <form method="post">
+                    {{form.hidden_tag()}}
+                    
+                    <div class="form-floating mb-3">
+                        {{form.name (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.name.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.number (class="form-control webForm", placeholder="Enter your number")}}
+                        {{form.number.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                      {{form.email (class="form-control webForm", placeholder="Enter your Email Address")}}
+                      {{form.email.label}}
+                    </div>
+                    <div class="form-floating mb-3">
+                        {{form.message (class="form-control webForm", placeholder="Write Message here", style="height: 12vh;")}}
+                        {{form.message.label}}
+                    </div>
+        
+                    {{form.submit (class="pill-button", style="width:100%") }}
+        
+                </form>
+            </div>
+
+            <div class="col-md-6" style="padding-top: 10px;">
+              <div>
+                <h6><b>Locate Us.</b></h6>
+
+                <!-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> -->
+                <iframe style="border:0; width: 100%; height: 48vh;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015560.2534173054!2d-1.3031758448857569!3d6.12636390104031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf817eb79d2f75%3A0x3d99be9dfb765ce6!2sCentral%20University!5e0!3m2!1sen!2sgh!4v1669718940848!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              </div>
+            </div>
+          </div>  
+        </div>
+      </section>
+    <!-- End of Contact Us Section   -->
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content" style="padding: 23px;">
+          <div class="modal-body">
+            <header>
+              <h5 style="color: #ca1e18;"><i class="bx bx-cookie"></i> <b>Cookies Consent</b></h5>
+            </header>
+
+            <h6>We use cookies to improve site functionality, analyse site traffic, and enhance user experience. By clicking "Accept" you agree to this cookie use. <a href="/privacypolicy" style="color:#ca1e18;">Read our cookie policy</a>.</h6>
+            
+            <div style="display: flex; justify-content: flex-end; align-items: flex-end;">
+              <button class="pill-button"  id="acceptBtn" data-bs-dismiss="modal" style="padding: 10px 13px; border-radius: 3px;">Accept</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+   
+
+
+
+  </main><!-- End #main -->
+
+  <script>
+    // Function to set a cookie with an expiration time
+    function setCookie(cname, cvalue, hours) {
+      var d = new Date();
+      d.setTime(d.getTime() + (hours * 60 * 60 * 1000));
+      var expires = "expires=" + d.toUTCString();
+      document.cookie = cname + "=" + cvalue + "; " + expires + "; path=/";
+    }
+
+    // Function to check if the cookie exists
+    function getCookie(cname) {
+      var name = cname + "=";
+      var decodedCookie = decodeURIComponent(document.cookie);
+      var ca = decodedCookie.split(';');
+      for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+          c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // Function to close the modal and set the cookie on "Accept"
+    function acceptAndClose() {
+      var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+      modal.hide(); // Close the modal
+      setCookie("cookieAccepted", "true", 2); // Set the cookie for 2 hours
+    }
+
+    // Wait for the document to be fully loaded before executing the code
+    document.addEventListener("DOMContentLoaded", function () {
+      // Check if the "cookieAccepted" cookie exists
+      if (!getCookie("cookieAccepted")) {
+        var modal = new bootstrap.Modal(document.getElementById('exampleModal'));
+        modal.show(); // Show the modal
+      }
+    });
+
+    // Add event listener for the "Accept" button
+    document.getElementById("acceptBtn").addEventListener("click", acceptAndClose);
+  </script>
+
+<!-- <script>
+  const tagid = {{id}}
+  const allwpposts = {{allposts|safe}}
+  const tableRows = allwpposts.map((item, index) =>  `   
+            <div class="tab-pane fade ${item.id == tagid ? 'show active' : ''} " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
+              <h1>${item.title}</h1>
+              ${item.content}
+            </div>
+            `).join('');
+  console.log("tableRows")
+  console.log(tableRows)
+  document.getElementById('pills-tabContent').innerHTML = tableRows;
+   
+  </script> -->
+
+
+  {% endblock %}

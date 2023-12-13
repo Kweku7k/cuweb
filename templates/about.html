@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<section>
+    <div class="container">
+        <div class="row">
+          <div class="col-md-8 order-1 order-lg-1" style="padding: 0 0 7px 7px;">
+            <div class="tab-content" id="pills-tabContent" style="padding: 0 7px;">
+              <!-- JS IS INJECTED -->
+            </div>    
+          </div>
+
+          <div class="col-md-4 order-1 order-lg-2">
+            <ul class="nav nav-pills mb-3 list-group list-group-flush" id="pills-tab" role="tablist">
+              {% for tag in tags %}
+                {% if loop.index == 1 %}
+                  <li class="nav-item list-group-item" role="presentation">
+                    <button class="nav-link side-nav active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
+                  </li>
+                {% else %}
+                  <li class="nav-item list-group-item" role="presentation">
+                    <button class="nav-link side-nav" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
+                  </li>
+                  {% endif %}
+              {% endfor %}  
+              </ul>
+          </div>
+                    
+        </div>
+    </div>
+</section>
+
+<script>
+
+  const allwpposts = {{allposts|safe}}
+  
+  const tableRows = allwpposts.map((item, index) =>  `   
+            <div class="tab-pane fade " id="post-${item.id}" role="tabpanel" aria-labelledby="pills-${item.id}-tab" >
+              <h1>${item.title} ${item.id}</h1>
+              ${item.content}
+            </div>
+            `).join('');
+  console.log("tableRows")
+  console.log(tableRows)
+  document.getElementById('pills-tabContent').innerHTML = tableRows;
+   
+  </script>
+{% endblock %}

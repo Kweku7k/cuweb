@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+        <div class="container" style="margin-top: 1vh;">
+            <div style="padding: 18px;">
+                <form method="post">
+                    <div class="progress" style="height: 5px;">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width:50%;"
+                            aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
+                    <br>
+
+
+                    <!-- <div class="ellipse">
+                        <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
+                    </div> -->
+                    {{form.hidden_tag()}}
+
+
+                    <div class="mb-3">
+                        {{form.applicantexam.label}}
+                        {{form.applicantexam (class="form-control webForm")}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.subject.label}}
+                        {{form.subject (class="form-control webForm")}}
+                    </div>
+                    <div class="mb-3">
+                        {{form.grade.label}}
+                        {{form.grade (class="form-control webForm")}}
+                    </div>
+                    
+                    {{form.submit (class="pill-button", style="width:100%") }}
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        {% endblock %}

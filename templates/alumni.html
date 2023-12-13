@@ -1,0 +1,149 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+  <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+    <div class="row" style="padding-top: 6vh;">
+      <div class="col-xl-6 col-lg-6 text-left">
+        <h6>Central University </h6>
+        <h1>Alumni Portal</h1>
+        <h5>Get connected to our global online community where you can build your network, find jobs and stay up-to-date with events and workshops
+        </h5>
+        <br/>
+        <div class="row" style="padding: 15px;">
+          <a href="#about" class="pill-button" style="margin-right: 10px; margin-bottom:10px">Connect Now</a>
+          <!-- <a href="#about" class="pill-button-alternate">Guidance And Counselling</a> -->
+        </div>
+      </div>
+      <div class="col-lg-6 order-2 order-lg-2">
+        <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/alu.png")}}" alt="" srcset="">
+      </div>
+    </div>
+    <div class="text-center">
+    </div>
+
+    <div class="row icon-boxes">
+      <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
+        <div class="icon-box">
+          <div class="icon"><i class="ri-stack-line"></i></div>
+          <h4 class="title"><a href="">Alumni Benefits</a></h4>  
+          <p class="description">Exclusive benefits to fully alumni of the university including access journals and join CU clubs</p>
+        </div>
+      </div>
+      
+      <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
+        <div class="icon-box">
+          <div class="icon"><i class="ri-palette-line"></i></div>
+          <h4 class="title"><a href="">Alumni Networks</a></h4>
+          <p class="description">Join engaged communities of like-minded professionals and explore networking opportunities.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
+        <div class="icon-box">
+          <div class="icon"><i class="ri-command-line"></i></div>
+          <h4 class="title"><a href="">Get Involved</a></h4>
+          <p class="description">Share your knowledge and experience with students by mentoring, guest speaking or offering work experience.</p>
+        </div>
+      </div>
+      
+
+    </div>
+  </div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  <!-- ======= About Video Section ======= -->
+  <section id="about" class="about-video" style="padding-bottom: 0;">
+    <div class="container" data-aos="fade-up">
+      
+
+      <div class="row">
+        <div class="col-md-6">
+          <div style="display: flex; align-items: center; margin-bottom: 3vh;">
+            <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ff4a17;"></div>
+            <div class="text"><b> Alumni Stories</b></div>
+          </div>
+          
+          <h4>The CU community is a widespread network made up of 5 schools and over 60,000 alumni in more than 140 countries worldwide.
+            This is where you can tell us what you want to hear about from your college, department. we want you to know that UniCamp alumni community is here to support you. </h4>
+          <button class="pill-button" style="margin: 10px 0 25px 0;">Connect with other Alumni</button>
+        </div>
+        <div class="col-md-6">
+          <img src="{{url_for ("static", filename="img/alu1.jpg")}}" style="object-fit: cover; width: 100%;" alt="">
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End About Video Section -->
+
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Alumni Gallery</h2>
+        <!-- <p>Some kind words from some of our students that have passed through Central University.</p> -->
+      </div>
+
+      <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="50">
+        <div class="swiper-wrapper">
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu1.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+          
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu4.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu3.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu5.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu6.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+                <img src="{{url_for('static',filename='img/cuGram/cu7.jpg')}}" class="img-fluid" alt="">
+            </div>
+          </div><!-- End testimonial item -->
+
+          <div class="swiper-slide">
+            <div class="testimonial-item">
+              <div class="portfolio-wrap">
+                <img src="{{url_for('static',filename='img/cuGram/cu11.jpg')}}" class="img-fluid" alt="">
+              </div>
+            </div>
+          </div><!-- End testimonial item -->
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+  </section><!-- End Testimonials Section -->
+
+ 
+
+</main><!-- End #main -->
+
+{% endblock %}

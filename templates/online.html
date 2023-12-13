@@ -1,0 +1,290 @@
+  {% extends "layout.html" %}
+  {% block body %}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center" style="height: 90vh;">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5" style="padding-top: 6vh;">
+        <div class="col-lg-7 order-1 order-lg-1 text-left">
+          <h6>Central University </h6>
+          <h1>Online Application Portal</h1>
+          <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
+          <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="{{url_for("downloadOnlineManual")}}">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6>
+          <br/>
+          <div class="d-flex">
+
+            <!-- <a href="tel:*887*18#"> -->
+              <button id="myBtn" class="pill-button" style="width: fit-content;">Click here to buy eVoucher</button>
+            <!-- </a> -->
+            <a href="#ourprograms">
+              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Click here to select a program.</button>
+            </a>
+          </div>
+        </div>
+
+        <div class="col-lg-5 order-2 order-lg-2">
+            <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/hero-img.svg")}}" alt="" srcset="">
+        </div>
+      </div>
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    
+
+
+    <!-- ======= About Video Section ======= -->
+    <section id="ourprograms" class="about-video" >
+      <div class="container" data-aos="fade-up" data-aos-delay="">
+
+        <div class="section-title">
+          <h2>Our Programs</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+          <div class="col-md-6" style="margin: 5px 0;">
+            <div class="imgContainer">
+              <img src="{{url_for ("static", filename="img/cuInter.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+            </div>
+          </div>
+          <div class="col-md-6 content" id="undergraduate">
+            <h4 class="studentHeader">Undergraduate</h4>
+            <hr>
+            <br>
+            <p class="description">Welcome to the Undergraduate Online Application portal.
+                October Admissions are opened to Nursing Professionals, Law first degree holders and students joining mid stream (i.e. Level 200 & 300) in other programmes.
+                February Admission is opened to all prospective Level 100 applicants. <b>Apply Now!</b> <br>
+                <b>Price: Ghc 150 </b>
+            </p>
+            <br>
+            <div class="d-flex">
+                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/cd1c07a1-ac70-4565-9063-e2537ab5bd21" style="color: #fff;">Oct. 2023 Admissions</a></div>
+                <!-- <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/e9a624b3-f546-4555-9c97-9669e7f870d8" style="color: #fff;">Feb. 2024 Admissions</a></div> -->
+                <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/a84b8fa9-fd22-4aa5-80da-19013f6e3eb9" style="color: #fff;">Feb. 2024 Admissions</a></div>
+            </div>
+            </div>
+          </div>
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+            <div class="col-md-6 content" id="postgraduate">
+              <h4 class="studentHeader">Postgraduate</h4>
+              <hr>
+              <br>
+              <p class="description">Welcome to Postgraduate Online Application portal.
+                February Admission is opened to all prospective Level 100 applicants. You can earn a master's or a doctoral degree at the School of Graduate Studies from over 50+ programmes offered by various departments.<b>Apply Now!</b>
+              </p>
+              <br>
+              <div class="d-flex">
+                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/946790ca-2cdd-4e43-b1dc-1eb223868cb5" style="color: #fff;">Oct. 2023 Admissions</a></div>
+                <div class="pill-button" style="width: fit-content; margin-left: 3px;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/27661356-4132-4376-9a1a-8146851f9ef2" style="color: #fff;">Feb. 2024 Admissions</a></div>
+              </div>
+            </div>
+            <div class="col-md-6" style="margin: 15px 0;">
+              <div class="imgContainer">
+                <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+              </div>
+            </div>
+            </div>
+
+            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+              <div class="col-md-6" style="margin: 15px 0;">
+                <div class="imgContainer">
+                  <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+                </div>
+              </div>
+
+              <div class="col-md-6 content" id="diploma">
+                <h4 class="studentHeader">Diploma (ATHE)</h4>
+                <hr>
+                <br>
+                <p class="description">
+                  Gain admission to Central University this year. <b>ATHE</b> Diploma which is a WASSCE equivalent, qualifies you for admission into level 100 in many programmes areas.
+                  Tuition is offered both in person and distance learning modes.
+                </p>
+                <br>
+                <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/2c5f37d5-9254-4d0a-ab59-70dfb5fa3c1a" style="color: #fff;">Apply Now!</a></div>
+              </div>
+            </div>
+
+            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+                <div class="col-md-6 content" id="atle">
+                  <h4 class="studentHeader">Central University Gordon Application</h4>
+                  <hr>
+                  <br>
+                  <p class="description">
+                    Gain admission to Central University this year. <b>CENTRAL UNIVERSITY GORDON APPLICATION FORM  2023/2024</b> which is a WASSCE equivalent, qualifies you for admission into level 100 in many programmes areas.
+                    Tuition is offered both in person and distance learning modes.
+                  </p>
+                  <br>
+                  <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/37a1e236-6873-42b3-8c1d-caae3d1dcb16" style="color: #fff;">Apply Now!</a></div>
+                </div>
+                <div class="col-md-6" style="margin: 15px 0;">
+                  <div class="imgContainer">
+                    <img src="{{url_for ("static", filename="img/athe.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+                  </div>
+                </div>
+            </div> -->
+
+
+
+      </div>
+    </section><!-- End About Video Section -->
+
+
+    
+    <!-- ======= Frequently Asked Questions Section ======= -->
+    <section id="faq" class="faq section-bg">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Here are some frequently asked questions about admission and enrollment.</p>
+        </div>
+
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Where can one get the Central University application e-vouchers to buy?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+                <p>
+                  Kindly visit any near by bank office to purchase our application e-voucher.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">How much does the application fee cost? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  The application e-voucher cost <b> Ghc 150</b>. Kindly note this should not be more or less than.
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Can I visit my application document after I have finished filling the form online? If so, till when?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  While you are still workingand have not submitted with your Progress ID, you can always review your application with your Progress ID. <b>Note!:</b> After submission your application is been processed for admission, therefore you can not get a review permit 
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">What do I do if I have difficulty logging in? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  Kindly Call the Admission office. Telephone: <strong>Admission</strong> +233  0307 020540
+                </p>
+              </div>
+            </li>
+
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">If I have D7 in English and Mathematics, do I have a chance to get processed for admissions?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+                <p>
+                  D7 doesn't qualify you for a degree program, however the university runs a diploma program <b>(ATHE)</b> that we belive can help you continue with studies in many programmes areas.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </section><!-- End Frequently Asked Questions Section -->
+
+  </main><!-- End #main -->
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal" width="100%" style="margin:0;">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <div class="modal-header" style="background: #ca181e; color: #fff;">
+          <h2>How to Buy a eVoucher</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <h3>Steps</h3>
+            <ol>
+                <li>Enter the ussd code: <a href="tel:*887*18#">*887*9#</a> on your phone.</li>
+                <b>OR</b>
+                <li><a href="https://online-voucher.transflowitc.com/application-forms?merchant_id=15467d46-3be5-4ae5-9b20-d64ae21e9380">Buy CU forms via link</a></li>
+                <li>Enter CU as the name of the university (eg:CU)</li>
+                <li>Select the form you want to purchase from the list of options</li>
+                <li>Wait for the prompt to approve the payment</li>
+                <li>Enter pin to approve payment</li>
+                <li>If the prompt was not received, dial *170# and select my approvals to make payment</li>
+                <li>An <strong>SMS</strong> will be received after successful payment with the voucher details</li>
+                <li>To <strong>Retrieve Voucher</strong> Dial *887*9# </li>
+                <li>Select option to view history</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!-- The Modal -->
+<div id="myModal2" class="container modal" width="50%" style="margin:20px 0;">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+      <div class="modal-header" style="background: #ca181e; color: #fff;">
+        <h2>Our Payment Methods</h2>
+        <span class="close2">&times;</span>
+      </div>
+      <div class="modal-body">
+        <h6 class="">Kindly dial our USSD code to purchase e-voucher!</h6>
+          <div class="container d-flex">
+            <p><b>USSD: *887*18#</b></p>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+ 
+<script>
+  // Get the modal
+var modal = document.getElementById("myModal");
+// var modal2 = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// var span2 = document.getElementsByClassName("close2")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+modal.style.display = "block";
+}
+// btn2.onclick = function() {
+// modal2.style.display = "block";
+// }
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+// span2.onclick = function() {
+// modal2.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal || event.target == modal2) {
+  modal.style.display = "none";
+  modal2.style.display = "none";
+}
+}
+
+
+</script>
+
+
+  {% endblock %}

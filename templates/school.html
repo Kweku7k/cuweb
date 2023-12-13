@@ -1,0 +1,116 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    <!-- ======= Hero Section ======= -->
+<section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 text-left" style="padding-left: 20px;">
+          <h6>Central University </h6>
+          <h5 style="margin: 10px 0;"><b>SCHOOL OF ENGINEERING AND TECHNOLOGY</b></h5>
+          <h5>The admission process at any school can be a daunting process. The Admission Team at CU prides itself on doing everything possible to ensure a smooth and seamless experience for every family. </h5>
+          <br/>
+          <div class="row" style="padding: 5px;">
+            <a href="#about" class="pill-button" style="margin-right: 10px; margin-bottom:10px">Learn More</a>
+            <!-- <a href="#about" class="pill-button-alternate">Guidance And Counselling</a> -->
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 text-center d-none d-lg-block">
+                <img src="{{url_for ("static", filename="img/add2.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto"> 
+        </div>
+      </div>
+      <div class="text-center">
+      </div>
+
+      
+    </div>
+</section><!-- End Hero -->
+
+<section>
+    <div class="section-title">
+        <h4 style="margin: 6px 0 5px 0;"><b>Department</b></h4>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="padding-bottom: 6px;">
+                <a href="" style="color: black;">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/img/add2.jpg" alt="Card image cap">
+                        <div class="card-footer">
+                            <h6><b>Computer Science</b></h6>
+                        </div>
+                    </div>   
+                </a>
+            </div>
+            <div class="col-md-4" style="padding-bottom: 6px;">
+                <a href="" style="color: black;">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/img/add2.jpg" alt="Card image cap">
+                        <div class="card-footer">
+                          <h6><b>Information Technology</b></h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4" style="padding-bottom: 6px;">
+                <a href="" style="color: black;">
+                    <div class="card">
+                        <img class="card-img-top" src="/static/img/add2.jpg" alt="Card image cap">
+                        <div class="card-footer">
+                            <h6><b>Civil Engineering</b></h6>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="padding-top: 40px;">
+    <div class="section-title">
+        <h4><b>Administrative Staff</b></h4>
+    </div>
+
+    <div class="container">
+        <div class="row text-center">
+            
+            <!-- Team item -->
+            <div class="col-md-6">
+                <div class="bg-white rounded shadow-md py-5 px-4"><img src="/static/img/testimonials/kweku.jpg" alt="" width="30%" class="img-fluid rounded-circle  img-thumbnail shadow-sm"> 
+                    <a href="" style="text-decoration: none; color: black;">
+                        <h5 class="mb-0" style="padding-top: 5px;"><b>Nana Kweku Adumatta</b></h5><span class="small text-uppercase text-muted">Dean of Faculty</span>
+                    </a>
+                    
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="bg-white rounded shadow-md py-5 px-4"><img src="/static/img/testimonials/kweku.jpg" alt="" width="30%" class="img-fluid rounded-circle  img-thumbnail shadow-sm"> 
+                    <a href="" style="text-decoration: none; color: black;">
+                        <h5 class="mb-0" style="padding-top: 5px;"><b>Nana Kweku Adumatta</b></h5><span class="small text-uppercase text-muted">Head of Faculty Department</span>
+                    </a>
+                    
+                </div>
+            </div>
+    
+            
+            <!-- <div class="col-md-6 col-sm-6 mb-5">
+                <div class="bg-white rounded shadow-sm py-5 px-4"><img src="https://bootstrapious.com/i/snippets/sn-team/teacher-2.jpg" alt="" width="30%" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                    <h5 class="mb-0">Samuel Hardy</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                    <ul class="social mb-0 list-inline mt-3">
+                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-facebook-f"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-twitter"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-instagram"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="social-link"><i class="fa fa-linkedin"></i></a></li>
+                    </ul>
+                </div>
+            </div> -->
+</section>
+
+<section style="padding: 0;">
+    <div class="section-title">
+        <h4><b>Faculty/School Lectures</b></h4>
+    </div>
+</section>
+
+{% endblock %}

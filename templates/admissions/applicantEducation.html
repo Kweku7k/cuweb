@@ -1,0 +1,154 @@
+{% extends "admissions/admissionslayout.html" %}
+
+{% block body %}
+
+        <div class="container" style="margin-top: 1vh;">
+            <div style="padding: 18px;">
+                <form action="" method="post" >
+
+<br>
+
+                    <div class="controls" style="display: flex; align-items: center;">
+
+                        {% if userdata|length > 1 %}
+                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add Another School</button>
+                        {% else %}
+                            <button type="button" class="pill-button-alternate" data-toggle="modal" data-target="#exampleModal"> Add A School</button>
+                        {% endif %}
+                    </div>
+                    
+                    <br/>
+                      
+                      
+                      <!-- Modal -->
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Add School</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="dynamicForm">
+                                    <div class="">
+                                        <div class="form-floating mb-3">
+                                            {{form.school (class="form-control webForm", placeholder="Enter your Senior High School")}}
+                                            {{form.school.label}}
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            {{form.start_date (class="form-control webForm")}}
+                                            {{form.start_date.label}}
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            {{form.end_date (class="form-control webForm")}}
+                                            {{form.end_date.label}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
+                              {{form.submit (class='pill-button')}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <!-- <div class="ellipse">
+                        <img src="/static/img/testimonials/kweku.jpg" alt="" width="100" style="border-radius: 50%;">
+                    </div> -->
+                    <br>
+                    <!-- <div class="row"> -->
+
+                        <div id="dynamicForm">
+                            
+                            <div class="row">
+                                    {% for school in userdata %}
+                                    <div class="col-md-4">
+                                        <div class="card" style="padding: 20px 12px;">
+                                            <div class="flexRow">
+                                                <h6 class="text-muted">{{school.start.strftime("%m/%d/%Y") }} - {{school.endDate.strftime("%m/%d/%Y") }}</h6>
+                                                <a href="{{url_for('deleteEducation', id=school.id)}}">
+                                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                                </a>
+                                            </div>
+                                            <h4>{{school.school}}</h4>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+                        </div>
+                    </div>
+
+                    <a href="{{url_for(metadata.nextUrl)}}">
+                        <button type="button" class="pill-button full">Next</button>
+                    </a>
+                    
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+        <script>
+            var dynamicForm = document.getElementById('dynamicForm');
+            var add_more_fields = document.getElementById('add_more_fields');
+            var remove_fields = document.getElementById('remove_fields');
+
+           innerHtml =`<div id="dynamicForm" class="row">
+                        <div class="form-floating mb-3 col-md-4">
+                            {{form.school (class="form-control webForm", placeholder="Enter your Senior High School")}}
+                            {{form.school.label}}
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{form.start_date (class="form-control webForm")}}
+                            {{form.start_date.label}}
+                        </div>
+                        <div class="form-floating mb-3 col-md-4">
+                            {{form.end_date (class="form-control webForm")}}
+                            {{form.end_date.label}}
+                        </div>
+                    </div>`
+
+            add_more_fields.onclick = function(){
+            var newFormContainer = document.createElement('div')
+                newFormContainer.setAttribute('class','form-floating mb-3 col-md-4')
+
+            var newSchoolField = document.createElement('input');
+                var newSchoolLabel = document.createElement('label');
+                    newSchoolLabel.innerText = "School"
+                    newSchoolField.setAttribute('name','school');
+                    newSchoolField.setAttribute('class','form-control webForm col-md-4');
+                    newSchoolField.setAttribute('type','text');
+                    newSchoolField.setAttribute('size',50);
+                    newSchoolField.setAttribute('placeholder','Another Field');
+
+            var newStartDateField = document.createElement('input');
+                var newStartDateLabel = document.createElement('label');
+                    newStartDateLabel.innerText = "Start Date"
+                    newStartDateField.setAttribute('name','school');
+                    newStartDateField.setAttribute('class','form-control webForm col-md-4');
+                    newStartDateField.setAttribute('type','text');
+                    newStartDateField.setAttribute('size',50);
+                    newStartDateField.setAttribute('placeholder','Another Field');
+
+            newFormContainer.appendChild(newSchoolField);
+            newFormContainer.appendChild(newSchoolLabel);
+            newFormContainer.appendChild(newStartDateField);
+            dynamicForm.appendChild(newFormContainer);
+
+            }
+
+            remove_fields.onclick = function(){
+            var input_tags = survey_options.getElementsByTagName('input');
+            if(input_tags.length > 2) {
+                survey_options.removeChild(input_tags[(input_tags.length) - 1]);
+            }
+            }
+        </script>
+
+        {% endblock %}

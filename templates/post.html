@@ -1,0 +1,117 @@
+  {% extends "layout.html" %}
+  {% block body %}
+
+    <main>
+        <section>
+            <div class="container">
+                <h3 class="text-center"><b>Latest News</b></h3>
+
+                <!-- This section is being handled by the javascript calling the wordpress server! -->
+                <!-- DONT FFUCKING TOUCH!!! -->
+                <div class="postsContainer row icon-boxes">
+                  
+                </div>
+                <!-- THNAK YOU. -->
+
+
+            </div>
+        </section>
+    </main>
+ 
+<!-- <script>
+  url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/wp/v2/posts"
+  console.log (fetch(url))
+
+  let promises = [];
+
+  for (let i = 1; i <= 3; i++) {
+    promises.push(fetch(url));
+  }
+  Promise.all(promises)
+    .then(function handleData(data) {
+      return fetch(url) // should be returned 1 time
+        .then(response => {
+          if (response.ok) {
+            data = response.json();
+            console.log("response is okay")
+            console.log(data)
+          }
+          throw new Error(response.statusText);
+        });
+    })
+    .catch(function handleError(error) {
+      console.log("Error" + error);
+    });
+</script> -->
+
+<script>
+// function createNewPost(title, content) {
+//   posts = document.getElementsByClassName("postsContainer")[0]
+
+//   const post = document.createElement("div");
+
+//   // post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+//   post.innerHTML = `
+//         <div>
+//           <h3 class="text-center"><b>${title}</b></h3>
+//           <p class="description">${content}</p>
+//         </div>`
+
+//   posts.append(post)
+
+//   return post
+
+// }
+  console.log(window.location.href)
+  url = url
+  fetch(url)
+  .then(function(response) {
+    return response.json();
+  }).then(function(data) {
+    console.log(data)
+
+    // for (let index = 0; index <= data.length; index++) {
+    //   console.log(data[index]); // this will be a string
+
+      var title = data.title.rendered
+      var post = data.content.rendered
+     
+      console.log(title)
+      console.log(post)
+
+      createNewPost(title, post)  
+    // }
+  });
+</script>
+
+<!-- <script>
+url = "https://cu-807994.ingress-erytho.ewp.live/?rest_route=/"
+add_action('init', 'handle_preflight');
+function handle_preflight() {
+    $origin = get_http_origin();
+    if ($origin === url) {
+        header("Access-Control-Allow-Origin: yourfrontenddomain");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE");
+        header("Access-Control-Allow-Credentials: true");
+        header('Access-Control-Allow-Headers: Origin, X-Requested-With, X-WP-Nonce, Content-Type, Accept, Authorization');
+        if ('OPTIONS' == $_SERVER['REQUEST_METHOD']) {
+            status_header(200);
+            exit();
+        }
+    }
+}
+add_filter('rest_authentication_errors', 'rest_filter_incoming_connections');
+function rest_filter_incoming_connections($errors) {
+    $request_server = $_SERVER['REMOTE_ADDR'];
+    $origin = get_http_origin();
+    if ($origin !== url) return new WP_Error('forbidden_access', $origin, array(
+    ));
+    return $errors;
+}
+
+console.log(fetch(url))
+</script> -->
+
+
+
+  {% endblock %}

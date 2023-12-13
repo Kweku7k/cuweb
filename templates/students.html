@@ -1,0 +1,143 @@
+  {% extends "layout.html" %}
+  {% block body %}
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 text-left">
+          <h6>Central University </h6>
+          <h1 style="margin: 10px 0;">Students Portal</h1>
+          <h5>Welcome student to the new and improved CU Students Portal. You can find information about your course, request help, leave a comment or a suggestion!
+          </h5>
+          <br/>
+          <div class="row" style="padding: 5px;">
+            <a href="#about" class="pill-button" style="margin-right: 10px; margin-bottom:10px">View all Student Resources</a>
+            <!-- <a href="#about" class="pill-button-alternate">Guidance And Counselling</a> -->
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 text-center">
+          <img src="./static/img/student.png" alt="" srcset="">
+        </div>
+      </div>
+      <div class="text-center">
+      </div>
+
+      
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <!-- ======= About Video Section ======= -->
+    <section id="about" class="about-video">
+      <div class="container" data-aos="fade-up">
+        
+        <div class="section-title">
+          <h2>Student Resources</h2>
+          <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+        <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+          <div class="col-md-6" style="margin-bottom: 10px;">
+            <div class="imgContainer">
+              <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+            </div>
+          </div>
+          <div class="col-md-6 content">
+            <h4 class="studentHeader">ONLINE LEARNING APPLICATION (VCampus)</h4>
+            <hr>
+            <br>
+            <p class="description">
+              VCampus is an innovative online learning application that aims to transform the way university students engage with their coursework and educational materials. By leveraging cutting-edge technology and pedagogical approaches, VCampus offers a comprehensive and interactive platform designed to enhance the learning experience, foster collaboration, and empower students to excel academically.
+            </p>
+            <br>
+            <a href="https://vcampus.central.edu.gh">
+              <button class="pill-button" style="width: fit-content;">Visit Now!</button>
+            </a>
+          </div>
+          </div>
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+            <div class="col-md-6 content" style="margin-bottom: 10px;">
+              <h4 class="studentHeader">STUDENTS INFORMATION PORTAL (SIP)</h4>
+              <hr>
+              <br>
+              <p class="description">
+                The university student information portal (SIP) is a comprehensive online platform designed to provide students with easy access to essential information and resources related to their academic journey. It serves as a centralized hub where students can find all the necessary tools, services, and information they need to navigate their university experience effectively.
+              </p>
+              <br>
+              <a href="https//osissip.os:is.online.">
+                <button class="pill-button" style="width: fit-content;">Visit Now!</button>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <div class="imgContainer">
+                <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+              </div>
+            </div>
+          </div>
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+              <div class="col-md-6" style="margin-bottom: 10px;">
+                <div class="imgContainer">
+                  <img src="{{url_for ("static", filename="img/cuInter.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+                </div>
+              </div>
+              <div class="col-md-6 content">
+                <h4 class="studentHeader">STUDENT FINANCIAL PLANNING (SFP)</h4>
+                <hr>
+                <br>
+                <p class="description">
+                  The university Student Financial Planning (SFP) portal is a comprehensive online platform designed to assist students in managing their finances throughout their academic journey. This portal serves as a centralized resource that provides students with essential tools and information to make informed financial decisions and achieve their educational goals.
+                </p>
+                <br>
+                <a href="http://sfp.central.edu.gh">
+                  <button class="pill-button" style="width: fit-content;">Visit now!</button>
+                </a>
+              </div>
+          </div>
+
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+            <div class="col-md-6 content" style="margin-bottom: 10px;">
+              <h4 class="studentHeader">ELIGIBILITY CHECKER</h4>
+              <hr>
+              <br>
+              <p class="description">
+                The university eligibility checker for admissions is a powerful tool designed to assist prospective students in determining their eligibility for admission to various universities and programs. With the increasing number of applicants and the competitive nature of university admissions, this tool provides valuable guidance to help students make informed decisions about their educational pursuits.
+              </p>
+              <br>
+              <a href="https://eligibility.central.edu.gh/">
+                <button class="pill-button" style="width: fit-content;">Visit Now!</button>
+              </a>
+            </div>
+            <div class="col-md-6">
+              <div class="imgContainer">
+                <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+    </section><!-- End About Video Section -->
+
+     <!-- ======= Cta Section ======= -->
+     <section id="admissions" class="cta" style="margin-top: 2vh;">
+      <div class="container" data-aos="zoom-in">
+        <div class="text-center">
+          <h3>Are you eligible for our 2022-2023 enrollment?</h3>
+          <p> Check to see which courses you are eligible for on our eligibility platform. </p>
+          <a class="cta-btn" href="https://eligibility.central.edu.gh/">Check Eligibility</a>
+        </div>
+      </div>
+    </section><!-- End Cta Section -->
+
+
+    
+    
+
+  </main><!-- End #main -->
+
+  {% endblock %}

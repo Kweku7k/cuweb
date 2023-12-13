@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div style="background-color: rgb(250, 250, 250);">
+
+<div class="container">
+
+    <br/>
+    <h4 style="font-weight: 200;">Buy a payment form</h4>
+    <h6>Please fill out the form to gain an evoucher. Please note this would be sent to your phone via sms.</h6>
+    
+    <form action="" method="post" style="padding-bottom: 2vh;">
+        {{form.hidden_tag()}}
+        
+        <div class="form-floating mb-3">
+            {{form.name (class="form-control webForm", placeholder="Enter your name")}}
+            {{form.name.label}}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{form.amount (class="form-control webForm disabled", placeholder="Amount", value="120")}}
+            {{form.amount.label}}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{form.email (class="form-control webForm", placeholder="email@domain.com")}}
+            {{form.email.label}}
+        </div>
+
+        <div class="mb-3">
+            {{form.network.label}}
+            {{form.network (class="form-control webForm", placeholder="network")}}
+        </div>
+
+        <div class="form-floating mb-3">
+            {{form.phone (class="form-control webForm", placeholder="Enter your phone number")}}
+            {{form.phone.label}}
+        </div>
+
+        {{form.submit (class="pill-button", style="width:100%") }}
+        
+    </form>
+
+</div>
+</div>
+
+{% endblock %} 
