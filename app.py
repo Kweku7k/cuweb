@@ -281,8 +281,8 @@ class ExamResult(db.Model, UserMixin):
         return '<Exam {}>'.format(self.program)
 
 
-baseWpUrl = "https://webcms.central.edu.gh"
-# baseWpUrl = "http://52.203.70.80"
+# baseWpUrl = "https://webcms.central.edu.gh"
+baseWpUrl = "http://52.203.70.80"
 wpUrl = baseWpUrl+"/wp-json/wp/v2"
 
 def sendTelegram(params):
@@ -914,7 +914,9 @@ def wppost(id):
 def wppostbyslug(slug):
     # Get URL
     url=wpUrl+"/posts/"+slug
-    r=requests.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug="+slug)
+    print("requestUrl: ", url)
+    # r=requests.get("https://webcms.central.edu.gh/wp-json/wp/v2/posts?slug="+slug)
+    r=requests.get(wpUrl+"/posts?slug="+slug)
     content=r.json()[0]["content"]["rendered"]
     print(content[0])
     return jsonify({'rendered_content': r.json()})
