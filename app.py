@@ -316,8 +316,11 @@ class ExamResult(db.Model, UserMixin):
         return "<Exam {}>".format(self.program)
 
 
-baseWpUrl = "https://webcms.central.edu.gh"
+# baseWpUrl = "https://webcms.central.edu.gh"
+baseWpUrl = os.environ('WP_BASE_URL')
 # baseWpUrl = "http://52.203.70.80"
+
+
 wpUrl = baseWpUrl + "/wp-json/wp/v2"
 
 
