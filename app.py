@@ -317,7 +317,7 @@ class ExamResult(db.Model, UserMixin):
 
 
 # baseWpUrl = "https://webcms.central.edu.gh"
-baseWpUrl = os.environ('WP_BASE_URL')
+baseWpUrl = os.environ.get('WP_BASE_URL')
 # baseWpUrl = "http://52.203.70.80"
 
 
