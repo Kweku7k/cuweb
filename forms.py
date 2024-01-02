@@ -1,12 +1,15 @@
+import os
 from flask_wtf import FlaskForm
 import requests
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField, IntegerField, RadioField, DateField, FileField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
-programChoices = requests.get('https://forms.central.edu.gh/api/departments')
+# https://forms.central.edu.gh/api/departments
+# programChoices = requests.get(os.environ('forms_api_url')+'/api/departments')
 # print(programChoices.json())
-allProgramChoices = [program["name"] for program in programChoices.json()["data"]]
-           
+# allProgramChoices = [program["name"] for program in programChoices.json()["data"]]
+allProgramChoices = ["One", "Two"]
+
 class BuyForms(FlaskForm):
     name = StringField('Your Name', validators=[DataRequired()])
     network = SelectField('Network', choices=[("MTN","MTN"),("AIRTELTIGO","AIRTELTIGO"),("VODAFONE","VODAFONE")])
