@@ -30,6 +30,11 @@ import random
 import string
 import pprint
 
+
+# banner_img_src = "https://central.edu.gh/static/img/Central-Uni-logo.png"
+# banner_html = f'<img src="{banner_img_src}" style="max-width: 80%; height: auto; margin-bottom: 3vh;">'
+
+
 app = Flask(__name__)
 baseUrl = "https://online.central.edu.gh"
 baseIp = "http://45.222.128.225:5000"
@@ -389,7 +394,6 @@ def home():
 
     if request.method == "POST":
         if form.validate_on_submit():
-            print("firing form")
             try:
                 message = (
                     "From: "
@@ -401,8 +405,7 @@ def home():
                     + "\nMessage: "
                     + form.message.data
                 )
-                print("message")
-                print(message)
+
                 prestoUrl
                 r = requests.get(
                     prestoUrl
@@ -411,25 +414,34 @@ def home():
                     + "&message="
                     + message
                 )
-                print(r.url)
-                flash(
-                    "Hi, "
-                    + form.name.data
-                    + " your message has been submitted successfully.",
-                    "success",
+
+                # Send a thank-you email to the user
+                thank_you_message = (
+                    # "Subject: Thank You for Contacting Us\n\n"
+                    f"Dear {form.name.data},\n\n"
+                    "Thank you for reaching out to us. We appreciate you taking the time to fill out our contact form. Your message is important to us, and we will do our best to respond promptly"
                 )
+
+                sendAnEmail(
+                    title="CU Support",
+                    subject="Thank You for Contacting Us !",
+                    message=thank_you_message,
+                    email_receiver=[form.email.data],
+                )
+
+                # Redirect to the home page
+                return redirect(url_for("home"))
+
             except Exception as e:
                 print(e)
                 print("Unable to send emails!")
-                flash(
-                    "Oops, there was an error sending your email, please check and try again.",
-                    "fail",
-                )
-            # return render_template('index.html',hideNav=True, form=form)
-            return redirect(url_for("home"))
+
+                # Flash an error message or handle the error as needed
+
         else:
             print(form.errors)
 
+    # Render the template with the form and other data
     return render_template(
         "index.html",
         hideNav=False,
@@ -2104,7 +2116,7 @@ def sendAnEmail(
     <head>
         <style>
         @font-face {{
-            font-family: 'Plus Jakarta';
+            font-family: 'Poppins', sans serif;
             src: url('PlusJakartaSans-VariableFont_wght.woff2') format('woff2-variations'),
                 url('PlusJakartaSans-Italic-VariableFont_wght.woff2') format('woff2-variations');
             font-weight: 100 500; /* Adjust font weights based on available weights */
@@ -2122,11 +2134,30 @@ def sendAnEmail(
             font-weight:200;
         }}
 
+         img {{
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 3vh;
+        }}
+
+        @media (min-width: 768px) {{
+            /* Adjust the max-width for larger screens (you can customize this value) */
+            img {{
+                max-width: 50%;
+            }}
+        }}
         </style>
 
     </head>
     <body style="margin:auto 10px; color:black; font-family: 'Plus Jakarta', sans-serif;">
-        {message}
+
+        <!-- Your banner image above -->
+         <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo">
+
+        <div style="font-family:'Poppins', sans serif; font-weight: 400; font-size: 20px; line-height:26px; color: #000;">
+            {message}
+        </div>
+
         <h6 style="font-weight:200">This email is powered by <a href='https://prestoghana.com'>PrestoGhana</a></h6>
     </body>
     </html>
