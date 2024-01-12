@@ -461,7 +461,7 @@ button{
 .category {
   text-transform: uppercase;
 }
-
+/* 
 .hero5 {
   width: 100%;
   height: 55vh;
@@ -483,25 +483,46 @@ button{
   ),url("../img/lib.jpg") top center;
   background-size: cover;
   position: relative;
-}
-.hero7 {
+} */
+/* .hero7 {
   width: 100%;
   height: 55vh;
   position: relative;
   background: url("../img/about.jpg") top center;
   background-size: cover;
   position: relative;
-}
+} */
 
 .hero8 {
+  position: relative;
   width: 100%;
-  height: 55vh;
-  position: relative;
-  background: url("../img/about2.jpeg") top center;
-  background-size: cover;
-  position: relative;
-  object-fit: cover;
+  height: 70vh; /* Take up the full height of the body */
+  overflow: hidden; /* Hide any overflow content */
 }
+
+
+.hero8-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the entire image is visible without cropping */
+}
+
+.hero9 {
+  position: relative;
+  width: 100%;
+  height: 100%; /* Take up the full height of the body */
+  overflow: hidden; /* Hide any overflow content */
+}
+
+
+.hero9-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure the entire image is visible without cropping */
+}
+
+
+
 
 --------------------------------------------------------------*/
 #blankHero {
@@ -2342,4 +2363,6 @@ select{
   background: #ca181e;
   color: #fff;
   text-decoration: none;
+
+
 }

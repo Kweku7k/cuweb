@@ -419,7 +419,7 @@ def home():
                 thank_you_message = (
                     # "Subject: Thank You for Contacting Us\n\n"
                     f"Dear {form.name.data},\n\n"
-                    "Thank you for reaching out to us. We appreciate you taking the time to fill out our contact form. Your message is important to us, and we will do our best to respond promptly"
+                    "Thank you for contacting us. We value your time and will do well to respond as promptly as possible"
                 )
 
                 sendAnEmail(
@@ -1431,6 +1431,19 @@ def irb():
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
+    )
+
+
+@app.route("/summer-school")
+def summer():
+    id = 111
+    alltags = returnTags(id, "summer-school")["tags"]
+    allposts = returnTags(id, "summer-school")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "summer.html", id=startingPoint, tags=alltags, allposts=allposts
     )
 
 
