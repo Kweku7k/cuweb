@@ -409,10 +409,17 @@ def home():
                 prestoUrl
                 r = requests.get(
                     prestoUrl
-                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+                    + "/sendPrestoMail?recipient=&subject="
                     + form.name.data
                     + "&message="
                     + message
+                )
+                print(r.url)
+                flash(
+                    "Hi, "
+                    + form.name.data
+                    + " your message has been submitted successfully.",
+                    "success",
                 )
 
                 # Send a thank-you email to the user
