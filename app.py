@@ -920,7 +920,12 @@ def news():
         news.append(article)
     print(news)
     return render_template(
-        "news.html", news=news, totalPages=totalPages, page=page, per_page=per_page
+        "news.html",
+        news=news,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+        title="News & Blog",
     )
 
 
@@ -2223,4 +2228,4 @@ def students():
 
 if __name__ == "__main__":
     # DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(port=4000, host="0.0.0.0", debug=True)
+    app.run(port=5000, host="0.0.0.0", debug=True)

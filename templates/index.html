@@ -157,7 +157,7 @@
 
 
     <!-- ======= Counts Section ======= -->
-    <section id="counts" class="counts section-bg">
+    <section id="counts" class="counts section-bg" style="background: #f2f2f2;">
       <div class="container">
         
         <div class="row justify-content-end">
@@ -519,22 +519,27 @@
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
-                        {{form.name (class="form-control webForm", placeholder="Enter your name")}}
+                        {{form.name (class="form-control webForm", type="text", placeholder="Enter your name")}}
                         {{form.name.label}}
                     </div>
                     <div class="form-floating mb-3">
-                        {{form.number (class="form-control webForm", placeholder="Enter your number")}}
-                        {{form.number.label}}
+                      {{ form.number(class="form-control webForm", type="number", placeholder="Enter your number", pattern="[0-9+-]*", required=true) }}
+                      {{ form.number.label }}
                     </div>
+                    
                     <div class="form-floating mb-3">
-                      {{form.email (class="form-control webForm", placeholder="Enter your Email Address")}}
-                      {{form.email.label}}
+                        {{ form.email(class="form-control webForm", type="email", placeholder="Enter your Email Address", required=true) }}
+                        {{ form.email.label }}
                     </div>
                     <div class="form-floating mb-3">
                         {{form.message (class="form-control webForm", placeholder="Write Message here", style="height: 12vh;")}}
                         {{form.message.label}}
                     </div>
-        
+
+                    <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div> -->
+                    <div class="g-recaptcha" id="divRecaptcha"></div>
+                    <br>
+                    
                     {{form.submit (class="pill-button", style="width:100%") }}
         
                 </form>
@@ -578,6 +583,9 @@
 
 
   </main><!-- End #main -->
+
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
   <script>
     // Function to set a cookie with an expiration time
