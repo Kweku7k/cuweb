@@ -515,7 +515,7 @@
             <div class="col-md-6">
                 <h6><b>You can leave a message and we would respond if need be</b></h6>
                 <br/>
-                <form method="post">
+                <form method="post" onsubmit="return submitFormWithRecaptcha();">
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
