@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0PK8SXFW8Q"></script>
 <script>
@@ -15,8 +16,11 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <title>Central University</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+  <meta name="keywords" content="Central University">
+<link rel="icon" href="../static/img/fav.png" type="image/x-icon">
+<meta property="og:image" content="../static/img/ogLogo.png">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="400">
 
   <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="T2FyoL8J"></script>
@@ -60,6 +64,20 @@
   <!-- Template Main CSS File -->
   <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
   <link href="{{url_for("static", filename="css/style.css")}}" rel="stylesheet">
+  <script>
+    function onloadCallback
+    () {
+      grecaptcha.render('divRecaptcha', {
+        sitekey:'6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU',
+        callback: successCallback,
+      });
+    }
+  </script>
+
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+    async defer>
+  </script>
+
 
   {% block head %}
   {% endblock %}
@@ -373,6 +391,12 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     firebase.analytics();
+  </script>
+
+  <script>
+    function successCallback(token) {
+      debugger;
+    }
   </script>
 
 

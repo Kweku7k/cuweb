@@ -852,6 +852,8 @@ box-icon{
 }
 .img-caro {
   width: 100vw;
+  aspect-ratio: 4.8/2;
+  object-fit: contain;
 }
 .carousel-item {
   overflow: hidden;
