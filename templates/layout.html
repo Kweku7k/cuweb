@@ -64,13 +64,33 @@
   <!-- Template Main CSS File -->
   <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
   <link href="{{url_for("static", filename="css/style.css")}}" rel="stylesheet">
+  
+
   <script>
-    function onloadCallback
-    () {
-      grecaptcha.render('divRecaptcha', {
-        sitekey:'6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU',
-        callback: successCallback,
-      });
+    function successCallback(token) {
+        // You can handle the reCAPTCHA success if needed
+        console.log("reCAPTCHA completed successfully");
+    }
+
+    function onloadCallback() {
+        grecaptcha.render('divRecaptcha', {
+            sitekey: '6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU',
+            callback: successCallback,
+        });
+    }
+
+    function submitFormWithRecaptcha() {
+        // Get the reCAPTCHA response
+        var recaptchaResponse = grecaptcha.getResponse();
+
+        // Check if reCAPTCHA is completed
+        if (recaptchaResponse.length === 0) {
+            alert("Please complete the reCAPTCHA before submitting the form.");
+            return false; // Prevent form submission
+        }
+
+        // Proceed with form submission
+        return true; // Allow form submission
     }
   </script>
 
