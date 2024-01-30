@@ -409,7 +409,7 @@ def home():
                 prestoUrl
                 r = requests.get(
                     prestoUrl
-                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+                    + "/sendPrestoMail?recipient=&subject="
                     + form.name.data
                     + "&message="
                     + message
@@ -434,6 +434,7 @@ def home():
                     subject="Thank You for Contacting Us !",
                     message=thank_you_message,
                     email_receiver=[form.email.data],
+                    loadingMessage="Please wait while sending message....",
                 )
 
                 # Redirect to the home page
@@ -455,6 +456,7 @@ def home():
         form=form,
         gallery=gallery,
         events=events,
+        loadingMessage="Please wait while sending message....",
         supportGallery=supportGallery,
     )
 
