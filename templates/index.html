@@ -371,12 +371,16 @@
                         {{ form.email.label }}
                     </div>
                     <div class="form-floating mb-3">
+                      {{form.category (class="form-control webForm", placeholder="Write Message here")}}
+                      {{form.category.label}}
+                    </div>
+                    <div class="form-floating mb-3">
                         {{form.message (class="form-control webForm", placeholder="Write Message here", style="height: 12vh;")}}
                         {{form.message.label}}
                     </div>
 
                     <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div> -->
-                    <div class="g-recaptcha" id="divRecaptcha"></div>
+                    <!-- <div class="g-recaptcha" id="divRecaptcha"></div> -->
                     <br>
                     
                     <div>
