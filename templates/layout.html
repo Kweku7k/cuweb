@@ -54,19 +54,14 @@
   <link href="{{url_for("static", filename="vendor/glightbox/css/glightbox.min.css")}}" rel="stylesheet">
   <link href="{{url_for("static", filename="vendor/remixicon/remixicon.css")}}" rel="stylesheet">
   <link href="{{url_for("static", filename="vendor/swiper/swiper-bundle.min.css")}}" rel="stylesheet">
-  <!-- <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet"> -->
+  
 
   <!-- Template Main CSS File -->
   <!-- <link href="assets/css/style.css" rel="stylesheet"> -->
   <link href="{{url_for("static", filename="css/style.css")}}" rel="stylesheet">
   
 
-  <script>
+  <!-- <script>
     function successCallback(token) {
         // You can handle the reCAPTCHA success if needed
         console.log("reCAPTCHA completed successfully");
@@ -74,7 +69,7 @@
 
     function onloadCallback() {
         grecaptcha.render('divRecaptcha', {
-            sitekey: '6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU',
+            sitekey: '6Le6n1cpAAAAAFBssYWdASGHxKxyodk8rpKGxQNN',
             callback: successCallback,
         });
     }
@@ -92,7 +87,50 @@
         // Proceed with form submission
         return true; // Allow form submission
     }
-  </script>
+  </script> -->
+
+  <script>
+    function successCallback(token) {
+        // You can handle the reCAPTCHA success if needed
+        console.log("reCAPTCHA completed successfully");
+    }
+
+    function onloadCallback() {
+        grecaptcha.render('divRecaptcha', {
+            sitekey: '6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU',
+            callback: successCallback,
+        });
+    }
+
+    function showLoadingScreen() {
+        var loadingScreen = document.getElementById('loading');
+        loadingScreen.style.display = 'flex';
+    }
+
+    function hideLoadingScreen() {
+        var loadingScreen = document.getElementById('loading');
+        loadingScreen.style.display = 'none';
+    }
+
+    function submitFormWithRecaptcha() {
+        // Display loading screen
+        showLoadingScreen();
+
+        // Get the reCAPTCHA response
+        var recaptchaResponse = grecaptcha.getResponse();
+
+        // Check if reCAPTCHA is completed
+        if (recaptchaResponse.length === 0) {
+            // Hide loading screen if reCAPTCHA is not completed
+            hideLoadingScreen();
+            alert("Please complete the reCAPTCHA before submitting the form.");
+            return false; // Prevent form submission
+        }
+
+        // Proceed with form submission
+        return true; // Allow form submission
+    }
+</script>
 
   <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
     async defer>
@@ -194,7 +232,7 @@
               <a class="nav-link scrollto" href="{{url_for('summer')}}"><li>Summer School</li></a>
               <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
               <a class="nav-link scrollto" href="{{url_for('research')}}"><li>Research </li></a>
-              <a class="nav-link scrollto" href="{{url_for('irb')}}"><li>International Review Board </li></a>
+              <a class="nav-link scrollto" href="{{url_for('irb')}}"><li>Institutional Review Board </li></a>
               <a class="nav-link scrollto" href="{{url_for('corporate')}}"><li>Corporate </li></a>
           </ul>
         </li>
@@ -236,6 +274,20 @@
 {% block body %}
 
 {% endblock %}
+
+
+<div id="loading" style="height: 100vh; width: 100vw; display: none; background-color: white; position: fixed; top: 0; align-items: center; justify-content: center; z-index: 9999;">
+  <div>
+
+    <div style="width: 100%; text-align: center;">
+
+      <div class="spinner-border m-5" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only"></span>
+      </div>
+      <h6 style="text-align: center;">{{loadingMessage}}</h6>
+    </div>
+  </div>
+</div>
  
 <a href="https://api.whatsapp.com/send?phone=233233313180" target="_blank" class="whatsapp-icon">
   <img src="{{url_for("static", filename="img/whatsappIcon.png")}}" alt="WhatsApp Icon">
@@ -334,34 +386,7 @@
     </div>
   </div>
 
-  <!-- Privacy Policy Modal -->
-  <!-- <div class="modal fade" id="privacyPolicyModal" tabindex="-1" role="dialog" aria-labelledby="privacyPolicyModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header" style="background: #ca181e;">
-                <h5 class="modal-title" id="privacyPolicyModalLabel" style="color: #fff;">Privacy Policy</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="background: #ca181e; ">
-                    <span aria-hidden="true" style="font-size: 25px; color: #fff;">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                
-                <p>This website collects and processes personal data. By using this website, you consent to the collection and processing of your personal information as described in our data protection statement.</p>
-              </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background: #ca181e; box-shadow: none;">Close</button>
-            </div>
-        </div>
-    </div>
-  </div>
   
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#privacyPolicyModal').modal('show');
-        });
-  </script> -->
 
 </footer><!-- End Footer -->
 
@@ -413,35 +438,44 @@
     firebase.analytics();
   </script>
 
-  <script>
+  <!-- <script>
     function successCallback(token) {
       debugger;
     }
   </script>
 
+<script>
+  function submitForm() {
+      // Perform reCAPTCHA validation here
+      var isRecaptchaValid = true; // Replace with your reCAPTCHA validation logic
+      
+      if (isRecaptchaValid) {
+          // If reCAPTCHA is valid, show loading screen
+          showLoadingScreen();
+          return true; // Allow form submission
+      } else {
+          // If reCAPTCHA is not valid, do not submit the form
+          return false;
+      }
+  }
 
-<!-- Vendor JS Files -->
-<!-- <script src="static/vendor/purecounter/purecounter_vanilla.js"></script>
-<script src="static/vendor/aos/aos.js"></script>
-<script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="static/vendor/glightbox/js/glightbox.min.js"></script>
-<script src="static/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-<script src="static/vendor/swiper/swiper-bundle.min.js"></script>
-<script src="static/vendor/php-email-form/validate.js"></script> -->
+  function showLoadingScreen() {
+      // Display loading screen
+      var loadingScreen = document.getElementById('loading');
+      loadingScreen.style.display = 'flex';
+
+      // Simulate loading delay (remove this in real implementation)
+      setTimeout(function() {
+          // Hide loading screen after content is loaded
+          loadingScreen.style.display = 'none';
+      }, 2000); // Simulated loading time of 2 seconds
+  }
+</script> -->
+
 
 <!-- Template Main JS File -->
 <!-- <script src="static/js/main.js"></script> -->
 <script src="{{url_for('static', filename='js/main.js')}}"></script>
-
-<!-- <script>
-  function showDataProtectionStatement() {
-      alert("This website collects and processes personal data. By using this website, you consent to the collection and processing of your personal information as described in our data protection statement.");
-  }
-  
-  window.onload = function() {
-      showDataProtectionStatement();
-  };
-</script> -->
 
 </body>
 

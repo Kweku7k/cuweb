@@ -1,9 +1,11 @@
-/**
-* Template Name: OnePage - v4.9.2
-* Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+
+function showLoadingScreen() {
+  console.log("Firing loader")
+  console.log(document.getElementById("loading"))
+  document.getElementById("loading").style.display = "flex"
+  console.log(document.getElementById("loading").style.display)
+}
+
 (function() {
   "use strict";
 

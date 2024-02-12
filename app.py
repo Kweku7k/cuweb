@@ -1,4 +1,5 @@
 from email.message import EmailMessage
+import json
 import smtplib
 from flask import (
     Flask,
@@ -43,9 +44,9 @@ prestoUrl = "https://prestoghana.com"
 
 app.config["UPLOAD_FOLDER"] = "Documents"
 app.config["SECRET_KEY"] = "5791628basdfsadfa32242sdfsfde280ba245"
-app.config[
-    "SQLALCHEMY_DATABASE_URI"
-] = "postgresql://postgres:new_password@45.222.128.55:5432/cu"
+app.config["SQLALCHEMY_DATABASE_URI"] = (
+    "postgresql://postgres:new_password@45.222.128.55:5432/cu"
+)
 
 
 login_manager = LoginManager()
@@ -60,6 +61,12 @@ adminStaffId = 93
 eventsId = 101
 
 totalNumberOfAdmissionForms = 12
+
+baseUrl = "https://forms.central.edu.gh"
+# baseUrl = "http://127.0.0.1:5000"
+contact_form_url = baseUrl + "/api/contactform"
+
+category_form_url = baseUrl + "/api/categories/contactforms"
 
 
 def reportError(e):
@@ -390,66 +397,86 @@ def home():
     supportGallery = wpgallery(6)
     events = getEvents()[0]
     print("------------------events------------------")
-    print(events)
+    # print(events)
 
     print("gallery")
-    print(gallery)
+    # print(gallery)
+
+    # if request.method == "GET":
+    category = requests.get(category_form_url).json()
+    print(category)
+    # print(category.json())
+    #
+    print(category["categories"])
+    print
+    form.category.choices = category
+    print("category")
 
     if request.method == "POST":
-        if form.validate_on_submit():
-            try:
-                message = (
-                    "From: "
-                    + form.name.data
-                    + "\nPhone: "
-                    + form.number.data
-                    + "\nEmail: "
-                    + form.email.data
-                    + "\nMessage: "
-                    + form.message.data
-                )
+        print("This is a post request")
 
+        print(form.data)
+        # if form.validate_on_submit():
+        messageBody = form.data
+        # messageBody = messageBody.jsonify()
+
+        headers = {"Content-Type": "application/json"}
+        try:
+            response = requests.post(
+                contact_form_url, headers=headers, json=json.dumps(messageBody)
+            )
+            print("-----------------------------")
+            print(response)
+            print(response.content)
+            print("contactformresponse")
+
+            message = (
+                "From: "
+                + form.name.data
+                + "\nPhone: "
+                + form.number.data
+                + "\nEmail: "
+                + form.email.data
+                + "\nCategory: "
+                + form.category.data
+                + "\nMessage: "
+                + form.message.data
+            )
+
+            prestoUrl
+            r = requests.get(
                 prestoUrl
-                r = requests.get(
-                    prestoUrl
-                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
-                    + form.name.data
-                    + "&message="
-                    + message
-                )
-                print(r.url)
-                flash(
-                    "Hi, "
-                    + form.name.data
-                    + " your message has been submitted successfully.",
-                    "success",
-                )
+                + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+                + form.name.data
+                + "&message="
+                + message
+            )
+            print(r.url)
+            flash(
+                "Hi, "
+                + form.name.data
+                + " your message has been submitted successfully.",
+                "success",
+            )
 
-                # Send a thank-you email to the user
-                thank_you_message = (
-                    # "Subject: Thank You for Contacting Us\n\n"
-                    f"Dear {form.name.data},\n\n"
-                    "Thank you for contacting us. We value your time and will do well to respond as promptly as possible"
-                )
+            # Send a thank-you email to the user
+            thank_you_message = (
+                # "Subject: Thank You for Contacting Us\n\n"
+                f"Dear {form.name.data},<br>\n\n Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+            )
 
-                sendAnEmail(
-                    title="CU Support",
-                    subject="Thank You for Contacting Us !",
-                    message=thank_you_message,
-                    email_receiver=[form.email.data],
-                )
+            sendAnEmail(
+                title="CU Support",
+                subject="Thank You for Contacting Us !",
+                message=thank_you_message,
+                email_receiver=[form.email.data],
+            )
 
-                # Redirect to the home page
-                return redirect(url_for("home"))
+            # Redirect to the home page
+            return redirect(url_for("home"))
 
-            except Exception as e:
-                print(e)
-                print("Unable to send emails!")
-
-                # Flash an error message or handle the error as needed
-
-        else:
-            print(form.errors)
+        except Exception as e:
+            reportError(e)
 
     # Render the template with the form and other data
     return render_template(
@@ -458,6 +485,7 @@ def home():
         form=form,
         gallery=gallery,
         events=events,
+        loadingMessage="Please wait while sending message....",
         supportGallery=supportGallery,
     )
 
