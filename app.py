@@ -442,7 +442,7 @@ def home():
             prestoUrl
             r = requests.get(
                 prestoUrl
-                + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject="
+                + "/sendPrestoMail?recipient=info.central.edu.gh&subject="
                 + form.name.data
                 + "&message="
                 + message
