@@ -62,7 +62,8 @@ eventsId = 101
 
 totalNumberOfAdmissionForms = 12
 
-baseUrl = "http://127.0.0.1:5000"
+baseUrl = "https://forms.central.edu.gh"
+# baseUrl = "http://127.0.0.1:5000"
 contact_form_url = baseUrl + "/api/contactform"
 
 category_form_url = baseUrl + "/api/categories/contactforms"
@@ -402,6 +403,7 @@ def home():
     category = requests.get(category_form_url).json()
     print(category)
     # print(category.json())
+    #
     print(category["categories"])
     print
     form.category.choices = category
@@ -441,7 +443,7 @@ def home():
             prestoUrl
             r = requests.get(
                 prestoUrl
-                + "/sendPrestoMail?recipient=info.central.edu.gh&subject="
+                + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
                 + form.name.data
                 + "&message="
                 + message
@@ -456,16 +458,15 @@ def home():
 
             # Send a thank-you email to the user
             thank_you_message = (
-                "Subject: Thank You for Contacting Us\n\n"
-                f"Dear {form.name.data},\n\n"
-                "Thank you for contacting us. We value your time and will do well to respond as promptly as possible"
+                # "Subject: Thank You for Contacting Us\n\n"
+                f"Dear {form.name.data},<br>\n\n Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
             )
 
             sendAnEmail(
                 title="CU Support",
                 subject="Thank You for Contacting Us !",
                 message=thank_you_message,
-                email_receiver="mr.adumatta@gmail.com",
+                email_receiver=[form.email.data],
             )
 
             # Redirect to the home page
@@ -2255,4 +2256,4 @@ def students():
 
 if __name__ == "__main__":
     # DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(port=4000, host="0.0.0.0", debug=True)
+    app.run(port=5000, host="0.0.0.0", debug=True)
