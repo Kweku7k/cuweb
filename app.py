@@ -62,7 +62,8 @@ eventsId = 101
 
 totalNumberOfAdmissionForms = 12
 
-baseUrl = "http://172.16.12.221:5000"
+# baseUrl = "https://forms.central.edu.gh"
+baseUrl = "http://172.16.12.205:5000"
 contact_form_url = baseUrl + "/api/contactform"
 
 category_form_url = baseUrl + "/api/categories/contactforms"
@@ -398,14 +399,14 @@ def home():
     print("gallery")
     # print(gallery)
 
-    if request.method == "GET":
-        category = requests.get(category_form_url).json()
-        print(category)
-        # print(category.json())
-        print(category["data"])
-        print
-        form.category.choices = category
-        print("category")
+    # if request.method == "GET":
+    category = requests.get(category_form_url).json()
+    print(category)
+    # print(category.json())
+    print(category["categories"])
+    print
+    form.category.choices = category
+    print("category")
 
     if request.method == "POST":
         print("This is a post request")
@@ -424,65 +425,56 @@ def home():
             print(response)
             print(response.content)
             print("contactformresponse")
+
+            message = (
+                "From: "
+                + form.name.data
+                + "\nPhone: "
+                + form.number.data
+                + "\nEmail: "
+                + form.email.data
+                + "\nCategory: "
+                + form.category.data
+                + "\nMessage: "
+                + form.message.data
+            )
+
+            prestoUrl
+            r = requests.get(
+                prestoUrl
+                + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject="
+                + form.name.data
+                + "&message="
+                + message
+            )
+            print(r.url)
+            flash(
+                "Hi, "
+                + form.name.data
+                + " your message has been submitted successfully.",
+                "success",
+            )
+
+            # Send a thank-you email to the user
+            thank_you_message = (
+                "Subject: Thank You for Contacting Us\n\n"
+                f"Dear {form.name.data},\n\n"
+                "Thank you for contacting us. We value your time and will do well to respond as promptly as possible"
+            )
+
+            sendAnEmail(
+                title="CU Support",
+                subject="Thank You for Contacting Us !",
+                message=thank_you_message,
+                email_receiver="mr.adumatta@gmail.com",
+                loadingMessage="Please wait while sending message....",
+            )
+
+            # Redirect to the home page
+            return redirect(url_for("home"))
+
         except Exception as e:
             reportError(e)
-
-        #     try:
-        #         message = (
-        #             "From: "
-        #             + form.name.data
-        #             + "\nPhone: "
-        #             + form.number.data
-        #             + "\nEmail: "
-        #             + form.email.data
-        #             + "\nCategory: "
-        #             + form.category.data
-        #             + "\nMessage: "
-        #             + form.message.data
-        #         )
-
-        #         prestoUrl
-        #         r = requests.get(
-        #             prestoUrl
-        #             + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
-        #             + form.name.data
-        #             + "&message="
-        #             + message
-        #         )
-        #         print(r.url)
-        #         flash(
-        #             "Hi, "
-        #             + form.name.data
-        #             + " your message has been submitted successfully.",
-        #             "success",
-        #         )
-
-        #         # Send a thank-you email to the user
-        #         thank_you_message = (
-        #             # "Subject: Thank You for Contacting Us\n\n"
-        #             f"Dear {form.name.data},\n\n"
-        #             "Thank you for contacting us. We value your time and will do well to respond as promptly as possible"
-        #         )
-
-        #         sendAnEmail(
-        #             title="CU Support",
-        #             subject="Thank You for Contacting Us !",
-        #             message=thank_you_message,
-        #             email_receiver=[form.email.data],
-        #             loadingMessage="Please wait while sending message....",
-        #         )
-
-        #         # Redirect to the home page
-        #         return redirect(url_for("home"))
-
-        #     except Exception as e:
-        #         print(e)
-        #         print("Unable to send emails!")
-
-        #         # Flash an error message or handle the error as needed
-
-        # else:
-        #     print(form.errors)
 
     # Render the template with the form and other data
     return render_template(
