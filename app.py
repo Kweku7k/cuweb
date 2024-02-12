@@ -62,8 +62,7 @@ eventsId = 101
 
 totalNumberOfAdmissionForms = 12
 
-# baseUrl = "https://forms.central.edu.gh"
-baseUrl = "http://172.16.12.205:5000"
+baseUrl = "http://127.0.0.1:5000"
 contact_form_url = baseUrl + "/api/contactform"
 
 category_form_url = baseUrl + "/api/categories/contactforms"
@@ -467,7 +466,6 @@ def home():
                 subject="Thank You for Contacting Us !",
                 message=thank_you_message,
                 email_receiver="mr.adumatta@gmail.com",
-                loadingMessage="Please wait while sending message....",
             )
 
             # Redirect to the home page
@@ -2257,4 +2255,4 @@ def students():
 
 if __name__ == "__main__":
     # DEBUG is SET to TRUE. CHANGE FOR PROD
-    app.run(port=5000, host="0.0.0.0", debug=True)
+    app.run(port=4000, host="0.0.0.0", debug=True)
