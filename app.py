@@ -62,8 +62,8 @@ eventsId = 101
 
 totalNumberOfAdmissionForms = 12
 
-# baseUrl = "https://forms.central.edu.gh"
-baseUrl = "http://172.16.12.205:5000"
+baseUrl = "https://forms.central.edu.gh"
+# baseUrl = "http://172.16.12.205:5000"
 contact_form_url = baseUrl + "/api/contactform"
 
 category_form_url = baseUrl + "/api/categories/contactforms"

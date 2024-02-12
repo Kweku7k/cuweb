@@ -4,21 +4,25 @@
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center" style="height: 90vh;">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row gy-5" style="padding-top: 6vh;">
+      <div class="row gy-5" style="padding-top: 4vh;">
         <div class="col-lg-7 order-1 order-lg-1 text-left">
           <h6>Central University </h6>
           <h1>Online Application Portal</h1>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
           <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="{{url_for("downloadOnlineManual")}}">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6>
           <br/>
-          <div class="d-flex">
+          <div class="row">
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="#">
+                <button id="myBtn" class="pill-button" style="width: 100%;">Click here to buy eVoucher</button>
+              </a>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="#ourprograms">
+                <button id="myBtn2" class="pill-button-alternate" style="width: 100%;"> Click here to select a program.</button>
+              </a>
+            </div>
 
-            <!-- <a href="tel:*887*18#"> -->
-              <button id="myBtn" class="pill-button" style="width: fit-content;">Click here to buy eVoucher</button>
-            <!-- </a> -->
-            <a href="#ourprograms">
-              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Click here to select a program.</button>
-            </a>
           </div>
         </div>
 
