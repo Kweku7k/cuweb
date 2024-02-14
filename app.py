@@ -63,7 +63,7 @@ eventsId = 101
 totalNumberOfAdmissionForms = 12
 
 baseUrl = "https://forms.central.edu.gh"
-# baseUrl = "http://127.0.0.1:5000"
+# baseUrl = "http://172.16.12.205:5000"
 contact_form_url = baseUrl + "/api/contactform"
 
 category_form_url = baseUrl + "/api/categories/contactforms"
@@ -403,14 +403,17 @@ def home():
     # print(gallery)
 
     # if request.method == "GET":
-    category = requests.get(category_form_url).json()
-    print(category)
+    try:
+        category = requests.get(category_form_url).json()
+        print(category["categories"])
+        print
+        form.category.choices = category
+        print("category")
+    except Exception as e:
+        form.category.choices = [("pr-admin", "General")]
+
     # print(category.json())
     #
-    print(category["categories"])
-    print
-    form.category.choices = category
-    print("category")
 
     if request.method == "POST":
         print("This is a post request")
@@ -462,7 +465,7 @@ def home():
             # Send a thank-you email to the user
             thank_you_message = (
                 # "Subject: Thank You for Contacting Us\n\n"
-                f"Dear {form.name.data},<br>\n\n Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+                f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
             )
 
             sendAnEmail(
@@ -2172,7 +2175,7 @@ def sendAnEmail(
     <head>
         <style>
         @font-face {{
-            font-family: 'Poppins', sans serif;
+            font-family: 'Poppins', sans-serif;
             src: url('PlusJakartaSans-VariableFont_wght.woff2') format('woff2-variations'),
                 url('PlusJakartaSans-Italic-VariableFont_wght.woff2') format('woff2-variations');
             font-weight: 100 500; /* Adjust font weights based on available weights */
@@ -2181,16 +2184,18 @@ def sendAnEmail(
 
         body {{
             font-family: 'Plus Jakarta', sans-serif;
-            color:black;
+            color: black;
             margin: auto 10px;
+            line-height: 1.6; /* Adjust line height for better readability */
         }}
 
-        div{{
+        div {{
             font-family: 'Plus Jakarta', sans-serif;
-            font-weight:200;
+            font-weight: 200;
+            margin-bottom: 10px; /* Add margin bottom to separate paragraphs */
         }}
 
-         img {{
+        img {{
             max-width: 100%;
             height: auto;
             margin-bottom: 3vh;
@@ -2203,15 +2208,14 @@ def sendAnEmail(
             }}
         }}
         </style>
-
     </head>
     <body style="margin:auto 10px; color:black; font-family: 'Plus Jakarta', sans-serif;">
 
         <!-- Your banner image above -->
-         <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo">
+        <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo">
 
-        <div style="font-family:'Poppins', sans serif; font-weight: 400; font-size: 20px; line-height:26px; color: #000;">
-            {message}
+        <div style="font-family:'Poppins', sans serif; font-weight: 400; font-size: 20px; line-height:1.6; color: #000;">
+            <p>{message}</p>
         </div>
 
         <h6 style="font-weight:200">This email is powered by <a href='https://prestoghana.com'>PrestoGhana</a></h6>
