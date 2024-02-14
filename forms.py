@@ -14,9 +14,12 @@ from wtforms import (
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
-programChoices = requests.get("https://forms.central.edu.gh/api/departments")
-# print(programChoices.json())
-allProgramChoices = [program["name"] for program in programChoices.json()["data"]]
+try:
+    programChoices = requests.get("https://forms.central.edu.gh/api/departments")
+    # print(programChoices.json())
+    allProgramChoices = [program["name"] for program in programChoices.json()["data"]]
+except Exception as e:
+    allProgramChoices = [("department", "department")]
 
 
 class BuyForms(FlaskForm):
@@ -140,9 +143,9 @@ class ApplicantGuardian(FlaskForm):
 class ApplicantProgram(FlaskForm):
     # program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
     # programchoice = SelectField('Program Choice', choices=allProgramChoices)
-    firstchoice = SelectField("First Choice", choices=allProgramChoices)
-    secondchoice = SelectField("Second Choice", choices=allProgramChoices)
-    thirdchoice = SelectField("Third Choice", choices=allProgramChoices)
+    # firstchoice = SelectField("First Choice", choices=allProgramChoices)
+    # secondchoice = SelectField("Second Choice", choices=allProgramChoices)
+    # thirdchoice = SelectField("Third Choice", choices=allProgramChoices)
     submit = SubmitField("Next")
 
 

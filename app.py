@@ -400,14 +400,17 @@ def home():
     # print(gallery)
 
     # if request.method == "GET":
-    category = requests.get(category_form_url).json()
-    print(category)
+    try:
+        category = requests.get(category_form_url).json()
+        print(category["categories"])
+        print
+        form.category.choices = category
+        print("category")
+    except Exception as e:
+        form.category.choices = [("pr-admin", "General")]
+
     # print(category.json())
     #
-    print(category["categories"])
-    print
-    form.category.choices = category
-    print("category")
 
     if request.method == "POST":
         print("This is a post request")
