@@ -4,8 +4,8 @@
      <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row gy-5" style="padding-top: 3vh;" >
-        <div class="col-lg-6 order-1 order-lg-1 text-left" style="padding-top: 5vh;">
+      <div class="row gy-5" >
+        <div class="col-lg-6 order-1 order-lg-1 text-left">
           <h6>Central University </h6>
           <h3 style="margin: 20px 0; font-weight: bold;">COUNSELLING AND CAREER SERVICES CENTRE</h3>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
@@ -15,61 +15,66 @@
             deal with psychosocial barriers to success and personal wellbeing and
             maintain balance for teaching, learning and life.</h5>
           <br/>
-          <div class="d-flex">
+          <div class="row">
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="#">
+                <button id="myBtn" class="pill-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 100%;">Contact Us</button>
+              </a>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="https://prestoghana.com/donate/CuCare">
+                <button class="pill-button-alternate" style="width: 100%;"> Donate to CUCare</button>
+              </a>
+            </div>
 
-            
-            <button id="myBtn" class="pill-button" style="width: fit-content;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Contact Us</button>
-            
-
-            
-            <a href="https://prestoghana.com/donate/CuCare">
-              <button id="myBtn2" class="pill-button-alternate" style="width: fit-content; margin-left: 6px;"> Donate Now</button>
-            </a>
           </div>
+    
         </div>
        
         <div class="col-lg-6 order-2 order-lg-2">
             <img style="width:110%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cuc2.jpg")}}" alt="" srcset="">
         </div>
       </div>
-      <div class="row icon-boxes" style="margin-bottom: 2vh;">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="300">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-palette-line"></i></div>
-            <h4 class="title"><a href="#">Guidance and Counselling</a></h4>
-            <h6 class="description">"A counseling program provides guidance and support for individuals to improve their mental and emotional well-being."</h6>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="#">Internship Coordination</a></h4>
-            <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6>
-          </div>
-        </div>
-
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-command-line"></i></div>
-            <h4 class="title"><a href="#">Career and Placement Services</a></h4>
-            <h6 class="description">"Choosing the right Career and Placement Services can make a significant impact and help us create a better future."</h6>
-          </div>
-        </div>
-
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="400">
-          <div class="icon-box">
-            <div class="icon"><i class="ri-stack-line"></i></div>
-            <h4 class="title"><a href="#">Financial Aid Evaluations</a></h4>
-            <h6 class="description">"Assessment of students in financial distress for possible ecommendation to Scholarship Committee."</h6>
-          </div>
-        </div>
-
-      </div>
       
     </div>
   </section><!-- End Hero -->
+
+  <section style="padding-top: 7vh;">
+    <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+        <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+        <h3 style="padding-top: 3px;" id="title"><b>{{cucaremenutitle}}</b></h3>
+        <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row" style="align-items: stretch;">
+  
+          {% for article in CUCareMenu %}
+  
+            <div class="col-md-3"  style="margin-bottom: 20px;">
+                <a href="/expand/{{article.id}}" style="text-decoration: none;">
+                  <div class="card"  style="flex-grow: 1;">
+                      <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
+                  <div class="card-body">
+                      <!-- <div class="card-title" style="display: flex;">
+                          <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
+                          <h6 class="text-muted category"><b> {{article.id}}</b></h6>
+                      </div> -->
+                      <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
+                  </div>
+                  <!-- <div class="card-footer">
+                      <small class="text-muted">{{article.date}}</small>
+                  </div> -->
+                  </div>
+                </a>
+            </div>
+          {% endfor %} 
+            
+            <div id="demo"></div>
+        </div>
+    </div>
+  </section>
 
 
   <section style="height: 90%; background: #f2f2f2;">
@@ -97,17 +102,51 @@
   </section>
 
 
+
+
+  <section style="padding-top: 7vh;">
+    <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+        <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+        <h3 style="padding-top: 3px;" id="title"><b>{{cucarehelptitle}}</b></h3>
+        <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+    </div>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row" style="align-items: stretch;">
+  
+          {% for article in CUCareHelp %}
+  
+            <div class="col-md-3"  style="margin-bottom: 20px;">
+                <a href="/expand/{{article.id}}" style="text-decoration: none;">
+                  <div class="card"  style="flex-grow: 1;">
+                      <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
+                  <div class="card-body">
+                      <!-- <div class="card-title" style="display: flex;">
+                          <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
+                          <h6 class="text-muted category"><b> {{article.id}}</b></h6>
+                      </div> -->
+                      <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
+                  </div>
+                  <!-- <div class="card-footer">
+                      <small class="text-muted">{{article.date}}</small>
+                  </div> -->
+                  </div>
+                </a>
+            </div>
+          {% endfor %} 
+            
+            <div id="demo"></div>
+        </div>
+    </div>
+  </section>
+
   <section id="services" class="services section-bg">
     <div class="container-fluid" data-aos="fade-up">
 
-      <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 2vh;">
-        <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ca181e;"></div>
-        <h1 style="margin: 20px 0; font-weight: 700;">Ways to Help</h1>
-        <div class="line" style="width: 40px; height: 3px; margin-left: 12px; background-color: #ca181e;"></div>
-      </div>
-
-      <div class="text-center">
-        <h4 class="text-muted">Your support helps to educate leaders who make a difference in the world  </h4>
+      <div class="section-title">
+        <h2>Ways to Help</h2>
+        <p class="text-muted">Your support helps to educate leaders who make a difference in the world.</p>
       </div>
 
       <div class="row" style="margin-top: 2vh;">
@@ -167,6 +206,7 @@
 
     </div>
   </section><!-- End Sevices Section -->
+
 
   <!-- ======= Testimonials Section ======= -->
   <section id="testimonials" class="testimonials" style="padding: 10px;">
@@ -300,56 +340,7 @@
             </div>
           </div><!-- End testimonial item -->
 
-          <!-- <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Ultramodern campus with state of the art infrastructure. Neat washrooms and decent classroom sizes and a huge parking space.                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="{{url_for("static",filename="img/testimonials/t-2.jpeg")}}" class="testimonial-img" alt="">
-              <h3>Sara Wilsson</h3>
-              <h4>Designer</h4>
-            </div>
-          </div>End testimonial item -->
-
-          <!-- <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Central University is a very serene environment. The strategically planted trees make the environment very beautiful                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="{{url_for("static",filename="img/testimonials/t-3.jpeg")}}" class="testimonial-img" alt="">
-              <h3>Jena Karlis</h3>
-              <h4>Old Student</h4>
-            </div>
-          </div>End testimonial item -->
-
-          <!-- <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Teaching and learning are at the best peak. And the environment is conducive for learning. Rapid access to food variety.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="{{url_for("static",filename="img/testimonials/t-4.jpeg")}}" class="testimonial-img" alt="">
-              <h3>Matt Brandon</h3>
-              <h4>Freelancer</h4>
-            </div>
-          </div>End testimonial item -->
-
-          <!-- <div class="swiper-slide">
-            <div class="testimonial-item">
-              <p>
-                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                Looks a very beautiful place to learn. In the outskirts of Tema which is an ideal place to learn. Away from the noise of the city.
-                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
-              </p>
-              <img src="{{url_for("static",filename="img/testimonials/t-5.jpeg")}}" class="testimonial-img" alt="">
-              <h3>Johna Larson</h3>
-              <h4>Entrepreneur</h4>
-            </div>
-          </div>End testimonial item -->
-
+          
         </div>
         <div class="swiper-pagination"></div>
       </div>
@@ -379,6 +370,108 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+<script>
+  // Backend values passed to the frontend
+  const allPages = '{{totalPages}}'/* value from the backend */;
+  let currentPage = '{{page}}'/* value from the backend */;
+  const itemsPerPage = '{{per_page}}'/* value from the backend */;
+
+  totalPages = parseInt(allPages)
+  currentPage = parseInt(currentPage)
+  updatePaginationButtons()
+  // console.log(currentPage)
+
+  function updatePaginationButtons() {
+      const prevButton = document.getElementById("prevButton");
+      const nextButton = document.getElementById("nextButton");
+
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+  }
+
+  function showPage(pageNumber) {
+  //     // Replace this section with code to fetch items from the backend based on 'pageNumber' and 'itemsPerPage'
+  //     // and update the 'items' container accordingly
+  //     // Example:
+  //     const itemsContainer = document.getElementById("items");
+  //     itemsContainer.innerHTML = `<p>Page ${pageNumber}</p>`;
+
+  //     currentPage = pageNumber;
+  //     updatePaginationButtons();
+
+  // this should update the page based on 
+  console.log("Currently on page: " + pageNumber)
+
+  }
+
+  function previousPage() {
+      nextPage = currentPage - 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage > 1) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage - 1);
+      }
+  }
+
+  function nextPage() {
+      nextPage = currentPage + 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage < totalPages) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage + 1);
+      }
+  }
+
+  // Show the initial page
+  showPage(currentPage);
+</script>
+
+<script>
+  function getImageUrl(id) { 
+      let file = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/media/"+id
+      fetch(file)
+      .then(x => x.json())
+      .then(y => updateHtml(y));
+  }
+      
+  function updateHtml(data) {
+      console.log(data)
+      document.getElementById("demo").innerText = "data"
+  }
+
+</script>
+
+<script>
+  function createNewPost(title, content) {
+    posts = document.getElementsByClassName("postsContainer")[0]
+  
+    const post = document.createElement("div");
+  
+    post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+    post.innerHTML = `
+          <a href="{{url_for("post")}}">
+          <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+              <h4 class="title"><a href="">${title}</a></h4>
+              <p class="description">${content.substring(0,80)}...</p>
+          </div>
+          </a>
+          `
+  
+    posts.append(post)
+  
+    return post
+  
+  }
+  
+  
+  </script>
 
 
 {% endblock %}

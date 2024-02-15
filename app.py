@@ -960,6 +960,78 @@ def news():
     )
 
 
+@app.route("/cucare")
+def cucare():
+    page = request.args.get("page", "1")
+    print("page")
+    print(page)
+    # Get URL
+    id = 113
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    CUCareMenu = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        CUCareMenu.append(article)
+    print(CUCareMenu)
+
+    # Get URL
+    id = 114
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cucarehelp = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        cucarehelp.append(article)
+    print("cucarehelp")
+    print(cucarehelp)
+
+    return render_template(
+        "cucare.html",
+        CUCareHelp=cucarehelp,
+        CUCareMenu=CUCareMenu,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+        cucaremenutitle="WHAT WE DO",
+        cucarehelptitle="WAYS TO HELP",
+    )
+
+
 @app.route("/lecturers")
 def lecturers():
     page = request.args.get("page", "1")
