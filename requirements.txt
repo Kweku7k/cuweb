@@ -21,5 +21,6 @@ Werkzeug==2.2.0
 WTForms==3.0.1
 zipp==3.8.1
 psycopg2-binary
+PyJWT
 uwsgi
 flask_login
