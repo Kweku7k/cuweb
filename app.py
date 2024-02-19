@@ -884,9 +884,17 @@ def chapel():
 # return render_template('about.html' posts=allposts)
 
 
-@app.route("/cu")
-def cu():
-    return render_template("cu.html")
+@app.route("/cuposting")
+def cuposting():
+    id = 120
+    alltags = returnTags(id, "cucareposting")["tags"]
+    allposts = returnTags(id, "cucareposting")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "cucareposting.html", id=startingPoint, tags=alltags, allposts=allposts
+    )
 
 
 # @app.route('/admission')
