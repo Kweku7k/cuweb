@@ -11,6 +11,7 @@ from wtforms import (
     DateField,
     FileField,
     TextAreaField,
+    EmailField
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
@@ -40,6 +41,11 @@ class BuyForms(FlaskForm):
 
 class LoginForm(FlaskForm):
     code = StringField("Code", validators=[DataRequired()])
+    submit = SubmitField("Verify")
+
+class UserLoginForm(FlaskForm):
+    email = EmailField("Student Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
     submit = SubmitField("Verify")
 
 

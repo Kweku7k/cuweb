@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row" style="justify-content: space-around; margin-top: 4vh; min-height: 80vh;">
+        <div class="col-md-6" style="background-color: rgba(180, 156, 62, 0.731);">
+
+        </div>
+
+        <div class="col-md-6" style="align-items: center;">
+            <div class="defaultCard">
+
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div class="container">
+                            {% for message in messages %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+
+                    <h6 class="heading" style="margin-top: 1vh;">central.edu</h6> 
+                    <h2 class="heading" style="margin-top: 1vh;"><b>Login as a student</b></h2> 
+
+                    
+                    <br/>
+                    <form action="" method="POST">
+                        {{form.hidden_tag()}}
+
+                        <div class="form-floating mb-3">
+                            {{form.email (class="form-control webForm", type="text", placeholder="Enter your email")}}
+                            {{form.email.label}}
+                        </div>
+                        <div class="form-floating mb-3">
+                            {{form.password (class="form-control webForm", type="text", placeholder="Enter your password")}}
+                            {{form.password.label}}
+                        </div>
+
+                    
+                        <div onclick="showLoadingScreen()">
+                            {{form.submit (style="margin-top: 4vh; width:100%",  onclick="showLoadingScreen()", class="pill-button"  )}}
+                        </div>
+                        <br/>
+
+                        <a href='{{url_for("register")}}'>
+                            <h6 class="text-center">I dont have an account!</h6>
+                        </a>
+                    </form>
+
+            </div>
+            <h6 style="text-align: center; margin-top: 2vh; text-decoration: none;">
+           </h6>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}

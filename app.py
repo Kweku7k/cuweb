@@ -1,10 +1,12 @@
 from email.message import EmailMessage
+from functools import wraps
 import json
 import smtplib
 from flask import (
     Flask,
     jsonify,
     redirect,
+    session,
     url_for,
     render_template,
     request,
@@ -30,6 +32,7 @@ import csv
 import random
 import string
 import pprint
+import jwt
 
 
 # banner_img_src = "https://central.edu.gh/static/img/Central-Uni-logo.png"
@@ -72,6 +75,30 @@ category_form_url = baseUrl + "/api/categories/contactforms"
 def reportError(e):
     print(e)
     return "Noted!"
+
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        # token = session.get('token') #https://
+        token = session.get('jwt') #https://
+        print(token)
+
+        if not token:
+            return jsonify({'message':'Token is missing'}), 401
+
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'],algorithms=algorithms)
+            print("-----jwt-----")
+            print(data)
+            session['current_user'] = data['user']
+
+        except:
+            return jsonify({'message':'Token is invalid'}), 403
+        
+        return f(*args, **kwargs)
+
+    return decorated
 
 
 class User(db.Model, UserMixin):
@@ -996,6 +1023,24 @@ def news():
         title="News & Blog",
     )
 
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = UserLoginForm()
+    if form.validate_on_submit():
+        # send data to forms
+        pass
+    return render_template('login.html', form=form)
+
+
+@app.route('/jobboard', methods=['GET', 'POST'])
+def jobboard():
+    return "Jobboard"
+
+
+@app.route('/register')
+def register():
+    return "Done"
 
 @app.route("/cucare")
 def cucare():
