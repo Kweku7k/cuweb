@@ -26,7 +26,7 @@ from flask_login import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import urllib.request, urllib.parse
 import csv
 import random
@@ -76,6 +76,8 @@ def reportError(e):
     print(e)
     return "Noted!"
 
+
+algorithms = ["HS256"]
 
 def token_required(f):
     @wraps(f)
@@ -1027,13 +1029,28 @@ def news():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     form = UserLoginForm()
-    if form.validate_on_submit():
-        # send data to forms
-        pass
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+
+            # request data from source!
+            # send login data to forms
+
+            if user is not None:
+                token = jwt.encode({'user':user.id, 'exp':datetime.now()+timedelta(minutes=30)}, app.config['SECRET_KEY'])
+                session['jwt']=token
+                session['current_user'] = user.id
+                return redirect('jobboard')
+
+        else:
+            flash('Login failed.')
     return render_template('login.html', form=form)
 
 
+# send user reset password token
+
 @app.route('/jobboard', methods=['GET', 'POST'])
+@token_required
 def jobboard():
     return "Jobboard"
 
