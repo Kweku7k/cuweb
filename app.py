@@ -1020,15 +1020,45 @@ def cucare():
     print("cucarehelp")
     print(cucarehelp)
 
+    # Get URL
+    id = 119
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cucarestaff = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        cucarestaff.append(article)
+    print("cucarestaff")
+    print(cucarestaff)
+
     return render_template(
         "cucare.html",
         CUCareHelp=cucarehelp,
         CUCareMenu=CUCareMenu,
+        CUCareStaff=cucarestaff,
         totalPages=totalPages,
         page=page,
         per_page=per_page,
         cucaremenutitle="WHAT WE DO ",
         cucarehelptitle="WAYS TO HELP",
+        cucarestafftitle="STAFF",
     )
 
 
