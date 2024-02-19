@@ -886,14 +886,43 @@ def chapel():
 
 @app.route("/cuposting")
 def cuposting():
+    page = request.args.get("page", "1")
+    print("page")
+    print(page)
+    # Get URL
     id = 120
-    alltags = returnTags(id, "cucareposting")["tags"]
-    allposts = returnTags(id, "cucareposting")["posts"]
-    print("allposts being returned")
-    print(allposts)
-    startingPoint = alltags[0]["id"]
+    per_page = 30
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cuposting = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        article["content"] = i["content"]["rendered"]
+        cuposting.append(article)
+    print(cuposting)
     return render_template(
-        "cucareposting.html", id=startingPoint, tags=alltags, allposts=allposts
+        "cucareposting.html",
+        cuposting=cuposting,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+        title="CUCare Job Board",
     )
 
 
