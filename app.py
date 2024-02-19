@@ -1027,8 +1027,21 @@ def cucare():
         totalPages=totalPages,
         page=page,
         per_page=per_page,
-        cucaremenutitle="WHAT WE DO",
+        cucaremenutitle="WHAT WE DO ",
         cucarehelptitle="WAYS TO HELP",
+    )
+
+
+@app.route("/summer-school")
+def summer():
+    id = 111
+    alltags = returnTags(id, "summer-school")["tags"]
+    allposts = returnTags(id, "summer-school")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "summer.html", id=startingPoint, tags=alltags, allposts=allposts
     )
 
 
@@ -1546,19 +1559,6 @@ def irb():
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
-    )
-
-
-@app.route("/summer-school")
-def summer():
-    id = 111
-    alltags = returnTags(id, "summer-school")["tags"]
-    allposts = returnTags(id, "summer-school")["posts"]
-    print("allposts being returned")
-    print(allposts)
-    startingPoint = alltags[0]["id"]
-    return render_template(
-        "summer.html", id=startingPoint, tags=alltags, allposts=allposts
     )
 
 
