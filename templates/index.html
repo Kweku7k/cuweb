@@ -355,7 +355,7 @@
             <div class="col-md-6">
                 <h6><b>You can leave a message and we would respond if need be</b></h6>
                 <br/>
-                <form method="post" onsubmit="return showLoadingScreen();">
+                <form method="post" onsubmit="return  showLoadingScreen();">
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
@@ -380,8 +380,8 @@
                         {{form.message.label}}
                     </div>
 
-                    <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div> -->
-                    <!-- <div class="g-recaptcha" id="divRecaptcha"></div> -->
+                    <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div>  -->
+                    <div class="g-recaptcha" id="divRecaptcha" required></div>  
                     <br>
                     
                     <div>

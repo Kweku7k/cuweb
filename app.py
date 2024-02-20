@@ -432,7 +432,6 @@ def home():
     try:
         category = requests.get(category_form_url).json()
         print(category["categories"])
-        print
         form.category.choices = category
         print("category")
     except Exception as e:
@@ -444,69 +443,83 @@ def home():
     if request.method == "POST":
         print("This is a post request")
 
-        print(form.data)
-        # if form.validate_on_submit():
-        messageBody = form.data
-        # messageBody = messageBody.jsonify()
+        print(request.form)
+        recaptcha_response = request.form['g-recaptcha-response']
 
-        headers = {"Content-Type": "application/json"}
-        try:
-            response = requests.post(
-                contact_form_url, headers=headers, json=json.dumps(messageBody)
-            )
-            print("-----------------------------")
-            print(response)
-            print(response.content)
-            print("contactformresponse")
+        googlerecaptchakey="6LfanVcpAAAAAFoDc7tHMYolXiSZTxbkB6nMg15O"
 
-            message = (
-                "From: "
-                + form.name.data
-                + "\nPhone: "
-                + form.number.data
-                + "\nEmail: "
-                + form.email.data
-                + "\nCategory: "
-                + form.category.data
-                + "\nMessage: "
-                + form.message.data
-            )
+         # Verify the reCAPTCHA response
+        verify_url = f'https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}'
+        verify_response = requests.post(verify_url)
+        verify_data = verify_response.json()
 
-            prestoUrl
-            r = requests.get(
+        if verify_data['success']:
+
+            print(form.data)
+            # if form.validate_on_submit():
+            messageBody = form.data
+            # messageBody = messageBody.jsonify()
+
+            headers = {"Content-Type": "application/json"}
+            try:
+                response = requests.post(
+                    contact_form_url, headers=headers, json=json.dumps(messageBody)
+                )
+                print("-----------------------------")
+                print(response)
+                print(response.content)
+                print("contactformresponse")
+
+                message = (
+                    "From: "
+                    + form.name.data
+                    + "\nPhone: "
+                    + form.number.data
+                    + "\nEmail: "
+                    + form.email.data
+                    + "\nCategory: "
+                    + form.category.data
+                    + "\nMessage: "
+                    + form.message.data
+                )
+
                 prestoUrl
-                + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
-                + form.name.data
-                + "&message="
-                + message
-            )
-            print(r.url)
-            flash(
-                "Hi, "
-                + form.name.data
-                + " your message has been submitted successfully.",
-                "success",
-            )
+                r = requests.get(
+                    prestoUrl
+                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+                    + form.name.data
+                    + "&message="
+                    + message
+                )
+                print(r.url)
+                flash(
+                    "Hi, "
+                    + form.name.data
+                    + " your message has been submitted successfully.",
+                    "success",
+                )
 
-            # Send a thank-you email to the user
-            thank_you_message = (
-                # "Subject: Thank You for Contacting Us\n\n"
-                f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
-            )
+                # Send a thank-you email to the user
+                thank_you_message = (
+                    # "Subject: Thank You for Contacting Us\n\n"
+                    f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+                )
 
-            sendAnEmail(
-                title="CU Support",
-                subject="Thank You for Contacting Us !",
-                message=thank_you_message,
-                email_receiver=[form.email.data],
-            )
+                sendAnEmail(
+                    title="CU Support",
+                    subject="Thank You for Contacting Us !",
+                    message=thank_you_message,
+                    email_receiver=[form.email.data],
+                )
 
-            # Redirect to the home page
-            return redirect(url_for("home"))
+                # Redirect to the home page
+                return redirect(url_for("home"))
 
-        except Exception as e:
-            reportError(e)
+            except Exception as e:
+                reportError(e)
 
+        else:
+            flash(f'Recaptcha has failed please check and try again.')
     # Render the template with the form and other data
     return render_template(
         "index.html",
@@ -1291,7 +1304,7 @@ def getEvents():
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
     r = requests.get(url)
     response = r.json()
-    pprint.pprint(response)
+    # pprint.pprint(response)
     events = []
     for i in response:
         article = {}
@@ -1300,7 +1313,7 @@ def getEvents():
         article["title"] = i["title"]["rendered"]
         # article["title"] = i["title"]
         events.append(article)
-    print(events)
+    # print(events)
     return events
 
 
@@ -1372,13 +1385,13 @@ def wpgallery(id):
 
     # find length
     noOfImages = len(response)
-    print(noOfImages)
+    # print(noOfImages)
 
     for i, index in enumerate(response):
         content = r.json()[i]["guid"]["rendered"]
         images.append(content)
 
-    print(images)
+    # print(images)
 
     return images
 
