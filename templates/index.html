@@ -355,7 +355,7 @@
             <div class="col-md-6">
                 <h6><b>You can leave a message and we would respond if need be</b></h6>
                 <br/>
-                <form method="post" onsubmit="return  showLoadingScreen();">
+                <form method="post" onsubmit="return submitForm();">
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
@@ -385,7 +385,7 @@
                     <br>
                     
                     <div>
-                      {{form.submit (class="pill-button", style="width:100%") }}
+                      {{form.submit (class="pill-button", style="width:100%" ) }}
                     </div>
         
                 </form>
@@ -432,6 +432,25 @@
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+
+  <script>
+    function submitForm() {
+        var response = grecaptcha.getResponse();
+        if (response.length === 0) {
+            // reCAPTCHA not verified
+            alert("Please complete the reCAPTCHA to proceed.");
+            return false; // Prevent form submission
+        }
+        // Show loading screen
+        showLoadingScreen();
+        return true; // Allow form submission
+    }
+
+    function showLoadingScreen() {
+        var loadingScreen = document.getElementById('loading');
+        loadingScreen.style.display = 'flex';
+    }
+  </script>
 
   <script>
     // Function to set a cookie with an expiration time

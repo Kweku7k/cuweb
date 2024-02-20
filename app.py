@@ -423,7 +423,7 @@ def home():
     gallery = wpgallery(5)
     supportGallery = wpgallery(6)
     events = getEvents()[0]
-    print("------------------events------------------")
+    # print("------------------events------------------")
     # print(events)
 
     print("gallery")
@@ -445,16 +445,16 @@ def home():
         print("This is a post request")
 
         print(request.form)
-        recaptcha_response = request.form['g-recaptcha-response']
+        recaptcha_response = request.form["g-recaptcha-response"]
 
-        googlerecaptchakey="6LfanVcpAAAAAFoDc7tHMYolXiSZTxbkB6nMg15O"
+        googlerecaptchakey = "6LfanVcpAAAAAFoDc7tHMYolXiSZTxbkB6nMg15O"
 
         # Verify the reCAPTCHA response
-        verify_url = f'https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}'
+        verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
         verify_response = requests.post(verify_url)
         verify_data = verify_response.json()
 
-        if verify_data['success']:
+        if verify_data["success"]:
 
             print(form.data)
             # if form.validate_on_submit():
@@ -520,7 +520,7 @@ def home():
                 reportError(e)
 
         else:
-            flash(f'Recaptcha has failed please check and try again.')
+            flash(f"Recaptcha has failed please check and try again.")
     # Render the template with the form and other data
     return render_template(
         "index.html",
@@ -1310,7 +1310,7 @@ def getEvents():
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
     r = requests.get(url)
     response = r.json()
-    # pprint.pprint(response)
+    pprint.pprint(response)
     events = []
     for i in response:
         article = {}
@@ -1391,13 +1391,13 @@ def wpgallery(id):
 
     # find length
     noOfImages = len(response)
-    # print(noOfImages)
+    print(noOfImages)
 
     for i, index in enumerate(response):
         content = r.json()[i]["guid"]["rendered"]
         images.append(content)
 
-    # print(images)
+    print(images)
 
     return images
 
@@ -1508,8 +1508,6 @@ def view(id):
             + form.number.data
             + "\nEmail: "
             + form.email.data
-            + "\nCategory: "
-            + form.category.data
             + "\nMessage: "
             + form.message.data
         )
@@ -1517,7 +1515,7 @@ def view(id):
         # Perform the GET request
         r = requests.get(
             prestoUrl
-            + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+            + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject="
             + form.name.data
             + "&message="
             + message
@@ -1534,7 +1532,7 @@ def view(id):
         thank_you_message = f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
 
         sendAnEmail(
-            title="CU Support",
+            title="CUCare Job ",
             subject="Thank You for Contacting Us !",
             message=thank_you_message,
             email_receiver=[form.email.data],
