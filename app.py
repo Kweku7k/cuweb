@@ -79,25 +79,26 @@ def reportError(e):
 
 algorithms = ["HS256"]
 
+
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
         # token = session.get('token') #https://
-        token = session.get('jwt') #https://
+        token = session.get("jwt")  # https://
         print(token)
 
         if not token:
-            return jsonify({'message':'Token is missing'}), 401
+            return jsonify({"message": "Token is missing"}), 401
 
         try:
-            data = jwt.decode(token, app.config['SECRET_KEY'],algorithms=algorithms)
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=algorithms)
             print("-----jwt-----")
             print(data)
-            session['current_user'] = data['user']
+            session["current_user"] = data["user"]
 
         except:
-            return jsonify({'message':'Token is invalid'}), 403
-        
+            return jsonify({"message": "Token is invalid"}), 403
+
         return f(*args, **kwargs)
 
     return decorated
@@ -927,7 +928,7 @@ def chapel():
 
 
 @app.route("/cuposting")
-@token_required
+# @token_required
 def cuposting():
     page = request.args.get("page", "1")
     print("page")
@@ -1040,10 +1041,10 @@ def news():
     )
 
 
-@app.route("/login", methods=['GET', 'POST'])
+@app.route("/login", methods=["GET", "POST"])
 def login():
     form = UserLoginForm()
-    if request.method == 'POST':
+    if request.method == "POST":
         if form.validate_on_submit():
             user = User.query.filter_by(email=form.email.data).first()
 
@@ -1051,27 +1052,32 @@ def login():
             # send login data to forms
 
             if user is not None:
-                token = jwt.encode({'user':user.id, 'exp':datetime.now()+timedelta(minutes=30)}, app.config['SECRET_KEY'])
-                session['jwt']=token
-                session['current_user'] = user.id
-                return redirect('jobboard')
+                token = jwt.encode(
+                    {"user": user.id, "exp": datetime.now() + timedelta(minutes=30)},
+                    app.config["SECRET_KEY"],
+                )
+                session["jwt"] = token
+                session["current_user"] = user.id
+                return redirect("jobboard")
 
         else:
-            flash('Login failed.')
-    return render_template('login.html', form=form)
+            flash("Login failed.")
+    return render_template("login.html", form=form)
 
 
 # send user reset password token
 
-@app.route('/jobboard', methods=['GET', 'POST'])
+
+@app.route("/jobboard", methods=["GET", "POST"])
 @token_required
 def jobboard():
     return "Jobboard"
 
 
-@app.route('/register')
+@app.route("/register")
 def register():
     return "Done"
+
 
 @app.route("/cucare")
 def cucare():
@@ -1489,6 +1495,59 @@ def expand(id):
     # url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     wppost = "/wppost/" + str(id)
     return render_template("expand.html", url=wppost)
+
+
+@app.route("/view/<string:id>", methods=["GET", "POST"])
+def view(id):
+    form = ContactForm()
+    if request.method == "POST":
+        message = (
+            "From: "
+            + form.name.data
+            + "\nPhone: "
+            + form.number.data
+            + "\nEmail: "
+            + form.email.data
+            + "\nCategory: "
+            + form.category.data
+            + "\nMessage: "
+            + form.message.data
+        )
+
+        # Perform the GET request
+        r = requests.get(
+            prestoUrl
+            + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+            + form.name.data
+            + "&message="
+            + message
+        )
+        print(r.url)
+
+        # Flash message for successful submission
+        flash(
+            "Hi, " + form.name.data + " your message has been submitted successfully.",
+            "success",
+        )
+
+        # Send a thank-you email to the user
+        thank_you_message = f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+
+        sendAnEmail(
+            title="CU Support",
+            subject="Thank You for Contacting Us !",
+            message=thank_you_message,
+            email_receiver=[form.email.data],
+        )
+
+        # Redirect to the home page
+        return redirect(url_for("home"))
+    return render_template(
+        "view.html",
+        url="/wppost/" + str(id),
+        form=form,
+        loadingMessage="Please wait while we send your message....",
+    )
 
 
 @app.route("/staff")
