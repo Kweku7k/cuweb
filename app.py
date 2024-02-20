@@ -449,7 +449,7 @@ def home():
 
         googlerecaptchakey="6LfanVcpAAAAAFoDc7tHMYolXiSZTxbkB6nMg15O"
 
-         # Verify the reCAPTCHA response
+        # Verify the reCAPTCHA response
         verify_url = f'https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}'
         verify_response = requests.post(verify_url)
         verify_data = verify_response.json()
