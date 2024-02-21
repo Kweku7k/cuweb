@@ -928,7 +928,7 @@ def chapel():
 
 
 @app.route("/cuposting")
-# @token_required
+@token_required
 def cuposting():
     page = request.args.get("page", "1")
     print("page")
