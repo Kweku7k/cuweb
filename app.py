@@ -447,7 +447,7 @@ def home():
         print(request.form)
         recaptcha_response = request.form["g-recaptcha-response"]
 
-        googlerecaptchakey = "6LfanVcpAAAAAFoDc7tHMYolXiSZTxbkB6nMg15O"
+        googlerecaptchakey = os.environ["GOOGLERECAPTCHAKEY"]
 
         # Verify the reCAPTCHA response
         verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
@@ -528,7 +528,7 @@ def home():
         form=form,
         gallery=gallery,
         events=events,
-        loadingMessage="Please wait while sending message....",
+        loadingMessage="Please wait while we send your message....",
         supportGallery=supportGallery,
     )
 
@@ -1058,7 +1058,7 @@ def login():
                 )
                 session["jwt"] = token
                 session["current_user"] = user.id
-                return redirect("jobboard")
+                return redirect("cuposting")
 
         else:
             flash("Login failed.")
@@ -1499,23 +1499,24 @@ def expand(id):
 
 @app.route("/view/<string:id>", methods=["GET", "POST"])
 def view(id):
-    form = ContactForm()
+    form = PostingForm()
     if request.method == "POST":
+
         message = (
             "From: "
             + form.name.data
-            + "\nPhone: "
+            + "\n\nPhone: "
             + form.number.data
-            + "\nEmail: "
+            + "\n\nEmail: "
             + form.email.data
-            + "\nMessage: "
-            + form.message.data
+            + "\n\nNote: "
+            + form.about.data
         )
 
         # Perform the GET request
         r = requests.get(
             prestoUrl
-            + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject="
+            + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject=Job Posting Request "
             + form.name.data
             + "&message="
             + message
@@ -1524,7 +1525,7 @@ def view(id):
 
         # Flash message for successful submission
         flash(
-            "Hi, " + form.name.data + " your message has been submitted successfully.",
+            "Hi, " + form.name.data + " your application has been submitted successfully.",
             "success",
         )
 
@@ -1532,19 +1533,19 @@ def view(id):
         thank_you_message = f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
 
         sendAnEmail(
-            title="CUCare Job ",
+            title="CUCare Job Posting ",
             subject="Thank You for Contacting Us !",
             message=thank_you_message,
             email_receiver=[form.email.data],
         )
 
         # Redirect to the home page
-        return redirect(url_for("home"))
+        return redirect(url_for("cuposting"))
     return render_template(
         "view.html",
         url="/wppost/" + str(id),
         form=form,
-        loadingMessage="Please wait while we send your message....",
+        loadingMessage="Please wait while we send your application....",
     )
 
 
@@ -2435,8 +2436,8 @@ def sendAnEmail(
     print(email_receiver)
     print(type(email_receiver))
 
-    email_sender = "pay@prestoghana.com"
-    email_password = "nimda@2023"
+    email_sender = os.environ["PRESTO_MAIL_USERNAME"]
+    email_password = os.environ["PRESTO_MAIL_PASSWORD"]
 
     html_content = f"""
     <!DOCTYPE html>
