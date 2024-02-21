@@ -69,7 +69,7 @@ class PostingForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     number = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Email Address", validators=[DataRequired()])
-    about = TextAreaField("Leave us a Note", validators=[DataRequired()])
+    about = TextAreaField("Leave a Note", validators=[DataRequired()])
 
     submit = SubmitField("Submit")
 
