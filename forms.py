@@ -13,7 +13,7 @@ from wtforms import (
     FileField,
     TextAreaField,
     EmailField
-)
+    )
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
 try:
