@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block body %}
+<section style="padding-top: 5vh;">
+  <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+      <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+      <h3 style="padding-top: 3px;" id="title"><b>{{title}}</b></h3>
+      <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+  </div>
+</section>
+
+<section style="padding: 20px 0;">
+  <div class="container">
+      <div class="row" style="align-items: stretch;">
+
+{% for article in cuposting %}
+
+        <div class="col-md-6"  style="margin-bottom: 20px;">
+          <a href="/view/{{article.id}}" style="text-decoration: none; color: #000;">
+            <div class="card" style="flex-grow: 1;">
+                <div class="card-body">
+                    <p class="card-text" style="font-size: 20px; font-family: 'Butler', sans-serif; color: #111111;">
+                        <b>{{article.title}}</b><br>
+                        {{article.content|safe}} <!-- Displaying post content without escaping -->
+                    </p>
+                </div>
+                <!-- You can include other card elements such as footer here if needed -->
+            </div>
+          </a>
+        </div>
+          {% endfor %} 
+          
+             
+      </div>
+  </div>
+</section>
+
+
+
+
+<script>
+  // Backend values passed to the frontend
+  const allPages = '{{totalPages}}'/* value from the backend */;
+  let currentPage = '{{page}}'/* value from the backend */;
+  const itemsPerPage = '{{per_page}}'/* value from the backend */;
+
+  totalPages = parseInt(allPages)
+  currentPage = parseInt(currentPage)
+  updatePaginationButtons()
+  // console.log(currentPage)
+
+  function updatePaginationButtons() {
+      const prevButton = document.getElementById("prevButton");
+      const nextButton = document.getElementById("nextButton");
+
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+  }
+
+  function showPage(pageNumber) {
+  //     // Replace this section with code to fetch items from the backend based on 'pageNumber' and 'itemsPerPage'
+  //     // and update the 'items' container accordingly
+  //     // Example:
+  //     const itemsContainer = document.getElementById("items");
+  //     itemsContainer.innerHTML = `<p>Page ${pageNumber}</p>`;
+
+  //     currentPage = pageNumber;
+  //     updatePaginationButtons();
+
+  // this should update the page based on 
+  console.log("Currently on page: " + pageNumber)
+
+  }
+
+  function previousPage() {
+      nextPage = currentPage - 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage > 1) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage - 1);
+      }
+  }
+
+  function nextPage() {
+      nextPage = currentPage + 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage < totalPages) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage + 1);
+      }
+  }
+
+  // Show the initial page
+  showPage(currentPage);
+</script>
+{% endblock %}

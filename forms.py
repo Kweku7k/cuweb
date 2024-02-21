@@ -12,6 +12,7 @@ from wtforms import (
     DateField,
     FileField,
     TextAreaField,
+    EmailField
 )
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError
 
@@ -43,6 +44,11 @@ class LoginForm(FlaskForm):
     code = StringField("Code", validators=[DataRequired()])
     submit = SubmitField("Verify")
 
+class UserLoginForm(FlaskForm):
+    email = EmailField("Student Email", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Verify")
+
 
 class ContactForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
@@ -57,6 +63,14 @@ class ContactForm(FlaskForm):
         ],
     )
     message = TextAreaField("Message", validators=[DataRequired()])
+
+    submit = SubmitField("Submit")
+
+class PostingForm(FlaskForm):
+    name = StringField("Name", validators=[DataRequired()])
+    number = StringField("Phone Number", validators=[DataRequired()])
+    email = StringField("Email Address", validators=[DataRequired()])
+    about = TextAreaField("Leave a Note", validators=[DataRequired()])
 
     submit = SubmitField("Submit")
 

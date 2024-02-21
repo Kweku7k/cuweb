@@ -27,49 +27,13 @@
 {% endblock %}
 {% block body %}
 
-<section style="padding-top: 15vh;">
+<section style="padding-top: 5vh;">
     <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
         <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
         <h3 style="padding-top: 3px;" id="title"><b>{{title}}</b></h3>
         <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
     </div>
 </section>
-<!-- caurosel-->
-<!-- <section style="padding-top: 15vh;">
-    <div class="container">
-        <div style="display: flex; align-items: center; margin-bottom: 5vh; justify-content: center;">
-            <div class="line" style="width: 50px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
-            <div class="line" style="width: 50px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
-        </div>
-
-        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-
-            <div class="carousel-item active" data-bs-interval="1500">
-            <img src="{{url_for("static", filename="img/carosel/1.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-            <img src="{{url_for("static", filename="img/carosel/2.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-            <img src="{{url_for("static", filename="img/carosel/3.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-            <img src="{{url_for("static", filename="img/carosel/4.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="visually-hidden">Next</span>
-        </button>
-        </div>
-    </div>
-</section> -->
 
 <section style="padding: 20px 0;">
     <div class="container">
@@ -95,128 +59,7 @@
                 </a>
             </div>
             {% endfor %} 
-            <!-- <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog2.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: blue; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> STUDENT LIFE</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Most students say their mental health suffered in pandemic.</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog3.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: red; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> SPOTLIGHT</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>9 Top Tips On How To Get A First Class Degree At University.</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog4.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: green; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> RESEARCH</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Gender inequality in higher education persists.</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-                    
-        </div>
-        <div class="row">
-            <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog8.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: brown; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> Academics</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Examination is approaching, we kindly wish all student the best in their exams. Student who hasn't made 75% payment of fees will be dealth with in the exams hall.</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3"  style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog5.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: purple; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> admissions</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>International student tution fee down by 20%.</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog6.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: lime; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> Sports</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>New student ready to clinch championship over continuing student  in an NBA-tournament .</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3" style="margin-bottom: 20px;">
-                <a href="/expand" style="text-decoration: none;">
-                    <div class="card">
-                        <img class="card-img-top" src="{{url_for('static', filename='img/blog7.jpg')}}" width="100%" alt="Card image cap">                
-                    <div class="card-body">
-                        <div class="card-title" style="display: flex;">
-                            <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: orange; margin:5px 10px 0 0;"></div>
-                            <h6 class="text-muted category"><b> Campus ministry</b></h6>
-                        </div>
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Peer councellors will be organising a guidance and counseling event at the Trinity Hall. All are cordially invited</b></p>
-                    </div>
-                    <div class="card-footer">
-                        <small class="text-muted">Mr.Softlife - Jan 25, 2021</small>
-                    </div>
-                    </div>
-                </a>
-            </div> -->
+            
                
             
             <div id="demo"></div>
@@ -325,22 +168,7 @@
     
     }
     
-    //   url = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/posts"
-    //   fetch(url)
-    //   .then(function(response) {
-    //     return response.json();
-    //   }).then(function(data) {
-    //     console.log(data)
     
-    //     for (let index = 0; index <= data.length; index++) {
-    
-    //       var title = data[index].title.rendered
-    //       var post = data[index].content.rendered
-         
-    
-    //       createNewPost(title, post)  
-    //     }
-    //   });
     </script>
 
 {% endblock %}

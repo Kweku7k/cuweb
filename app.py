@@ -1,10 +1,12 @@
 from email.message import EmailMessage
+from functools import wraps
 import json
 import smtplib
 from flask import (
     Flask,
     jsonify,
     redirect,
+    session,
     url_for,
     render_template,
     request,
@@ -24,12 +26,13 @@ from flask_login import (
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 import urllib.request, urllib.parse
 import csv
 import random
 import string
 import pprint
+import jwt
 
 
 # banner_img_src = "https://central.edu.gh/static/img/Central-Uni-logo.png"
@@ -72,6 +75,33 @@ category_form_url = baseUrl + "/api/categories/contactforms"
 def reportError(e):
     print(e)
     return "Noted!"
+
+
+algorithms = ["HS256"]
+
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        # token = session.get('token') #https://
+        token = session.get("jwt")  # https://
+        print(token)
+
+        if not token:
+            return jsonify({"message": "Token is missing"}), 401
+
+        try:
+            data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=algorithms)
+            print("-----jwt-----")
+            print(data)
+            session["current_user"] = data["user"]
+
+        except:
+            return jsonify({"message": "Token is invalid"}), 403
+
+        return f(*args, **kwargs)
+
+    return decorated
 
 
 class User(db.Model, UserMixin):
@@ -396,7 +426,7 @@ def home():
     gallery = wpgallery(5)
     supportGallery = wpgallery(6)
     events = getEvents()[0]
-    print("------------------events------------------")
+    # print("------------------events------------------")
     # print(events)
 
     print("gallery")
@@ -406,7 +436,6 @@ def home():
     try:
         category = requests.get(category_form_url).json()
         print(category["categories"])
-        print
         form.category.choices = category
         print("category")
     except Exception as e:
@@ -418,69 +447,83 @@ def home():
     if request.method == "POST":
         print("This is a post request")
 
-        print(form.data)
-        # if form.validate_on_submit():
-        messageBody = form.data
-        # messageBody = messageBody.jsonify()
+        print(request.form)
+        recaptcha_response = request.form["g-recaptcha-response"]
 
-        headers = {"Content-Type": "application/json"}
-        try:
-            response = requests.post(
-                contact_form_url, headers=headers, json=json.dumps(messageBody)
-            )
-            print("-----------------------------")
-            print(response)
-            print(response.content)
-            print("contactformresponse")
+        googlerecaptchakey = os.environ["GOOGLERECAPTCHAKEY"]
 
-            message = (
-                "From: "
-                + form.name.data
-                + "\nPhone: "
-                + form.number.data
-                + "\nEmail: "
-                + form.email.data
-                + "\nCategory: "
-                + form.category.data
-                + "\nMessage: "
-                + form.message.data
-            )
+        # Verify the reCAPTCHA response
+        verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
+        verify_response = requests.post(verify_url)
+        verify_data = verify_response.json()
 
-            prestoUrl
-            r = requests.get(
+        if verify_data["success"]:
+
+            print(form.data)
+            # if form.validate_on_submit():
+            messageBody = form.data
+            # messageBody = messageBody.jsonify()
+
+            headers = {"Content-Type": "application/json"}
+            try:
+                response = requests.post(
+                    contact_form_url, headers=headers, json=json.dumps(messageBody)
+                )
+                print("-----------------------------")
+                print(response)
+                print(response.content)
+                print("contactformresponse")
+
+                message = (
+                    "From: "
+                    + form.name.data
+                    + "\nPhone: "
+                    + form.number.data
+                    + "\nEmail: "
+                    + form.email.data
+                    + "\nCategory: "
+                    + form.category.data
+                    + "\nMessage: "
+                    + form.message.data
+                )
+
                 prestoUrl
-                + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
-                + form.name.data
-                + "&message="
-                + message
-            )
-            print(r.url)
-            flash(
-                "Hi, "
-                + form.name.data
-                + " your message has been submitted successfully.",
-                "success",
-            )
+                r = requests.get(
+                    prestoUrl
+                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
+                    + form.name.data
+                    + "&message="
+                    + message
+                )
+                print(r.url)
+                flash(
+                    "Hi, "
+                    + form.name.data
+                    + " your message has been submitted successfully.",
+                    "success",
+                )
 
-            # Send a thank-you email to the user
-            thank_you_message = (
-                # "Subject: Thank You for Contacting Us\n\n"
-                f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
-            )
+                # Send a thank-you email to the user
+                thank_you_message = (
+                    # "Subject: Thank You for Contacting Us\n\n"
+                    f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+                )
 
-            sendAnEmail(
-                title="CU Support",
-                subject="Thank You for Contacting Us !",
-                message=thank_you_message,
-                email_receiver=[form.email.data],
-            )
+                sendAnEmail(
+                    title="CU Support",
+                    subject="Thank You for Contacting Us !",
+                    message=thank_you_message,
+                    email_receiver=[form.email.data],
+                )
 
-            # Redirect to the home page
-            return redirect(url_for("home"))
+                # Redirect to the home page
+                return redirect(url_for("home"))
 
-        except Exception as e:
-            reportError(e)
+            except Exception as e:
+                reportError(e)
 
+        else:
+            flash(f"Recaptcha has failed please check and try again.")
     # Render the template with the form and other data
     return render_template(
         "index.html",
@@ -488,7 +531,7 @@ def home():
         form=form,
         gallery=gallery,
         events=events,
-        loadingMessage="Please wait while sending message....",
+        loadingMessage="Please wait while we send your message....",
         supportGallery=supportGallery,
     )
 
@@ -887,9 +930,47 @@ def chapel():
 # return render_template('about.html' posts=allposts)
 
 
-@app.route("/cu")
-def cu():
-    return render_template("cu.html")
+@app.route("/cuposting")
+# @token_required
+def cuposting():
+    page = request.args.get("page", "1")
+    print("page")
+    print(page)
+    # Get URL
+    id = 120
+    per_page = 30
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cuposting = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        article["content"] = i["content"]["rendered"]
+        cuposting.append(article)
+    print(cuposting)
+    return render_template(
+        "cucareposting.html",
+        cuposting=cuposting,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+        title="CUCare Job Board",
+    )
 
 
 # @app.route('/admission')
@@ -960,6 +1041,159 @@ def news():
         page=page,
         per_page=per_page,
         title="News & Blog",
+    )
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    form = UserLoginForm()
+    if request.method == "POST":
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+
+            # request data from source!
+            # send login data to forms
+
+            if user is not None:
+                token = jwt.encode(
+                    {"user": user.id, "exp": datetime.now() + timedelta(minutes=30)},
+                    app.config["SECRET_KEY"],
+                )
+                session["jwt"] = token
+                session["current_user"] = user.id
+                return redirect("cuposting")
+
+        else:
+            flash("Login failed.")
+    return render_template("login.html", form=form)
+
+
+# send user reset password token
+
+
+@app.route("/jobboard", methods=["GET", "POST"])
+@token_required
+def jobboard():
+    return "Jobboard"
+
+
+@app.route("/register")
+def register():
+    return "Done"
+
+
+@app.route("/cucare")
+def cucare():
+    page = request.args.get("page", "1")
+    print("page")
+    print(page)
+    # Get URL
+    id = 113
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    CUCareMenu = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        CUCareMenu.append(article)
+    print(CUCareMenu)
+
+    # Get URL
+    id = 114
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cucarehelp = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        cucarehelp.append(article)
+    print("cucarehelp")
+    print(cucarehelp)
+
+    # Get URL
+    id = 119
+    per_page = 8
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    cucarestaff = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        cucarestaff.append(article)
+    print("cucarestaff")
+    print(cucarestaff)
+
+    return render_template(
+        "cucare.html",
+        CUCareHelp=cucarehelp,
+        CUCareMenu=CUCareMenu,
+        CUCareStaff=cucarestaff,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+        cucaremenutitle="WHAT WE DO ",
+        cucarehelptitle="WAYS TO HELP",
+        cucarestafftitle="STAFF",
+    )
+
+
+@app.route("/summer-school")
+def summer():
+    id = 111
+    alltags = returnTags(id, "summer-school")["tags"]
+    allposts = returnTags(id, "summer-school")["posts"]
+    print("allposts being returned")
+    print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "summer.html", id=startingPoint, tags=alltags, allposts=allposts
     )
 
 
@@ -1088,7 +1322,7 @@ def getEvents():
         article["title"] = i["title"]["rendered"]
         # article["title"] = i["title"]
         events.append(article)
-    print(events)
+    # print(events)
     return events
 
 
@@ -1264,6 +1498,58 @@ def expand(id):
     # url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     wppost = "/wppost/" + str(id)
     return render_template("expand.html", url=wppost)
+
+
+@app.route("/view/<string:id>", methods=["GET", "POST"])
+def view(id):
+    form = PostingForm()
+    if request.method == "POST":
+
+        message = (
+            "From: "
+            + form.name.data
+            + "\n\nPhone: "
+            + form.number.data
+            + "\n\nEmail: "
+            + form.email.data
+            + "\n\nNote: "
+            + form.about.data
+        )
+
+        # Perform the GET request
+        r = requests.get(
+            prestoUrl
+            + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject=Job Posting Request "
+            + form.name.data
+            + "&message="
+            + message
+        )
+        print(r.url)
+
+        # Flash message for successful submission
+        flash(
+            "Hi, " + form.name.data + " your application has been submitted successfully.",
+            "success",
+        )
+
+        # Send a thank-you email to the user
+        thank_you_message = f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+
+        sendAnEmail(
+            title="CUCare Job Posting ",
+            subject="Thank You for Contacting Us !",
+            message=thank_you_message,
+            email_receiver=[form.email.data],
+        )
+
+        # Redirect to the home page
+        return redirect(url_for("cuposting"))
+    return render_template(
+        "view.html",
+        url="/wppost/" + str(id),
+        form=form,
+        loadingMessage="Please wait while we send your application....",
+    )
 
 
 @app.route("/staff")
@@ -1477,19 +1763,6 @@ def irb():
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
-    )
-
-
-@app.route("/summer-school")
-def summer():
-    id = 111
-    alltags = returnTags(id, "summer-school")["tags"]
-    allposts = returnTags(id, "summer-school")["posts"]
-    print("allposts being returned")
-    print(allposts)
-    startingPoint = alltags[0]["id"]
-    return render_template(
-        "summer.html", id=startingPoint, tags=alltags, allposts=allposts
     )
 
 
@@ -2166,8 +2439,8 @@ def sendAnEmail(
     print(email_receiver)
     print(type(email_receiver))
 
-    email_sender = "pay@prestoghana.com"
-    email_password = "nimda@2023"
+    email_sender = os.environ["PRESTO_MAIL_USERNAME"]
+    email_password = os.environ["PRESTO_MAIL_PASSWORD"]
 
     html_content = f"""
     <!DOCTYPE html>

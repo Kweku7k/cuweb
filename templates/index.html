@@ -68,20 +68,7 @@
                 {% endif %}
 
             {% endfor %}
-<!--            
-            <div class="carousel-item active" data-bs-interval="3000">
-              <img src="{{url_for("static", filename="img/carosel/1.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div> -->
-            <!-- <div class="carousel-item" data-bs-interval="3000">
-              <img src="{{url_for("static", filename="img/carosel/2.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-              <img src="{{url_for("static", filename="img/carosel/3.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-            <div class="carousel-item" data-bs-interval="3000">
-              <img src="{{url_for("static", filename="img/carosel/4.png")}}" class="d-block w-100 img-caro" alt="...">
-            </div>
-             -->
+
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -93,11 +80,7 @@
           </button>
         </div>
     
-        <!-- <a href="{{url_for("news")}}">
-          <button class="pill-button" style="padding: 10px 18px; margin: 8px 0 0 0;">
-            View all news
-          </button>
-        </a> -->
+       
       </div>
     </a>
     </section>
@@ -372,7 +355,7 @@
             <div class="col-md-6">
                 <h6><b>You can leave a message and we would respond if need be</b></h6>
                 <br/>
-                <form method="post" onsubmit="return showLoadingScreen();">
+                <form method="post" onsubmit="return submitForm();">
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
@@ -397,12 +380,12 @@
                         {{form.message.label}}
                     </div>
 
-                    <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div> -->
-                    <!-- <div class="g-recaptcha" id="divRecaptcha"></div> -->
+                    <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div>  -->
+                    <div class="g-recaptcha" id="divRecaptcha" required></div>  
                     <br>
                     
                     <div>
-                      {{form.submit (class="pill-button", style="width:100%") }}
+                      {{form.submit (class="pill-button", style="width:100%" ) }}
                     </div>
         
                 </form>
@@ -449,6 +432,25 @@
 
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
+
+  <script>
+    function submitForm() {
+        var response = grecaptcha.getResponse();
+        if (response.length === 0) {
+            // reCAPTCHA not verified
+            alert("Please complete the reCAPTCHA to proceed.");
+            return false; // Prevent form submission
+        }
+        // Show loading screen
+        showLoadingScreen();
+        return true; // Allow form submission
+    }
+
+    function showLoadingScreen() {
+        var loadingScreen = document.getElementById('loading');
+        loadingScreen.style.display = 'flex';
+    }
+  </script>
 
   <script>
     // Function to set a cookie with an expiration time

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # PULL CHANGES
-git pull origin master
+#git pull origin production
 
 #Delete the previous environment
 sudo rm -r env  
@@ -19,7 +19,7 @@ source $venv_name/bin/activate
 pip install -r requirements.txt
 
 #Restart the forms application
-sudo systemctl restart central.service
+#sudo systemctl restart central.service
 
 # Deactivate the virtual environment
 #deactivate
