@@ -399,6 +399,7 @@ def sendTelegram(params):
 @app.errorhandler(500)
 def internal_server_error(error):
     sendTelegram(str(error) + "\n" + str(request.url) + "\n" + str(current_user))
+    print(error)
     return (
         render_template(
             "error.html",
@@ -1506,7 +1507,7 @@ def expand(id):
     return render_template("expand.html", url=wppost)
 
 
-@app.route("/view/<string:id>", methods=["GET", "POST"])
+@app.route("/view/<int:id>", methods=["GET", "POST"])
 def view(id):
     form = PostingForm()
     if request.method == "POST":
