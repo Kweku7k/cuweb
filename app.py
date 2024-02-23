@@ -441,9 +441,9 @@ def home():
     # if request.method == "GET":
     try:
         category = requests.get(category_form_url).json()
-        print(category["categories"])
+        # print(category["categories"])
         form.category.choices = category
-        print("category")
+        # print("category")
     except Exception as e:
         form.category.choices = [("pr-admin", "General")]
 
@@ -453,7 +453,7 @@ def home():
     if request.method == "POST":
         print("This is a post request")
 
-        print(request.form)
+        # print(request.form)
         recaptcha_response = request.form["g-recaptcha-response"]
 
         googlerecaptchakey = os.environ["GOOGLERECAPTCHAKEY"]
@@ -465,7 +465,7 @@ def home():
 
         if verify_data["success"]:
 
-            print(form.data)
+            # print(form.data)
             # if form.validate_on_submit():
             messageBody = form.data
             # messageBody = messageBody.jsonify()
@@ -476,8 +476,8 @@ def home():
                     contact_form_url, headers=headers, json=json.dumps(messageBody)
                 )
                 print("-----------------------------")
-                print(response)
-                print(response.content)
+                # print(response)
+                # print(response.content)
                 print("contactformresponse")
 
                 message = (
@@ -1319,7 +1319,7 @@ def getEvents():
     # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
     r = requests.get(url)
     response = r.json()
-    pprint.pprint(response)
+    # pprint.pprint(response)
     events = []
     for i in response:
         article = {}
