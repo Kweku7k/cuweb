@@ -1526,7 +1526,7 @@ def view(id):
         # Perform the GET request
         r = requests.get(
             prestoUrl
-            + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject=Job Posting Request "
+            + "/sendPrestoMail?recipient=careers@central.edu.gh&subject=Job Posting Request "
             + form.name.data
             + "&message="
             + message
