@@ -88,7 +88,10 @@ def token_required(f):
         print(token)
 
         if not token:
-            return jsonify({"message": "Token is missing"}), 401
+            flash(f'No token was found.')
+
+            return redirect(url_for('login'))
+            # return jsonify({"message": "Token is missing"}), 401
 
         try:
             data = jwt.decode(token, app.config["SECRET_KEY"], algorithms=algorithms)
@@ -97,7 +100,10 @@ def token_required(f):
             session["current_user"] = data["user"]
 
         except:
-            return jsonify({"message": "Token is invalid"}), 403
+            flash(f'This token is invalid.')
+            return redirect(url_for('login'))
+
+            # return jsonify({"message": "Token is invalid"}), 403
 
         return f(*args, **kwargs)
 
@@ -1394,13 +1400,13 @@ def wpgallery(id):
 
     # find length
     noOfImages = len(response)
-    print(noOfImages)
+    # print(noOfImages)
 
     for i, index in enumerate(response):
         content = r.json()[i]["guid"]["rendered"]
         images.append(content)
 
-    print(images)
+    # print(images)
 
     return images
 
