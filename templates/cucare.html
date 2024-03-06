@@ -9,7 +9,7 @@
           <h6>Central University </h6>
           <h3 style="margin: 20px 0; font-weight: bold;">COUNSELLING AND CAREER SERVICES CENTRE</h3>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
-          <p class="text-muted" style="text-align: justify; font-size: 14px;">Central University has established the Counselling and Career Services  
+          <p class="text-muted" style="text-align: justify; font-size: 16px;">Central University has established the Counselling and Career Services  
             Centre with the mandate to promote a healthy campus environment and
             enhance student learning. The Centre is to help both students and staff to
             deal with psychosocial barriers to success and personal wellbeing and
@@ -39,8 +39,8 @@
     </div>
   </section><!-- End Hero -->
 
-  <section style="padding-top: 7vh;">
-    <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+  <section style="padding-top: 3vh;">
+    <div style="display: flex; align-items: center; justify-content: center;">
         <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
         <h3 style="padding-top: 3px;" id="title"><b>{{cucaremenutitle}}</b></h3>
         <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
@@ -51,28 +51,28 @@
         <div class="row" style="align-items: stretch;">
   
           
+          {% for article in CUCareMenu %}
+          <div class="col-md-3"  style="margin-bottom: 20px;">
+            <a href="/expand/{{article.id}}" style="text-decoration: none;">
+              <div class="card"  style="flex-grow: 1;">
+                <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
+                <div class="card-body">
+                  <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %} 
           <div class="col-md-3"  style="margin-bottom: 20px;">
             <a href="/cuposting" style="text-decoration: none;">
               <div class="card"  style="flex-grow: 1;">
-                <img class="card-img-top" src="/static/img/cucare.jpg" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
+                <img class="card-img-top" src="/static/img/career.jpg" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
                 <div class="card-body">
                   <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>Career and Placement Services</b></p>
                 </div>
               </div>
             </a>
           </div>
-            {% for article in CUCareMenu %}
-              <div class="col-md-3"  style="margin-bottom: 20px;">
-                <a href="/expand/{{article.id}}" style="text-decoration: none;">
-                  <div class="card"  style="flex-grow: 1;">
-                      <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
-                    <div class="card-body">
-                        <p class="card-text" style="font-size: 20px Butler; color: #111111;"><b>{{article.title}}</b></p>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            {% endfor %} 
             
             <!-- <div id="demo"></div> -->
         </div>
@@ -89,8 +89,8 @@
                     <div class="line" style="width: 40px; height: 3px; margin-right: 12px; background-color: #ca181e;"></div>
                     <div style="color: #333; font-size: 20px;">Our Statement</div>
                 </div>
-                <h4 style="font-size: 20px; margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Vision</b> is to be an effective Counselling and Career Services provider for staff and students of the Central University and its surrounding communities.</h4>
-                <h5 style=" margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Mission</b> is to provide guidance, counselling and career services that enhance personal and professional development and employability nationally and globally. We support student recruitment, enrolment, retention, graduation and transition into the world of work by helping to deal with issues which affect student success and employability.</h5>
+                <p style="font-size: 16px; margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Vision</b> is to be an effective Counselling and Career Services provider for staff and students of the Central University and its surrounding communities.</p>
+                <p style="font-size: 16px; margin-bottom: 3vh; color: #333; text-align: justify;"><b>Our Mission</b> is to provide guidance, counselling and career services that enhance personal and professional development and employability nationally and globally. We support student recruitment, enrolment, retention, graduation and transition into the world of work by helping to deal with issues which affect student success and employability.</p>
               
               <br>
               <div class="pill-button" style="width: fit-content; margin-bottom: 2vh;">Learn More !</div>
@@ -107,8 +107,8 @@
 
 
 
-  <section style="padding-top: 7vh;">
-    <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+  <section style="padding-top: 3vh;">
+    <div style="display: flex; align-items: center; justify-content: center;">
         <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
         <h3 style="padding-top: 3px;" id="title"><b>{{cucarehelptitle}}</b></h3>
         <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
@@ -145,8 +145,8 @@
   </section>
 
 
-  <section style="padding-top: 7vh;">
-    <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+  <section style="padding-top: 3vh;">
+    <div style="display: flex; align-items: center; justify-content: center;">
         <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
         <h3 style="padding-top: 3px;" id="title"><b>{{cucarestafftitle}}</b></h3>
         <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
@@ -250,6 +250,40 @@
 
 
   <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials">
+    <div class="container">
+
+      <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+        <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+        <h3 style="padding-top: 3px;" id="title"><b>Gallery</b></h3>
+        <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+      </div>
+      <br>
+
+      <div class="testimonials-slider swiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+
+          
+          
+          {% for image in cucareUpload %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src={{image}} style="object-fit: cover; width: 100%; height: 100%; object-fit: cover;" class="img-fluid" alt="">
+              </div>
+            </div>
+          {% endfor %}
+
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+  </section><!-- End Testimonials Section -->
+
+
+
+  <!-- ======= Testimonials Section =======
   <section id="testimonials" class="testimonials" style="padding: 10px;">
     <div class="container">
 
@@ -264,130 +298,34 @@
           <div class="swiper-slide">
             <div class="testimonial-item">
               <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
+                <!-- <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;"> -->
                   <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Psychosocial orientation for newly admitted students</h3>
+                  <!-- <h3 style="font-size: 14px; color: #ca181e;">Psychosocial orientation for newly admitted students</h3> -->
                   <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
+                <!-- </div> -->
               <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
+            <!-- </div> -->
+          <!-- </div>End testimonial item -->
 
-          <div class="swiper-slide">
+          <!-- <div class="swiper-slide">
             <div class="testimonial-item">
               <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
+                <!-- <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;"> -->
                   <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Adjustment to University life</h3>
+                  <!-- <h3 style="font-size: 14px; color: #ca181e;">Student Success Toolkit Series</h3> -->
                   <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
+                <!-- </div> -->
               <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
+            <!-- </div>
+          </div>End testimonial item --> 
 
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Educational Goal Setting</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Drug abuse and addiction</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Career Advising and Coaching</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Mentorship Programmes</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Stress management</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Relationship issues</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">How to choose programme/career path</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          <div class="swiper-slide">
-            <div class="testimonial-item">
-              <!-- <div class="" data-aos="zoom-in" data-aos-delay="200"> -->
-                <div class="card" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 15px; background-color:#fff; border-radius:20px; padding: 30px;">
-                  <!-- <div class="icon"><i class="ri-stack-line"></i></div> -->
-                  <h3 style="font-size: 14px; color: #ca181e;">Student Success Toolkit Series</h3>
-                  <!-- <h6 class="description">"Gain hands-on experience and develop skills through our internship program."</h6> -->
-                </div>
-              <!-- </div> -->
-            </div>
-          </div><!-- End testimonial item -->
-
-          
+<!--           
         </div>
         <div class="swiper-pagination"></div>
       </div>
 
-    </div>
-  </section><!-- End Testimonials Section -->
+    </div> -->
+  <!-- </section>End Testimonials Section -->
 
 
 
@@ -400,17 +338,19 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <h5>For: Career Services</h5>
-        <h5><b>Email:</b><a href="mailto:careers@central.edu.gh"> careers@central.edu.gh</a></h5>
-        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 208816822/+233 598574577 </h5>
+        <h5>For: Counselling Services</h5>
+        <h5><b>Email:</b><a href="mailto:counsellingservices@central.edu.gh">counsellingservices@central.edu.gh</a></h5>
+        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 598574577 </h5>
         <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5>
 
         <hr style="width: 100%; height: 2vh;">
 
-        <h5>For: Counselling Services</h5>
-        <h5><b>Email:</b><a href="mailto:counsellingservices@central.edu.gh">counsellingservices@central.edu.gh</a></h5>
-        <!-- <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 208816822/+233 598574577 </h5> -->
-        <!-- <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5> -->
+        <h5>For: Career Services</h5>
+        <h5><b>Email:</b><a href="mailto:careers@central.edu.gh"> careerservices@central.edu.gh</a></h5>
+        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 208816822 </h5>
+        <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5>
+
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" style="background: #ca181e; border: none;" data-bs-dismiss="modal">Close</button>

@@ -1091,6 +1091,9 @@ def register():
 
 @app.route("/cucare")
 def cucare():
+    cucareUpload = cucaregallery(7)
+
+    print("gallery")
     page = request.args.get("page", "1")
     print("page")
     print(page)
@@ -1188,6 +1191,8 @@ def cucare():
         cucaremenutitle="WHAT WE DO ",
         cucarehelptitle="WAYS TO HELP",
         cucarestafftitle="STAFF",
+        cucareUpload=cucareUpload,
+
     )
 
 
@@ -1392,6 +1397,33 @@ def wppostbyslug(slug):
 
 @app.route("/wpgallery/<string:id>")
 def wpgallery(id):
+    images = []
+    # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
+    url = wpUrl + "/media?author=" + str(id)
+    r = requests.get(url)
+
+    response = r.json()
+
+    # find length
+    noOfImages = len(response)
+    # print(noOfImages)
+
+    for i, index in enumerate(response):
+        content = r.json()[i]["guid"]["rendered"]
+        images.append(content)
+
+    # print(images)
+
+    return images
+
+
+# FindPostByCategoryId
+# url = wpUrl+"posts?categories=63"
+
+
+
+@app.route("/cucaregallery/<string:id>")
+def cucaregallery(id):
     images = []
     # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
     url = wpUrl + "/media?author=" + str(id)
