@@ -211,10 +211,10 @@ button{
 .whatsapp-icon {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 10px;
   display: block;
-  width: 60px;
-  height: 60px;
+  width: 70px;
+  height: 70px;
   background-color: green;
   border-radius: 50%;
   text-decoration: none;
@@ -222,7 +222,7 @@ button{
   line-height: 60px;
   color: white;
   font-size: 24px;
-  z-index: 9999;
+  z-index: 1;
 }
 
 .whatsapp-icon img {

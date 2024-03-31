@@ -433,105 +433,59 @@ def home():
     gallery = wpgallery(5)
     supportGallery = wpgallery(6)
     events = getEvents()[0]
-    # print("------------------events------------------")
-    # print(events)
 
-    print("gallery")
-    # print(gallery)
-
-    # if request.method == "GET":
     try:
         category = requests.get(category_form_url).json()
-        # print(category["categories"])
         form.category.choices = category
-        # print("category")
     except Exception as e:
         form.category.choices = [("pr-admin", "General")]
 
-    # print(category.json())
-    #
-
     if request.method == "POST":
-        print("This is a post request")
-
-        # print(request.form)
-        recaptcha_response = request.form["g-recaptcha-response"]
-
-        googlerecaptchakey = os.environ["GOOGLERECAPTCHAKEY"]
+        recaptcha_response = request.form.get("g-recaptcha-response")
+        googlerecaptchakey = os.environ.get("GOOGLERECAPTCHAKEY")
 
         # Verify the reCAPTCHA response
         verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
         verify_response = requests.post(verify_url)
         verify_data = verify_response.json()
 
-        if verify_data["success"]:
+        if verify_data.get("success"):
+            # Proceed with form processing if reCAPTCHA verification succeeds
+            if form.validate_on_submit():  # Use Flask-WTF validation
+                # Process form data
+                messageBody = {
+                    "name": form.name.data,
+                    "number": form.number.data,
+                    "email": form.email.data,
+                    "category": form.category.data,
+                    "message": form.message.data
+                }
 
-            # print(form.data)
-            # if form.validate_on_submit():
-            messageBody = form.data
-            # messageBody = messageBody.jsonify()
+                headers = {"Content-Type": "application/json"}
+                try:
+                    response = requests.post(
+                        contact_form_url, headers=headers, json=messageBody
+                    )
 
-            headers = {"Content-Type": "application/json"}
-            try:
-                response = requests.post(
-                    contact_form_url, headers=headers, json=json.dumps(messageBody)
-                )
-                print("-----------------------------")
-                # print(response)
-                # print(response.content)
-                print("contactformresponse")
+                    # Send Presto mail
+                    message = (
+                        "From: " + form.name.data + "\nPhone: " + form.number.data + "\nEmail: " + form.email.data + "\nCategory: " + form.category.data + "\nMessage: " + form.message.data
+                    )
+                    r = requests.get(
+                        prestoUrl + "/sendPrestoMail?recipient=info@central.edu.gh&subject=" + form.name.data + "&message=" + message
+                    )
 
-                message = (
-                    "From: "
-                    + form.name.data
-                    + "\nPhone: "
-                    + form.number.data
-                    + "\nEmail: "
-                    + form.email.data
-                    + "\nCategory: "
-                    + form.category.data
-                    + "\nMessage: "
-                    + form.message.data
-                )
+                    # Notify user and redirect
+                    flash("Hi, " + form.name.data + " your message has been submitted successfully.", "success")
+                    return redirect(url_for("home"))
 
-                prestoUrl
-                r = requests.get(
-                    prestoUrl
-                    + "/sendPrestoMail?recipient=info@central.edu.gh&subject="
-                    + form.name.data
-                    + "&message="
-                    + message
-                )
-                print(r.url)
-                flash(
-                    "Hi, "
-                    + form.name.data
-                    + " your message has been submitted successfully.",
-                    "success",
-                )
-
-                # Send a thank-you email to the user
-                thank_you_message = (
-                    # "Subject: Thank You for Contacting Us\n\n"
-                    f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
-                )
-
-                sendAnEmail(
-                    title="CU Support",
-                    subject="Thank You for Contacting Us !",
-                    message=thank_you_message,
-                    email_receiver=[form.email.data],
-                )
-
-                # Redirect to the home page
-                return redirect(url_for("home"))
-
-            except Exception as e:
-                reportError(e)
-
+                except Exception as e:
+                    reportError(e)
+            else:
+                flash("Form validation failed. Please check your input and try again.")
         else:
-            flash(f"Recaptcha has failed please check and try again.")
-    # Render the template with the form and other data
+            flash("reCAPTCHA verification failed. Please try again.")
+
     return render_template(
         "index.html",
         hideNav=False,

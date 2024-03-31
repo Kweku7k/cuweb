@@ -240,7 +240,7 @@
           <!-- <p>Some kind words from some of our students that have passed through Central University.</p> -->
         </div>
 
-        <div class="testimonials-slider swiper" data-aos="fade-up">
+        <div class="testimonials-slider swiper">
           <div class="swiper-wrapper">
 
             <!-- <div class="swiper-slide">
@@ -355,7 +355,7 @@
             <div class="col-md-6">
                 <h6><b>You can leave a message and we would respond if need be</b></h6>
                 <br/>
-                <form method="post" onsubmit="return submitForm();">
+                <form method="post" onsubmit="return submitForm()">
                     {{form.hidden_tag()}}
                     
                     <div class="form-floating mb-3">
@@ -363,16 +363,16 @@
                         {{form.name.label}}
                     </div>
                     <div class="form-floating mb-3">
-                      {{ form.number(class="form-control webForm", type="number", placeholder="Enter your number", pattern="[0-9+-]*", required=true) }}
+                      {{ form.number(class="form-control webForm", type="number", placeholder="Enter your number", pattern="[0-9+-]*") }}
                       {{ form.number.label }}
                     </div>
                     
                     <div class="form-floating mb-3">
-                        {{ form.email(class="form-control webForm", type="email", placeholder="Enter your Email Address", required=true) }}
+                        {{ form.email(class="form-control webForm", type="email", placeholder="Enter your Email Address") }}
                         {{ form.email.label }}
                     </div>
                     <div class="form-floating mb-3">
-                      {{form.category (class="form-control webForm", placeholder="Write Message here")}}
+                      {{form.category (class="form-control webForm", placeholder="Select category")}}
                       {{form.category.label}}
                     </div>
                     <div class="form-floating mb-3">
@@ -451,6 +451,7 @@
         loadingScreen.style.display = 'flex';
     }
   </script>
+
 
   <script>
     // Function to set a cookie with an expiration time

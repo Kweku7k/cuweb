@@ -101,6 +101,10 @@
             callback: successCallback,
         });
     }
+    function submitForm() {
+          showLoadingScreen();
+          return true; // Allow form submission
+    }
 
     function showLoadingScreen() {
         var loadingScreen = document.getElementById('loading');
@@ -113,23 +117,18 @@
     }
 
     function submitFormWithRecaptcha() {
-        // Display loading screen
-        showLoadingScreen();
+    // Get the reCAPTCHA response
+    var recaptchaResponse = grecaptcha.getResponse();
 
-        // Get the reCAPTCHA response
-        var recaptchaResponse = grecaptcha.getResponse();
-
-        // Check if reCAPTCHA is completed
-        if (recaptchaResponse.length === 0) {
-            // Hide loading screen if reCAPTCHA is not completed
-            hideLoadingScreen();
-            alert("Please complete the reCAPTCHA before submitting the form.");
-            return false; // Prevent form submission
-        }
-
-        // Proceed with form submission
-        return true; // Allow form submission
+    // Check if reCAPTCHA is completed
+    if (recaptchaResponse.length === 0) {
+        alert("Please complete the reCAPTCHA before submitting the form.");
+        return false; // Prevent form submission
     }
+
+    // Proceed with form submission
+    return true; // Allow form submission
+}
 </script>
 
   <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
