@@ -934,9 +934,9 @@ def cuposting():
     )
 
 
-# @app.route('/admission')
-# def admission():
-#     return render_template('admission.html')
+@app.route('/donate')
+def donate():
+    return render_template('donate.html')
 
 
 def getImageUrl(id):

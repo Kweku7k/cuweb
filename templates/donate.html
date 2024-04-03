@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block body %}
+ 
+      <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5" >
+        <div class="col-lg-6 order-1 order-lg-1 text-left">
+          <h6>Central University </h6>
+          <h3 style="margin: 20px 0; font-weight: bold;">COUNSELLING AND CAREER SERVICES CENTRE</h3>
+          <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
+          <p class="text-muted" style="text-align: justify; font-size: 16px;">Central University has established the Counselling and Career Services  
+            Centre with the mandate to promote a healthy campus environment and
+            enhance student learning. The Centre is to help both students and staff to
+            deal with psychosocial barriers to success and personal wellbeing and
+            maintain balance for teaching, learning and life.</p>
+          <br/>
+          <div class="row">
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="#">
+                <button id="myBtn" class="pill-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 100%;">Contact Us</button>
+              </a>
+            </div>
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="https://prestoghana.com/donate/CuCare">
+                <button class="pill-button-alternate" style="width: 100%;"> Donate to CUcare</button>
+              </a>
+            </div>
+
+          </div>
+    
+        </div>
+       
+        <div class="col-lg-6 order-2 order-lg-2">
+            <img style="width:110%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cuc2.jpg")}}" alt="" srcset="">
+        </div>
+      </div>
+      
+    </div>
+  </section><!-- End Hero -->
+  
+{% endblock %}
