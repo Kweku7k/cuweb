@@ -455,7 +455,7 @@ def home():
                 # Process form data
                 messageBody = {
                     "name": form.name.data,
-                    "number": form.number.data,
+                    "number": form.number.data, 
                     "email": form.email.data,
                     "category": form.category.data,
                     "message": form.message.data
@@ -477,6 +477,19 @@ def home():
 
                     # Notify user and redirect
                     flash("Hi, " + form.name.data + " your message has been submitted successfully.", "success")
+                    
+                    # Send a thank-you email to the user
+                    thank_you_message = (
+                        f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+                    )
+
+                    sendAnEmail(
+                        title="CU Support",
+                        subject="Thank You for Contacting Us !",
+                        message=thank_you_message,
+                        email_receiver=[form.email.data],
+                    )
+
                     return redirect(url_for("home"))
 
                 except Exception as e:
@@ -1569,6 +1582,78 @@ def admissions():
 def alumni():
     return render_template("alumni.html")
 
+
+@app.route("/giving", methods=["GET", "POST"])
+def giving():
+    form = ContactForm()
+    try:
+        category = requests.get(category_form_url).json()
+        form.category.choices = category
+    except Exception as e:
+        form.category.choices = [("pr-admin", "General")]
+
+    if request.method == "POST":
+        recaptcha_response = request.form.get("g-recaptcha-response")
+        googlerecaptchakey = os.environ.get("GOOGLERECAPTCHAKEY")
+
+        # Verify the reCAPTCHA response
+        verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
+        verify_response = requests.post(verify_url)
+        verify_data = verify_response.json()
+
+        if verify_data.get("success"):
+            # Proceed with form processing if reCAPTCHA verification succeeds
+            if form.validate_on_submit():  # Use Flask-WTF validation
+                # Process form data
+                messageBody = {
+                    "name": form.name.data,
+                    "number": form.number.data, 
+                    "email": form.email.data,
+                    "category": form.category.data,
+                    "message": form.message.data
+                }
+
+                headers = {"Content-Type": "application/json"}
+                try:
+                    response = requests.post(
+                        contact_form_url, headers=headers, json=messageBody
+                    )
+
+                    # Send Presto mail
+                    message = (
+                        "From: " + form.name.data + "\nPhone: " + form.number.data + "\nEmail: " + form.email.data + "\nCategory: " + form.category.data + "\nMessage: " + form.message.data
+                    )
+                    r = requests.get(
+                        prestoUrl + "/sendPrestoMail?recipient=info@central.edu.gh&subject=" + form.name.data + "&message=" + message
+                    )
+
+                    # Notify user and redirect
+                    flash("Hi, " + form.name.data + " your message has been submitted successfully.", "success")
+                    
+                    # Send a thank-you email to the user
+                    thank_you_message = (
+                        f"Dear {form.name.data},<br> Thank you for contacting us. We value your time and will do well to respond as promptly as possible."
+                    )
+
+                    sendAnEmail(
+                        title="CU Support",
+                        subject="Thank You for Contacting Us !",
+                        message=thank_you_message,
+                        email_receiver=[form.email.data],
+                    )
+
+                    return redirect(url_for("home"))
+
+                except Exception as e:
+                    reportError(e)
+            else:
+                flash("Form validation failed. Please check your input and try again.")
+        else:
+            flash("reCAPTCHA verification failed. Please try again.")
+        
+    elif request.method == "GET":
+        pass
+    return render_template("giving.html", hideNav=False, form=form )
 
 def returnPostsUnderCategoryId(id):
     per_page = 100
