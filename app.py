@@ -1,6 +1,7 @@
 from email.message import EmailMessage
 from functools import wraps
 import json
+import re
 import smtplib
 from flask import (
     Flask,
@@ -431,6 +432,7 @@ def user_loader(user_id):
 def home():
     form = ContactForm()
     gallery = wpgallery(5)
+    pprint.pprint(gallery)
     supportGallery = wpgallery(6)
     events = getEvents()[0]
 
@@ -1365,24 +1367,22 @@ def wppostbyslug(slug):
 @app.route("/wpgallery/<string:id>")
 def wpgallery(id):
     images = []
-    # url=baseWpUrl+"/?rest_route=/wp/v2/media?author="+id
     url = wpUrl + "/media?author=" + str(id)
     r = requests.get(url)
-
     response = r.json()
+    print("==response")
+    pprint.pprint(response)
 
-    # find length
-    noOfImages = len(response)
-    # print(noOfImages)
+    for media_item in response:
+        print("========")
+        pprint.pprint(media_item)
+        image_url = media_item["source_url"]  # Extract image URL
+        link_url = media_item.get("alt_text", None)
 
-    for i, index in enumerate(response):
-        content = r.json()[i]["guid"]["rendered"]
-        images.append(content)
-
-    # print(images)
+        images.append({"image_url": image_url, "link_url": link_url, })
+        print(f"Image URL: {image_url}, Link URL: {link_url}")
 
     return images
-
 
 # FindPostByCategoryId
 # url = wpUrl+"posts?categories=63"
