@@ -51,24 +51,24 @@
   <main id="main">
     <!-- caurosel-->
     <section>
-      <a href="#">
       <div class="container-fluid" style="width: 100%; height: 100%; overflow: hidden; position: relative;">
         <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-
             {% for image in gallery %}
               {% if loop.index == 1 %}
-                <div class="carousel-item active" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; opacity: 1;" alt="...">
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}" data-bs-interval="3000">
+                  <a href="{{ image.link_url }}">
+                    <img src="{{ image.image_url }}" class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; opacity: 1;" alt="{{ image.alt }}">
+                  </a>
                 </div>
-                {% else %}
+              {% else %}
                 <div class="carousel-item" data-bs-interval="3000">
-                  <img src={{image}} class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; opacity: 1;" alt="...">
+                  <a href="{{ image.link_url }}">
+                    <img src="{{ image.image_url }}" class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; opacity: 1;" alt="{{ image.alt }}">
+                  </a>
                 </div>
-                {% endif %}
-
+              {% endif %}
             {% endfor %}
-
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -79,10 +79,7 @@
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-    
-       
       </div>
-    </a>
     </section>
     <!--End of Caurosel  -->
 
