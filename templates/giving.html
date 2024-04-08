@@ -37,8 +37,8 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-between">
       <a href="#" class="d-flex align-items-center" style="text-decoration: none; color: #fff;">
-          <img src="../static/img/Frame 1.png" width="55" alt="" style="margin-right: 10px;">
-          <h5 style="margin: 0; color: #fff;"><b>Central University <br/>Day of Giving</b></h5>
+          <img src="../static/img/cucarelogo.png" width="200" alt="" style="margin-right: 10px;">
+          <!-- <h6 style="margin: 0; color: #fff;"><b>Central University <br/>Day of Giving</b></h6> -->
       </a>
       <a class="pill-button" style="color: #fff; text-decoration: none;" href="https://prestoghana.com/pay/cudayofgiving">Donate Now</a>
   </div>
@@ -65,31 +65,37 @@
     </div>
   </header><!-- End Header -->
 
-  <section id="hero" class="" style="padding-top: 10vh;">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100" style="margin-top: 20vh;">
-      <div class="row" >
-        <div class="col-lg-6 order-1 order-lg-2 text-justify">
-          <h2><b>Central University</b></h2>
-          <h2 style="margin: 20px 0; font-weight: 600; font-size: 1.5rem;">COUNSELLING AND CAREER SERVICES CENTRE</h2>
-          <h2 style="letter-spacing: 1gap; font-size: 24px; line-height: 1.3;"><b>Be a part of Central University's significant endeavor as we undertake the construction of a cutting-edge medical center and hostel. Join us today in shaping the future of Central University</b></h2>
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-5" >
+        <div class="col-lg-6 order-1 order-lg-1 text-left">
+         
+          <h3 style="margin: 20px 0; font-weight: bold;">Central Week of Giving</h3>
+          <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
+          <p style="text-align: justify; font-size: 16px; font-weight: 600;">The CUcare Week of Giving is a special time dedicated to supporting brilliant but financially disadvantaged students. At Central University we believe that education should be accessible to all, regardless of financial circumstances. <br><br>
+            Contributions to the Fund are welcome from institutions, individuals, families and friends of CU. You may contact +233 208 816 822  or email cucare@central.edu.gh for further details. </p>
+          <br/>
           <div class="row">
-            <div class="d-flex">
-              <a href="https://prestoghana.com/pay/cudayofgiving" class="pill-button"  style="background: #d92c26; border: #d92c26; color: #fff;"><b>Donate to Cu</b></a>
-              <a href="https://youtu.be/hvPhrmf46Jo?si=WQVwvNi5W1SMdCOY" class="glightbox btn-watch-video"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
+            <!-- <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="#">
+                <button id="myBtn" class="pill-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 100%;">Contact Us</button>
+              </a>
+            </div> -->
+            <div class="col-md-6" style="margin-bottom: 2vh;">
+              <a href="https://prestoghana.com/pay/cudayofgiving">
+                <button class="pill-button" style="width: 100%;"> Support a Student Now !!</button>
+              </a>
             </div>
-
+  
           </div>
     
         </div>
-
        
-        <div class="col-lg-6 d-none d-sm-block center order-lg-2">
-          <img src="../static/img/Frame 1.png" width="500" alt="">
-        </div>
+        <div class="col-lg-6 order-1 order-lg-1">
+          <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cuc2.jpg")}}" alt="" srcset="">
+      </div>
       </div>
       
-    </div>
-
     </div>
   </section>
 
@@ -97,6 +103,7 @@
 
     
     <div class="container" id="about" style="margin-top: 8vh;">
+
       <div class="funds-committed" style="position: relative;
         top: 0;
         border-radius: 15px;
