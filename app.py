@@ -1058,7 +1058,7 @@ def register():
     return "Done"
 
 
-@app.route("/cucare")
+@app.route("/couselling-career-service")
 def cucare():
     cucareUpload = cucaregallery(7)
 
@@ -1370,12 +1370,9 @@ def wpgallery(id):
     url = wpUrl + "/media?author=" + str(id)
     r = requests.get(url)
     response = r.json()
-    print("==response")
-    pprint.pprint(response)
 
     for media_item in response:
-        print("========")
-        pprint.pprint(media_item)
+
         image_url = media_item["source_url"]  # Extract image URL
         link_url = media_item.get("alt_text", None)
 
@@ -1583,9 +1580,11 @@ def alumni():
     return render_template("alumni.html")
 
 
-@app.route("/giving", methods=["GET", "POST"])
+@app.route("/donate", methods=["GET", "POST"])
 def giving():
     form = ContactForm()
+    cucareUpload = cucaregallery(7)
+
     try:
         category = requests.get(category_form_url).json()
         form.category.choices = category
@@ -1653,7 +1652,7 @@ def giving():
         
     elif request.method == "GET":
         pass
-    return render_template("giving.html", hideNav=False, form=form )
+    return render_template("cucare copy.html", hideNav=False, form=form, cucareUpload=cucareUpload )
 
 def returnPostsUnderCategoryId(id):
     per_page = 100

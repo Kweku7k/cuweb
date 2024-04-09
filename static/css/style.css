@@ -560,7 +560,7 @@ button{
 }
 
 #hero .container {
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 #hero h1 {
@@ -793,9 +793,50 @@ box-icon{
   color: #000;
 }
 
+.heading-title{
+  padding-bottom: 40px;
+}
+
+.heading-title h5 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0 0 15px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #d92c26;
+  font-family: "Poppins", sans-serif;
+}
+
+.heading-title p {
+  margin: 0;
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: #000;
+  
+}
+
+@media (max-width: 575px) {
+  .heading-title p {
+      font-size: 16px !important;
+  } 
+}
+
+
 /*--------------------------------------------------------------
 # About
 --------------------------------------------------------------*/
+@media (max-width: 767px) {
+  .total-funds {
+      display: block !important;
+      text-align: center;
+  } 
+  }
+  
 .about .content h3 {
   font-weight: 600;
   font-size: 26px;
