@@ -1,43 +1,348 @@
 {% extends "layout.html" %}
 
 {% block body %}
- 
-      <!-- ======= Hero Section ======= -->
+
+     <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
     <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
       <div class="row gy-5" >
         <div class="col-lg-6 order-1 order-lg-1 text-left">
-          <h6>Central University </h6>
-          <h3 style="margin: 20px 0; font-weight: bold;">COUNSELLING AND CAREER SERVICES CENTRE</h3>
+         
+          <h3 style="margin: 20px 0; font-weight: bold;">Central Week of Giving</h3>
           <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
-          <p class="text-muted" style="text-align: justify; font-size: 16px;">Central University has established the Counselling and Career Services  
-            Centre with the mandate to promote a healthy campus environment and
-            enhance student learning. The Centre is to help both students and staff to
-            deal with psychosocial barriers to success and personal wellbeing and
-            maintain balance for teaching, learning and life.</p>
+          <p style="text-align: justify; font-size: 16px; font-weight: 600;">The CUcare Week of Giving is a special time dedicated to supporting brilliant but financially disadvantaged students. At Central University we believe that education should be accessible to all, regardless of financial circumstances. <br><br>
+            Contributions to the Fund are welcome from institutions, individuals, families and friends of CU. <br><br> Click on the button below to <b>donate</b> Or contact <a href="tel:+233 208 816 822">+233 208 816 822</a> or email <a href="mailto:cucare@central.edu.gh">cucare@central.edu.gh</a> for further details. </p>
           <br/>
           <div class="row">
-            <div class="col-md-6" style="margin-bottom: 2vh;">
+            <!-- <div class="col-md-6" style="margin-bottom: 2vh;">
               <a href="#">
                 <button id="myBtn" class="pill-button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="width: 100%;">Contact Us</button>
               </a>
-            </div>
+            </div> -->
             <div class="col-md-6" style="margin-bottom: 2vh;">
-              <a href="https://prestoghana.com/donate/CuCare">
-                <button class="pill-button-alternate" style="width: 100%;"> Donate to CUcare</button>
+              <a href="https://prestoghana.com/pay/cudayofgiving">
+                <button class="pill-button" style="width: 100%;"> Support a Student Now !!</button>
               </a>
             </div>
-
+  
           </div>
     
         </div>
        
         <div class="col-lg-6 order-2 order-lg-2">
-            <img style="width:110%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cuc2.jpg")}}" alt="" srcset="">
+            <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/cucare.png")}}" alt="" srcset="">
         </div>
       </div>
       
     </div>
   </section><!-- End Hero -->
+
+
+  <div class="container" id="about" style="margin-top: 8vh;">
+
+    <div class="funds-committed" style="position: relative;
+      top: 0;
+      border-radius: 15px;
+      padding: 18px;
+      background: #d92c26;
+      color: #fff;
+      overflow: hidden;
+      margin-top: -30px;
+      box-shadow: none;
+      display: flex;
+      align-items: center;">
   
+  
+      <div class="col-12 col-sm-10 mb-3" style="position: relative; width: 100%; padding: 18px 22px;">
+  
+        <div class="total-funds" style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+            
+          <div class="fund-column" style="flex: 1; text-align: center; margin-bottom: 20px;"> <!-- Center align text -->
+            <h5 class="column-title">Total Funds Donated</h5>
+            <span class="counter amount-sm" style="font-weight: 700; font-size: 35px;">0.0</span>
+            <div style="background-color: white; height: 2px; margin: 0 auto;"></div> <!-- Line under the fund-column -->
+          </div>
+  
+          <div class="fund-column" style="flex: 1; text-align: center; margin-bottom: 20px;"> <!-- Center align text -->
+            <h5 class="column-title">Cedi Donations (GHS)</h5>
+            <span class="counter amount-sm" style="font-weight: 700; font-size: 35px;">0.0</span>
+            <div style="background-color: white; height: 2px;"></div> <!-- Line under the fund-column -->
+          </div>
+          
+          <div class="fund-column" style="flex: 1; text-align: center; margin-bottom: 20px;"> <!-- Center align text -->
+            <h5 class="column-title">Dollar Donations (USD)</h5>
+            <span class="counter amount-sm" style="font-weight: 700; font-size: 35px;">0.0</span>
+            <div style="background-color: white; height: 2px;"></div> <!-- Line under the fund-column -->
+          </div>
+        </div>
+        
+         <!-- Bootstrap Progress Bar
+        <div class="progress" style="height: 2px; background: #fff; margin-top: 10px; width: 100%;"> 
+          <div class="progress-bar bg-white" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+        </div> -->
+
+        
+        
+  
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+    <section id="about" style="padding-top: 30px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 video-box align-self-baseline" data-aos="zoom-in" data-aos-delay="100">
+            <div class="heading-title">
+              <h5><b>Welcome To CU Day Of Giving</b></h5>
+              <p>Official Launch of the CU Day of Giving by the Chancellor, Rev. Dr. Mesah Otabil.</p>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/NMEQltfBBLk?autoplay=1&amp;mute=1&amp;loop=1&amp;rel=0" frameborder="0" allowfullscreen style="aspect-ratio: 16 / 9; width: 100%; height: auto; margin-bottom: 20px;"></iframe>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+    <section id="about" style="padding-top: 30px;">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 video-box align-self-baseline" data-aos="zoom-in" data-aos-delay="100">
+            <div class="heading-title">
+              <p>Our program's goal is to help raise funds to support the financial needs of students in our school. We aim to gather an amount of money that will assist students in paying their fees, ensuring they can access quality education without financial barriers. </p>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/im-caDjVDSw?autoplay=1&amp;mute=1&amp;loop=1&amp;rel=0&amp;start=38" frameborder="0" allowfullscreen style="aspect-ratio: 16 / 9; width: 100%; height: auto; margin-bottom: 20px;"></iframe>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </section>
+
+
+  <!-- ======= Testimonials Section ======= -->
+  <section id="testimonials" class="testimonials" style="padding: 0;">
+    <div class="container">
+
+      <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
+        <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div>
+        <h3 style="padding-top: 3px;" id="title"><b>Gallery</b></h3>
+        <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div>
+      </div>
+      <br>
+
+      <div class="testimonials-slider swiper" data-aos="fade-up">
+        <div class="swiper-wrapper">
+
+          
+          
+          {% for image in cucareUpload %}
+            <div class="swiper-slide">
+              <div class="testimonial-item">
+                  <img src={{image}} style="object-fit: cover; width: 100%; height: 100%; object-fit: cover;" class="img-fluid" alt="">
+              </div>
+            </div>
+          {% endfor %}
+
+
+        </div>
+        <div class="swiper-pagination"></div>
+      </div>
+
+    </div>
+  </section><!-- End Testimonials Section -->
+
+
+    <section id="contact" style="padding: 0;">
+      <div class="container">
+        <h1><b>Contact Us</b></h1>
+        <div class="row">
+          <div class="col-md-6">
+              <h6><b>You can leave a message and we would respond if need be</b></h6>
+              <br/>
+              <form method="post" onsubmit="return submitForm()">
+                  {{form.hidden_tag()}}
+                  
+                  <div class="form-floating mb-3">
+                      {{form.name (class="form-control webForm", type="text", placeholder="Enter your name")}}
+                      {{form.name.label}}
+                  </div>
+                  <div class="form-floating mb-3">
+                    {{ form.number(class="form-control webForm", type="number", placeholder="Enter your number", pattern="[0-9+-]*") }}
+                    {{ form.number.label }}
+                  </div>
+                  
+                  <div class="form-floating mb-3">
+                      {{ form.email(class="form-control webForm", type="email", placeholder="Enter your Email Address") }}
+                      {{ form.email.label }}
+                  </div>
+                  
+                  <div class="form-floating mb-3">
+                      {{form.message (class="form-control webForm", placeholder="Write Message here", style="height: 12vh;")}}
+                      {{form.message.label}}
+                  </div>
+
+                  <!-- <div class="g-recaptcha" data-sitekey="6LfanVcpAAAAAAK5-iZYTwb9vw0mYIXbsU4S7aMU"></div>  -->
+                  <div class="g-recaptcha" id="divRecaptcha"></div>  
+                  <br>
+                  
+                  <div>
+                    {{form.submit (class="pill-button", style="width:100%" ) }}
+                  </div>
+      
+              </form>
+          </div>
+
+          <div class="col-md-6" style="padding-top: 10px;">
+            <div>
+              <h6><b>Locate Us.</b></h6>
+
+              <!-- <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe> -->
+              <iframe style="border:0; width: 100%; height: 48vh;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1015560.2534173054!2d-1.3031758448857569!3d6.12636390104031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf817eb79d2f75%3A0x3d99be9dfb765ce6!2sCentral%20University!5e0!3m2!1sen!2sgh!4v1669718940848!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+        </div>  
+      </div>
+    </section>
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><b>Reach Counselling and Career Services at:</b></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h5>For: Counselling Services</h5>
+        <h5><b>Email:</b><a href="mailto:counsellingservices@central.edu.gh">counsellingservices@central.edu.gh</a></h5>
+        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 598574577 </h5>
+        <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5>
+
+        <hr style="width: 100%; height: 2vh;">
+
+        <h5>For: Career Services</h5>
+        <h5><b>Email:</b><a href="mailto:careers@central.edu.gh"> careerservices@central.edu.gh</a></h5>
+        <h5><b>Telephone:</b><a href="tel:+233 208816822"></a> +233 208816822 </h5>
+        <h5><b>Location:</b> Academic Block C Ground Floor C03/C05 </h5>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" style="background: #ca181e; border: none;" data-bs-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+  // Backend values passed to the frontend
+  const allPages = '{{totalPages}}'/* value from the backend */;
+  let currentPage = '{{page}}'/* value from the backend */;
+  const itemsPerPage = '{{per_page}}'/* value from the backend */;
+
+  totalPages = parseInt(allPages)
+  currentPage = parseInt(currentPage)
+  updatePaginationButtons()
+  // console.log(currentPage)
+
+  function updatePaginationButtons() {
+      const prevButton = document.getElementById("prevButton");
+      const nextButton = document.getElementById("nextButton");
+
+      prevButton.disabled = currentPage === 1;
+      nextButton.disabled = currentPage === totalPages;
+  }
+
+  function showPage(pageNumber) {
+  //     // Replace this section with code to fetch items from the backend based on 'pageNumber' and 'itemsPerPage'
+  //     // and update the 'items' container accordingly
+  //     // Example:
+  //     const itemsContainer = document.getElementById("items");
+  //     itemsContainer.innerHTML = `<p>Page ${pageNumber}</p>`;
+
+  //     currentPage = pageNumber;
+  //     updatePaginationButtons();
+
+  // this should update the page based on 
+  console.log("Currently on page: " + pageNumber)
+
+  }
+
+  function previousPage() {
+      nextPage = currentPage - 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage > 1) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage - 1);
+      }
+  }
+
+  function nextPage() {
+      nextPage = currentPage + 1
+      console.log("CurrentPage: " + currentPage + "NextPage: " + nextPage)
+
+      if (currentPage < totalPages) {
+          window.location.href = "?page="+nextPage;
+          // showPage(currentPage + 1);
+      }
+  }
+
+  // Show the initial page
+  showPage(currentPage);
+</script>
+
+<script>
+  function getImageUrl(id) { 
+      let file = "https://wptemp-807994.ingress-florina.ewp.live/?rest_route=/wp/v2/media/"+id
+      fetch(file)
+      .then(x => x.json())
+      .then(y => updateHtml(y));
+  }
+      
+  function updateHtml(data) {
+      console.log(data)
+      document.getElementById("demo").innerText = "data"
+  }
+
+</script>
+
+<script>
+  function createNewPost(title, content) {
+    posts = document.getElementsByClassName("postsContainer")[0]
+  
+    const post = document.createElement("div");
+  
+    post.className = "col-md-4 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0";
+    post.innerHTML = `
+          <a href="{{url_for("post")}}">
+          <div class="icon-box" data-aos="zoom-in" data-aos-delay="300">
+              <h4 class="title"><a href="">${title}</a></h4>
+              <p class="description">${content.substring(0,80)}...</p>
+          </div>
+          </a>
+          `
+  
+    posts.append(post)
+  
+    return post
+  
+  }
+  
+  
+  </script>
+
+
 {% endblock %}
