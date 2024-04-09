@@ -1581,7 +1581,7 @@ def alumni():
 
 
 @app.route("/donate", methods=["GET", "POST"])
-def giving():
+def donate():
     form = ContactForm()
     cucareUpload = cucaregallery(7)
 
@@ -1652,7 +1652,7 @@ def giving():
         
     elif request.method == "GET":
         pass
-    return render_template("cucare copy.html", hideNav=False, form=form, cucareUpload=cucareUpload )
+    return render_template("donate.html", hideNav=False, form=form, cucareUpload=cucareUpload )
 
 def returnPostsUnderCategoryId(id):
     per_page = 100
