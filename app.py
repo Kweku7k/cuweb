@@ -2562,7 +2562,7 @@ def sendAnEmail(
     <body style="margin:auto 10px; color:black; font-family: 'Plus Jakarta', sans-serif;">
 
         <!-- Your banner image above -->
-        <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo">
+        <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo" width"200">
 
         <div style="font-family:'Poppins', sans serif; font-weight: 400; font-size: 20px; line-height:1.6; color: #000;">
             <p>{message}</p>
