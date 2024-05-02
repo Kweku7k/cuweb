@@ -445,6 +445,7 @@ def home():
         print(category)
         form.category.choices = category
     except Exception as e:
+        print(e)
         form.category.choices = [("pr-admin", "General")]
 
     if request.method == "POST":
