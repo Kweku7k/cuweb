@@ -441,6 +441,8 @@ def home():
 
     try:
         category = requests.get(category_form_url).json()
+        print("category")
+        print(category)
         form.category.choices = category
     except Exception as e:
         form.category.choices = [("pr-admin", "General")]
