@@ -436,6 +436,9 @@ def home():
     supportGallery = wpgallery(6)
     events = getEvents()[0]
 
+    print("category_form_url")
+    print(category_form_url)
+
     try:
         category = requests.get(category_form_url).json()
         form.category.choices = category
