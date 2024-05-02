@@ -440,7 +440,7 @@ def home():
     print(category_form_url)
 
     try:
-        category = requests.get(category_form_url).json()
+        category = requests.get(category_form_url, verify=False).json()
         print("category")
         print(category)
         form.category.choices = category
