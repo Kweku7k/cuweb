@@ -475,6 +475,7 @@ def home():
                         contact_form_url, headers=headers, json=messageBody
                     )
 
+                    print("response")
                     print(response)
 
                     # Send Presto mail
