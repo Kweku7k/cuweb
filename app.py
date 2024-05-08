@@ -472,7 +472,7 @@ def home():
                 headers = {"Content-Type": "application/json"}
                 try:
                     response = requests.post(
-                        contact_form_url, headers=headers, json=messageBody
+                        contact_form_url, headers=headers, json=messageBody, verify=False
                     )
 
                     print("response")
