@@ -156,11 +156,11 @@ class ApplicantGuardian(FlaskForm):
 
 
 class ApplicantProgram(FlaskForm):
-    # program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
-    # programchoice = SelectField('Program Choice', choices=allProgramChoices)
-    # firstchoice = SelectField("First Choice", choices=allProgramChoices)
-    # secondchoice = SelectField("Second Choice", choices=allProgramChoices)
-    # thirdchoice = SelectField("Third Choice", choices=allProgramChoices)
+    program = SelectField('Program', choices=[("Computer Science","Computer Science"),("Information Technology","Information Technology")])
+    programchoice = SelectField('Program Choice', choices=allProgramChoices)
+    firstchoice = SelectField("First Choice", choices=allProgramChoices)
+    secondchoice = SelectField("Second Choice", choices=allProgramChoices)
+    thirdchoice = SelectField("Third Choice", choices=allProgramChoices)
     submit = SubmitField("Next")
 
 

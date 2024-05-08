@@ -49,7 +49,7 @@ prestoUrl = "https://prestoghana.com"
 app.config["UPLOAD_FOLDER"] = "Documents"
 app.config["SECRET_KEY"] = "5791628basdfsadfa32242sdfsfde280ba245"
 app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "postgresql://postgres:new_password@45.222.128.55:5432/cu"
+    "postgresql://postgres:new_password@localhost:5432/cu"
 )
 
 
