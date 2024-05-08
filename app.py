@@ -475,6 +475,8 @@ def home():
                         contact_form_url, headers=headers, json=messageBody
                     )
 
+                    print(response)
+
                     # Send Presto mail
                     message = (
                         "From: " + form.name.data + "\nPhone: " + form.number.data + "\nEmail: " + form.email.data + "\nCategory: " + form.category.data + "\nMessage: " + form.message.data
