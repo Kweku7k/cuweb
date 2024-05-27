@@ -10,9 +10,10 @@
 
 <section style="padding: 20px 0;">
   <div class="container">
-      <div class="row" style="align-items: stretch;">
+    
+    <div class="row" style="display: flex; flex-wrap: wrap;">
 
-{% for article in cuposting %}
+      {% for article in cuposting %}  
 
         <div class="col-md-6"  style="margin-bottom: 20px;">
           <a href="/view/{{article.id}}" style="text-decoration: none; color: #000;">
