@@ -913,7 +913,7 @@ def cuposting():
     print("page")
     print(page)
     # Get URL
-    id = 120
+    id = 122
     per_page = 30
     url = (
         baseWpUrl
@@ -1577,7 +1577,43 @@ def admissions():
 
 @app.route("/alumni")
 def alumni():
-    return render_template("alumni.html")
+    page = request.args.get("page", "1")
+    print("page")
+    print(page)
+    # Get URL
+    id = 123
+    per_page = 30
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    alums = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        article["content"] = i["content"]["rendered"]
+        alums.append(article)
+    print(alums)
+    return render_template(
+        "alumni.html",
+        alums=alums,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+    )
 
 
 @app.route("/donate", methods=["GET", "POST"])
