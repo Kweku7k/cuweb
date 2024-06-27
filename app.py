@@ -966,6 +966,17 @@ def getImageUrl(id):
         image = "https://banner2.cleanpng.com/20190216/fox/kisspng-central-university-ghana-technology-university-col-school-of-theology-amp-missions-central-univer-5c67c799ec2858.1783459915503051779673.jpg"
     return image
 
+def getAuthorName(id):
+    print(id)
+    try:
+        url = baseWpUrl + "/?rest_route=/wp/v2/users/" + str(id)
+        r = requests.get(url)
+        print(r)
+        author = r.json()["name"]
+    except Exception as e:
+        print(e)
+        author = "Unknown Author"
+    return author
 
 def fetch(url, params):
     try:
@@ -1008,6 +1019,8 @@ def news():
         article["id"] = i["id"]
         article["image"] = getImageUrl(i["featured_media"])
         article["title"] = i["title"]["rendered"]
+        article["date"] = i["date"]
+        article["author"] = getAuthorName(i["author"])
         news.append(article)
     print(news)
     return render_template(
