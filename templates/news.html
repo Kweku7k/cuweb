@@ -39,12 +39,12 @@
     <div class="container">
         <div class="row" style="align-items: stretch;">
 
-{% for article in news %}
+            {% for article in news %}
 
-           <div class="col-md-3"  style="margin-bottom: 20px;">
+           <div class="col-md-4"  style="margin-bottom: 20px;">
                 <a href="/expand/{{article.id}}" style="text-decoration: none;">
-                    <div class="card"  style="flex-grow: 1;">
-                        <img class="card-img-top" src="{{article.image}}" width="100%" height="350px" style="object-fit: cover;" alt="Card image cap">                
+                    <div class="card"  style="flex-grow: 1; overflow: hidden;">
+                        <img class="card-img-top" src="{{article.image}}" max-width="100%" height="300px" style="object-fit: contain;" alt="Card image cap" >                
                     <div class="card-body">
                         <!-- <div class="card-title" style="display: flex;">
                             <div class="elipse" style="border-radius: 50%; width: 10px; height: 10px; background: yellow; margin:5px 10px 0 0;"></div>
@@ -58,7 +58,9 @@
                     </div>
                 </a>
             </div>
-            {% endfor %} 
+          {% endfor %}
+
+
             
                
             
