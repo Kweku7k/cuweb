@@ -922,7 +922,8 @@ def cuposting():
     print("page")
     print(page)
     # Get URL
-    id = 122
+    # Get URL
+    id = 120
     per_page = 30
     url = (
         baseWpUrl
