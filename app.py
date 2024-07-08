@@ -525,6 +525,81 @@ def home():
 #     requests.get('prestoghana.com/pay')
 
 
+@app.route("/complaint", methods=["GET", "POST"])
+def complaint():
+    form = ComplaintForm();
+
+    if request.method == "POST":
+        recaptcha_response = request.form.get("g-recaptcha-response")
+        googlerecaptchakey = os.environ.get("GOOGLERECAPTCHAKEY")
+
+        # Verify the reCAPTCHA response
+        verify_url = f"https://www.google.com/recaptcha/api/siteverify?secret={googlerecaptchakey}&response={recaptcha_response}"
+        verify_response = requests.post(verify_url)
+        verify_data = verify_response.json()
+
+        if verify_data.get("success"):
+            # Proceed with form processing if reCAPTCHA verification succeeds
+            if form.validate_on_submit():  # Use Flask-WTF validation
+                # Process form data
+                messageBody = {
+                    "name": form.name.data,
+                    "number": form.number.data, 
+                    "email": form.email.data,
+                    "category": "complaints",
+                    "message": f"Index Number: {form.index.data} Options: {form.options.data} Message: {form.message.data}"
+                }
+
+                headers = {"Content-Type": "application/json"}
+                try:
+                    response = requests.post(
+                        contact_form_url, headers=headers, json=messageBody, verify=False
+                    )
+                    print(response)
+                    print(response.content)
+                    print(response.status_code)
+                    # Send Presto mail
+                    # message = (
+                    #     "From: " + form.name.data + "\nIndex: " + form.index.data + "\nPhone: " + form.phone.data + "\nEmail: " + form.email.data + "\nCategory: " + form.options.data + "\nMessage: " + form.message.data
+                    # )
+                    # r = requests.get(
+                    #     prestoUrl + "/sendPrestoMail?recipient=onikosiadewale18@gmail.com&subject=" + form.name.data + "&message=" + message
+                    # )
+
+                    # Notify user and redirect
+                    flash("Hi, " + form.name.data + " your message has been submitted successfully.", "success")
+                    
+                    # Send a thank-you email to the user
+                    thank_you_message = (
+                        f"Dear {form.name.data},<br> Your complaint has been submitted. We are reviewing it and will be in touch with you shortly to resolve the issue. Thank you for your patience and feedback."
+                    )
+
+                    sendAnEmail(
+                        title="CU Support",
+                        subject="We appreciate your feedback!!",
+                        message=thank_you_message,
+                        email_receiver=[form.email.data],
+                    )
+
+                    return redirect(url_for("success"))
+
+                except Exception as e:
+                    reportError(e)
+            else:
+                flash("Form validation failed. Please check your input and try again.")
+        else:
+            flash("reCAPTCHA verification failed. Please try again.")
+    return render_template("complaint.html", form=form, loadingMessage="Please wait while we send your message....")
+
+@app.route("/success", methods=["GET", "POST"])
+def success():
+    return render_template(
+        "success.html",
+        message="Your form was submitted successfully. Your data has also been recorded for future communication. We are proud of you.",
+    )
+
+
+
 def sendsms(phone, message, exceptionPath):
     api_key = "aniXLCfDJ2S0F1joBHuM0FcmH"  # Remember to put your own API Key here
     message = message + "\n \nPowered by PrestoGhana"
@@ -2621,7 +2696,7 @@ def sendAnEmail(
     <body style="margin:auto 10px; color:black; font-family: 'Plus Jakarta', sans-serif;">
 
         <!-- Your banner image above -->
-        <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo" width"200">
+        <img src="https://central.edu.gh/static/img/Central-Uni-logo.png" alt="Central University Logo" width="200" height="200">
 
         <div style="font-family:'Poppins', sans serif; font-weight: 400; font-size: 20px; line-height:1.6; color: #000;">
             <p>{message}</p>
