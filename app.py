@@ -534,11 +534,11 @@ def complaint():
             if form.validate_on_submit():  # Use Flask-WTF validation
                 # Process form data
                 messageBody = {
-                    "name": "form.name.data",
-                    "number": "form.number.data", 
-                    "email": "form.email.data",
+                    "name": form.name.data,
+                    "number": form.number.data, 
+                    "email": form.email.data,
                     "category": "complaints",
-                    "message": "form.message.data"
+                    "message": f"Index Number: {form.index.data} Options: {form.options.data} Message: {form.message.data}"
                 }
 
                 headers = {"Content-Type": "application/json"}
@@ -572,7 +572,7 @@ def complaint():
                         email_receiver=[form.email.data],
                     )
 
-                    return redirect(url_for("complaint"))
+                    return redirect(url_for("success"))
 
                 except Exception as e:
                     reportError(e)

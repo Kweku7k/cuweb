@@ -40,7 +40,7 @@
 
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <div class="container">
+        <div class="container" style="margin-top: 5px;">
             {% for message in messages %}
                 <div class="alert alert-success">
                     {{ message }}
@@ -59,7 +59,7 @@
                     <h2 class="heading" style="text-align: center; margin-top: 1vh;"><b>Complaint Form</b></h2>
                     <h6 style="text-align: center; width: 100%; ">We’re here to help! Please fill out the form below to let us know about any issues you’re facing, and we’ll work to resolve them as quickly as possible.</h6>
                     <br>
-                    <form action="" method="POST" style="margin-top: 2vh;">
+                    <form method="POST" style="margin-top: 2vh;" onsubmit="return submitForm()">
                         {{form.hidden_tag()}}
 
 
@@ -79,8 +79,8 @@
                         </div>
 
                         <div class="mb-4">
-                            {{form.phone.label}}
-                            {{form.phone (class="inputCard", placeholder="Phone Number")}}
+                            {{form.number.label}}
+                            {{form.number (class="inputCard", placeholder="Phone Number")}}
                         </div>
 
                         <div class="mb-4">

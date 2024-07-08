@@ -71,7 +71,7 @@ class ComplaintForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     index = StringField("Index Number", validators=[DataRequired()])
     # category = SelectField("category", validators=[DataRequired()], choices=[])
-    phone = StringField("Phone Number", validators=[DataRequired()])
+    number = StringField("Phone Number", validators=[DataRequired()])
     email = StringField("Student Email Address", validators=[DataRequired()])
     options = SelectField("Select a student resource to assist with your issue.", choices=[("", "Select an option..."), ("VCampus", "VCampus"), ("OSIS", "OSIS"), ("Both", "Both")], validators=[DataRequired()],)
     message = TextAreaField("Explain the problem you are experiencing and any relevant details.", validators=[DataRequired()])
