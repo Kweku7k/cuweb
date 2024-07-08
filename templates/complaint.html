@@ -1,0 +1,114 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+
+.defaultCard{
+   
+   box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+   cursor: pointer;
+   padding: 30px;
+   width: 100%;
+   transition: width 1s;
+   margin-bottom: 3vh auto;
+}
+.inputCard{
+    /* box-shadow: 0 2px 8px 0 rgba(48, 44, 255, 0.1); */
+    border-radius: 10px;    
+    border: none;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+}
+.inputTextHolder{
+    width: 100%;
+    margin-top: 5vh;
+    /* box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05); */
+}
+
+.inputTextCard{
+    /* box-shadow: 0 2px 8px 0 rgba(48, 44, 255, 0.1); */
+    border-radius: 10px;    
+    border: none;
+    padding: 20px;
+    width: 100%;
+    /* margin-bottom: 5vh; */
+    margin-top: 0;
+    box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+}
+</style>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="container">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+  {% endwith %}
+
+<div class="container">
+    <div class="row" style="justify-content: space-around; margin-top: 4vh;">
+        <div class="col-md-6">
+            <div class="defaultCard">
+                    <img src="../static/img/fav.png" width="100" style="display: flex; justify-content: center; align-items: center; text-align: center; margin: 0 auto;" class="center" alt="">
+                    <!-- <h6 class="heading" style="text-align: center; margin-top: 1vh;"><b>CENTRAL UNIVERSITY STAFF COOPERATIVE</b></h6> -->
+                    <h2 class="heading" style="text-align: center; margin-top: 1vh;"><b>Complaint Form</b></h2>
+                    <h6 style="text-align: center; width: 100%; ">We’re here to help! Please fill out the form below to let us know about any issues you’re facing, and we’ll work to resolve them as quickly as possible.</h6>
+                    <br>
+                    <form action="" method="POST" style="margin-top: 2vh;">
+                        {{form.hidden_tag()}}
+
+
+                        <div class="mb-4">
+                            {{form.name.label}}
+                            {{form.name (class="inputCard", placeholder="Full Name")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.index.label}}
+                            {{form.index (class="inputCard", placeholder="Index Number")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.email.label}}
+                            {{form.email (class="inputCard", type="email", placeholder="Student Email Address")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.phone.label}}
+                            {{form.phone (class="inputCard", placeholder="Phone Number")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.options.label}}
+                            {{form.options (class="inputCard")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.message.label}}
+                            {{form.message (class="inputCard", placeholder="Comment")}}
+                        </div>
+
+                        <div class="g-recaptcha" id="divRecaptcha"></div>  
+                        <br>
+
+                        <div>
+                            {{form.submit (class="pill-button", style="width:100%" ) }}
+                          </div>
+                        
+                        
+                    </form>
+
+            </div>
+            <h6 style="text-align: center; margin-top: 2vh; text-decoration: none;">
+              <!-- Already Signed In? <a href="/" style="text-align: center; text-decoration: none; color: #992621;"><b>Login</b></a> -->
+           </h6>
+        </div>
+        </div>
+    </div>
+
+{% endblock %}
