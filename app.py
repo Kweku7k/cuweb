@@ -1899,8 +1899,22 @@ def international():
     )
 
 
+# @app.route("/cirp")
+# def cirp():
+#     id = 102
+#     alltags = returnTags(id, "cirp")["tags"]
+#     allposts = returnTags(id, "cirp")["posts"]
+#     print("allposts being returned")
+#     print(allposts)
+#     startingPoint = alltags[0]["id"]
+#     return render_template(
+#         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
+#     )
+
 @app.route("/cirp")
 def cirp():
+    gallery = wpgallery(10)
+    pprint.pprint(gallery)
     id = 102
     alltags = returnTags(id, "cirp")["tags"]
     allposts = returnTags(id, "cirp")["posts"]
@@ -1908,7 +1922,7 @@ def cirp():
     print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
-        "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
+        "cirp.html", tags=alltags, id=startingPoint, allposts=allposts, gallery=gallery
     )
 
 
