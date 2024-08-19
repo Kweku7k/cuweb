@@ -524,10 +524,13 @@ def home():
 # def payWithPresto():
 #     requests.get('prestoghana.com/pay')
 
+# @app.route('/expand/102')
+# def expand_102():
+#     return redirect("online")
 
 @app.route("/complaint", methods=["GET", "POST"])
 def complaint():
-    form = ComplaintForm();
+    form = ComplaintForm()
 
     if request.method == "POST":
         recaptcha_response = request.form.get("g-recaptcha-response")
@@ -590,6 +593,13 @@ def complaint():
         else:
             flash("reCAPTCHA verification failed. Please try again.")
     return render_template("complaint.html", form=form, loadingMessage="Please wait while we send your message....")
+
+
+@app.route("/offer", methods=["GET", "POST"])
+def offer():
+    form = DonationForm()
+    
+    return render_template("offer.html", form=form)
 
 @app.route("/success", methods=["GET", "POST"])
 def success():
@@ -1034,9 +1044,7 @@ def cuposting():
     )
 
 
-# @app.route('/donate')
-# def donate():
-#     return render_template('donate.html')
+
 
 
 def getImageUrl(id):

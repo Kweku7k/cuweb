@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<style>
+
+.defaultCard{
+   
+   box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+   cursor: pointer;
+   padding: 30px;
+   width: 100%;
+   transition: width 1s;
+   margin-bottom: 3vh auto;
+}
+.inputCard{
+    -webkit-appearance: none;
+    border-radius: 10px;    
+    border: none;
+    padding: 20px;
+    width: 100%;
+    box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+}
+.inputTextHolder{
+    width: 100%;
+    margin-top: 5vh;
+    /* box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05); */
+}
+
+.inputTextCard{
+    /* box-shadow: 0 2px 8px 0 rgba(48, 44, 255, 0.1); */
+    border-radius: 10px;    
+    border: none;
+    padding: 20px;
+    width: 100%;
+    /* margin-bottom: 5vh; */
+    margin-top: 0;
+    box-shadow: 0 2px 8px 0 rgba(13, 10, 44, 0.06), 0 60px 80px 0 rgba(74, 58, 255, 0.02), 0 40px 50px 0 rgba(74, 58, 255, 0.05);
+}
+</style>
+
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="container" style="margin-top: 5px;">
+            {% for message in messages %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+  {% endwith %}
+
+<div class="container">
+    <div class="row" style="justify-content: space-around; margin-top: 4vh;">
+        <div class="col-md-6">
+            <div class="defaultCard">
+                    <img src="../static/img/cucare.png" width="100" style="display: flex; justify-content: center; align-items: center; text-align: center; margin: 0 auto;" class="center" alt="">
+                    <!-- <h6 class="heading" style="text-align: center; margin-top: 1vh;"><b>CENTRAL UNIVERSITY STAFF COOPERATIVE</b></h6> -->
+                    <h2 class="heading" style="text-align: center; margin-top: 1vh;"><b>Donate to CuCare</b></h2>
+                    <h6 style="text-align: center; width: 100%; ">Every donation, big or small, helps us continue our vital work and bring hope to student in need. Together, we can create positive change and build a brighter future.</h6>
+                    <br>
+                    <form method="POST" style="margin-top: 2vh;" onsubmit="return submitForm()">
+                        {{form.hidden_tag()}}
+
+                        <div class="mb-4">
+                            {{form.options.label}}
+                            {{form.options (class="inputCard", onchange="checkValue(this)")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.name.label}}
+                            {{form.name (class="inputCard", placeholder="Full Name")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.number.label}}
+                            {{form.number (class="inputCard", placeholder="Phone Number")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.email.label}}
+                            {{form.email (class="inputCard", type="email", placeholder="Email Address")}}
+                        </div>
+
+                        <div class="mb-4">
+                            {{form.amount.label}}
+                            {{form.amount (class="inputCard", placeholder="Enter an amount")}}
+                        </div>
+
+                        <div class="mb-4" style="display: none;" id="choice">
+                            {{form.choice.label}}
+                            {{form.choice (class="inputCard", id="choice")}}
+                        </div>
+
+                        
+
+                        <div class="g-recaptcha" id="divRecaptcha"></div>  
+                        <br>
+
+                        <div>
+                            {{form.submit (class="pill-button", style="width:100%" ) }}
+                          </div>
+                        
+                        
+                    </form>
+
+            </div>
+            
+        </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        function checkValue(selectElement) {
+            var selectedValue = selectElement.value;
+            if (selectedValue === "Staff") {
+                document.getElementById("choice").style.display="block"
+            }
+            else {
+            document.getElementById("choice").style.display="none"
+            }
+        }
+    </script>
+
+{% endblock %}

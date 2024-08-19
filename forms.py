@@ -78,6 +78,18 @@ class ComplaintForm(FlaskForm):
 
     submit = SubmitField("File a Complaint")
 
+
+class DonationForm(FlaskForm):
+    options = SelectField("Identity", choices=[("", "Select an option..."), ("Staff", "Staff"), ("Student", "Student"), ("Alumni", "Alumni"), ("Family & Friends", "Family & Friends"),  ("Corperate", "Corperate")], validators=[DataRequired()],)
+    name = StringField("Name", validators=[DataRequired()])
+    number = StringField("Phone Number", validators=[DataRequired()])
+    email = StringField("Email Address", validators=[DataRequired()])
+    amount = StringField("Amount", validators=[DataRequired()])
+    choice = SelectField("Deduct at Source", choices=[("", "Select an option..."), ("Yes", "Yes"), ("No", "No")], validators=[DataRequired()])
+
+    submit = SubmitField("Donate Now")
+    
+    
 class PostingForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     number = StringField("Phone Number", validators=[DataRequired()])
