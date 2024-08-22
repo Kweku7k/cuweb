@@ -524,9 +524,9 @@ def home():
 # def payWithPresto():
 #     requests.get('prestoghana.com/pay')
 
-# @app.route('/expand/102')
-# def expand_102():
-#     return redirect("online")
+@app.route('/102')
+def expand_102():
+    return redirect("online")
 
 @app.route("/complaint", methods=["GET", "POST"])
 def complaint():
@@ -595,11 +595,11 @@ def complaint():
     return render_template("complaint.html", form=form, loadingMessage="Please wait while we send your message....")
 
 
-@app.route("/offer", methods=["GET", "POST"])
-def offer():
-    form = DonationForm()
+# @app.route("/offer", methods=["GET", "POST"])
+# def offer():
+#     form = DonationForm()
     
-    return render_template("offer.html", form=form)
+#     return render_template("offer.html", form=form)
 
 @app.route("/success", methods=["GET", "POST"])
 def success():
