@@ -1607,13 +1607,13 @@ def expand(id):
     # Get URL
     # url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     wp_post_url = "/wppost/" + str(id)
-    metadata = {
+    meta = {
         "title": body.json["rendered_content"]["title"]["rendered"],
         "description": body.json["rendered_content"]["excerpt"]["rendered"],
         # "image": getImageUrl(body.json["rendered_content"]["featured_media"]["rendered"]),
         "url": wp_post_url
     }
-    return render_template("expand.html", url=wp_post_url, metadata=metadata)
+    return render_template("expand.html", url=wp_post_url, meta=meta)
 
 
 @app.route("/view/<int:id>", methods=["GET", "POST"])
