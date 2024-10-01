@@ -1610,7 +1610,7 @@ def expand(id):
     meta = {
         "title": body.json["rendered_content"]["title"]["rendered"],
         "description": body.json["rendered_content"]["excerpt"]["rendered"],
-        # "image": getImageUrl(body.json["rendered_content"]["featured_media"]["rendered"]),
+        "image": getImageUrl(body.json["rendered_content"]["featured_media"]),
         "url": wp_post_url
     }
     return render_template("expand.html", url=wp_post_url, meta=meta)
