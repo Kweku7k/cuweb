@@ -15,12 +15,26 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Central University</title>
-  <meta name="keywords" content="Central University">
-<link rel="icon" href="../static/img/fav.png" type="image/x-icon">
-<meta property="og:image" content="../static/img/ogLogo.png">
+  <link rel="icon" href="../static/img/fav.png" type="image/x-icon">
+  
+  {% if meta %}
+  
+<title>{{meta.title}}</title>
+<meta name="keywords" content="Central University">
+<meta name="description" content="{{meta.description}}">
+<meta property="og:image" content="{{meta.image}}">
 <meta property="og:image:width" content="600">
 <meta property="og:image:height" content="400">
+<meta property="og:image:height" content="400">
+{% else %}
+<title>Central University</title>
+<meta name="keywords" content="Central University">
+<meta property="og:image" content="../static/img/fav.png">
+<meta property="og:image:width" content="600">
+<meta property="og:image:height" content="400">
+<meta property="og:image:height" content="400">
+
+{% endif %}
 
   <div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v17.0" nonce="T2FyoL8J"></script>

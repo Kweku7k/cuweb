@@ -1603,9 +1603,16 @@ def find_in_array(arr, target_char):
 
 @app.route("/expand/<string:id>")
 def expand(id):
+    body = wppost(id)
     # Get URL
     # url=baseWpUrl+"/?rest_route=/wp/v2/posts/"+id
     wppost = "/wppost/" + str(id)
+    meta = {
+        title: body.get("title", "Central University"),
+        description: body.get("excerpt", "Central University"),
+        image: getImageUrl(body.get("featured_media")),
+        url: wppost,
+    }
     return render_template("expand.html", url=wppost)
 
 
