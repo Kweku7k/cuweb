@@ -1613,7 +1613,7 @@ def expand(id):
         # "image": getImageUrl(body.json["rendered_content"]["featured_media"]["rendered"]),
         "url": wp_post_url
     }
-    return render_template("expand.html", url=wp_post_url)
+    return render_template("expand.html", url=wp_post_url, meta=meta)
 
 
 @app.route("/view/<int:id>", methods=["GET", "POST"])
