@@ -1277,7 +1277,7 @@ def summer():
     alltags = returnTags(id, "summer-school")["tags"]
     allposts = returnTags(id, "summer-school")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "summer.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1868,21 +1868,54 @@ def library():
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library.html", tags=alltags, id=startingPoint, allposts=allposts
     )
 
 
+# @app.route("/about")
+# def about():
+#     id = 2
+#     alltags = returnTags(id, "library")["tags"]
+#     allposts = returnTags(id, "library")["posts"]
+#     print("allposts being returned")
+#     print(allposts)
+#     startingPoint = alltags[0]["id"]
+#     return render_template(
+#         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
+#     )
+
+
 @app.route("/about")
 def about():
     id = 2
-    alltags = returnTags(id, "library")["tags"]
-    allposts = returnTags(id, "library")["posts"]
-    print("allposts being returned")
-    print(allposts)
+    data = returnTags(id, "library")
+    alltags = data["tags"]
+    allposts = data["posts"]
+
+    # custom order by tag name
+    custom_order = [
+        "About Cu",
+        "Council of the University",
+        "Office of the Chancellor",
+        "Office of the Vice Chancellor",   # should follow Chancellor
+        "Office of the Pro Vice Chancellor",
+        "Office Of the Registrar",
+        "Our Core Values, Vision and Mission",
+        "Reach Us",
+        "Vacancies"
+    ]
+
+    # sort the tags by your custom order
+    alltags = sorted(
+        alltags,
+        key=lambda x: custom_order.index(x["name"]) if x["name"] in custom_order else len(custom_order)
+    )
+
     startingPoint = alltags[0]["id"]
+
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
     )
@@ -1894,7 +1927,7 @@ def admission():
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1907,7 +1940,7 @@ def international():
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1934,7 +1967,7 @@ def cirp():
     alltags = returnTags(id, "cirp")["tags"]
     allposts = returnTags(id, "cirp")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "cirp.html", tags=alltags, id=startingPoint, allposts=allposts, gallery=gallery
@@ -1947,7 +1980,7 @@ def schools():
     alltags = returnTags(id, "schools")["tags"]
     allposts = returnTags(id, "schools")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1960,7 +1993,7 @@ def chaplaincy():
     alltags = returnTags(id, "library")["tags"]
     allposts = returnTags(id, "library")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1973,7 +2006,7 @@ def research():
     alltags = returnTags(id, "research")["tags"]
     allposts = returnTags(id, "research")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1986,7 +2019,7 @@ def corporate():
     alltags = returnTags(id, "corporate")["tags"]
     allposts = returnTags(id, "corporate")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
@@ -1999,7 +2032,7 @@ def irb():
     alltags = returnTags(id, "irb")["tags"]
     allposts = returnTags(id, "irb")["posts"]
     print("allposts being returned")
-    print(allposts)
+    # print(allposts)
     startingPoint = alltags[0]["id"]
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
