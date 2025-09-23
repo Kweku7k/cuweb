@@ -1898,11 +1898,11 @@ def about():
     # custom order by tag name
     custom_order = [
         "About Cu",
-        "Council of the University",
-        "Office of the Chancellor",
-        "Office of the Vice Chancellor",   # should follow Chancellor
-        "Office of the Pro Vice Chancellor",
-        "Office Of the Registrar",
+        "Chancellor",
+        "University Council",
+        "Vice Chancellor",   # should follow Chancellor
+        "Pro Vice Chancellor",
+        "Registrar",
         "Our Core Values, Vision and Mission",
         "Reach Us",
         "Vacancies"
