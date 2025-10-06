@@ -1633,7 +1633,7 @@ body {
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #ca181e;
+  color: #992621;
   position: relative;
   padding-bottom: 12px;
 }
@@ -1650,7 +1650,7 @@ body {
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #ca181e;
+  color: #992621;
   font-size: 18px;
   line-height: 1;
 }
@@ -1675,7 +1675,7 @@ body {
 
 #footer .footer-top .footer-links ul a:hover {
   text-decoration: none;
-  color: #ca181e;
+  color: #992621;
 }
 
 #footer .footer-newsletter {
@@ -1715,7 +1715,7 @@ body {
   background: none;
   font-size: 16px;
   padding: 0 20px 2px 20px;
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   transition: 0.3s;
   border-radius: 0 5px 5px 0;
@@ -1723,7 +1723,7 @@ body {
 }
 
 #footer .footer-newsletter form input[type=submit]:hover {
-  background: #ca181e;
+  background: #992621;
 }
 
 #footer .credits {
@@ -1735,7 +1735,7 @@ body {
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -1748,7 +1748,7 @@ body {
 }
 
 #footer .social-links a:hover {
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   text-decoration: none;
 

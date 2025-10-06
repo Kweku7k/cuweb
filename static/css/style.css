@@ -1,12 +1,5 @@
-/**
-* Template Name: OnePage - v4.9.2
-* Template URL: https://bootstrapmade.com/onepage-multipurpose-bootstrap-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
 /*--------------------------------------------------------------
-# General
+# Home
 --------------------------------------------------------------*/
 body {
   font-family: "Poppins", sans-serif;
@@ -14,7 +7,7 @@ body {
 }
 
 a {
-  color: #ca181e;
+  color: #992621;
   text-decoration: none;
 }
 
@@ -42,7 +35,7 @@ h6 {
   right: 15px;
   bottom: 15px;
   z-index: 996;
-  background: #ca181e;
+  background: #992621;
   width: 40px;
   height: 40px;
   border-radius: 4px;
@@ -93,7 +86,7 @@ h6 {
   position: fixed;
   top: calc(50% - 30px);
   left: calc(50% - 30px);
-  border: 6px solid #ca181e;
+  border: 6px solid #992621;
   border-top-color: #fff;
   border-bottom-color: #fff;
   border-radius: 50%;
@@ -143,8 +136,17 @@ h6 {
   transition: all 0.5s;
   background: #b8b0b0;
   z-index: 997;
-  padding: 10px 0;
+  padding: 0 0 10px 0;
   border-bottom: 1px solid #f2f2f2;
+}
+
+.topbar {
+  height: 40px;
+  padding: 10px 0;
+  font-size: 14px;
+  transition: all 0.5s;
+  color: #fff;
+  background: #992621;
 }
 
 #header.header-scrolled {
@@ -163,7 +165,7 @@ h6 {
 }
 
 #header .logo a {
-  color: #ca181e;
+  color: #992621;
 }
 
 #header .logo img {
@@ -239,7 +241,7 @@ button{
   justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 25px;
-  color: #ca181e;
+  color: #992621;
   white-space: nowrap;
   transition: 0.3s;
 }
@@ -255,12 +257,12 @@ button{
 .navbar .active,
 .navbar .active:focus,
 .navbar li:hover>a {
-  color: #ca181e;
+  color: #992621;
 }
 
 .navbar .getstarted,
 .navbar .getstarted:focus {
-  background: #ca181e;
+  background: #992621;
   padding: 8px 20px;
   margin-left: 30px;
   border-radius: 10px;
@@ -306,7 +308,7 @@ button{
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover>a {
-  color: #ca181e;
+  color: #992621;
 }
 
 .navbar .dropdown:hover>ul {
@@ -342,7 +344,7 @@ button{
 * Mobile Navigation 
 */
 .mobile-nav-toggle {
-  color: #ca181e;
+  color: #992621;
   font-size: 28px;
   cursor: pointer;
   display: none;
@@ -399,13 +401,13 @@ button{
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 15px;
-  color: #ca181e;
+  color: #992621;
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover>a {
-  color: #ca181e;
+  color: #992621;
 }
 
 .navbar-mobile .getstarted,
@@ -440,7 +442,7 @@ button{
 .navbar-mobile .dropdown ul a:hover,
 .navbar-mobile .dropdown ul .active:hover,
 .navbar-mobile .dropdown ul li:hover>a {
-  color: #ca181e;
+  color: #992621;
 }
 
 .navbar-mobile .dropdown>.dropdown-active {
@@ -545,11 +547,11 @@ button{
   transition: 0.5s;
   margin-top: 30px;
   color: #fff;
-  background: #ca181e;
+  background: #992621;
 }
 
 #hero .btn-get-started:hover {
-  background: #ca181e;
+  background: #992621;
 }
 
 #hero .icon-boxes {
@@ -612,11 +614,11 @@ button{
 }
 
 #hero .icon-box .title a {
-  color: #ca181e;
+  color: #992621;
   transition: 0.3s;
 }
 .postsContainer .icon-box .title a {
-  color: #ca181e;
+  color: #992621;
   transition: 0.3s;
 }
 
@@ -639,7 +641,7 @@ button{
   transition: all 0.3s ease-in-out;
   font-size: 36px;
   line-height: 1;
-  color: #ca181e;
+  color: #992621;
 }
 
 .postsContainer .icon-box .icon {
@@ -649,7 +651,7 @@ button{
   transition: all 0.3s ease-in-out;
   font-size: 36px;
   line-height: 1;
-  color: #ca181e;
+  color: #992621;
 }
 
 #hero .icon-box:hover .icon {
@@ -658,13 +660,13 @@ button{
 
 #hero .icon-box:hover {
   transform: scale(1.08);
-  background-color: #ca181e;
+  background-color: #992621;
   color: white;
 }
 
 /* .postsContainer .icon-box:hover {
   transform: scale(1.08);
-  background-color: #ca181e;
+  background-color: #992621;
   color: white;
 } */
 
@@ -817,7 +819,7 @@ box-icon{
   left: 0;
   top: 2px;
   font-size: 20px;
-  color: #ca181e;
+  color: #992621;
   line-height: 1;
 }
 
@@ -835,15 +837,15 @@ box-icon{
   border-radius: 5px;
   transition: 0.3s;
   line-height: 1;
-  color: #ca181e;
+  color: #992621;
   -webkit-animation-delay: 0.8s;
   animation-delay: 0.8s;
   margin-top: 6px;
-  border: 2px solid #ca181e;
+  border: 2px solid #992621;
 }
 
 .about .content .btn-learn-more:hover {
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   text-decoration: none;
 }
@@ -881,7 +883,7 @@ select{
   line-height: 48px;
   display: block;
   font-weight: 700;
-  color: #ca181e;
+  color: #992621;
   margin-left: 80px;
   margin: auto;
 }
@@ -904,7 +906,7 @@ select{
 .about-video .content h3 {
   font-weight: 700;
   font-size: 24px;
-  color: #ca181e;
+  color: #992621;
 }
 
 .about-video .content ul {
@@ -920,7 +922,7 @@ select{
 
 .about-video .content ul i {
   font-size: 24px;
-  color: #ca181e;
+  color: #992621;
   position: absolute;
   left: 0;
   top: -2px;
@@ -933,7 +935,7 @@ select{
 .about-video .play-btn {
   width: 94px;
   height: 94px;
-  background: radial-gradient(#ca181e 50%, rgba(36, 135, 206, 0.4) 52%);
+  background: radial-gradient(#992621 50%, rgba(36, 135, 206, 0.4) 52%);
   border-radius: 50%;
   display: block;
   position: absolute;
@@ -981,7 +983,7 @@ select{
 }
 
 .about-video .play-btn:hover::after {
-  border-left: 15px solid #ca181e;
+  border-left: 15px solid #992621;
   transform: scale(20);
 }
 
@@ -1063,7 +1065,7 @@ select{
 }
 
 .pill-button {
-  background-color: #ca181e;
+  background-color: #992621;
   font: 'Poppins',sans-serif;
   border: none;
   color: white;
@@ -1085,7 +1087,7 @@ select{
 }
 
 /* .pill-button:hover {
-  background-color: #ca181e;
+  background-color: #992621;
   font: 'Poppins',sans-serif;
   border: none;
   color: white;
@@ -1105,17 +1107,17 @@ select{
 
 
 .pill-button-alternate{
-  background-color: #ca181e;
+  background-color: #992621;
   font: 'Poppins',sans-serif;
   border: none;
-  color: #ca181e;
+  color: #992621;
   border-radius: 10px;
   padding: 16px 22px;
   box-shadow: 0 2px 8px 0 rgba(48, 44, 255, 0.1);
   text-align: center;
   font-weight: bold;
   transition: width 2s;
-  background-color: white;  border: 1px solid #ca181e;
+  background-color: white;  border: 1px solid #992621;
   width: fit-content;
 
 }
@@ -1206,11 +1208,11 @@ select{
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #ca181e;
+  border: 1px solid #992621;
 }
 
 .testimonials .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #ca181e;
+  background-color: #992621;
 }
 
 /*--------------------------------------------------------------
@@ -1268,7 +1270,7 @@ select{
 }
 
 .services .icon-box h4 a {
-  color: #ca181e;
+  color: #992621;
   transition: ease-in-out 0.3s;
 }
 
@@ -1284,7 +1286,7 @@ select{
 }
 
 .services .iconbox-blue i {
-  color: #ca181e;
+  color: #992621;
 }
 
 .services .iconbox-blue:hover .icon i {
@@ -1292,7 +1294,7 @@ select{
 }
 
 .services .iconbox-blue:hover .icon path {
-  fill: #ca181e;
+  fill: #992621;
 }
 
 .services .iconbox-orange i {
@@ -1359,7 +1361,7 @@ select{
 # Cta
 --------------------------------------------------------------*/
 .cta {
-  background: #ca181e;
+  background: #992621;
   background-size: cover;
   padding: 40px 0;
     /* The image used */
@@ -1381,19 +1383,22 @@ select{
   text-transform: uppercase;
 }
 
+.topbar-nav-link{
+  font-size: 16px !important; 
+  color: white !important;
+  text-transform: uppercase;
+}
+
 .nav-link .active{
-  background: #ca181e !important;
+  background: #992621 !important;
   color: #fff !important;
 }
 
-.nav-link .side-nav .active{
-  background: #ca181e !important;
-  color: #fff !important;
+.nav-pills .side-nav.active {
+  background-color: #992621 !important;
+  color: #ffffff !important;
 }
-.side-nav{
-  background: #ca181e;
-  color: #fff;
-}
+
 
 .cta h3 {
   color: #fff;
@@ -1421,7 +1426,7 @@ select{
 
 .cta .cta-btn:hover {
   background: #fff;
-  color: #ca181e;
+  color: #992621;
 }
 
 /*--------------------------------------------------------------
@@ -1455,7 +1460,7 @@ select{
 
 .portfolio #portfolio-flters li:hover,
 .portfolio #portfolio-flters li.filter-active {
-  color: #ca181e;
+  color: #992621;
 }
 
 .portfolio #portfolio-flters li:last-child {
@@ -1655,11 +1660,11 @@ select{
   height: 12px;
   background-color: #fff;
   opacity: 1;
-  border: 1px solid #ca181e;
+  border: 1px solid #992621;
 }
 
 .portfolio-details .portfolio-details-slider .swiper-pagination .swiper-pagination-bullet-active {
-  background-color: #ca181e;
+  background-color: #992621;
 }
 
 .portfolio-details .portfolio-info {
@@ -1733,13 +1738,13 @@ select{
 
 .team .member .social a {
   transition: color 0.3s;
-  color: #ca181e;
+  color: #992621;
   margin: 0 10px;
   display: inline-block;
 }
 
 .team .member .social a:hover {
-  color: #ca181e;
+  color: #992621;
 }
 
 .team .member .social i {
@@ -1756,7 +1761,7 @@ select{
   font-weight: 700;
   margin-bottom: 5px;
   font-size: 18px;
-  color: #ca181e;
+  color: #992621;
 }
 
 .team .member .member-info span {
@@ -1808,12 +1813,12 @@ select{
   font-size: 18px;
   text-transform: uppercase;
   font-weight: 600;
-  color: #ca181e;
+  color: #992621;
 }
 
 .pricing .box h4 {
   font-size: 42px;
-  color: #ca181e;
+  color: #992621;
   font-weight: 500;
   font-family: "Open Sans", sans-serif;
   margin-bottom: 20px;
@@ -1834,7 +1839,7 @@ select{
 .pricing .box ul {
   padding: 0;
   list-style: none;
-  color: #ca181e;
+  color: #992621;
   text-align: center;
   line-height: 20px;
   font-size: 14px;
@@ -1858,23 +1863,23 @@ select{
   display: inline-block;
   padding: 10px 40px;
   border-radius: 4px;
-  color: #ca181e;
+  color: #992621;
   transition: none;
   font-size: 14px;
   font-weight: 400;
   font-family: "Raleway", sans-serif;
   font-weight: 600;
   transition: 0.3s;
-  border: 2px solid #ca181e;
+  border: 2px solid #992621;
 }
 
 .pricing .box .btn-buy:hover {
-  background: #ca181e;
+  background: #992621;
   color: #fff;
 }
 
 .pricing .featured {
-  background: #ca181e;
+  background: #992621;
 }
 
 .pricing .featured h3,
@@ -1897,7 +1902,7 @@ select{
 
 .pricing .featured .btn-buy:hover {
   background: #fff;
-  color: #ca181e;
+  color: #992621;
 }
 
 
@@ -1974,7 +1979,7 @@ select{
 }
 
 .faq .faq-list a.collapsed:hover {
-  color: #ca181e;
+  color: #992621;
 }
 
 .faq .faq-list a.collapsed .icon-show {
@@ -2005,7 +2010,7 @@ select{
 
 .contact .info i {
   font-size: 20px;
-  color: #ca181e;
+  color: #992621;
   float: left;
   width: 44px;
   height: 44px;
@@ -2022,7 +2027,7 @@ select{
   font-size: 22px;
   font-weight: 600;
   margin-bottom: 5px;
-  color: #ca181e;
+  color: #992621;
 }
 
 .contact .info p {
@@ -2040,7 +2045,7 @@ select{
 .contact .info .email:hover i,
 .contact .info .address:hover i,
 .contact .info .phone:hover i {
-  background: #ca181e;
+  background: #992621;
   color: #fff;
 }
 
@@ -2105,7 +2110,7 @@ select{
 
 .contact .php-email-form input:focus,
 .contact .php-email-form textarea:focus {
-  border-color: #ca181e;
+  border-color: #992621;
 }
 
 .contact .php-email-form input {
@@ -2117,7 +2122,7 @@ select{
 }
 
 .contact .php-email-form button[type=submit] {
-  background: #ca181e;
+  background: #992621;
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -2126,7 +2131,7 @@ select{
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: #ca181e;
+  background: #992621;
 }
 
 @-webkit-keyframes animate-loading {
@@ -2250,7 +2255,7 @@ select{
 #footer .footer-top h4 {
   font-size: 16px;
   font-weight: bold;
-  color: #ca181e;
+  color: #992621;
   position: relative;
   padding-bottom: 12px;
 }
@@ -2267,7 +2272,7 @@ select{
 
 #footer .footer-top .footer-links ul i {
   padding-right: 2px;
-  color: #ca181e;
+  color: #992621;
   font-size: 18px;
   line-height: 1;
 }
@@ -2292,7 +2297,7 @@ select{
 
 #footer .footer-top .footer-links ul a:hover {
   text-decoration: none;
-  color: #ca181e;
+  color: #992621;
 }
 
 #footer .footer-newsletter {
@@ -2332,7 +2337,7 @@ select{
   background: none;
   font-size: 16px;
   padding: 0 20px 2px 20px;
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   transition: 0.3s;
   border-radius: 0 5px 5px 0;
@@ -2340,7 +2345,7 @@ select{
 }
 
 #footer .footer-newsletter form input[type=submit]:hover {
-  background: #ca181e;
+  background: #992621;
 }
 
 #footer .credits {
@@ -2352,7 +2357,7 @@ select{
 #footer .social-links a {
   font-size: 18px;
   display: inline-block;
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   line-height: 1;
   padding: 8px 0;
@@ -2365,7 +2370,7 @@ select{
 }
 
 #footer .social-links a:hover {
-  background: #ca181e;
+  background: #992621;
   color: #fff;
   text-decoration: none;
 

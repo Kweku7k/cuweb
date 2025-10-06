@@ -171,117 +171,198 @@
     {% endif %}
   {% endwith %}
 
+
+  
+
   <!-- ======= Header ======= -->
  <header id="header" class="sticky-top" style="background: #fff;">
+  <div class="topbar d-flex align-items-center">
+    <div class="container-fluid d-flex justify-content-center justify-content-md-between">
+      <div class="contact-info d-flex align-items-center">
+        <i class="bi bi-envelope d-flex align-items-center"></i><a href="mailto:pr@central.edu.gh" style="color: #fff; margin-left: 4px;">pr@central.edu.gh</a>
+        <i class="bi bi-phone d-flex align-items-center ms-4"><a href="tel:+2330303318580" style="color: #fff;">+2330303318580</a></i>
+      </div>
+      <div class="d-none d-md-flex align-items-center">
+        <nav id="topbar-navbar" class="navbar ">
+          <ul>
+          <li class="nav-item dropdown">
+            <a class="dropdown-toggle topbar-nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Students
+            </a>
+            <ul class="dropdown-menu">
+                <a class="nav-link scrollto" href="https://student.central.edu.gh/login" target="_blank"><li>Student Portal</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
+                <a class="nav-link scrollto" href="https://eligibility.central.edu.gh" target="_blank"><li>Eligibility Checker</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Financial Info And Scholarship</li></a>
+                <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2023/08/Students-Handbook2018FINAL-2.pdf"><li>Student HandBook </li></a>
+                <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library</li></a>
+            </ul>
+          </li>
+
+          <a class="scrollto topbar-nav-link" href="{{url_for('alumni')}}"><li>Alumni</li></a>      
+
+          <li class="nav-item dropdown">
+            <a class="topbar-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Faculty & Staff
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('international')}}"><li>OSIS</li></a>
+              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Office 365</li></a>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="topbar-nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              CUCare
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('cucare')}}"><li>About CuCare</li></a>
+              <a class="nav-link scrollto" href="https://forms.central.edu.gh/donation" target="_blank"><li>Donate to CuCare</li></a>
+            </ul>
+          </li>
+
+          <a class="scrollto topbar-nav-link" href="#contact"><li>Contact Us</li></a>      
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
   <div class="container-fluid d-flex align-items-center justify-content-between"> 
 
     {% if hideNav == True %}
 
-    <a href="{{url_for('home')}}">
-      <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
-    </a>
-    
-    {% else %}
-
-      <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
-    <a href="{{url_for('home')}}">
+      <a href="{{url_for('home')}}">
         <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
       </a>
-    {% endif %}
 
-    <nav id="navbar" class="navbar navbar-light ">
+      {% else %}
 
-      <ul>
-
-        {% if hideNav != True %}
-        <!--  <a class="nav-link" href="{{url_for('home')}}"><li>Home</li></a> -->
-        <a class="nav-link" href="{{url_for('about')}}"><li>About CU</li></a>
-        <!-- <a class="nav-link scrollto" href="{{url_for('admissions')}}"><li>Admissions</li></a> -->
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Admissions
-          </a>
-          <ul class="dropdown-menu">
-            <a class="nav-link scrollto" href="{{url_for('international')}}"><li>Programmes  </li></a>
-            <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Entry Requirements</li></a>
-              <a class="nav-link scrollto" href="https://eligibility.central.edu.gh/"><li>Eligibility Checker</li></a>
-              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
-              <a class="nav-link scrollto" href="{{url_for('online')}}"><li>Online Application</li></a>
-              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Financial Info And Scholarship</li></a>
-              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>CU-Gordon College Partnership Programme</li></a>
-          </ul>
-        </li>
-
-        <a class="nav-link scrollto" href="https://student.central.edu.gh/login" target="_blank"><li>Student Portal</li></a>      
-
-        <!-- <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Student Resources
-          </a>
-          <ul class="dropdown-menu">
-              <a class="nav-link scrollto" href="https://vcampus.central.edu.gh"><li>Online Learning(VCAMPUS) </li></a>
-              <a class="nav-link scrollto" href="https://osissip.osis.online"><li>Student Information Portal(SIP) </li></a>
-              <a class="nav-link scrollto" href="http://sfp.central.edu.gh"><li>Fees Portal(SFP) </li></a>
-              <a class="nav-link scrollto" href="https://eligibility.central.edu.gh/"><li>Eligibility Checker</li></a>
-              <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2023/08/Students-Handbook2018FINAL-2.pdf"><li>Student HandBook </li></a>
-              <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2024/04/2024-2025-Academic-Calendar.pdf"><li>Academic Calendar </li></a>
-              <a class="nav-link scrollto" href="https://secure.theclearinghub.com/"><li>Clearing Hub </li></a>
-              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Campus Life</li></a>
-          </ul>
-        </li> -->
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Schools
-          </a>
-          <ul class="dropdown-menu">
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sop')}}"><li>Pharmacy </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='facultyoflaw')}}"><li>Law </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='somah')}}"><li>Medical Sciences </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='snm')}}"><li>Nursing and Midwifery</li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='soeat')}}"><li>Engineering & Technology</li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='fass')}}"><li>Social Sciences </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>Architecture and Design </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Business </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sogs')}}"><li>Graduate School </li></a>
-            <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CDPE </li></a>
-          </ul>
-        </li>
-
-        <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library </li></a>
-
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            More
-          </a>
-          <ul class="dropdown-menu">
-            <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News </li></a>
-              <a class="nav-link scrollto" href="{{url_for('cirp')}}"><li>International Relations </li></a>
-              <a class="nav-link scrollto" href="{{url_for('cucare')}}" ><li>Counselling & Career Services</li></a>
-              <a class="nav-link scrollto" href="{{url_for('alumni')}}"  ><li>Alumni </li></a>
-              <a class="nav-link scrollto" href="{{url_for('admissions')}}"><li>Admissions</li></a>
-              <a class="nav-link scrollto" href="{{url_for('summer')}}"><li>Summer School</li></a>
-              <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
-              <a class="nav-link scrollto" href="{{url_for('research')}}"><li>Research </li></a>
-              <a class="nav-link scrollto" href="{{url_for('irb')}}"><li>Institutional Review Board </li></a>
-              <a class="nav-link scrollto" href="{{url_for('corporate')}}"><li>Corporate </li></a>
-          </ul>
-        </li>
-
-        {% endif %}
-        
-
-        
-        <a href="{{url_for('online')}}" target="_blank">
-          <button class="pill-button" style="padding: 12px 13px; font-size: 16px;">
-            Apply Now!
-          </button>
+        <!-- <img class="" src="assets/img/Central-Uni-logo.  png" alt="" width="150"> -->
+      <a href="{{url_for('home')}}">
+          <img class="" src="{{url_for("static",filename="img/Central-Uni-logo.png")}}" alt="" width="150">
         </a>
+      {% endif %}
+
+      <nav id="navbar" class="navbar navbar-light ">
+
+        <ul>
+
+          {% if hideNav != True %}
+          <a class="nav-link" href="{{url_for('about')}}"><li>About CU</li></a>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Academics
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('international')}}"><li>Study</li></a>
+              <a class="nav-link scrollto" href="{{url_for('cirp')}}"><li>International Programmes Office </li></a>
+              <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2024/04/2024-2025-Academic-Calendar.pdf"><li>Academic Calendar </li></a>
+              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
+              <a class="nav-link scrollto" href="{{url_for('irb')}}"><li>Institutional Review Board </li></a>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Admissions
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('international')}}"><li>Programmes</li></a>
+              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Entry Requirements</li></a>
+                <a class="nav-link scrollto" href="https://eligibility.central.edu.gh/"><li>Eligibility Checker</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
+                <a class="nav-link scrollto" href="{{url_for('online')}}"><li>Online Application</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Financial Info And Scholarship</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>CU-Gordon College Partnership Programme</li></a>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Schools
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sop')}}"><li>Pharmacy </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='facultyoflaw')}}"><li>Law </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='somah')}}"><li>Medical Sciences </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='snm')}}"><li>Nursing and Midwifery</li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='soeat')}}"><li>Engineering & Technology</li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='fass')}}"><li>Social Sciences </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>Architecture and Design </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Business </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sogs')}}"><li>Graduate School </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CDPE </li></a>
+            </ul>
+          </li>
+
+          <a class="nav-link scrollto" href="{{url_for('chaplaincy')}}"><li>Chaplaincy </li></a>
+          <a class="nav-link scrollto" href="{{url_for('news')}}"><li>News </li></a>
+
+          
+          <li class="nav-item dropdown d-lg-none">
+            <a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Students
+            </a>
+            <ul class="dropdown-menu">
+                <a class="nav-link scrollto" href="https://student.central.edu.gh/login" target="_blank"><li>Student Portal</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
+                <a class="nav-link scrollto" href="https://eligibility.central.edu.gh" target="_blank"><li>Eligibility Checker</li></a>
+                <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Financial Info And Scholarship</li></a>
+                <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2023/08/Students-Handbook2018FINAL-2.pdf"><li>Student HandBook </li></a>
+                <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library</li></a>
+            </ul>
+          </li>
+
+          <a class="scrollto nav-link d-lg-none" href="{{url_for('alumni')}}"><li>Alumni</li></a>      
+
+          <li class="nav-item dropdown d-lg-none">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Faculty & Staff
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('international')}}"><li>OSIS</li></a>
+              <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Office 365</li></a>
+            </ul>
+          </li>
+
+          <li class="nav-item dropdown d-lg-none">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              CUCare
+            </a>
+            <ul class="dropdown-menu">
+              <a class="nav-link scrollto" href="{{url_for('cucare')}}"><li>About CuCare</li></a>
+              <a class="nav-link scrollto" href="https://forms.central.edu.gh/donation" target="_blank"><li>Donate to CuCare</li></a>
+            </ul>
+          </li>
+
+          <!-- <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </a>
+            <ul class="dropdown-menu">
+                <a class="nav-link scrollto" href="{{url_for('summer')}}"><li>Summer School</li></a>
+                <a class="nav-link scrollto" href="{{url_for('research')}}"><li>Research </li></a>
+                <a class="nav-link scrollto" href="{{url_for('corporate')}}"><li>Corporate </li></a>
+            </ul>
+          </li> -->
+
+          {% endif %}
+          
+
+          
+          <a href="{{url_for('online')}}" target="_blank">
+            <button class="pill-button" style="padding: 12px 13px; font-size: 16px;">
+              Apply Now!
+            </button>
+          </a>
+          
+        </ul>
         
-      </ul>
-      
-      <i class="bi bi-list mobile-nav-toggle"></i>
-    </nav>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav>
 
     
   </div>

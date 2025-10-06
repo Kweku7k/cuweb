@@ -114,7 +114,10 @@ function showLoadingScreen() {
    * Mobile nav toggle
    */
   on('click', '.mobile-nav-toggle', function(e) {
-    select('#navbar').classList.toggle('navbar-mobile')
+    const parentNav = this.closest('nav') || select('#navbar')
+    if (parentNav) {
+      parentNav.classList.toggle('navbar-mobile')
+    }
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
   })
@@ -123,7 +126,8 @@ function showLoadingScreen() {
    * Mobile nav dropdowns activate
    */
   on('click', '.navbar .dropdown > a', function(e) {
-    if (select('#navbar').classList.contains('navbar-mobile')) {
+    const parentNav = this.closest('nav') || select('#navbar')
+    if (parentNav && parentNav.classList.contains('navbar-mobile')) {
       e.preventDefault()
       this.nextElementSibling.classList.toggle('dropdown-active')
     }
@@ -136,12 +140,14 @@ function showLoadingScreen() {
     if (select(this.hash)) {
       e.preventDefault()
 
-      let navbar = select('#navbar')
-      if (navbar.classList.contains('navbar-mobile')) {
-        navbar.classList.remove('navbar-mobile')
-        let navbarToggle = select('.mobile-nav-toggle')
-        navbarToggle.classList.toggle('bi-list')
-        navbarToggle.classList.toggle('bi-x')
+      const parentNav = this.closest('nav') || select('#navbar')
+      if (parentNav && parentNav.classList.contains('navbar-mobile')) {
+        parentNav.classList.remove('navbar-mobile')
+        let navbarToggle = parentNav.querySelector('.mobile-nav-toggle') || select('.mobile-nav-toggle')
+        if (navbarToggle) {
+          navbarToggle.classList.toggle('bi-list')
+          navbarToggle.classList.toggle('bi-x')
+        }
       }
       scrollto(this.hash)
     }
