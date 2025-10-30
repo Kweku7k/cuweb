@@ -208,6 +208,7 @@
             <ul class="dropdown-menu">
               <a class="nav-link scrollto" href="{{url_for('international')}}"><li>OSIS</li></a>
               <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Office 365</li></a>
+              <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library</li></a>
             </ul>
           </li>
 
@@ -260,6 +261,7 @@
               <a class="nav-link scrollto" href="{{url_for('international')}}"><li>Study</li></a>
               <a class="nav-link scrollto" href="{{url_for('cirp')}}"><li>International Programmes Office </li></a>
               <a class="nav-link scrollto" href="https://webcms.central.edu.gh/wp-content/uploads/2024/04/2024-2025-Academic-Calendar.pdf"><li>Academic Calendar </li></a>
+              <a class="nav-link scrollto" href="{{url_for('library')}}"><li>Library</li></a>
               <a class="nav-link scrollto" href="{{url_for('admission')}}"><li>Schedule Of Fees</li></a>
               <a class="nav-link scrollto" href="{{url_for('irb')}}"><li>Institutional Review Board </li></a>
             </ul>
@@ -294,7 +296,7 @@
               <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sad')}}"><li>School of Architecture & Design </li></a>
               <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='cbs')}}"><li>Central Business School</li></a>
               <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='sogs')}}"><li>School of Graduate Studies & Research </li></a>
-              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>CDPE </li></a>
+              <a class="nav-link scrollto" href="{{url_for('schoolpage', slug='code')}}"><li>Centre for Distance & Professional Education </li></a>
             </ul>
           </li>
 
@@ -433,30 +435,31 @@
           </p>
         </div>
 
-        <div class="col-lg-3 col-md-6 footer-links">
-          <h4>Faculties</h4>
+        <div class="col-lg-4 col-md-6 footer-links">
+          <h4>Schools & Faculties</h4>
           <ul>   
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sop')}}">Pharmacy</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='facultyoflaw')}}">Law</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='somah')}}">Medical Sciences</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='snm')}}">Nursing and Midwifery</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='soeat')}}">Engineering & Technology</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='fass')}}">Social Sciences</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sad')}}">Architecture and Design</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='cbs')}}">Business</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sogs')}}">Graduate School</a></li>
-            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='code')}}">CDPE</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sop')}}">School of Pharmacy</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='facultyoflaw')}}">Faculty of Law </a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='somah')}}">School of Medical Sciences</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='snm')}}">School of Nursing & Midwifery</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='soeat')}}">School of Engineering & Technology</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='fass')}}">Faculty of Arts & Social Sciences</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sad')}}">School of Architecture & Design</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='cbs')}}">Central Business School</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='sogs')}}">School of Graduate Studies & Research</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('schoolpage', slug='code')}}">Centre for Distance & Professional Education</a></li>
             
           </ul>
           
         </div>
         
-        <div class="col-lg-3 col-md-6 footer-links">
+        <div class="col-lg-2 col-md-6 footer-links">
           <h4>Useful Links</h4>
           <ul>
             <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('home')}}">Home</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('about')}}">About us</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('admissions')}}">Admissions</a></li>
+            <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('library')}}">Library</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('faq')}}">FAQ</a></li>
             <li><i class="bx bx-chevron-right"></i> <a href="{{url_for('online')}}">Apply Now</a></li>
             <!-- <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li> -->
