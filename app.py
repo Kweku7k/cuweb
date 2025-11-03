@@ -1875,6 +1875,19 @@ def library():
     )
 
 
+@app.route("/cucarepage")
+def cucarepage():
+    id = 129
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    # print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "cucarepage.html", tags=alltags, id=startingPoint, allposts=allposts
+    )
+    
+
 # @app.route("/about")
 # def about():
 #     id = 2
