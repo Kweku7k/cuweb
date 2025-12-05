@@ -32,6 +32,8 @@ class BuyForms(FlaskForm):
             ("MTN", "MTN"),
             ("AIRTELTIGO", "AIRTELTIGO"),
             ("VODAFONE", "VODAFONE"),
+            # ("CARD", "CARD"),
+            ("EXTERNAL", "EXTERNAL"),
         ],
     )
     email = StringField("Email", validators=[DataRequired()])

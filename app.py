@@ -48,9 +48,7 @@ prestoUrl = "https://prestoghana.com"
 
 app.config["UPLOAD_FOLDER"] = "Documents"
 app.config["SECRET_KEY"] = "5791628basdfsadfa32242sdfsfde280ba245"
-app.config["SQLALCHEMY_DATABASE_URI"] = (
-    "postgresql://postgres:new_password@localhost:5432/cu"
-)
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('CUWEB_DB_URL')
 
 
 login_manager = LoginManager()
@@ -648,6 +646,7 @@ def readcsv():
 @app.route("/buyforms", methods=["GET", "POST"])
 def buyforms():
     form = BuyForms()
+    form.network.choices = [("EXTERNAL", "EXTERNAL")]
     if request.method == "POST":
         if form.validate_on_submit():
             try:
@@ -656,17 +655,18 @@ def buyforms():
                     email=form.email.data,
                     amount=form.amount.data,
                     phone=form.phone.data,
+                    # network=form.network.data,
                     network=form.network.data,
                 )
 
                 db.session.add(newPayment)
                 db.session.commit()
 
-                confirm(newPayment.id)
+                # confirm(newPayment.id)
 
-                response = payWithPresto(newPayment.id)
+                response = payWithPresto(newPayment)
                 print(response)
-                return redirect(url_for("apply"))
+                return redirect(response["url"])
 
             except Exception as e:
                 print(e)
@@ -681,29 +681,64 @@ def buyforms():
     return render_template("buyforms.html", form=form)
 
 
-def payWithPresto(paymentId):
-    payment = Payments.query.get_or_404(paymentId)
+# def payWithPresto(paymentId):
+#     payment = Payments.query.get_or_404(paymentId)
 
-    prestoUrl = "https://sandbox.prestoghana.com/korba"
+#     prestoUrl = "https://sandbox.prestoghana.com/korba"
+
+#     paymentInfo = {
+#         "appId": "centraluniversity",
+#         "ref": payment.name,
+#         "reference": payment.name,
+#         "paymentId": payment.id,
+#         "phone": "0" + payment.phone[-9:],
+#         "amount": payment.amount,
+#         "total": payment.amount,  # TODO:CHANGE THIS!
+#         "recipient": "external",  # TODO:Change!
+#         "percentage": "5",
+#         "callbackUrl": baseIp
+#         + "/confirm/"
+#         + str(payment.id),  # TODO: UPDATE THIS VALUE
+#         "firstName": payment.name,
+#         "network": payment.network,
+#     }
+#     r = requests.post(prestoUrl, json=paymentInfo)
+#     return r.json()
+
+
+def payWithPresto(transaction, callbackUrlType=None):
+    print("Triggering External Pay Transaction!")
+    
+    baseUrl = "https://prestoghana.com"
+    
+    callbackUrl = "https://central.edu.gh"+"/confirm/"+str(transaction.id)
 
     paymentInfo = {
-        "appId": "centraluniversity",
-        "ref": payment.name,
-        "reference": payment.name,
-        "paymentId": payment.id,
-        "phone": "0" + payment.phone[-9:],
-        "amount": payment.amount,
-        "total": payment.amount,  # TODO:CHANGE THIS!
-        "recipient": "external",  # TODO:Change!
-        "percentage": "5",
-        "callbackUrl": baseIp
-        + "/confirm/"
-        + str(payment.id),  # TODO: UPDATE THIS VALUE
-        "firstName": payment.name,
-        "network": payment.network,
+        "name":transaction.name,
+        "transactionId":transaction.id,
+        "amount":"1",
+        "currency":"GHS",
+        "reference":"International Admissions",
+        "charges":0.03,
+        "callbackUrl":callbackUrl
     }
-    r = requests.post(prestoUrl, json=paymentInfo)
-    return r.json()
+
+    print(paymentInfo)
+
+    try:   
+        response = requests.post(prestoUrl+"/externalpay/"+ "centraluni", json=paymentInfo)
+        print("response from presto server")
+        print(response)
+        # print(response.json())
+
+        transaction.ref = response.json()["transactionId"]
+    except Exception as e:
+        print(e)
+        print("Creating External Transaction failed!")
+
+    print(response)
+    print(response.json())
+    return response.json()
 
 
 def randomLetters(y):
@@ -910,11 +945,24 @@ def confirm(transactionId):
         except Exception as e:
             print("Exception creating user after successful payment!")
             print(e)
+            
+    # Application content type
+    
 
-    print(code)
-    flash(f"Code - " + code, "success")
-
-    return code
+    # Check if it's an API call (JSON request) or HTML request
+    if request.is_json or request.headers.get('Accept', '').startswith('application/json'):
+        # API call - return JSON response
+        print(f"API call - Code: {code}")
+        return jsonify({
+            "success": True,
+            "code": code,
+            "message": f"Code - {code}"
+        })
+    else:
+        # HTML request - return redirect
+        print(f"HTML request - Code: {code}")
+        flash(f"Code - " + code, "success")
+        return redirect(url_for("apply"))
 
 
 @app.route("/applicationform", methods=["GET", "POST"])
