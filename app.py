@@ -361,6 +361,38 @@ class ExamResult(db.Model, UserMixin):
 
     def __repr__(self):
         return "<Exam {}>".format(self.program)
+    
+    
+class ApplicantHall(db.Model, UserMixin):
+    """Model for applicant hall history."""
+
+    __tablename__ = "applicantHall"
+
+    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.String, nullable=False, unique=False)
+    usercode = db.Column(db.String, nullable=False, unique=False)
+    hall = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return "<Hall {}>".format(self.hall)
+    
+
+class ApplicantMisinfos(db.Model, UserMixin):
+    """Model for applicant miscellaneous information."""
+
+    __tablename__ = "applicantMisinfos"
+    id = db.Column(db.Integer, primary_key=True)
+    userId = db.Column(db.String, nullable=False, unique=False)
+    usercode = db.Column(db.String, nullable=False, unique=False)
+    misinfo = db.Column(db.String)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+
+    filed = db.Column(db.Boolean, default=False)
+
+    def __repr__(self):
+        return "<Misinfo {}>".format(self.misinfo)
 
 
 # baseWpUrl = "https://webcms.central.edu.gh"
@@ -869,6 +901,45 @@ admissionMap = {
         "loadingMessage": "Submitting Your Final Application",
     },
 }
+
+
+@app.context_processor
+def inject_admission_map():
+    """Make admissionMap and section completion status available to all templates"""
+    section_completion = {}
+    
+    # Only check if user is logged in
+    try:
+        if hasattr(current_user, 'is_authenticated') and current_user.is_authenticated:
+            usercode = current_user.code
+            
+            # Map each section to its corresponding model check
+            section_checks = {
+                "applicantInformation": lambda: ApplicantInformation.query.filter_by(usercode=usercode).first() is not None,
+                "applicantPrograms": lambda: Programs.query.filter_by(usercode=usercode).first() is not None,
+                "applicantEducation": lambda: Education.query.filter_by(usercode=usercode).first() is not None,
+                "applicantEmployment": lambda: ApplicantEmployments.query.filter_by(usercode=usercode).first() is not None,
+                "applicantAttachments": lambda: ApplicantAttatchments.query.filter_by(usercode=usercode).first() is not None,
+                "applicantGuardian": lambda: Guardian.query.filter_by(usercode=usercode).first() is not None,
+                "applicantContacts": lambda: ApplicantContacts.query.filter_by(usercode=usercode).first() is not None,
+                "applicantIdentity": lambda: ApplicantIdentity.query.filter_by(usercode=usercode).first() is not None,
+                "applicantExam": lambda: Exam.query.filter_by(usercode=usercode).first() is not None,
+                "applicantReferees": lambda: ApplicantReferees.query.filter_by(usercode=usercode).first() is not None,
+                "applicantHall": lambda: ApplicantHall.query.filter_by(usercode=usercode).first() is not None,
+                "applicantMisinfos": lambda: ApplicantMisinfos.query.filter_by(usercode=usercode).first() is not None,
+            }
+            
+            # Check each section
+            for section, check_func in section_checks.items():
+                try:
+                    section_completion[section] = check_func()
+                except Exception:
+                    section_completion[section] = False
+    except Exception:
+        # If anything goes wrong, just return empty completion dict
+        pass
+    
+    return dict(admissionMap=admissionMap, section_completion=section_completion)
 
 
 @app.route("/apply/<string:code>", methods=["GET", "POST"])
@@ -2723,42 +2794,109 @@ def applicantReferees():
 
 
 @app.route("/applicantSummary", methods=["GET", "POST"])
+@login_required
 def applicantSummary():
-    # check request method
-    # check form validation
-    # check errors
-    return render_template("admissions/applicantSummary.html")
+    # Fetch all applicant data
+    applicant_info = ApplicantInformation.query.filter_by(usercode=current_user.code).first()
+    programs = Programs.query.filter_by(usercode=current_user.code).first()
+    education = Education.query.filter_by(usercode=current_user.code).all()
+    guardian = Guardian.query.filter_by(usercode=current_user.code).first()
+    exam = Exam.query.filter_by(usercode=current_user.code).all()
+    employment = ApplicantEmployments.query.filter_by(usercode=current_user.code).all()
+    contacts = ApplicantContacts.query.filter_by(usercode=current_user.code).first()
+    hall = ApplicantHall.query.filter_by(usercode=current_user.code).first()
+    misinfo = ApplicantMisinfos.query.filter_by(usercode=current_user.code).first()
+    attatchments = ApplicantAttatchments.query.filter_by(usercode=current_user.code).first()
+    
+    
+    
+    # Create metadata for summary page
+    summary_metadata = {
+        "current": "applicantSummary",
+        "title": "Profile Summary",
+        "description": "Review all your application information before submitting",
+        "percentage": 100,
+    }
+    
+    return render_template(
+        "admissions/applicantSummary.html",
+        applicant_info=applicant_info,
+        programs=programs,
+        education=education,
+        guardian=guardian,
+        exam=exam,
+        employment=employment,
+        contacts=contacts,
+        hall=hall,
+        misinfo=misinfo,
+        attatchments=attatchments,
+        current_user=current_user,
+        metadata=summary_metadata
+    )
 
 
 @app.route("/applicantHall", methods=["GET", "POST"])
 def applicantHall():
     formId = 9
-    form = ApplicantHall()
-    # check request method
+    form = ApplicantHallForm()
+    metadata = admissionMap[formId]
+    userdata = ApplicantHall.query.filter_by(usercode=current_user.code).all()
 
-    # check form validation
-    # check errors
+    if request.method == "POST":
+        if form.validate_on_submit():
+            data = ApplicantHall(
+                userId=current_user.id,
+                usercode=current_user.code,
+                hall=form.applicanthall.data,
+            )
+            postformroute(form, data, "applicantHall")
+            return redirect(url_for(admissionMap[formId]["current"]))
+        else:
+            reportFormError(form)
     return render_template(
         "admissions/applicantHall.html",
         form=form,
-        metadata=admissionMap[formId],
-        userdata=[],
+        metadata=metadata,
+        userdata=userdata,
     )
+
+@app.route("/deleteApplicantHall/<int:id>", methods=["GET", "POST"])
+def deleteApplicantHall(id):
+    deleteEntry(ApplicantHall, id, "Hall of Affilliation")
+    return redirect(url_for("applicantHall"))
+
 
 
 @app.route("/applicantMisinfos", methods=["GET", "POST"])
 def applicantMisinfos():
     formId = 11
     form = ApplicantMiscellaneousInformation()
+    metadata = admissionMap[formId]
+    userdata = ApplicantMisinfos.query.filter_by(usercode=current_user.code).all()
     # check request method
-    # check form validation
-    # check errors
+    if request.method == "POST":
+        if form.validate_on_submit():
+            data = ApplicantMisinfos(
+                userId=current_user.id,
+                usercode=current_user.code,
+                misinfo=form.applicantmisinfo.data,
+            )
+            postformroute(form, data, "applicantMisinfos")
+            return redirect(url_for(admissionMap[formId]["current"]))
+        else:
+            reportFormError(form)
     return render_template(
         "admissions/applicantMisinfos.html",
         form=form,
-        metadata=admissionMap[formId],
-        userdata=[],
+        metadata=metadata,
+        userdata=userdata,
     )
+    
+    
+@app.route("/deleteApplicantMisinfos/<int:id>", methods=["GET", "POST"])
+def deleteApplicantMisinfos(id):
+    deleteEntry(ApplicantMisinfos, id, "Miscellaneous Information")
+    return redirect(url_for("applicantMisinfos"))
 
 
 @app.route("/sendMail", methods=["GET", "POST"])

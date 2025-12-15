@@ -260,7 +260,7 @@ class ApplicantRefreeForm(FlaskForm):
     submit = SubmitField("Next")
 
 
-class ApplicantHall(FlaskForm):
+class ApplicantHallForm(FlaskForm):
     applicanthall = SelectField(
         "Hall of Affilliation",
         choices=[

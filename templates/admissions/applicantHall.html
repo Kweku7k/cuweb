@@ -41,10 +41,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                      <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="pill-button">Add Hall</button>
-                    </div>
+                    
+                      <div class="modal-footer">
+                        <button type="button" class="pill-button-alternate" data-dismiss="modal">Cancel</button>
+                        {{form.submit (class='pill-button')}}
+                      </div>
                   </div>
                 </div>
               </div>
@@ -56,12 +57,12 @@
                         <div class="col-md-4">
                             <div class="card" style="padding: 20px 12px;">
                                 <div class="flexRow">
-                                    <h6 class="text-muted">{{data.identitytype }}</h6>
-                                    <a href="{{url_for(metadata.deleteUrl, id=data.id)}}">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    <h6 class="text-muted">Hall of Affilliation</h6>
+                                    <a href="{{url_for('deleteApplicantHall', id=data.id)}}">
+                                        <i class="bi bi-trash" aria-hidden="true"></i>
                                     </a>
                                 </div>
-                                <h4>{{data.identitynumber}}</h4>
+                                <h4>{{data.hall}}</h4>
                             </div>
                         </div>
                         {% endfor %}

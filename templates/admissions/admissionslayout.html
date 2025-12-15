@@ -159,18 +159,20 @@
 
         
       </ul>
-        <a href="{{url_for('apply', code=current_user.code )}}" target="_blank">
-          {% if current_user.picture %}
-          <img src="{{current_user.picture}}" class="profileellipse" alt="">
-          {% else %}
-          <img src="https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png" class="profileellipse" alt="">
-          {% endif %}
-          <div>
-              <h6 style="color: black;"><b>{{current_user.code}}</b>
-              </b></h6>
-              <h6 class="text-muted">{{current_user.phone}}</h6>
-            </div>
-        </a>
+
+      
+      <a href="{{url_for('apply', code=current_user.code )}}" target="_blank">
+        {% if current_user.picture %}
+        <img src="{{current_user.picture}}" class="profileellipse" alt="">
+        {% else %}
+        <img src="https://www.iprcenter.gov/image-repository/blank-profile-picture.png/@@images/image.png" class="profileellipse" alt="">
+        {% endif %}
+        <div>
+            <h6 style="color: black;"><b>{{current_user.code}}</b>
+            </b></h6>
+            <h6 class="text-muted">{{current_user.phone}}</h6>
+          </div>
+      </a>
       
       <!-- <i class="bi bi-list mobile-nav-toggle"></i> -->
     </nav>
@@ -194,18 +196,59 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <div>You can jump through the many options from this side bar.</div>
+      <div style="margin-bottom: 20px;">You can jump through the many options from this side bar.</div>
       
-      <a href="#">
-        <div class="sidenav-item">
-          <div style="display: flex;">
-            <box-icon type='solid' name='balloon'></box-icon>
-            <h6>Item</h6>
+      {% if admissionMap %}
+        {% for form_id in admissionMap.keys()|sort %}
+          {% set form_data = admissionMap[form_id] %}
+          {% set has_data = section_completion.get(form_data.current, False) if section_completion else False %}
+          <a href="{{ url_for(form_data.current) }}" class="offcanvas-nav-link" style="text-decoration: none; color: inherit; display: block;">
+            <div class="sidenav-item" {% if metadata and metadata.current == form_data.current %}style="background-color: #e9ecef; border-left: 3px solid #007bff;"{% endif %}>
+              <div style="display: flex; align-items: center;">
+                <box-icon type='solid' name='file-blank'></box-icon>
+                <div style="margin-left: 10px;">
+                  <h6 style="margin: 0; font-weight: {% if metadata and metadata.current == form_data.current %}bold{% else %}normal{% endif %};">{{ form_data.title }}</h6>
+                  <small style="color: #6c757d;">{{ '%0.0f'| format(form_data.percentage|float) }}% Complete</small>
+                </div>
+              </div>
+              {% if has_data %}
+                <box-icon name='check-circle' type='solid' color='#28a745'></box-icon>
+              {% else %}
+                <box-icon name='circle' color='#6c757d'></box-icon>
+              {% endif %}
+            </div>
+          </a>
+        {% endfor %}
+        
+        <!-- Add Summary page link -->
+        {% set summary_has_data = section_completion.get('applicantInformation', False) if section_completion else False %}
+        <a href="{{ url_for('applicantSummary') }}" class="offcanvas-nav-link" style="text-decoration: none; color: inherit; display: block;">
+          <div class="sidenav-item" {% if metadata and metadata.current == 'applicantSummary' %}style="background-color: #e9ecef; border-left: 3px solid #007bff;"{% endif %}>
+            <div style="display: flex; align-items: center;">
+              <box-icon type='solid' name='clipboard'></box-icon>
+              <div style="margin-left: 10px;">
+                <h6 style="margin: 0; font-weight: {% if metadata and metadata.current == 'applicantSummary' %}bold{% else %}normal{% endif %};">Profile Summary</h6>
+                <small style="color: #6c757d;">Review your application</small>
+              </div>
+            </div>
+            {% if summary_has_data %}
+              <box-icon name='check-circle' type='solid' color='#28a745'></box-icon>
+            {% else %}
+              <box-icon name='circle' color='#6c757d'></box-icon>
+            {% endif %}
           </div>
-          <box-icon name='circle'></box-icon>
-        </div>
-      </a>
-
+        </a>
+      {% else %}
+        <a href="#">
+          <div class="sidenav-item">
+            <div style="display: flex;">
+              <box-icon type='solid' name='balloon'></box-icon>
+              <h6>Item</h6>
+            </div>
+            <box-icon name='circle'></box-icon>
+          </div>
+        </a>
+      {% endif %}
 
     </div>
   </div>
@@ -268,6 +311,44 @@
        
 
       }
+    
+    // Handle offcanvas navigation links - close offcanvas when link is clicked
+    document.addEventListener('DOMContentLoaded', function() {
+        const offcanvasNavLinks = document.querySelectorAll('.offcanvas-nav-link');
+        const offcanvasElement = document.getElementById('offcanvasExample');
+        
+        offcanvasNavLinks.forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                // Close the offcanvas
+                if (offcanvasElement) {
+                    // Remove show class and backdrop
+                    offcanvasElement.classList.remove('show');
+                    document.body.classList.remove('modal-open', 'offcanvas-open');
+                    document.body.style.overflow = '';
+                    document.body.style.paddingRight = '';
+                    
+                    // Remove backdrop if it exists
+                    const backdrop = document.querySelector('.offcanvas-backdrop');
+                    if (backdrop) {
+                        backdrop.remove();
+                    }
+                    
+                    // Try Bootstrap 5 method if available
+                    if (typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+                        try {
+                            const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+                            if (bsOffcanvas) {
+                                bsOffcanvas.hide();
+                            }
+                        } catch(err) {
+                            // Ignore errors
+                        }
+                    }
+                }
+                // Allow default navigation to proceed
+            });
+        });
+    });
   </script>
  
 <a href="https://api.whatsapp.com/send?phone=233233313180" target="_blank" class="whatsapp-icon">

@@ -34,38 +34,283 @@
                 <div class="summary">
                     <div class="profile">
                         <div class="elipse">
+                            {% if applicant_info and applicant_info.picture %}
+                                <img class="profile-image" src="{{ applicant_info.picture }}">
+                            {% else %}
                             <img class="profile-image" src="/static/img/about.jpg">
+                            {% endif %}
                         </div>
                         <div class="info" style="margin-left: 5vw;">
-                            <h5>Name: <b style="font-size: 22px;">Adumatta Nana Kweku</b></h5>
-                            <h5>Mobile: <b style="font-size: 20px;">+233592033701</b></h5>
-                            <h5>Email: <b style="font-size: 20px;">info@gmail.com</b></h5>
+                            <h5>Name: <b style="font-size: 22px;">
+                                {% if applicant_info %}
+                                    {{ applicant_info.surname }} {{ applicant_info.othername }}
+                                {% else %}
+                                    {{ current_user.name if current_user else 'N/A' }}
+                                {% endif %}
+                            </b></h5>
+                            <h5>Mobile: <b style="font-size: 20px;">
+                                {% if applicant_info and applicant_info.phone %}
+                                    {{ applicant_info.phone }}
+                                {% else %}
+                                    {{ current_user.phone if current_user and current_user.phone else 'N/A' }}
+                                {% endif %}
+                            </b></h5>
+                            <h5>Email: <b style="font-size: 20px;">
+                                {% if applicant_info and applicant_info.email %}
+                                    {{ applicant_info.email }}
+                                {% else %}
+                                    {{ current_user.email if current_user and current_user.email else 'N/A' }}
+                                {% endif %}
+                            </b></h5>
+                            <h5>Nationality: <b style="font-size: 20px;">
+                                {% if applicant_info and applicant_info.nationality %}
+                                    {{ applicant_info.nationality }}
+                                {% else %}
+                                    {{ current_user.nationality if current_user and current_user.nationality else 'N/A' }}
+                                {% endif %}
+                            </b></h5>
+                            <h5>Voucher Code: <b style="font-size: 20px;">
+                                {% if applicant_info and applicant_info.usercode %}
+                                    {{ applicant_info.usercode }}
+                                {% else %}
+                                    N/A
+                                {% endif %}
+                            </b></h5>
                         </div>
                     </div>
 
                     <hr >
                     <br>
 
+                    {% if applicant_info %}
                     <div>
-                        <h6>Personal Information</h6>
+                        <h5>Personal Information</h5>
                         <div class="row">
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                                <label>Surname</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.surname }}" readonly>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+                                <label>Other Name</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.othername }}" readonly>
                             </div>
                             <div class="col">
-                                <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+                                <label>Nationality</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.nationality }}" readonly>
                             </div>
                         </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Campus</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.campus }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Stream</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.stream }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Entry Mode</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.entry_mode }}" readonly>
+                            </div>
+                        </div>
+                        {% if applicant_info.date_of_birth %}
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Date of Birth</label>
+                                <input type="text" class="form-control" value="{{ applicant_info.date_of_birth.strftime('%Y-%m-%d') }}" readonly>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    {% if programs %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Program Choices</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label>First Choice</label>
+                                <input type="text" class="form-control" value="{{ programs.firstchoice }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Second Choice</label>
+                                <input type="text" class="form-control" value="{{ programs.seconschoice         }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Third Choice</label>
+                                <input type="text" class="form-control" value="{{ programs.thirdchoice if programs.thirdchoice else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Assigned Program</label>
+                                <input type="text" class="form-control" value="{{ programs.program if programs.program and programs.program != 'PENDING' else 'PENDING' }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if education %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Education History</h5>
+                        {% for edu in education %}
+                        <div class="row mb-2">
+                            <div class="col">
+                                <label>School</label>
+                                <input type="text" class="form-control" value="{{ edu.school }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Start Date</label>
+                                <input type="text" class="form-control" value="{{ edu.start.strftime('%Y-%m-%d') if edu.start else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>End Date</label>
+                                <input type="text" class="form-control" value="{{ edu.endDate.strftime('%Y-%m-%d') if edu.endDate else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if guardian %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Guardian Information</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label>Name</label>
+                                <input type="text" class="form-control" value="{{ guardian.name if guardian.name else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Relationship</label>
+                                <input type="text" class="form-control" value="{{ guardian.relationship if guardian.relationship else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Mobile</label>
+                                <input type="text" class="form-control" value="{{ guardian.mobile if guardian.mobile else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Email</label>
+                                <input type="text" class="form-control" value="{{ guardian.email if guardian.email else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Occupation</label>
+                                <input type="text" class="form-control" value="{{ guardian.occupation if guardian.occupation else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if contacts %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Contact Information</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label>Name</label>
+                                <input type="text" class="form-control" value="{{ contacts.name if contacts.name else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Relationship</label>
+                                <input type="text" class="form-control" value="{{ contacts.relationship if contacts.relationship else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Mobile</label>
+                                <input type="text" class="form-control" value="{{ contacts.mobile if contacts.mobile else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <label>Email</label>
+                                <input type="text" class="form-control" value="{{ contacts.email if contacts.email else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>Occupation</label>
+                                <input type="text" class="form-control" value="{{ contacts.job if contacts.job else 'N/A' }}" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    
+                    {% if exam %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Exam Results</h5>
+                        {% for exam in exam %}
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label>Exam Type</label>
+                                    <input type="text" class="form-control" value="{{ exam.exam if exam.exam else 'N/A' }}" readonly>
+                                </div>
+                                <div class="col">
+                                    <label>Index Number</label>
+                                    <input type="text" class="form-control" value="{{ exam.indexNumber if exam.indexNumber else 'N/A' }}" readonly>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    {% if attatchments %}
+                    <div style="margin-top: 3vh;">
+                        <h5>Attachments</h5>
+                        <div class="row">
+                            <div class="col">
+                                <label>File Type</label>
+                                <input type="text" class="form-control" value="{{ attatchments.filetype if attatchments.filetype else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>File Name</label>
+                                <input type="text" class="form-control" value="{{ attatchments.filename if attatchments.filename else 'N/A' }}" readonly>
+                            </div>
+                            <div class="col">
+                                <label>View File</label>
+                                {% if attatchments.attatchmentUrl %}
+                                    <a href="{{ attatchments.attatchmentUrl }}" target="_blank" class="btn btn-primary" style="width: 100%;">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> View File
+                                    </a>
+                                {% else %}
+                                    <button type="button" class="btn btn-secondary" disabled style="width: 100%;">No File Available</button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+
+
+                    <div class="row mt-3">
+
+                        {% if hall %}
+                        <div class="col-md-6">
+                            <h5>Hall of Affilliation</h5>
+                            <input type="text" class="form-control" value="{{ hall.hall if hall.hall else 'N/A' }}" readonly>
+                        </div>
+                        {% endif %}
+    
+                        {% if misinfo %}
+                        <div class="col-md-6">
+                            <h5>Miscellaneous Information</h5>
+                            <input type="text" class="form-control" value="{{ misinfo.misinfo if misinfo.misinfo else 'N/A' }}" readonly>
+                        </div>
+                        {% endif %}
                     </div>
 
 
                     <div style="margin-top: 7vh;">
-                        <a href="">
-                            <button type="button" class="pill-button full">Submit Application</button>
-                        </a>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <a href="{{ url_for('applicantReferees') }}">
+                                    <button type="button" class="pill-button full" style="background-color: #6c757d;">
+                                        <i class="fa fa-arrow-left" aria-hidden="true"></i> Back to Forms
+                                    </button>
+                                </a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <a href="">
+                                    <button type="button" class="pill-button full">Submit Application</button>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
