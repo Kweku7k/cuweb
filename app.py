@@ -117,7 +117,7 @@ class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=False)
     code = db.Column(db.String, nullable=False, unique=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.now())
     phone = db.Column(db.String)
     email = db.Column(db.String)
     paid = db.Column(db.Boolean, default=False)
@@ -134,7 +134,7 @@ class Payments(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False, unique=False)
     amount = db.Column(db.String, nullable=False, unique=False)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.now())
     phone = db.Column(db.String)
     email = db.Column(db.String)
     network = db.Column(db.String)
@@ -159,7 +159,7 @@ class ApplicantInformation(db.Model, UserMixin):
     campus = db.Column(db.String, nullable=False, unique=False)
     stream = db.Column(db.String, nullable=False, unique=False)
     date_of_birth = db.Column(db.DateTime)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     phone = db.Column(db.String())
     picture = db.Column(db.String())
     entry_mode = db.Column(db.String())
@@ -181,7 +181,7 @@ class Education(db.Model, UserMixin):
     start = db.Column(db.DateTime, nullable=False, unique=False)
     endDate = db.Column(db.DateTime, nullable=False, unique=False)
     entry_mode = db.Column(db.String())
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -201,7 +201,7 @@ class Programs(db.Model, UserMixin):
     firstchoice = db.Column(db.String())
     seconschoice = db.Column(db.String())
     thirdchoice = db.Column(db.String())
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     entry_mode = db.Column(db.String())
     filed = db.Column(db.Boolean, default=False)
 
@@ -223,7 +223,7 @@ class Guardian(db.Model, UserMixin):
     mobile = db.Column(db.String, nullable=True)
     email = db.Column(db.String, nullable=True)
     occupation = db.Column(db.String, nullable=True)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -242,7 +242,7 @@ class Exam(db.Model, UserMixin):
     school = db.Column(db.String)
     exam = db.Column(db.String)
     date = db.Column(db.DateTime)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
 
     filed = db.Column(db.Boolean, default=False)
 
@@ -264,7 +264,7 @@ class ApplicantContacts(db.Model, UserMixin):
     email = db.Column(db.String)
     mobile = db.Column(db.String)
     job = db.Column(db.String)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
 
     filed = db.Column(db.Boolean, default=False)
 
@@ -301,7 +301,7 @@ class ApplicantAttatchments(db.Model, UserMixin):
     filename = db.Column(db.String)
     filetype = db.Column(db.String)
     attatchmentUrl = db.Column(db.String)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+    date_created = db.Column(db.DateTime, default=datetime.now())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -319,7 +319,7 @@ class ApplicantIdentity(db.Model, UserMixin):
     identitytype = db.Column(db.String)
     identitynumber = db.Column(db.String)
     identityexpire = db.Column(db.DateTime)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -372,7 +372,7 @@ class ApplicantHall(db.Model, UserMixin):
     userId = db.Column(db.String, nullable=False, unique=False)
     usercode = db.Column(db.String, nullable=False, unique=False)
     hall = db.Column(db.String)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
     filed = db.Column(db.Boolean, default=False)
 
     def __repr__(self):
@@ -387,7 +387,7 @@ class ApplicantMisinfos(db.Model, UserMixin):
     userId = db.Column(db.String, nullable=False, unique=False)
     usercode = db.Column(db.String, nullable=False, unique=False)
     misinfo = db.Column(db.String)
-    date_created = db.Column(db.DateTime, default=datetime.utcnow())
+    date_created = db.Column(db.DateTime, default=datetime.now())
 
     filed = db.Column(db.Boolean, default=False)
 
@@ -1509,7 +1509,7 @@ def events_view():
         totalPages=1,
         page=1,
         per_page=10,
-        title="Upcoming Events",
+        title="Events",
     )
 
 
