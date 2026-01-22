@@ -395,6 +395,24 @@ class ApplicantMisinfos(db.Model, UserMixin):
         return "<Misinfo {}>".format(self.misinfo)
 
 
+class AdmissionRecord(db.Model, UserMixin):
+    """Model for admission records."""
+
+    __tablename__ = "admissionrecords"
+
+    id = db.Column(db.Integer, primary_key=True)
+    full_name = db.Column(db.String, nullable=False)
+    campus = db.Column(db.String, nullable=False)
+    stream = db.Column(db.String, nullable=False)
+    program_offered = db.Column(db.String, nullable=False)
+    admission_type = db.Column(db.String, nullable=False)  # "Degree" or "Diploma/ATHE"
+    academic_year = db.Column(db.String, nullable=False)  # Stored as text
+    date_created = db.Column(db.DateTime, default=datetime.now())
+
+    def __repr__(self):
+        return "<AdmissionRecord {} - {}>".format(self.full_name, self.academic_year)
+
+
 # baseWpUrl = "https://webcms.central.edu.gh"
 baseWpUrl = os.environ.get('WP_BASE_URL')
 # baseWpUrl = "http://52.203.70.80"
@@ -3004,6 +3022,45 @@ def posts():
 @app.route("/students")
 def students():
     return render_template("students.html")
+
+
+@app.route("/check-admission", methods=["GET", "POST"])
+def check_admission():
+    """Admission checking page where students can search their names."""
+    # Get current academic year - you can update this as needed
+    # For now, we'll use 2024/2025 as default, but this should be configurable
+    current_academic_year = "2025/2026"
+    
+    # Get search parameters
+    search_name = request.args.get("name", "").strip()
+    admission_type = request.args.get("type", "Degree")  # Default to Degree
+    
+    results = []
+    no_results_message = None
+    
+    if search_name:
+        # Perform case-insensitive partial name search
+        # Filter by admission type and current academic year
+        search_pattern = f"%{search_name}%"
+        query = AdmissionRecord.query.filter(
+            AdmissionRecord.admission_type == admission_type,
+            AdmissionRecord.academic_year == current_academic_year,
+            db.func.lower(AdmissionRecord.full_name).like(db.func.lower(search_pattern))
+        )
+        results = query.all()
+        
+        if not results:
+            no_results_message = f"No admission found for this academic year ({current_academic_year})"
+    
+    return render_template(
+        "check_admission.html",
+        search_name=search_name,
+        admission_type=admission_type,
+        results=results,
+        no_results_message=no_results_message,
+        current_academic_year=current_academic_year,
+        title="Central University Admission Status Checker"
+    )
 
 
 if __name__ == "__main__":
