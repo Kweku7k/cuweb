@@ -558,6 +558,61 @@ def home():
         else:
             flash("reCAPTCHA verification failed. Please try again.")
 
+    # Define schools with their data
+    # Image URLs will be from webcms - update these with actual URLs from your webcms
+    schools = [
+        {
+            "name": "School of Pharmacy",
+            "slug": "sop",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2025/12/WCC-GSTAR25O-42.jpg"
+        },
+        {
+            "name": "Faculty of Law",
+            "slug": "facultyoflaw",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/Gqt9jvwWEAAOjhK.jpg"
+        },
+        {
+            "name": "School of Medical Sciences",
+            "slug": "somah",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001175.jpg"
+        },
+        {
+            "name": "School of Nursing & Midwifery",
+            "slug": "snm",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001182.jpg"
+        },
+        {
+            "name": "School of Engineering & Technology",
+            "slug": "soeat",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001180.jpg"
+        },
+        {
+            "name": "Faculty of Arts & Social Sciences",
+            "slug": "fass",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001177.jpg"
+        },
+        {
+            "name": "School of Architecture & Design",
+            "slug": "sad",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001302.jpg"
+        },
+        {
+            "name": "Central Business School",
+            "slug": "cbs",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/postgrade.jpg"
+        },
+        {
+            "name": "School of Graduate Studies & Research",
+            "slug": "sogs",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001179.jpg"
+        },
+        {
+            "name": "Centre for Distance & Professional Education",
+            "slug": "code",
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/Students-Centred-4.jpg"
+        }
+    ]
+
     return render_template(
         "index.html",
         hideNav=False,
@@ -566,6 +621,7 @@ def home():
         events=events,
         loadingMessage="Please wait while we send your message....",
         supportGallery=supportGallery,
+        schools=schools,
     )
 
 
