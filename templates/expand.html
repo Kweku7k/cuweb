@@ -1,49 +1,135 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<section style="padding-top: 7vh;">
-    <div class="container">
-        <div style="display: flex; align-items: center; margin-bottom: 1vh; justify-content: center;">
-            <!-- <div class="line" style="width: 30px; height: 3px; margin-right: 14px; background-color: #ff4a17;"></div> -->
-            <h4 style="padding-top: 1px;" id="title"><b></b></h4>
-            <!-- <div class="line" style="width: 30px; height: 3px; margin-left: 14px; background-color: #ff4a17;"></div> -->
+<style>
+    /* Wrapper */
+    .news-wrapper {
+        max-width: 900px;
+        margin: auto;
+    }
+
+    /* Card */
+    .news-card {
+        background: #ffffff;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Title */
+    .news-title {
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+
+    /* Share Button */
+    .share-btn {
+        background: #992621;
+        color: #fff;
+        border: none;
+        padding: 10px 22px;
+        border-radius: 30px;
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin-bottom: 2rem;
+    }
+
+    .share-btn:hover {
+        background: #e63f10;
+    }
+
+    /* Content */
+    .news-content {
+        font-size: 1.05rem;
+        line-height: 1.9;
+        color: #333;
+    }
+
+    .news-content p {
+        margin-bottom: 1.2rem;
+    }
+
+    /* FORCE WORDPRESS IMAGES TO BE CLEAN */
+    .news-content img {
+        max-width: 100% !important;
+        height: auto !important;
+        display: block;
+        margin: 2rem auto;
+        border-radius: 10px;
+    }
+
+    .news-content figure {
+        margin: 2rem auto;
+        text-align: center;
+    }
+
+    .news-content figure img {
+        margin: auto;
+    }
+
+    .news-content figcaption {
+        font-size: 0.85rem;
+        color: #777;
+        margin-top: 0.5rem;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        .news-card {
+            padding: 1.4rem;
+        }
+    }
+</style>
+
+<section style="padding-top: 8vh; padding-bottom: 6vh;">
+    <div class="container news-wrapper">
+
+        <div class="news-card">
+            <h3 class="news-title" id="title"></h3>
+
+            <div style="text-align:center;">
+                <button id="shareBtn" class="share-btn">
+                    Share this article
+                </button>
+            </div>
+
+            <div class="news-content" id="content"></div>
         </div>
 
-        <div class="row justify-content-center" id="content">
-            
-        </div>
     </div>
 </section>
 
 <script>
+    console.log("Calling API...");
+    const url = "{{ url }}";
 
-console.log("Calling api!!")
-url = "{{url}}"
-  fetch(url)
-  .then(function(response) {
-      return response.json();
-    }).then(function(data) {
-        console.log("data")
-        console.log(data)
-        
-        document.getElementById("content").innerHTML = data.rendered_content.content.rendered
-        document.getElementById("title").innerHTML = data.rendered_content.title.rendered
-        console.log(data)
-        
-      var title = data.rendered_content.title.rendered
-      var post = data.rendered_content.content.rendered
-     
-      console.log("title")
-      console.log(title)
-      console.log("post")
-      console.log(post)
+    fetch(url)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("title").innerHTML =
+                data.rendered_content.title.rendered;
 
-    // set meta from here
-       
+            document.getElementById("content").innerHTML =
+                data.rendered_content.content.rendered;
+        });
 
-  })   
+    // SHARE LOGIC
+    document.getElementById("shareBtn").addEventListener("click", () => {
+        const title = document.getElementById("title").innerText;
+        const url = window.location.href;
+
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                url: url
+            });
+        } else {
+            navigator.clipboard.writeText(url);
+            alert("Link copied to clipboard");
+        }
+    });
 </script>
 
 {% endblock %}
-
-

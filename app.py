@@ -567,7 +567,7 @@ def home():
             "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2025/12/WCC-GSTAR25O-42.jpg"
         },
         {
-            "name": "Faculty of Law",
+            "name": "Central Law School",
             "slug": "facultyoflaw",
             "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/Gqt9jvwWEAAOjhK.jpg"
         },
@@ -1676,7 +1676,7 @@ def wpgallery(id):
         link_url = media_item.get("alt_text", None)
 
         images.append({"image_url": image_url, "link_url": link_url, })
-        print(f"Image URL: {image_url}, Link URL: {link_url}")
+        # print(f"Image URL: {image_url}, Link URL: {link_url}")
 
     return images
 
