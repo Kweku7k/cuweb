@@ -569,7 +569,7 @@ def home():
         {
             "name": "Central Law School",
             "slug": "facultyoflaw",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/Gqt9jvwWEAAOjhK.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/FB_IMG_1770454195313.jpg"
         },
         {
             "name": "School of Medical Sciences",
