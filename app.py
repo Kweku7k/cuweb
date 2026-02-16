@@ -564,7 +564,7 @@ def home():
         {
             "name": "School of Pharmacy",
             "slug": "sop",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2025/12/WCC-GSTAR25O-42.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/SoP-Lab-Work.jpg"
         },
         {
             "name": "Central Law School",
@@ -574,12 +574,12 @@ def home():
         {
             "name": "School of Medical Sciences",
             "slug": "somah",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001175.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/FB_IMG_1770454667372.jpg"
         },
         {
             "name": "School of Nursing & Midwifery",
             "slug": "snm",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001182.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/FB_IMG_1770454250673.jpg"
         },
         {
             "name": "School of Engineering & Technology",
@@ -594,7 +594,7 @@ def home():
         {
             "name": "School of Architecture & Design",
             "slug": "sad",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001302.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/FB_IMG_1770455069845.jpg"
         },
         {
             "name": "Central Business School",
@@ -604,7 +604,7 @@ def home():
         {
             "name": "School of Graduate Studies & Research",
             "slug": "sogs",
-            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/01/1000001179.jpg"
+            "image_url": "https://webcms.central.edu.gh/wp-content/uploads/2026/02/FB_IMG_1770455332872.jpg"
         },
         {
             "name": "Centre for Distance & Professional Education",
