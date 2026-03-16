@@ -3119,6 +3119,11 @@ def check_admission():
     )
 
 
+@app.route("/pssp")
+def pssp():
+    return render_template("pssp.html")
+
+
 if __name__ == "__main__":
     # DEBUG is SET to TRUE. CHANGE FOR PROD
     app.run(port=5000, host="0.0.0.0", debug=True)
