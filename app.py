@@ -2153,6 +2153,20 @@ def international():
     )
 
 
+
+
+@app.route("/academic")
+def academic():
+    id = 138
+    alltags = returnTags(id, "library")["tags"]
+    allposts = returnTags(id, "library")["posts"]
+    print("allposts being returned")
+    # print(allposts)
+    startingPoint = alltags[0]["id"]
+    return render_template(
+        "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
+    )
+
 # @app.route("/cirp")
 # def cirp():
 #     id = 102
