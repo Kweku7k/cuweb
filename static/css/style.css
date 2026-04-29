@@ -461,6 +461,12 @@ button{
   background-repeat: no-repeat; /* Prevent the image from repeating */
   position: relative;
 }
+
+#onlineHero {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
 .category {
   text-transform: uppercase;
 }

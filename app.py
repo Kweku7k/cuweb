@@ -480,7 +480,6 @@ def user_loader(user_id):
 def home():
     form = ContactForm()
     gallery = wpgallery(5)
-    pprint.pprint(gallery)
     supportGallery = wpgallery(6)
     events = getEvents()[0]
 
@@ -1123,8 +1122,9 @@ def mail():
 
 @app.route("/online")
 def online():
+    gallery = wpgallery(14)
     return render_template(
-        "online.html", hideNav=True, title="Online Application Form."
+        "online.html", hideNav=True, title="Online Application Form.", gallery=gallery
     )
 
 

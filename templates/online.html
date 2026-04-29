@@ -1,15 +1,56 @@
   {% extends "layout.html" %}
   {% block body %}
 
-  <!-- ======= Hero Section ======= -->
-  <section id="hero" class="d-flex align-items-center" style="height: 90vh;">
-    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
-      <div class="row gy-5" style="padding-top: 4vh;">
-        <div class="col-lg-7 order-1 order-lg-1 text-left">
-          <h6>Central University </h6>
-          <h1>Online Application Portal</h1>
-          <!-- <h6>To be able to apply on this website, you need to by an e-voucher from <a href="tel:887*18#">*887*18#</a>. With your e-voucher ready, you can pick a course and apply </h6> -->
-          <h6 class="text-muted">You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site. Click here to find out how to purchase one. <a href="{{url_for("downloadOnlineManual")}}">Online Application Form Instructions</a> (You may kindly check your downloads after clicking the link) </h6>
+<!-- ======= Hero Section with Carousel Background ======= -->
+<section id="onlineHero" class="position-relative" style="height: 90vh; overflow: hidden;">
+  <!-- Carousel background layer -->
+  <div class="h-100 w-100 position-relative">
+    <!-- Darken ONLY the carousel background (not the whole hero) -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.25); z-index: 1; pointer-events: none;"></div>
+
+    <div id="onlineCarousel" class="carousel slide h-100" data-bs-ride="carousel" style="position: relative; z-index: 0;">
+      <div class="carousel-inner h-100">
+        {% for image in gallery %}
+          {% if loop.index == 1 %}
+            <div class="carousel-item active h-100" data-bs-interval="3000">
+              <a href="{{ image.link_url }}">
+                <img src="{{ image.image_url }}" class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; filter: brightness(0.75) saturate(1.05);" alt="{{ image.alt }}">
+              </a>
+            </div>
+          {% else %}
+            <div class="carousel-item h-100" data-bs-interval="3000">
+              <a href="{{ image.link_url }}">
+                <img src="{{ image.image_url }}" class="d-block w-100 img-caro" style="object-fit: cover; height: 100%; filter: brightness(0.75) saturate(1.05);" alt="{{ image.alt }}">
+              </a>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#onlineCarousel" data-bs-slide="prev" style="z-index: 2;">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#onlineCarousel" data-bs-slide="next" style="z-index: 2;">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Text overlay -->
+  <div class="w-100 position-absolute top-50 start-0 translate-middle-y" data-aos="fade-up" data-aos-delay="100" style="z-index: 2;">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 text-left">
+          <h6 class="text-light mb-2">Central University</h6>
+          <h1 class="text-white mb-3" style="font-size: 2.5rem;">Online Application Portal</h1>
+          <h6 class="text-light rounded" style="max-width: 800px; font-size: 1.2rem;">
+            You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site.
+            Click here to find out how to purchase one.
+            <a href="{{url_for("downloadOnlineManual")}}" class="text-warning text-decoration-underline">Online Application Form Instructions</a>
+            (You may kindly check your downloads after clicking the link)
+          </h6>
           <br/>
           <div class="row">
             <div class="col-md-6" style="margin-bottom: 2vh;">
@@ -18,20 +59,16 @@
               </a>
             </div>
             <div class="col-md-6" style="margin-bottom: 2vh;">
-              <a href="#ourprograms">
-                <button id="myBtn2" class="pill-button-alternate" style="width: 100%;"> Click here to select a program.</button>
+              <a href="{{url_for('check_admission')}}">
+                <button id="myBtn2" class="pill-button-alternate" style="width: 100%;">Check Admission Status</button>
               </a>
             </div>
-
           </div>
-        </div>
-
-        <div class="col-lg-5 order-2 order-lg-2">
-            <img style="width:100%; object-fit:cover ;" src="{{ url_for ("static", filename="img/hero-img.svg")}}" alt="" srcset="">
         </div>
       </div>
     </div>
-  </section><!-- End Hero -->
+  </div>
+</section><!-- End Hero -->
 
   <main id="main">
 
@@ -48,151 +85,344 @@
         </div> -->
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-          <div class="col-md-6" style="margin: 5px 0;">
-            <div class="imgContainer">
-              <img src="{{url_for ("static", filename="img/undergraduate.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
-            </div>
-          </div>
-          <div class="col-md-6 content" id="undergraduate">
-            <h4 class="studentHeader" style="color: #992621;">Undergraduate</h4>
-            <hr>
-            <br>
-            <p class="description">Welcome to the Undergraduate Online Application portal.
-                October Admissions are opened to Nursing Professionals, Law and students joining mid stream (i.e. Level 200 & 300) as well as student professionals from other disciplines.
-                February Admission is open to all prospective students joining in Level 100 as well as the Nursing Professionals and Law degree holders. <b>Apply Now!</b> <br>
-                <b>Price: Ghc 200 </b>
-            </p>
-            <br>
-              <div class="row">
-                <div class="col-md-6" style="margin-bottom: 2vh;">
-                  <a href="https://workflow.transflowitc.com/formfilling/df865240-7bd5-4f98-8805-a8a7e9f417b0" target="_blank">
-                    <div class="pill-button" style="width: 100%;">2025/2026 October Cohort </div>
-                  </a>
+            <div class="col-md-6 content" id="undergraduate">
+              <h4 class="studentHeader" style="color: #992621;">Undergraduate</h4>
+              <hr>
+              <br>
+              <p class="description">Welcome to the Undergraduate Online Application portal.
+                  October Admissions are opened to Nursing Professionals, Law and students joining mid stream (i.e. Level 200 & 300) as well as student professionals from other disciplines.
+                  February Admission is open to all prospective students joining in Level 100 as well as the Nursing Professionals and Law degree holders. <b>Apply Now!</b> <br>
+                  <b>Price: GH¢ 200 </b>
+              </p>
+              <br>
+                <div class="row">
+                  <div class="col-md-6" style="margin-bottom: 2vh;">
+                    <a href="https://workflow.transflowitc.com/formfilling/dabd162e-3ca0-401e-898e-5f6b1e1e7ef5" target="_blank">
+                      <div class="pill-button" style="width: 100%;">2026/2027 October Cohort </div>
+                    </a>
+                  </div>
+                  <div class="col-md-6" style="margin-bottom: 2vh;">
+                    <a href="https://workflow.transflowitc.com/formfilling/1a82cda5-7511-4926-a36b-e7c931169d9e" target="_blank">
+                      <div class="pill-button-alternate" style="width: 100%;">2027 February Cohort </div>
+                    </a>
+                  </div>
+      
                 </div>
-                <div class="col-md-6" style="margin-bottom: 2vh;">
-                  <a href="https://workflow.transflowitc.com/formfilling/94b223b4-9cda-45e0-a299-e3865103a1e9" target="_blank">
-                    <div class="pill-button-alternate" style="width: 100%;">2026 February Cohort </div>
-                  </a>
-                </div>
-    
               </div>
-            </div>
+
+              <div class="col-md-6" style="margin: 5px 0;">
+                <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                  <h4 class="studentHeader" style="color: #992621;">Admissions Contact</h4>
+                  <hr>
+                  <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                  <p class="description mb-1">Undergraduate February Applications</p>
+                  <p class="description mb-2">
+                    <a href="https://wa.me/233555101093" target="_blank" rel="noopener">
+                      <i class="bx bxl-whatsapp"></i> 0555101093
+                    </a>
+                  </p>
+                  <p class="description mb-3">
+                    <a href="tel:+233555095090">
+                      <i class="bx bx-phone-call"></i> 0555095090
+                    </a>
+                  </p>
+
+                  <p class="description mb-1"><b>Email:</b></p>
+                  <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                  <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
+                </div>
+              </div>
           </div>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-            <div class="col-md-6 order-lg-2" style="margin: 15px 0;">
-              <div class="imgContainer">
-                <img src="{{url_for ("static", filename="img/mba.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
-              </div>
-            </div>
-            <div class="col-md-6 order-lg-1 content" id="postgraduate">
+            <div class="col-md-6 content" id="postgraduate">
               <h4 class="studentHeader">Masters</h4>
               <hr>
               <br>
               <p class="description">Welcome to the master’s online application portal. October and February Admissions are open to all prospective applicants. You can earn a master’s degree at the School of Graduate Studies and Research from any of the programmes offered by the various Departments.
                 <b>Apply Now!</b><br>
-                <b>Price: Ghc 250 </b>
+                <b>Price: GH¢ 250 </b>
               </p>
               <br>
               <div class="row">
                 <div class="col-md-6" style="margin-bottom: 2vh;">
-                  <a href="https://workflow.transflowitc.com/formfilling/fc03823c-b1f0-45d4-baab-d42940c0ebdb" target="_blank">
-                    <div class="pill-button" style="width: 100%; background: #000;">2025/2026 October Cohort </div>
+                  <a href="https://workflow.transflowitc.com/formfilling/7e6e1bab-2e92-4741-9a9e-00710b7924b7" target="_blank">
+                    <div class="pill-button" style="width: 100%; background: #000;">2026/2027 October Cohort </div>
                   </a>
                 </div>
                 <div class="col-md-6" style="margin-bottom: 2vh;">
-                  <a href="https://workflow.transflowitc.com/formfilling/c727da34-2cf1-4996-9708-1dd41403ae37" target="_blank">
-                    <div class="pill-button-alternate" style="width: 100%; color: #000; border: 1px solid #000;">2026 February Cohort </div>
+                  <a href="https://workflow.transflowitc.com/formfilling/c2277ea8-b316-4c45-90d2-95a996cd6790" target="_blank">
+                    <div class="pill-button-alternate" style="width: 100%; color: #000; border: 1px solid #000;">2027 February Cohort </div>
                   </a>
                 </div>
     
               </div>
             </div>
+
+            <div class="col-md-6" style="margin: 5px 0;">
+              <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                <h4 class="studentHeader">Admissions Contact</h4>
+                <hr>
+                <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                <p class="description mb-1">Postgraduate Applications</p>
+                  <p class="description">
+                  <a href="tel:+233307020540">
+                    <i class="bx bx-phone-call"></i> 0307020540
+                  </a>
+                </p>
+
+                <p class="description mb-1"><b>Email:</b></p>
+                <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
+              </div>
+            </div>
           </div>
 
           <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-            <div class="col-md-6" style="margin: 15px 0;">
-              <div class="imgContainer">
-                <img src="{{url_for ("static", filename="img/doc.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
-              </div>
-            </div>
-
             <div class="col-md-6 content" id="diploma">
               <h4 class="studentHeader" style="color: #992621;">Doctoral</h4>
               <hr>
               <br>
               <p class="description">
                 Advance from executive leadership to doctoral distinction with our PhD Finance or Doctor of Business Administration (DBA); a globally relevant, practice-driven doctoral programmes designed for today’s strategic leaders.<b>Apply Now!</b><br>
-                <b>Price: Ghc 300 </b>
+                <b>Price: GH¢ 300 </b>
               </p>
               <br>
               <div class="row">
                 <div class="col-md-6" style="margin-bottom: 2vh;">
-                  <a href="https://workflow.transflowitc.com/formfilling/5fa41bda-9384-498c-aff7-dd5b77ccba42" target="_blank">
-                    <div class="pill-button" style="width: 100%;">Apply Now ! </div>
+                  <a href="https://workflow.transflowitc.com/formfilling/29e1df0d-a552-42e6-8aa5-c5b8e43f8616" target="_blank">
+                    <div class="pill-button" style="width: 100%;">2026/2027 October Cohort</div>
+                  </a>
+                </div>
+                <div class="col-md-6" style="margin-bottom: 2vh;">
+                  <a href="https://workflow.transflowitc.com/formfilling/0b7b29d8-6cea-46ba-a6c6-b6e78fc2302b" target="_blank">
+                    <div class="pill-button-alternate" style="width: 100%;">2027 February Cohort </div>
                   </a>
                 </div>
     
               </div>
             </div>
+            <div class="col-md-6" style="margin: 5px 0;">
+              <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                <h4 class="studentHeader" style="color: #992621;">Admissions Contact</h4>
+                <hr>
+                <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                <p class="description mb-1">Doctoral Applications</p>
+                <p class="description">
+                  <a href="tel:+233307020540">
+                    <i class="bx bx-phone-call"></i> 0307020540
+                  </a>
+                </p>
+
+                <p class="description mb-1"><b>Email:</b></p>
+                <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
+              </div>
+            </div>
           </div>
 
-            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-              <div class="col-md-6 order-lg-2" style="margin: 15px 0;">
-                <div class="imgContainer">
-                  <img src="{{url_for ("static", filename="img/diploma.jpeg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
+          <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+            <div class="col-md-6 content" id="diploma">
+              <h4 class="studentHeader">ATHE Diploma</h4>
+              <hr>
+              <br>
+              <p class="description">
+                Gain admission to Central University this year. <b>ATHE</b> Diploma which is a WASSCE equivalent, qualifies you for admission into level 100 in many programmes.
+                Tuition is offered both in person and online.<b>Apply Now!</b><br>
+                <b>Price: GH¢ 200 </b>
+              </p>
+              <br>
+              <div class="row">
+                <div class="col-md-6" style="margin-bottom: 2vh;">
+                  <a href="https://workflow.transflowitc.com/formfilling/8fc9c454-11ac-4478-9b0e-9f58616e71af" target="_blank">
+                    <div class="pill-button" style="width: 100%; background: #000;">2026/2027 October Cohort </div>
+                  </a>
                 </div>
-              </div>
-              <div class="col-md-6 order-lg-1 content" id="diploma">
-                <h4 class="studentHeader">Diploma (ATHE)</h4>
-                <hr>
-                <br>
-                <p class="description">
-                  Gain admission to Central University this year. <b>ATHE</b> Diploma which is a WASSCE equivalent, qualifies you for admission into level 100 in many programmes.
-                  Tuition is offered both in person and online.<b>Apply Now!</b><br>
-                  <b>Price: Ghc 200 </b>
-                </p>
-                <br>
-                <div class="row">
-                  <div class="col-md-6" style="margin-bottom: 2vh;">
-                    <a href="https://workflow.transflowitc.com/formfilling/3e189cb2-1c64-43f9-8377-0020bd5238a2" target="_blank">
-                      <div class="pill-button" style="width: 100%; background: #000;">Apply Now ! </div>
-                    </a>
-                  </div>
-      
+                <div class="col-md-6" style="margin-bottom: 2vh;">
+                  <a href="https://workflow.transflowitc.com/formfilling/6d8c2656-612b-45b6-a465-751e1bec11a5" target="_blank">
+                    <div class="pill-button-alternate" style="width: 100%; color: #000; border: 1px solid #000;">2027 February Cohort </div>
+                  </a>
                 </div>
+    
               </div>
             </div>
 
-            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
-              <div class="col-md-6" style="margin: 15px 0;">
-                <div class="imgContainer">
-                  <img src="{{url_for ("static", filename="img/postgrade.jpg")}}" alt="" srcset="" style="object-fit: cover; width:100%; height:auto">
-                </div>
+            <div class="col-md-6" style="margin: 5px 0;">
+              <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                <h4 class="studentHeader">Admissions Contact</h4>
+                <hr>
+                <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                <p class="description mb-1">Diploma (ATHE) Applications</p>
+                <p class="description">
+                  <a href="https://wa.me/233555101093" target="_blank" rel="noopener">
+                    <i class="bx bxl-whatsapp"></i> 0555101093
+                  </a>
+                </p>
+
+                <p class="description mb-1"><b>Email:</b></p>
+                <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
               </div>
+            </div>
+          </div>
+
+            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
               <div class="col-md-6 content" id="atle">
                 <h4 class="studentHeader"style="color: #992621;">Diploma in Law Application</h4>
                 <hr>
                 <br>
                 <p class="description">
                   The Diploma in Law is a two-year Diploma programme which qualifies you for admission into the four-year Law degree programme at the second year (level 200).
-                  <b>Price: Ghc 200</b>
+                  <b>Price: GH¢ 200</b>
                 </p>
                 <br>
                 <div class="row">
                   <div class="col-md-6" style="margin-bottom: 2vh;">
-                    <a href="https://workflow.transflowitc.com/formfilling/1bb97e01-b717-4962-83fe-17d176b50dd4" target="_blank">
+                    <a href="https://workflow.transflowitc.com/formfilling/09e0e9c8-c369-40fa-b924-579d422a68a9" target="_blank">
                       <div class="pill-button" style="width: 100%;">Apply Now ! </div>
                     </a>
                   </div>
       
                 </div>
-                <!-- <div class="pill-button" style="width: fit-content;"><a href="https://workflow.ourmarketplaceonline.com/formfilling/37a1e236-6873-42b3-8c1d-caae3d1dcb16" style="color: #fff;">Apply Now!</a></div> -->
+              </div>
+
+              <div class="col-md-6" style="margin: 5px 0;">
+                <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                  <h4 class="studentHeader" style="color: #992621;">Admissions Contact</h4>
+                  <hr>
+                  <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                  <p class="description mb-1">Diploma in Law Applications</p>
+                  <p class="description">
+                    <a href="tel:+233555095090">
+                      <i class="bx bx-phone-call"></i> 0555095090
+                    </a>
+                  </p>
+                  <p class="description mb-1"><b>Email:</b></p>
+                  <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                  <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
+                </div>
               </div>
             </div>
 
+            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+              <div class="col-md-6 content" id="atle">
+                <h4 class="studentHeader">Diploma in Paralegal Studies Application</h4>
+                <hr>
+                <br>
+                <p class="description">
+                  The Diploma in Paralegal Studies is a two-year Diploma programme which qualifies you for admission into the four-year Law degree programme at the second year (level 200).
+                  <b>Price: GH¢ 200</b>
+                </p>
+                <br>
+                <div class="row">
+                  <div class="col-md-6" style="margin-bottom: 2vh;">
+                    <a href="https://workflow.transflowitc.com/formfilling/bdff7ebb-ef63-4232-9709-5af204df6296" target="_blank">
+                      <div class="pill-button" style="width: 100%; background: #000;">Apply Now ! </div>
+                    </a>
+                  </div>
+      
+                </div>
+              </div>
 
+              <div class="col-md-6" style="margin: 5px 0;">
+                <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                  <h4 class="studentHeader">Admissions Contact</h4>
+                  <hr>
+                  <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                  <p class="description mb-1">Diploma in Paralegal Studies Applications</p>
+                  <p class="description">
+                    <a href="https://wa.me/233555101093" target="_blank" rel="noopener">
+                      <i class="bx bxl-whatsapp"></i> 0555101093
+                    </a>
+                  </p>
+                  <p class="description mb-1"><b>Email:</b></p>
+                  <p class="description mb-1"><a href="mailto:admissions@central.edu.gh">admissions@central.edu.gh</a></p>
+                  <p class="description mb-0"><a href="mailto:enquire.admissions@central.edu.gh">enquire.admissions@central.edu.gh</a></p>
+                </div>
+              </div>
+            </div>
 
+          
+            <div class="row pt-3 pt-lg-0 mt-5 content" data-aos="fade-left" data-aos-delay="100">
+              <div class="col-md-6 content" id="atle">
+                <h4 class="studentHeader"style="color: #992621;">Daniel Institute Application</h4>
+                <hr>
+                <br>
+                <p class="description">
+                  Choosing to study at Daniel Institute is one of the most positive ministry decisions you will ever make. We offer ministerial education centered on the inerrant Word of God, sustained by scholarly study and theological research. Join us for an impactful and life-changing experience!
+                </p>
+
+                <div>
+                  <h4 class="studentHeader" style="color: #992621;">BA Divinity Application</h4> <b>Price: GH¢ 200</b>
+                    
+                  <div class="row mt-3">
+                    <div class="col-md-6" style="margin-bottom: 2vh;">
+                      <a href="https://workflow.transflowitc.com/formfilling/f2ef60e1-4d3f-4d5f-ba98-af4d54f9b1df" target="_blank">
+                        <div class="pill-button" style="width: 100%;">2026/2027 October Cohort</div>
+                      </a>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 2vh;">
+                      <a href="https://workflow.transflowitc.com/formfilling/ee098c96-88f5-48ef-8c7c-328cc6c299c4" target="_blank">
+                        <div class="pill-button-alternate" style="width: 100%;">2027 February Cohort</div>
+                      </a>
+                    </div>
+        
+                  </div>
+                </div>
+
+                <br>
+
+                <div>
+                  <h4 class="studentHeader">MA Sacred Ministry Application</h4> <b>Price: GH¢ 250</b>
+        
+                  <div class="row mt-3">
+                    <div class="col-md-6" style="margin-bottom: 2vh;">
+                      <a href="https://workflow.transflowitc.com/formfilling/0a3807e3-d739-4045-aacf-3ed89bebf55a" target="_blank">
+                        <div class="pill-button" style="width: 100%; background: #000;">2026/2027 October Cohort</div>
+                      </a>
+                    </div>
+                    <div class="col-md-6" style="margin-bottom: 2vh;">
+                      <a href="https://workflow.transflowitc.com/formfilling/bb1d4346-a061-490b-b402-ce7799d91ea7" target="_blank">
+                        <div class="pill-button-alternate" style="width: 100%; color: #000; border: 1px solid #000;">2027 February Cohort</div>
+                      </a>
+                    </div>
+        
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6" style="margin: 5px 0;">
+                <div class="p-4" style="height: 100%; border: 1px solid #e9e9e9; border-radius: 10px; background: #fafafa;">
+                  <h4 class="studentHeader" style="color: #992621;">Admissions Contact</h4>
+                  <hr>
+                  <p class="description mb-2"><b>Contact/WhatsApp</b></p>
+                  <p class="description mb-1">Daniel Institute Applications</p>
+                  <p class="description">
+                    <a href="tel:+233208070809">
+                      <i class="bx bx-phone-call"></i> 0208070809
+                    </a>
+                  </p>
+                  <p class="description">
+                    <a href="tel:+233249493296">
+                      <i class="bx bx-phone-call"></i> 0249493296
+                    </a>
+                  </p>
+                  <p class="description">
+                    <a href="tel:+233545377598">
+                      <i class="bx bx-phone-call"></i> 0545377598
+                    </a>
+                  </p>
+                  <p class="description">
+                    <a href="https://wa.me/233555101093" target="_blank" rel="noopener">
+                      <i class="bx bxl-whatsapp"></i> 0555101093
+                    </a>
+                  </p>
+
+                  <p class="description mb-1"><b>Email:</b></p>
+                  <p class="description mb-1"><a href="mailto:admissions@danielinstitute.net">admissions@danielinstitute.net</a></p>
+                </div>
+              </div>
+            </div>
       </div>
     </section><!-- End About Video Section -->
 
@@ -223,9 +453,9 @@
               <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
                 <p>
                   The application e-voucher costs:
-- Undergraduate: <b>Ghc 200</b>
-- Postgraduate: <b>Ghc 250</b>
-- Diploma: <b>Ghc 200</b>
+- Undergraduate: <b>GH¢ 200</b>
+- Postgraduate: <b>GH¢ 250</b>
+- Diploma: <b>GH¢ 200</b>
 Kindly note these prices are fixed.                  
                 </p>
               </div>
