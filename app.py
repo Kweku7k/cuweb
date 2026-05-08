@@ -1884,8 +1884,6 @@ def admissions():
 @app.route("/alumni")
 def alumni():
     page = request.args.get("page", "1")
-    print("page")
-    print(page)
     # Get URL
     id = 123
     per_page = 30
@@ -1912,10 +1910,47 @@ def alumni():
         article["title"] = i["title"]["rendered"]
         article["content"] = i["content"]["rendered"]
         alums.append(article)
-    print(alums)
     return render_template(
         "alumni.html",
         alums=alums,
+        totalPages=totalPages,
+        page=page,
+        per_page=per_page,
+    )
+
+
+@app.route("/academic-news")
+def academic_news():
+    page = request.args.get("page", "1")
+    # Get URL
+    id = 140
+    per_page = 30
+    url = (
+        baseWpUrl
+        + "/wp-json/wp/v2/posts?page="
+        + str(page)
+        + "&categories="
+        + str(id)
+        + "&per_page="
+        + str(per_page)
+    )
+    # url = "http://45.222.128.105/wp-json/wp/v2/posts?categories="+str(id)
+    r = requests.get(url)
+    response = r.json()
+    print("response.headers")
+    print(r.headers)
+    totalPages = r.headers["x-wp-totalpages"]
+    academic_news = []
+    for i in response:
+        article = {}
+        article["id"] = i["id"]
+        article["image"] = getImageUrl(i["featured_media"])
+        article["title"] = i["title"]["rendered"]
+        article["content"] = i["content"]["rendered"]
+        academic_news.append(article)
+    return render_template(
+        "academic-news.html",
+        academic_news=academic_news,
         totalPages=totalPages,
         page=page,
         per_page=per_page,
@@ -2135,6 +2170,41 @@ def admission():
     print("allposts being returned")
     # print(allposts)
     startingPoint = alltags[0]["id"]
+
+    requested_tag_id = request.args.get("tag_id", type=int)
+    requested_section = request.args.get("section", type=str)
+
+    if requested_tag_id:
+        matching_tag = next((tag for tag in alltags if tag["id"] == requested_tag_id), None)
+        if matching_tag:
+            startingPoint = matching_tag["id"]
+    elif requested_section:
+        normalized_requested = re.sub(r"[^a-z0-9]+", "", requested_section.lower())
+
+        def normalize(value):
+            return re.sub(r"[^a-z0-9]+", "", value.lower())
+
+        matching_tag = next(
+            (
+                tag
+                for tag in alltags
+                if normalize(tag["name"]) == normalized_requested
+            ),
+            None,
+        )
+        if not matching_tag:
+            matching_tag = next(
+                (
+                    tag
+                    for tag in alltags
+                    if normalized_requested in normalize(tag["name"])
+                    or normalize(tag["name"]) in normalized_requested
+                ),
+                None,
+            )
+        if matching_tag:
+            startingPoint = matching_tag["id"]
+
     return render_template(
         "library-dynamic.html", id=startingPoint, tags=alltags, allposts=allposts
     )

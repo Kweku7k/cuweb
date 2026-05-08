@@ -19,7 +19,7 @@
           <div class="col-md-4 order-1 order-lg-2">
             <ul class="nav nav-pills mb-3 list-group list-group-flush" id="pills-tab" role="tablist">
               {% for tag in tags %}
-                {% if loop.index == 1 %}
+                {% if tag.id == id %}
                   <li class="nav-item list-group-item" role="presentation">
                     <button class="nav-link side-nav active activate" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#post-{{tag.id}}" type="button" role="tab" aria-controls="pills-home" aria-selected="true">{{tag.name}}</button>
                   </li>
