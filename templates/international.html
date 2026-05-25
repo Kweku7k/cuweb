@@ -1,0 +1,363 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<!-- ======= Hero Section with Static Background ======= -->
+<section id="onlineHero" class="position-relative international-hero" style="height: 90vh; overflow: hidden;">
+<div class="h-100 w-100 position-relative">
+  <div class="online-hero-bg">
+    <img
+      src="{{ url_for('static', filename='img/inter.jpg') }}"
+      class="online-hero-bg-image"
+      alt="International students at Central University"
+    >
+  </div>
+  <div class="online-hero-scrim position-absolute top-0 start-0 w-100 h-100" style="z-index: 1; pointer-events: none;"></div>
+</div>
+
+<!-- Text overlay -->
+<div class="w-100 position-absolute top-50 start-0 translate-middle-y online-hero-layer" data-aos="fade-up" data-aos-delay="100" style="z-index: 2;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-lg-11">
+        <div class="online-hero-panel text-center">
+          <span class="online-hero-eyebrow">Central University</span>
+          <h1 class="online-hero-title">International Students Admissions</h1>
+          <p class="online-hero-subtitle">
+            Apply online for undergraduate, postgraduate, and professional programmes.
+          </p>
+
+          <div class="online-hero-notice">
+            <!-- <i class="bx bx-info-circle" aria-hidden="true"></i> -->
+            <div class="online-hero-notice-text">
+              <p class="mb-1">You need an e-voucher with a <strong>Serial Number</strong> and <strong>PIN</strong> before you can apply.</p>
+              <a href="{{ url_for('downloadOnlineManual') }}" class="online-hero-notice-link">
+                Download application instructions
+                <i class="bx bx-download ms-1" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="row g-3 g-lg-4 online-hero-actions justify-content-center">
+            <div class="col-md-4 col-sm-6">
+              <button type="button" id="myBtn" class="online-hero-action online-hero-action--primary w-100">
+                <span class="online-hero-action-icon"><i class="bx bx-cart" aria-hidden="true"></i></span>
+                <span class="online-hero-action-copy">
+                  <span class="online-hero-action-label">Buy e-Voucher</span>
+                  <span class="online-hero-action-hint">USSD *887*9# or online link</span>
+                </span>
+                <i class="bx bx-chevron-right online-hero-action-arrow" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <a href="{{ url_for('check_admission') }}" class="online-hero-action online-hero-action--light w-100">
+                <span class="online-hero-action-icon"><i class="bx bx-search-alt" aria-hidden="true"></i></span>
+                <span class="online-hero-action-copy">
+                  <span class="online-hero-action-label">Admission Status</span>
+                  <span class="online-hero-action-hint">Check application progress</span>
+                </span>
+                <i class="bx bx-chevron-right online-hero-action-arrow" aria-hidden="true"></i>
+              </a>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section><!-- End Hero -->
+
+<main id="main">
+
+  
+
+
+  <!-- ======= Programme Cards Section ======= -->
+  <section id="ourprograms" class="intl-programs-section">
+    <div class="container" data-aos="fade-up">
+      <div class="intl-programs-header text-center">
+        <span class="intl-programs-eyebrow">International Admissions</span>
+        <h2 class="intl-programs-title">Choose Your Application Pathway</h2>
+        <p class="intl-programs-lead">
+          Select the programme and intake that matches your academic goals. Each card links directly to the online application form.
+        </p>
+      </div>
+
+      <div class="row g-4 intl-programs-grid">
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <article class="intl-program-card" id="undergraduate">
+            <img
+              src="{{ url_for('static', filename='img/undergraduate.jpg') }}"
+              class="intl-program-card__image"
+              alt="Undergraduate students at Central University"
+            >
+            <div class="intl-program-card__overlay"></div>
+            <div class="intl-program-card__content">
+              <!-- <span class="intl-program-card__tag">Undergraduate</span> -->
+              <h3 class="intl-program-card__title">Undergraduate</h3>
+              <p class="intl-program-card__text">
+                Build a strong academic foundation and gain practical, industry-relevant skills through our diverse undergraduate programmes designed to prepare students for leadership, innovation, and global career opportunities.
+              </p>
+              <a
+                href="https://workflow.transflowitc.com/formfilling/dabd162e-3ca0-401e-898e-5f6b1e1e7ef5"
+                target="_blank"
+                rel="noopener"
+                class="intl-program-card__btn"
+              >
+                Apply Now
+                <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="150">
+          <article class="intl-program-card">
+            <img
+              src="{{ url_for('static', filename='img/post.jpg') }}"
+              class="intl-program-card__image"
+              alt="Students on campus"
+            >
+            <div class="intl-program-card__overlay"></div>
+            <div class="intl-program-card__content">
+              <h3 class="intl-program-card__title">Postgraduate</h3>
+              <p class="intl-program-card__text">
+                Advance your expertise, enhance your professional impact, and deepen your knowledge through flexible and research-driven postgraduate programmes tailored for career growth and specialization.
+              </p>
+              <a
+                href="https://workflow.transflowitc.com/formfilling/1a82cda5-7511-4926-a36b-e7c931169d9e"
+                target="_blank"
+                rel="noopener"
+                class="intl-program-card__btn intl-program-card__btn--light"
+              >
+                Apply Now
+                <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <article class="intl-program-card">
+            <img
+              src="{{ url_for('static', filename='img/Doctoral.jpeg') }}"
+              class="intl-program-card__image"
+              alt="Postgraduate students"
+            >
+            <div class="intl-program-card__overlay"></div>
+            <div class="intl-program-card__content">
+              <h3 class="intl-program-card__title">Doctorial Admissions</h3>
+              <p class="intl-program-card__text">
+                Pursue advanced research and scholarly excellence through rigorous doctoral programmes designed to develop thought leaders, innovators, and experts capable of driving transformational change.
+              </p>
+              <a
+                href="https://workflow.transflowitc.com/formfilling/7e6e1bab-2e92-4741-9a9e-00710b7924b7"
+                target="_blank"
+                rel="noopener"
+                class="intl-program-card__btn intl-program-card__btn--light"
+              >
+                Apply Now
+                <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>
+              </a>
+            </div>
+          </article>
+        </div>
+
+        <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
+          <article class="intl-program-card">
+            <img
+              src="{{ url_for('static', filename='img/diploma.jpg') }}"
+              class="intl-program-card__image"
+              alt="International admissions support"
+            >
+            <div class="intl-program-card__overlay"></div>
+            <div class="intl-program-card__content">
+              <h3 class="intl-program-card__title ">Diploma Programmes</h3>
+              <p class="intl-program-card__text">
+                Acquire practical knowledge and career-focused training through our diploma programmes, carefully structured to provide foundational competencies for professional development and further academic progression.
+              </p>
+              <!-- <p class="intl-program-card__price">WhatsApp: 0555101093 · Tel: 0555095090</p> -->
+              <a
+              href="https://workflow.transflowitc.com/formfilling/1a82cda5-7511-4926-a36b-e7c931169d9e"
+              target="_blank"
+              rel="noopener"
+              class="intl-program-card__btn"
+            >
+              Apply Now
+              <i class="bx bx-right-arrow-alt" aria-hidden="true"></i>
+            </a>
+              <!-- <a
+                href="https://wa.me/233555101093"
+                target="_blank"
+                rel="noopener"
+                class="intl-program-card__btn intl-program-card__btn--light"
+              >
+                Chat on WhatsApp
+                <i class="bx bxl-whatsapp" aria-hidden="true"></i>
+              </a> -->
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section><!-- End Programme Cards Section -->
+
+
+  
+  <!-- ======= Frequently Asked Questions Section ======= -->
+  <section id="faq" class="faq section-bg">
+    <div class="container" data-aos="fade-up">
+
+      <div class="section-title">
+        <h2>Frequently Asked Questions</h2>
+        <p>Here are some frequently asked questions about admission and enrollment.</p>
+      </div>
+
+      <div class="faq-list">
+        <ul>
+          <li data-aos="fade-up">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" class="collapse" data-bs-target="#faq-list-1">Where can one get the Central University application e-vouchers to buy?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-1" class="collapse show" data-bs-parent=".faq-list">
+              <p>
+                Kindly visit any near by bank office to purchase our application e-voucher.
+              </p>
+            </div>
+          </li>
+
+          <!-- <li data-aos="fade-up" data-aos-delay="100">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">How much does the application fee cost? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                The application e-voucher costs:
+- Undergraduate: <b>GH¢ 200</b>
+- Postgraduate: <b>GH¢ 250</b>
+- Diploma: <b>GH¢ 200</b>
+Kindly note these prices are fixed.                  
+              </p>
+            </div>
+          </li> -->
+
+          <li data-aos="fade-up" data-aos-delay="200">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Can I visit my application document after I have finished filling the form online? If so, till when?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-3" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                While you are still workingand have not submitted with your Progress ID, you can always review your application with your Progress ID. <b>Note!:</b> After submission your application is been processed for admission, therefore you can not get a review permit 
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="300">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-4" class="collapsed">What do I do if I have difficulty logging in? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-4" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                Kindly Call the Admission office. Telephone: <strong>Admission</strong> +233  0307 020540
+              </p>
+            </div>
+          </li>
+
+          <li data-aos="fade-up" data-aos-delay="400">
+            <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-5" class="collapsed">If I have D7 in English and Mathematics, do I have a chance to get processed for admissions?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+            <div id="faq-list-5" class="collapse" data-bs-parent=".faq-list">
+              <p>
+                D7 doesn't qualify you for a degree program, however the university runs a diploma program <b>(ATHE)</b> that we belive can help you continue with studies in many programmes areas.
+              </p>
+            </div>
+          </li>
+
+        </ul>
+      </div>
+
+    </div>
+  </section><!-- End Frequently Asked Questions Section -->
+
+</main><!-- End #main -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal" width="100%" style="margin:0;">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+      <div class="modal-header" style="background: #992621; color: #fff;">
+        <h2>How to Buy a eVoucher</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+          <h3>Steps</h3>
+          <ol>
+              <li>Enter the ussd code: <a href="tel:*887*18#">*887*9#</a> on your phone.</li>
+              <b>OR</b>
+              <li><a href="https://online-voucher.transflowitc.com/application-forms?merchant_id=15467d46-3be5-4ae5-9b20-d64ae21e9380">Buy CU forms via link</a></li>
+              <li>Enter CU as the name of the university (eg:CU)</li>
+              <li>Select the form you want to purchase from the list of options</li>
+              <li>Wait for the prompt to approve the payment</li>
+              <li>Enter pin to approve payment</li>
+              <li>If the prompt was not received, dial *170# and select my approvals to make payment</li>
+              <li>An <strong>SMS</strong> will be received after successful payment with the voucher details</li>
+              <li>To <strong>Retrieve Voucher</strong> Dial *887*9# </li>
+              <li>Select option to view history</li>
+          </ol>
+      </div>
+  </div>
+</div>
+<!-- The Modal -->
+<div id="myModal2" class="container modal" width="50%" style="margin:20px 0;">
+
+<!-- Modal content -->
+<div class="modal-content">
+    <div class="modal-header" style="background: #992621; color: #fff;">
+      <h2>Our Payment Methods</h2>
+      <span class="close2">&times;</span>
+    </div>
+    <div class="modal-body">
+      <h6 class="">Kindly dial our USSD code to purchase e-voucher!</h6>
+        <div class="container d-flex">
+          <p><b>USSD: *887*18#</b></p>
+        </div>
+    </div>
+</div>
+</div>
+
+
+<script>
+// Get the modal
+var modal = document.getElementById("myModal");
+// var modal2 = document.getElementById("myModal2");
+
+// Get the button that opens the modal
+var btn = document.getElementById("myBtn");
+// var btn2 = document.getElementById("myBtn2");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+// var span2 = document.getElementsByClassName("close2")[0];
+
+// When the user clicks the button, open the modal
+btn.onclick = function() {
+modal.style.display = "block";
+}
+// btn2.onclick = function() {
+// modal2.style.display = "block";
+// }
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+modal.style.display = "none";
+}
+
+// span2.onclick = function() {
+// modal2.style.display = "none";
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+if (event.target == modal || event.target == modal2) {
+modal.style.display = "none";
+modal2.style.display = "none";
+}
+}
+
+
+</script>
+
+
+{% endblock %}

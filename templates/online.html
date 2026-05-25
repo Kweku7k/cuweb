@@ -6,7 +6,7 @@
   <!-- Carousel background layer -->
   <div class="h-100 w-100 position-relative">
     <!-- Darken ONLY the carousel background (not the whole hero) -->
-    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0, 0, 0, 0.25); z-index: 1; pointer-events: none;"></div>
+    <div class="online-hero-scrim position-absolute top-0 start-0 w-100 h-100" style="z-index: 1; pointer-events: none;"></div>
 
     <div id="onlineCarousel" class="carousel slide h-100" data-bs-ride="carousel" style="position: relative; z-index: 0;">
       <div class="carousel-inner h-100">
@@ -39,29 +39,60 @@
   </div>
 
   <!-- Text overlay -->
-  <div class="w-100 position-absolute top-50 start-0 translate-middle-y" data-aos="fade-up" data-aos-delay="100" style="z-index: 2;">
+  <div class="w-100 position-absolute top-50 start-0 translate-middle-y online-hero-layer" data-aos="fade-up" data-aos-delay="100" style="z-index: 2;">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 text-left">
-          <h6 class="text-light mb-2">Central University</h6>
-          <h1 class="text-white mb-3" style="font-size: 2.5rem;">Online Application Portal</h1>
-          <h6 class="text-light rounded" style="max-width: 800px; font-size: 1.2rem;">
-            You need to purchase an e-voucher with a Serial Number and a Pin to be able to apply on this site.
-            Click here to find out how to purchase one.
-            <a href="{{url_for("downloadOnlineManual")}}" class="text-warning text-decoration-underline">Online Application Form Instructions</a>
-            (You may kindly check your downloads after clicking the link)
-          </h6>
-          <br/>
-          <div class="row">
-            <div class="col-md-6" style="margin-bottom: 2vh;">
-              <a href="#">
-                <button id="myBtn" class="pill-button" style="width: 100%;">Click here to buy eVoucher</button>
-              </a>
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-lg-11">
+          <div class="online-hero-panel text-center">
+            <span class="online-hero-eyebrow">Central University</span>
+            <h1 class="online-hero-title">Admissions Portal</h1>
+            <p class="online-hero-subtitle">
+              Apply online for undergraduate, postgraduate, and professional programmes.
+            </p>
+
+            <div class="online-hero-notice">
+              <!-- <i class="bx bx-info-circle" aria-hidden="true"></i> -->
+              <div class="online-hero-notice-text">
+                <p class="mb-1">You need an e-voucher with a <strong>Serial Number</strong> and <strong>PIN</strong> before you can apply.</p>
+                <a href="{{ url_for('downloadOnlineManual') }}" class="online-hero-notice-link">
+                  Download application instructions
+                  <i class="bx bx-download ms-1" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
-            <div class="col-md-6" style="margin-bottom: 2vh;">
-              <a href="{{url_for('check_admission')}}">
-                <button id="myBtn2" class="pill-button-alternate" style="width: 100%;">Check Admission Status</button>
-              </a>
+
+            <div class="row g-3 g-lg-4 online-hero-actions justify-content-center">
+              <div class="col-md-4 col-sm-6">
+                <button type="button" id="myBtn" class="online-hero-action online-hero-action--primary w-100">
+                  <span class="online-hero-action-icon"><i class="bx bx-cart" aria-hidden="true"></i></span>
+                  <span class="online-hero-action-copy">
+                    <span class="online-hero-action-label">Buy e-Voucher</span>
+                    <span class="online-hero-action-hint">USSD *887*9# or online link</span>
+                  </span>
+                  <i class="bx bx-chevron-right online-hero-action-arrow" aria-hidden="true"></i>
+                </button>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <a href="{{ url_for('check_admission') }}" class="online-hero-action online-hero-action--light w-100">
+                  <span class="online-hero-action-icon"><i class="bx bx-search-alt" aria-hidden="true"></i></span>
+                  <span class="online-hero-action-copy">
+                    <span class="online-hero-action-label">Admission Status</span>
+                    <span class="online-hero-action-hint">Check application progress</span>
+                  </span>
+                  <i class="bx bx-chevron-right online-hero-action-arrow" aria-hidden="true"></i>
+                </a>
+              </div>
+              <div class="col-md-4 col-sm-6">
+                <a href="{{ url_for('international_admissions') }}" class="online-hero-action online-hero-action--primary w-100">
+                  <span class="online-hero-action-icon"><i class="bx bx-globe" aria-hidden="true"></i></span>
+                  <span class="online-hero-action-copy">
+                    <span class="online-hero-action-label">International Students</span>
+                    <!-- <span class="online-hero-action-hint">Programmes &amp; entry information</span> -->
+                    <span class="online-hero-action-hint">Entry information</span>
+                  </span>
+                  <i class="bx bx-chevron-right online-hero-action-arrow" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -467,18 +498,7 @@
               </div>
             </li>
 
-            <li data-aos="fade-up" data-aos-delay="100">
-              <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-2" class="collapsed">How much does the application fee cost? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
-              <div id="faq-list-2" class="collapse" data-bs-parent=".faq-list">
-                <p>
-                  The application e-voucher costs:
-- Undergraduate: <b>GH¢ 200</b>
-- Postgraduate: <b>GH¢ 250</b>
-- Diploma: <b>GH¢ 200</b>
-Kindly note these prices are fixed.                  
-                </p>
-              </div>
-            </li>
+            
 
             <li data-aos="fade-up" data-aos-delay="200">
               <i class="bx bx-help-circle icon-help"></i> <a data-bs-toggle="collapse" data-bs-target="#faq-list-3" class="collapsed">Can I visit my application document after I have finished filling the form online? If so, till when?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>

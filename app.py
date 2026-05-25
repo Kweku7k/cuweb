@@ -1124,7 +1124,18 @@ def mail():
 def online():
     gallery = wpgallery(14)
     return render_template(
-        "online.html", hideNav=True, title="Online Application Form.", gallery=gallery
+        "online.html",
+        nav_variant="online",
+        title="Online Application Form.",
+        gallery=gallery,
+    )
+
+@app.route("/international-admissions")
+def international_admissions():
+    return render_template(
+        "international.html",
+        nav_variant="online",
+        title="International Admissions.",
     )
 
 

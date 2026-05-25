@@ -248,7 +248,15 @@
 
         <ul>
 
-          {% if hideNav != True %}
+          {% if nav_variant == 'online' %}
+          <a class="nav-link scrollto" href="{{ url_for('admission', section='entry-requirements') }}"><li>Admission Requirements</li></a>
+          <!-- <a class="nav-link scrollto" href="https://eligibility.central.edu.gh/" target="_blank"><li>Check Eligibility</li></a> -->
+          <a class="nav-link scrollto" href="{{ url_for('downloadOnlineManual') }}"><li>Application Guidelines</li></a>
+          <!-- <a class="nav-link scrollto" href="{{ url_for('international_admissions') }}"><li>International Students</li></a> -->
+          <a class="nav-link scrollto" href="#ourprograms"><li>Programmes</li></a>
+          <a class="nav-link scrollto" href="{{ url_for('admission', section='schedule-of-fees') }}"><li>Schedule of Fees</li></a>
+
+          {% elif hideNav != True %}
           <a class="nav-link" href="{{url_for('about')}}"><li>About CU</li></a>
 
           <li class="nav-item dropdown">
@@ -281,6 +289,7 @@
                 <a class="nav-link scrollto" href="{{url_for('check_admission')}}"><li>Check Admission Status</li></a>
                 <a class="nav-link scrollto" href="{{url_for('admission', section='schedule-of-fees')}}"><li>Schedule Of Fees</li></a>
                 <a class="nav-link scrollto" href="{{url_for('online')}}"><li>Online Application</li></a>
+                <a class="nav-link scrollto" href="{{url_for('international_admissions')}}"><li>International Application</li></a>
                 <a class="nav-link scrollto" href="{{url_for('admission', section='financial-info-and-scholarship')}}"><li>Financial Info And Scholarship</li></a>
                 <a class="nav-link scrollto" href="{{url_for('admission', section='cu-gordon-college-partnership-programme')}}"><li>CU-Gordon College Partnership Programme</li></a>
             </ul>
@@ -359,8 +368,6 @@
           </li> -->
 
           {% endif %}
-          
-
           
           <a href="{{url_for('online')}}" target="_blank">
             <button class="pill-button" style="padding: 12px 13px; font-size: 16px;">
