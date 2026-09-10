@@ -3180,7 +3180,7 @@ def check_admission():
     """Admission checking page where students can search their names."""
     # Get current academic year - you can update this as needed
     # For now, we'll use 2024/2025 as default, but this should be configurable
-    current_academic_year = "2025/2026"
+    current_academic_year = "2026/2027"
     
     # Get search parameters
     search_name = request.args.get("name", "").strip()
